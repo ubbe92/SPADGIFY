@@ -1,0 +1,60 @@
+syntax = "proto3"; /* default is proto2 */
+option java_package = "proto";
+
+
+// ----------------------------------------------------
+// Service symbolizing the Messenger interface
+// ----------------------------------------------------
+service Node {
+  rpc FindSuccessor (FindSuccessorRequest) returns (FindSuccessorReply) {}
+  rpc FindPredecessor(FindPredecessorRequest) returns (FindPredecessorReply) {}
+  rpc ClosestPrecedingFinger(ClosestPrecedingFingerRequest) returns (ClosestPrecedingFingerReply) {}
+
+  rpc Join(JoinRequest) returns (JoinReply) {}
+}
+
+// ----------------------------------------------------
+// Requests and replies definitions
+// ----------------------------------------------------
+message FindSuccessorRequest {
+  ChordNode chordNode = 1;
+}
+
+message FindSuccessorReply {
+  ChordNode chordNode = 1;
+}
+// ----------------------------------------------------
+message FindPredecessorRequest {
+
+}
+
+message FindPredecessorReply {
+
+}
+// ----------------------------------------------------
+message ClosestPrecedingFingerRequest {
+
+}
+
+message ClosestPrecedingFingerReply {
+
+}
+// ----------------------------------------------------
+message JoinRequest {
+  ChordNode chordNode = 1;
+}
+
+message JoinReply {
+  ChordNode chordNode = 1;
+}
+// ----------------------------------------------------
+// Chord messages
+// ----------------------------------------------------
+message ChordNode {
+  string ip = 1;
+  uint64 port = 2;
+  uint64 identifier = 3;
+  uint64 m = 4;
+  ChordNode successor = 5;
+  ChordNode predecessor = 6;
+}

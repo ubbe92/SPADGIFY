@@ -1,6 +1,5 @@
 package cs.umu.se.util;
 
-import cs.umu.se.chord.FingerTableNode;
 import cs.umu.se.chord.Node;
 import proto.Chord;
 

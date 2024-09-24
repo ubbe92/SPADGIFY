@@ -1,11 +1,9 @@
 package cs.umu.se.grpc;
 
 import cs.umu.se.chord.ChordBackEnd;
-import cs.umu.se.chord.FingerTableNode;
 import cs.umu.se.chord.Node;
 import cs.umu.se.util.ChordUtil;
 import io.grpc.stub.StreamObserver;
-import org.checkerframework.checker.units.qual.C;
 import proto.Chord;
 import proto.NodeGrpc;
 

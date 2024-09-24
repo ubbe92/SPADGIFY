@@ -1,11 +1,9 @@
 package cs.umu.se.grpc;
 
 import cs.umu.se.chord.ChordBackEnd;
-import cs.umu.se.chord.FingerTableNode;
 import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Server;
 import io.grpc.ServerBuilder;
-import org.checkerframework.checker.units.qual.N;
 
 import java.io.IOException;
 

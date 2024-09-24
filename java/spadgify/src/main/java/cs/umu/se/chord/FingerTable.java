@@ -1,7 +1,6 @@
 package cs.umu.se.chord;
 
 import cs.umu.se.util.ChordUtil;
-import cs.umu.se.util.Util;
 
 import java.util.Arrays;
 

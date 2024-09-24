@@ -2,7 +2,6 @@ package cs.umu.se.util;
 
 import picocli.CommandLine;
 
-import java.io.File;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "chord", mixinStandardHelpOptions = true, version = "Ubbes Chord DHT 1.0",
