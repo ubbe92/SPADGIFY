@@ -28,8 +28,8 @@ public class GRPCServer implements Server {
             switch (mode) {
                 case 0: // join existing DTH.
                     System.out.println("Joining existing DTH!");
-                    Node id = new Node(remoteIp, remotePort, m);
-                    chordBackEnd.join(id);
+                    Node nodePrime = new Node(remoteIp, remotePort, m);
+                    chordBackEnd.join(nodePrime);
                     break;
                 case 1: // create new DHT
                     System.out.println("Creating new DHT!");

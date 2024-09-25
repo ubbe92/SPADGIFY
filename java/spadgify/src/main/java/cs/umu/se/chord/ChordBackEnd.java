@@ -1,8 +1,17 @@
 package cs.umu.se.chord;
 
+import cs.umu.se.util.ChordUtil;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import proto.Chord;
+import proto.NodeGrpc;
+
 public class ChordBackEnd {
 
     private Node node;
+    private ManagedChannel channel;
+    private NodeGrpc.NodeBlockingStub blockingStub;
+    private ChordUtil chordUtil = new ChordUtil();
 
     public ChordBackEnd(Node node) {
         this.node = node;
@@ -13,10 +22,10 @@ public class ChordBackEnd {
     public synchronized void join(Node nodePrime) {
         System.out.println("join()");
 
-        // Make grpc call to node
+        // Make grpc call to node, "ping it"
 
-        if (nodePrime != null) { // Temp condition
-            System.out.println("node is joining the network: " + node.getMyIp() + ":" + node.getMyPort());
+        if (nodePrime != null) { // Temp condition, should be a boolean like "nodePrimeIsAlive"
+            System.out.println("node " + node + " is joining node: " + nodePrime);
             initFingerTable(nodePrime);
             updateOthers();
 
@@ -34,14 +43,36 @@ public class ChordBackEnd {
         node.displayCurrentTable();
     }
 
+    private void initChannelAndStub(String ip, int port) {
+        this.channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
+        this.blockingStub = NodeGrpc.newBlockingStub(channel);
+    }
+
+    private void shutdownChannel(ManagedChannel channel) {
+        channel.shutdown();
+    }
+
+    private Node gRPCFindSuccessor(int start) {
+        Chord.FindSuccessorRequest request = Chord.FindSuccessorRequest.newBuilder().setId(start).build();
+        Chord.FindSuccessorReply reply = blockingStub.findSuccessor(request);
+        Chord.ChordNode chordNode = reply.getChordNode();
+
+        Node successor = chordUtil.createNodeFromGRPCChordNode(chordNode);
+        return successor;
+    }
+
     // initialize finger table of local node;
     // n' is an arbitrary node already in the network
     public synchronized void initFingerTable(Node nodePrime) {
-//        System.out.println("initFingerTable()");
-//        FingerTableEntry[] table = node.getFingerTable().getTable();
-//        int start = table[0].getStart();
-//
-//        Node node = gRPCFindSuccessor(nodePrime, start);
+        System.out.println("initFingerTable()");
+        FingerTableEntry[] table = node.getFingerTable().getTable();
+        int start = table[0].getStart();
+
+        initChannelAndStub(nodePrime.getMyIp(), nodePrime.getMyPort());
+        Node successor = gRPCFindSuccessor(start);
+
+        System.out.println("Our successor is: " + successor);
+
 //        table[0].setNode(node);
 //
 //        Node pred = node.getSuccessor().getPredecessor();

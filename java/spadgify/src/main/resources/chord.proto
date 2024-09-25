@@ -17,7 +17,7 @@ service Node {
 // Requests and replies definitions
 // ----------------------------------------------------
 message FindSuccessorRequest {
-  ChordNode chordNode = 1;
+  uint64 id = 1;
 }
 
 message FindSuccessorReply {

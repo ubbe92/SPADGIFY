@@ -30,19 +30,10 @@ public final class Chord {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return Whether the chordNode field is set.
+     * <code>uint64 id = 1;</code>
+     * @return The id.
      */
-    boolean hasChordNode();
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return The chordNode.
-     */
-    proto.Chord.ChordNode getChordNode();
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     */
-    proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder();
+    long getId();
   }
   /**
    * <pre>
@@ -87,31 +78,15 @@ public final class Chord {
               proto.Chord.FindSuccessorRequest.class, proto.Chord.FindSuccessorRequest.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int CHORDNODE_FIELD_NUMBER = 1;
-    private proto.Chord.ChordNode chordNode_;
+    public static final int ID_FIELD_NUMBER = 1;
+    private long id_ = 0L;
     /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return Whether the chordNode field is set.
+     * <code>uint64 id = 1;</code>
+     * @return The id.
      */
     @java.lang.Override
-    public boolean hasChordNode() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return The chordNode.
-     */
-    @java.lang.Override
-    public proto.Chord.ChordNode getChordNode() {
-      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
-    }
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     */
-    @java.lang.Override
-    public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
-      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+    public long getId() {
+      return id_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -128,8 +103,8 @@ public final class Chord {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(1, getChordNode());
+      if (id_ != 0L) {
+        output.writeUInt64(1, id_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -140,9 +115,9 @@ public final class Chord {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) != 0)) {
+      if (id_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getChordNode());
+          .computeUInt64Size(1, id_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -159,11 +134,8 @@ public final class Chord {
       }
       proto.Chord.FindSuccessorRequest other = (proto.Chord.FindSuccessorRequest) obj;
 
-      if (hasChordNode() != other.hasChordNode()) return false;
-      if (hasChordNode()) {
-        if (!getChordNode()
-            .equals(other.getChordNode())) return false;
-      }
+      if (getId()
+          != other.getId()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -175,10 +147,9 @@ public final class Chord {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasChordNode()) {
-        hash = (37 * hash) + CHORDNODE_FIELD_NUMBER;
-        hash = (53 * hash) + getChordNode().hashCode();
-      }
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -304,29 +275,19 @@ public final class Chord {
 
       // Construct using proto.Chord.FindSuccessorRequest.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage
-                .alwaysUseFieldBuilders) {
-          getChordNodeFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        chordNode_ = null;
-        if (chordNodeBuilder_ != null) {
-          chordNodeBuilder_.dispose();
-          chordNodeBuilder_ = null;
-        }
+        id_ = 0L;
         return this;
       }
 
@@ -360,14 +321,9 @@ public final class Chord {
 
       private void buildPartial0(proto.Chord.FindSuccessorRequest result) {
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.chordNode_ = chordNodeBuilder_ == null
-              ? chordNode_
-              : chordNodeBuilder_.build();
-          to_bitField0_ |= 0x00000001;
+          result.id_ = id_;
         }
-        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -382,8 +338,8 @@ public final class Chord {
 
       public Builder mergeFrom(proto.Chord.FindSuccessorRequest other) {
         if (other == proto.Chord.FindSuccessorRequest.getDefaultInstance()) return this;
-        if (other.hasChordNode()) {
-          mergeChordNode(other.getChordNode());
+        if (other.getId() != 0L) {
+          setId(other.getId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -411,13 +367,11 @@ public final class Chord {
               case 0:
                 done = true;
                 break;
-              case 10: {
-                input.readMessage(
-                    getChordNodeFieldBuilder().getBuilder(),
-                    extensionRegistry);
+              case 8: {
+                id_ = input.readUInt64();
                 bitField0_ |= 0x00000001;
                 break;
-              } // case 10
+              } // case 8
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -435,125 +389,36 @@ public final class Chord {
       }
       private int bitField0_;
 
-      private proto.Chord.ChordNode chordNode_;
-      private com.google.protobuf.SingleFieldBuilder<
-          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> chordNodeBuilder_;
+      private long id_ ;
       /**
-       * <code>.ChordNode chordNode = 1;</code>
-       * @return Whether the chordNode field is set.
+       * <code>uint64 id = 1;</code>
+       * @return The id.
        */
-      public boolean hasChordNode() {
-        return ((bitField0_ & 0x00000001) != 0);
+      @java.lang.Override
+      public long getId() {
+        return id_;
       }
       /**
-       * <code>.ChordNode chordNode = 1;</code>
-       * @return The chordNode.
+       * <code>uint64 id = 1;</code>
+       * @param value The id to set.
+       * @return This builder for chaining.
        */
-      public proto.Chord.ChordNode getChordNode() {
-        if (chordNodeBuilder_ == null) {
-          return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
-        } else {
-          return chordNodeBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public Builder setChordNode(proto.Chord.ChordNode value) {
-        if (chordNodeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          chordNode_ = value;
-        } else {
-          chordNodeBuilder_.setMessage(value);
-        }
+      public Builder setId(long value) {
+
+        id_ = value;
         bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
-       * <code>.ChordNode chordNode = 1;</code>
+       * <code>uint64 id = 1;</code>
+       * @return This builder for chaining.
        */
-      public Builder setChordNode(
-          proto.Chord.ChordNode.Builder builderForValue) {
-        if (chordNodeBuilder_ == null) {
-          chordNode_ = builderForValue.build();
-        } else {
-          chordNodeBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public Builder mergeChordNode(proto.Chord.ChordNode value) {
-        if (chordNodeBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0) &&
-            chordNode_ != null &&
-            chordNode_ != proto.Chord.ChordNode.getDefaultInstance()) {
-            getChordNodeBuilder().mergeFrom(value);
-          } else {
-            chordNode_ = value;
-          }
-        } else {
-          chordNodeBuilder_.mergeFrom(value);
-        }
-        if (chordNode_ != null) {
-          bitField0_ |= 0x00000001;
-          onChanged();
-        }
-        return this;
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public Builder clearChordNode() {
+      public Builder clearId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        chordNode_ = null;
-        if (chordNodeBuilder_ != null) {
-          chordNodeBuilder_.dispose();
-          chordNodeBuilder_ = null;
-        }
+        id_ = 0L;
         onChanged();
         return this;
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public proto.Chord.ChordNode.Builder getChordNodeBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getChordNodeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
-        if (chordNodeBuilder_ != null) {
-          return chordNodeBuilder_.getMessageOrBuilder();
-        } else {
-          return chordNode_ == null ?
-              proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
-        }
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> 
-          getChordNodeFieldBuilder() {
-        if (chordNodeBuilder_ == null) {
-          chordNodeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder>(
-                  getChordNode(),
-                  getParentForChildren(),
-                  isClean());
-          chordNode_ = null;
-        }
-        return chordNodeBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:FindSuccessorRequest)
@@ -4964,25 +4829,25 @@ public final class Chord {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013chord.proto\"5\n\024FindSuccessorRequest\022\035\n" +
-      "\tchordNode\030\001 \001(\0132\n.ChordNode\"3\n\022FindSucc" +
-      "essorReply\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNod" +
-      "e\"\030\n\026FindPredecessorRequest\"\026\n\024FindPrede" +
-      "cessorReply\"\037\n\035ClosestPrecedingFingerReq" +
-      "uest\"\035\n\033ClosestPrecedingFingerReply\",\n\013J" +
-      "oinRequest\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNod" +
-      "e\"*\n\tJoinReply\022\035\n\tchordNode\030\001 \001(\0132\n.Chor" +
-      "dNode\"\204\001\n\tChordNode\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030" +
-      "\002 \001(\004\022\022\n\nidentifier\030\003 \001(\004\022\t\n\001m\030\004 \001(\004\022\035\n\t" +
-      "successor\030\005 \001(\0132\n.ChordNode\022\037\n\013predecess" +
-      "or\030\006 \001(\0132\n.ChordNode2\210\002\n\004Node\022=\n\rFindSuc" +
-      "cessor\022\025.FindSuccessorRequest\032\023.FindSucc" +
-      "essorReply\"\000\022C\n\017FindPredecessor\022\027.FindPr" +
-      "edecessorRequest\032\025.FindPredecessorReply\"" +
-      "\000\022X\n\026ClosestPrecedingFinger\022\036.ClosestPre" +
-      "cedingFingerRequest\032\034.ClosestPrecedingFi" +
-      "ngerReply\"\000\022\"\n\004Join\022\014.JoinRequest\032\n.Join" +
-      "Reply\"\000B\007\n\005protob\006proto3"
+      "\n\013chord.proto\"\"\n\024FindSuccessorRequest\022\n\n" +
+      "\002id\030\001 \001(\004\"3\n\022FindSuccessorReply\022\035\n\tchord" +
+      "Node\030\001 \001(\0132\n.ChordNode\"\030\n\026FindPredecesso" +
+      "rRequest\"\026\n\024FindPredecessorReply\"\037\n\035Clos" +
+      "estPrecedingFingerRequest\"\035\n\033ClosestPrec" +
+      "edingFingerReply\",\n\013JoinRequest\022\035\n\tchord" +
+      "Node\030\001 \001(\0132\n.ChordNode\"*\n\tJoinReply\022\035\n\tc" +
+      "hordNode\030\001 \001(\0132\n.ChordNode\"\204\001\n\tChordNode" +
+      "\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004\022\022\n\nidentifier" +
+      "\030\003 \001(\004\022\t\n\001m\030\004 \001(\004\022\035\n\tsuccessor\030\005 \001(\0132\n.C" +
+      "hordNode\022\037\n\013predecessor\030\006 \001(\0132\n.ChordNod" +
+      "e2\210\002\n\004Node\022=\n\rFindSuccessor\022\025.FindSucces" +
+      "sorRequest\032\023.FindSuccessorReply\"\000\022C\n\017Fin" +
+      "dPredecessor\022\027.FindPredecessorRequest\032\025." +
+      "FindPredecessorReply\"\000\022X\n\026ClosestPrecedi" +
+      "ngFinger\022\036.ClosestPrecedingFingerRequest" +
+      "\032\034.ClosestPrecedingFingerReply\"\000\022\"\n\004Join" +
+      "\022\014.JoinRequest\032\n.JoinReply\"\000B\007\n\005protob\006p" +
+      "roto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4993,7 +4858,7 @@ public final class Chord {
     internal_static_FindSuccessorRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_FindSuccessorRequest_descriptor,
-        new java.lang.String[] { "ChordNode", });
+        new java.lang.String[] { "Id", });
     internal_static_FindSuccessorReply_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_FindSuccessorReply_fieldAccessorTable = new

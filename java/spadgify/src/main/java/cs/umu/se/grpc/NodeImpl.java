@@ -40,28 +40,15 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
     public void findSuccessor(Chord.FindSuccessorRequest req, StreamObserver<Chord.FindSuccessorReply> resp) {
         System.out.println("SERVER GOT REQUEST!");
 
-        // Parse request
-//        FingerTableNode fingerTableNode = chordUtil.createFingerTableNode(req.getChordNode());
-//        FingerTableNode fingerTableNodePrime = node.findSuccessor(fingerTableNode);
+        int id = (int) req.getId();
 
-//        Node id = chordUtil.createNode();
-//        Node nodePrime = chordBackEnd.findSuccessor();
+        Node nodePrime = node; // change to find_predecessor(id)
 
-//        // Make reply
-//        Chord.ChordNode chordNode = chordUtil.createGRPCChordNode(fingerTableNodePrime);
-//        Chord.FindSuccessorReply reply = Chord.FindSuccessorReply.newBuilder().setChordNode(chordNode).build();
-//        resp.onNext(reply);
-//        resp.onCompleted();
-
-
-
-        int port = 8187;
-        String ip = chordUtil.getLocalIp();
-        int m = 3;
-        Node nodeIds = new Node(ip, port, m);
-        Node nodePrime = chordBackEnd.findSuccessor(nodeIds.getMyIdentifier());
-
-        System.out.println("Node prime: " + nodePrime.getMyIdentifier());
+        Node nodePrimeSuccessor = nodePrime.getSuccessor();
+        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(nodePrimeSuccessor);
+        Chord.FindSuccessorReply reply = Chord.FindSuccessorReply.newBuilder().setChordNode(chordNode).build();
+        resp.onNext(reply);
+        resp.onCompleted();
     }
 
     @Override
