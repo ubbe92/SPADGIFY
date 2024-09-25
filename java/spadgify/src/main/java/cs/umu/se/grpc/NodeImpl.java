@@ -42,7 +42,8 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
         int id = (int) req.getId();
 
-        Node nodePrime = node; // change to find_predecessor(id)
+//        Node nodePrime = node; // change to find_predecessor(id)
+        Node nodePrime = chordBackEnd.findPredecessor(id); // change to find_predecessor(id)
 
         Node nodePrimeSuccessor = nodePrime.getSuccessor();
         Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(nodePrimeSuccessor);

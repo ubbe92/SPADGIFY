@@ -70,28 +70,24 @@ public class ChordBackEnd {
 
         initChannelAndStub(nodePrime.getMyIp(), nodePrime.getMyPort());
         Node successor = gRPCFindSuccessor(start);
-
         System.out.println("Our successor is: " + successor);
 
-//        table[0].setNode(node);
-//
-//        Node pred = node.getSuccessor().getPredecessor();
-//        node.setPredecessor(pred);
-//        Node succ = node.getSuccessor();
-//        succ.setPredecessor(node);
-//
-//        int m = node.getM();
-//        for (int i = 0; i < m - 1; i++) {
-//            int fingerStart = table[i+1].getStart();
-//            Node fingerNode = table[i].getNode();
-//
-//            if (isStartInIntervalNodeToFingerNodeI(fingerStart, node, fingerNode)) {
-//                table[i+1].setNode(fingerNode);
-//            } else {
-//                Node n = gRPCFindSuccessor(nodePrime, fingerStart);
-//                table[i+1].setNode(n);
-//            }
-//        }
+        table[0].setNode(successor);
+        node.setPredecessor(successor.getPredecessor());
+        successor.setPredecessor(node);
+
+        int m = node.getM();
+        for (int i = 0; i < m - 1; i++) {
+            int fingerStart = table[i+1].getStart();
+            Node fingerNode = table[i].getNode();
+
+            if (isStartInIntervalNodeToFingerNodeI(fingerStart, node, fingerNode)) {
+                table[i+1].setNode(fingerNode);
+            } else {
+                Node n = gRPCFindSuccessor(fingerStart);
+                table[i+1].setNode(n);
+            }
+        }
     }
 
     public synchronized void updateOthers() {
@@ -110,15 +106,23 @@ public class ChordBackEnd {
         return nodePrime.getSuccessor();
     }
 
+    private boolean isNodeAlone(Node node) {
+         return node.getSuccessor().getMyIdentifier() == node.getMyIdentifier()
+                 && node.getPredecessor().getMyIdentifier() == node.getMyIdentifier();
+    }
 
     // ask node n to find id’s predecessor
     public synchronized Node findPredecessor(int id) {
         System.out.println("Find predecessor()");
         Node nodePrime = node;
 
-        while (!isIdInIntervalNodePrimeToNodePrimeSuccessor(id, nodePrime, nodePrime.getSuccessor())) {
-            nodePrime = closestPrecedingFinger(id);
-        }
+        if (isNodeAlone(nodePrime))
+            return nodePrime;
+
+        // closestPrecedingFinger needs to be a gRPC function that can also call other nodes
+//        while (!isIdInIntervalNodePrimeToNodePrimeSuccessor(id, nodePrime, nodePrime.getSuccessor())) {
+//            nodePrime = closestPrecedingFinger(id);
+//        }
 
         return nodePrime;
     }
@@ -146,6 +150,9 @@ public class ChordBackEnd {
         int leftBound = nodePrime.getMyIdentifier();
         int rightBound = successor.getMyIdentifier();
         int m = node.getM();
+
+        System.out.println("id: " + nodeIdentifier + " left: " + leftBound + " right: " + rightBound);
+
 
         if (leftBound <= rightBound) {
             System.out.println("isIdInIntervalNodePrimeToNodePrimeSuccessor() Left lessOrEq than right - node identifier: "
@@ -188,18 +195,15 @@ public class ChordBackEnd {
         int rightBound = fingerNodeI.getMyIdentifier();
         int m = node.getM();
 
-        if (leftBound < rightBound) {
-            System.out.println("isStartInIntervalNodeToFingerNodeI() Left lessOrEq than right - node identifier: "
-                    + fingerStartIPlusOne + ", left bound: " + leftBound + ", right bound: " + rightBound);
+        int maxNodes = (int) Math.pow(2, m);
 
+        if (leftBound <= rightBound) {
+            // Simple range, no wrapping
             return fingerStartIPlusOne >= leftBound && fingerStartIPlusOne < rightBound;
-        }
-        else {
-            System.out.println("isStartInIntervalNodeToFingerNodeI() Left greater than right - node identifier: "
-                    + fingerStartIPlusOne + ", left bound: " + leftBound + ", right bound: " + rightBound);
-
-            return (fingerStartIPlusOne >= leftBound && fingerStartIPlusOne < m)
-                    || (fingerStartIPlusOne >= 0 && fingerStartIPlusOne < rightBound);
+        } else {
+            // Wrapped range
+            return (fingerStartIPlusOne >= leftBound && fingerStartIPlusOne < maxNodes) ||
+                    (fingerStartIPlusOne >= 0 && fingerStartIPlusOne < rightBound);
         }
     }
 }

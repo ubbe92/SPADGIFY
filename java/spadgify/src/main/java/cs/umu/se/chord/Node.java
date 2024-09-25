@@ -27,7 +27,7 @@ public class Node {
         predecessor = successor;
 
         System.out.println("Created node with identifier string: " + identifierString);
-//        displayCurrentTable();
+        displayCurrentTable();
     }
 
     public void displayCurrentTable() {
@@ -69,6 +69,6 @@ public class Node {
 
     @Override
     public String toString() {
-        return myIp + ":" + myPort;
+        return myIp + ":" + myPort + " identifier: " + myIdentifier;
     }
 }
