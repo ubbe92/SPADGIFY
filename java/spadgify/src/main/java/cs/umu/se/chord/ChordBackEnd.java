@@ -82,8 +82,10 @@ public class ChordBackEnd {
             Node fingerNode = table[i].getNode();
 
             if (isStartInIntervalNodeToFingerNodeI(fingerStart, node, fingerNode)) {
+                System.out.println("In interval");
                 table[i+1].setNode(fingerNode);
             } else {
+                System.out.println("Not in interval");
                 Node n = gRPCFindSuccessor(fingerStart);
                 table[i+1].setNode(n);
             }
@@ -92,6 +94,15 @@ public class ChordBackEnd {
 
     public synchronized void updateOthers() {
         System.out.println("updateOthers()");
+        int m = node.getM();
+
+        for (int i = 0; i < m; i++) {
+            int id = (node.getMyIdentifier() - ((int) Math.pow(2,i)));
+            Node p = findPredecessor(id);
+
+            // Kör p.grpcUpdatefingertable
+
+        }
     }
 
     public synchronized void updateFingerTable() {
@@ -119,6 +130,7 @@ public class ChordBackEnd {
         if (isNodeAlone(nodePrime))
             return nodePrime;
 
+        // TODO: Implement this!! gRPCClosestPrecedingFinger
         // closestPrecedingFinger needs to be a gRPC function that can also call other nodes
 //        while (!isIdInIntervalNodePrimeToNodePrimeSuccessor(id, nodePrime, nodePrime.getSuccessor())) {
 //            nodePrime = closestPrecedingFinger(id);
