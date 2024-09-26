@@ -27,6 +27,9 @@ public class ChordBackEnd {
         if (nodePrime != null) { // Temp condition, should be a boolean like "nodePrimeIsAlive"
             System.out.println("node " + node + " is joining node: " + nodePrime);
             initFingerTable(nodePrime);
+
+            node.displayCurrentTable();
+
             updateOthers();
 
             // move keys in (predecessor; n] from successor
@@ -119,7 +122,7 @@ public class ChordBackEnd {
         for (int i = 0; i < m; i++) {
             int id = (node.getMyIdentifier() - ((int) Math.pow(2,i)));
             Node p = findPredecessor(id);
-
+            System.out.println("p: " + p);
             // Kör p.grpcUpdatefingertable
 
         }
@@ -154,8 +157,17 @@ public class ChordBackEnd {
         // TODO: Implement this!! gRPCClosestPrecedingFinger
         // closestPrecedingFinger needs to be a gRPC function that can also call other nodes
         while (!isIdInIntervalFP(id, nodePrime, nodePrime.getSuccessor())) {
-//            nodePrime = closestPrecedingFinger(id);
-            nodePrime = gRPCClosestPrecedingFinger(id, nodePrime);
+            // Possible collisions with small m - but we don't care B^)
+            if (nodePrime.getMyIdentifier() == node.getMyIdentifier()) {
+                System.out.println("Calling my self");
+                nodePrime = closestPrecedingFinger(id);
+                System.out.println("nodePrime: " + nodePrime);
+            } else {
+                System.out.println("Calling someone else");
+                nodePrime = gRPCClosestPrecedingFinger(id, nodePrime);
+                System.out.println("nodePrime: " + nodePrime);
+            }
+
         }
 
         return nodePrime;
