@@ -59,6 +59,22 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
     @Override
     public void closestPrecedingFinger(Chord.ClosestPrecedingFingerRequest req, StreamObserver<Chord.ClosestPrecedingFingerReply> resp) {
+        System.out.println("SERVER GOT CPF REQUEST!");
+        int id = (int) req.getId();
+
+        System.out.println("ID: " + id);
+
+        Node nodePrime = chordBackEnd.closestPrecedingFinger(id);
+
+        System.out.println("1");
+        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(nodePrime);
+        System.out.println("2");
+        Chord.ClosestPrecedingFingerReply reply = Chord.ClosestPrecedingFingerReply.newBuilder().setChordNode(chordNode).build();
+        System.out.println("3");
+        resp.onNext(reply);
+        System.out.println("4");
+        resp.onCompleted();
+        System.out.println("5");
 
     }
 

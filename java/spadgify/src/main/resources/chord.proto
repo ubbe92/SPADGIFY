@@ -33,11 +33,11 @@ message FindPredecessorReply {
 }
 // ----------------------------------------------------
 message ClosestPrecedingFingerRequest {
-
+  uint64 id = 1;
 }
 
 message ClosestPrecedingFingerReply {
-
+  ChordNode chordNode = 1;
 }
 // ----------------------------------------------------
 message JoinRequest {
