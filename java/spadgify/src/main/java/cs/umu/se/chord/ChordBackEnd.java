@@ -120,7 +120,11 @@ public class ChordBackEnd {
         int m = node.getM();
 
         for (int i = 0; i < m; i++) {
-            int id = (node.getMyIdentifier() - ((int) Math.pow(2,i)));
+//            int id = (node.getMyIdentifier() - ((int) Math.pow(2,i)));
+
+            int id = (int) ((node.getMyIdentifier() - ((int) Math.pow(2, i))) % Math.pow(2, m)); // mod is wrong -1 mod 8 == 7
+
+            System.out.println("ID:::::: " + id);
             Node p = findPredecessor(id);
             System.out.println("p: " + p);
             // Kör p.grpcUpdatefingertable
@@ -156,10 +160,15 @@ public class ChordBackEnd {
 
         // TODO: Implement this!! gRPCClosestPrecedingFinger
         // closestPrecedingFinger needs to be a gRPC function that can also call other nodes
+
+        int i = 0; // remove i later
         while (!isIdInIntervalFP(id, nodePrime, nodePrime.getSuccessor())) {
             // Possible collisions with small m - but we don't care B^)
-            if (nodePrime.getMyIdentifier() == node.getMyIdentifier()) {
-                System.out.println("Calling my self");
+
+            if (i == 3) break;
+
+            if (nodePrime.equals(node)) {
+                System.out.println("Calling my self: " + nodePrime + " with id: " + id);
                 nodePrime = closestPrecedingFinger(id);
                 System.out.println("nodePrime: " + nodePrime);
             } else {
@@ -167,6 +176,9 @@ public class ChordBackEnd {
                 nodePrime = gRPCClosestPrecedingFinger(id, nodePrime);
                 System.out.println("nodePrime: " + nodePrime);
             }
+
+            System.out.println("i = " + i);
+            i++;
 
         }
 
@@ -181,13 +193,19 @@ public class ChordBackEnd {
         int m = node.getM();
         FingerTableEntry[] table = node.getFingerTable().getTable();
 
+//        node.displayCurrentTable();
+
         for (int i = m - 1; i >= 0; i--) {
             Node fingerNode = table[i].getNode();
 
-            if (isFingerNodeInIntervalCPF(fingerNode, node, id))
+            if (isFingerNodeInIntervalCPF(fingerNode, node, id)) {
+                System.out.println("finger node: " + fingerNode + " is in interval " +
+                        node.getMyIdentifier() + " - " + id);
                 return fingerNode;
-        }
+            }
 
+        }
+        System.out.println("finger nodes not in interval returning self node: " + node );
         return node;
     }
 

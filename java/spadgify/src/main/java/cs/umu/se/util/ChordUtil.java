@@ -39,6 +39,14 @@ public class ChordUtil {
 
         Node predNode = new Node(ip, port, m);
         newNode.setPredecessor(predNode);
+
+        ip = succ.getIp();
+        port = (int) succ.getPort();
+        m = (int) succ.getM();
+
+        Node succNode = new Node(ip, port, m);
+        newNode.setSuccessor(succNode);
+
         return newNode;
     }
 

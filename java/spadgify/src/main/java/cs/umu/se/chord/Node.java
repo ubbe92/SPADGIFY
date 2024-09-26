@@ -39,6 +39,11 @@ public class Node {
         return table[0].getNode();
     }
 
+    public void setSuccessor(Node successor) {
+        FingerTableEntry[] table = fingerTable.getTable();
+        table[0].setNode(successor);
+    }
+
     public Node getPredecessor() {
         return predecessor;
     }
@@ -70,5 +75,18 @@ public class Node {
     @Override
     public String toString() {
         return myIp + ":" + myPort + " identifier: " + myIdentifier;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this)
+            return true;
+
+        if (!(o instanceof Node))
+            return false;
+
+        Node n = (Node) o;
+        return (this.getMyPort() == n.getMyPort()) && (this.getMyIp().equals(n.getMyIp()));
     }
 }
