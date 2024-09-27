@@ -113,6 +113,37 @@ public final class NodeGrpc {
     return getClosestPrecedingFingerMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.UpdateFingerTableRequest,
+      proto.Chord.UpdateFingerTableReply> getUpdateFingerTableMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateFingerTable",
+      requestType = proto.Chord.UpdateFingerTableRequest.class,
+      responseType = proto.Chord.UpdateFingerTableReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<proto.Chord.UpdateFingerTableRequest,
+      proto.Chord.UpdateFingerTableReply> getUpdateFingerTableMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.UpdateFingerTableRequest, proto.Chord.UpdateFingerTableReply> getUpdateFingerTableMethod;
+    if ((getUpdateFingerTableMethod = NodeGrpc.getUpdateFingerTableMethod) == null) {
+      synchronized (NodeGrpc.class) {
+        if ((getUpdateFingerTableMethod = NodeGrpc.getUpdateFingerTableMethod) == null) {
+          NodeGrpc.getUpdateFingerTableMethod = getUpdateFingerTableMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.UpdateFingerTableRequest, proto.Chord.UpdateFingerTableReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateFingerTable"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.UpdateFingerTableRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.UpdateFingerTableReply.getDefaultInstance()))
+              .setSchemaDescriptor(new NodeMethodDescriptorSupplier("UpdateFingerTable"))
+              .build();
+        }
+      }
+    }
+    return getUpdateFingerTableMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<proto.Chord.JoinRequest,
       proto.Chord.JoinReply> getJoinMethod;
 
@@ -220,6 +251,13 @@ public final class NodeGrpc {
 
     /**
      */
+    default void updateFingerTable(proto.Chord.UpdateFingerTableRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.UpdateFingerTableReply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateFingerTableMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void join(proto.Chord.JoinRequest request,
         io.grpc.stub.StreamObserver<proto.Chord.JoinReply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getJoinMethod(), responseObserver);
@@ -289,6 +327,14 @@ public final class NodeGrpc {
 
     /**
      */
+    public void updateFingerTable(proto.Chord.UpdateFingerTableRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.UpdateFingerTableReply> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateFingerTableMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void join(proto.Chord.JoinRequest request,
         io.grpc.stub.StreamObserver<proto.Chord.JoinReply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -336,6 +382,13 @@ public final class NodeGrpc {
     public proto.Chord.ClosestPrecedingFingerReply closestPrecedingFinger(proto.Chord.ClosestPrecedingFingerRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getClosestPrecedingFingerMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public proto.Chord.UpdateFingerTableReply updateFingerTable(proto.Chord.UpdateFingerTableRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateFingerTableMethod(), getCallOptions(), request);
     }
 
     /**
@@ -393,6 +446,14 @@ public final class NodeGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.UpdateFingerTableReply> updateFingerTable(
+        proto.Chord.UpdateFingerTableRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateFingerTableMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<proto.Chord.JoinReply> join(
         proto.Chord.JoinRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -403,7 +464,8 @@ public final class NodeGrpc {
   private static final int METHODID_FIND_SUCCESSOR = 0;
   private static final int METHODID_FIND_PREDECESSOR = 1;
   private static final int METHODID_CLOSEST_PRECEDING_FINGER = 2;
-  private static final int METHODID_JOIN = 3;
+  private static final int METHODID_UPDATE_FINGER_TABLE = 3;
+  private static final int METHODID_JOIN = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -433,6 +495,10 @@ public final class NodeGrpc {
         case METHODID_CLOSEST_PRECEDING_FINGER:
           serviceImpl.closestPrecedingFinger((proto.Chord.ClosestPrecedingFingerRequest) request,
               (io.grpc.stub.StreamObserver<proto.Chord.ClosestPrecedingFingerReply>) responseObserver);
+          break;
+        case METHODID_UPDATE_FINGER_TABLE:
+          serviceImpl.updateFingerTable((proto.Chord.UpdateFingerTableRequest) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.UpdateFingerTableReply>) responseObserver);
           break;
         case METHODID_JOIN:
           serviceImpl.join((proto.Chord.JoinRequest) request,
@@ -477,6 +543,13 @@ public final class NodeGrpc {
               proto.Chord.ClosestPrecedingFingerRequest,
               proto.Chord.ClosestPrecedingFingerReply>(
                 service, METHODID_CLOSEST_PRECEDING_FINGER)))
+        .addMethod(
+          getUpdateFingerTableMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              proto.Chord.UpdateFingerTableRequest,
+              proto.Chord.UpdateFingerTableReply>(
+                service, METHODID_UPDATE_FINGER_TABLE)))
         .addMethod(
           getJoinMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -535,6 +608,7 @@ public final class NodeGrpc {
               .addMethod(getFindSuccessorMethod())
               .addMethod(getFindPredecessorMethod())
               .addMethod(getClosestPrecedingFingerMethod())
+              .addMethod(getUpdateFingerTableMethod())
               .addMethod(getJoinMethod())
               .build();
         }

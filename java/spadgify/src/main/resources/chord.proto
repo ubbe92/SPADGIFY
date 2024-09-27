@@ -7,8 +7,9 @@ option java_package = "proto";
 // ----------------------------------------------------
 service Node {
   rpc FindSuccessor (FindSuccessorRequest) returns (FindSuccessorReply) {}
-  rpc FindPredecessor(FindPredecessorRequest) returns (FindPredecessorReply) {}
-  rpc ClosestPrecedingFinger(ClosestPrecedingFingerRequest) returns (ClosestPrecedingFingerReply) {}
+  rpc FindPredecessor (FindPredecessorRequest) returns (FindPredecessorReply) {}
+  rpc ClosestPrecedingFinger (ClosestPrecedingFingerRequest) returns (ClosestPrecedingFingerReply) {}
+  rpc UpdateFingerTable (UpdateFingerTableRequest) returns (UpdateFingerTableReply) {}
 
   rpc Join(JoinRequest) returns (JoinReply) {}
 }
@@ -23,6 +24,7 @@ message FindSuccessorRequest {
 message FindSuccessorReply {
   ChordNode chordNode = 1;
 }
+
 // ----------------------------------------------------
 message FindPredecessorRequest {
 
@@ -31,6 +33,7 @@ message FindPredecessorRequest {
 message FindPredecessorReply {
 
 }
+
 // ----------------------------------------------------
 message ClosestPrecedingFingerRequest {
   uint64 id = 1;
@@ -39,6 +42,17 @@ message ClosestPrecedingFingerRequest {
 message ClosestPrecedingFingerReply {
   ChordNode chordNode = 1;
 }
+
+// ----------------------------------------------------
+message UpdateFingerTableRequest {
+  uint64 i = 1;
+  ChordNode chordNode = 2;
+}
+
+message UpdateFingerTableReply {
+
+}
+
 // ----------------------------------------------------
 message JoinRequest {
   ChordNode chordNode = 1;

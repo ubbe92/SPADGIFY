@@ -62,20 +62,42 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         System.out.println("SERVER GOT CPF REQUEST!");
         int id = (int) req.getId();
 
-        System.out.println("ID: " + id);
-
         Node nodePrime = chordBackEnd.closestPrecedingFinger(id);
-
-        System.out.println("1");
         Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(nodePrime);
-        System.out.println("2");
         Chord.ClosestPrecedingFingerReply reply = Chord.ClosestPrecedingFingerReply.newBuilder().setChordNode(chordNode).build();
-        System.out.println("3");
-        resp.onNext(reply);
-        System.out.println("4");
-        resp.onCompleted();
-        System.out.println("5");
 
+        resp.onNext(reply);
+        resp.onCompleted();
+
+    }
+
+    @Override
+    public void updateFingerTable(Chord.UpdateFingerTableRequest req, StreamObserver<Chord.UpdateFingerTableReply> resp) {
+        System.out.println("SERVER GOT UFT REQUEST");
+
+        int i = (int) req.getI();
+        Chord.ChordNode chordNode = req.getChordNode();
+        Node s = chordUtil.createNodeFromGRPCChordNode(chordNode);
+
+        chordBackEnd.updateFingerTable(s, i); // this crashes the program
+
+//        updateFingerTable()
+//        s: 1 in interval: [1 - 1)
+//        updateFingerTable() Updating my own fingertable with: 192.168.38.126:8185 identifier: 1 at i: 0
+//        updateFingerTable()
+//        s: 1 in interval: [1 - 1)
+//        updateFingerTable() Updating my own fingertable with: 192.168.38.126:8185 identifier: 1 at i: 0
+//        Exception in thread "grpc-default-executor-0" java.lang.StackOverflowError
+//        at cs.umu.se.chord.ChordBackEnd.updateFingerTable(ChordBackEnd.java:148)
+//        at cs.umu.se.chord.ChordBackEnd.updateFingerTable(ChordBackEnd.java:163)
+
+        Chord.UpdateFingerTableReply reply = Chord.UpdateFingerTableReply.newBuilder().build();
+
+        resp.onNext(reply);
+        resp.onCompleted();
+
+        System.out.println("after receiving updateFingerTable gRPC call");
+        node.displayCurrentTable();
     }
 
     public ChordBackEnd getChordBackEnd() {

@@ -43,6 +43,7 @@ public class ChordBackEnd {
             node.setPredecessor(node);
         }
 
+        System.out.println("Finished join!");
         node.displayCurrentTable();
     }
 
@@ -104,11 +105,11 @@ public class ChordBackEnd {
             int fingerStart = table[i+1].getStart();
             Node fingerNode = table[i].getNode();
 
-            if (isFingerStartInIntervalIFT(fingerStart, node, fingerNode)) {
-                System.out.println("In interval");
+            if (isNumberInIntervalInclusiveExclusive(fingerStart, node, fingerNode)) {
+                System.out.println("fingerStart: " + fingerStart + " in interval: [" + node.getMyIdentifier() + " - " + fingerNode.getMyIdentifier() + ")");
                 table[i+1].setNode(fingerNode);
             } else {
-                System.out.println("Not in interval");
+                System.out.println("fingerStart: " + fingerStart + " not in interval: [" + node.getMyIdentifier() + " - " + fingerNode.getMyIdentifier() + ")");
                 Node n = gRPCFindSuccessor(fingerStart, nodePrime);
                 table[i+1].setNode(n);
             }
@@ -118,22 +119,72 @@ public class ChordBackEnd {
     public synchronized void updateOthers() {
         System.out.println("updateOthers()");
         int m = node.getM();
+        int maxNodes = (int) Math.pow(2, m);
 
         for (int i = 0; i < m; i++) {
-//            int id = (node.getMyIdentifier() - ((int) Math.pow(2,i)));
+            int id = ((node.getMyIdentifier() + 1) - ((int) Math.pow(2, i)));
 
-            int id = (int) ((node.getMyIdentifier() - ((int) Math.pow(2, i))) % Math.pow(2, m)); // mod is wrong -1 mod 8 == 7
+            // wrap around the circle if below zero e.g. -1 == 7 if m == 3
+            if (id < 0)
+                id += maxNodes;
 
-            System.out.println("ID:::::: " + id);
+            id = id % maxNodes;
+
             Node p = findPredecessor(id);
-            System.out.println("p: " + p);
-            // Kör p.grpcUpdatefingertable
 
+            if (p.equals(node)) {
+                System.out.println("updateOthers() p == node");
+                updateFingerTable(node, i);
+
+            // else if p == another node call gRPCUpdateFingerTable
+            } else {
+                System.out.println("updateOthers() p != node");
+                gRPCUpdateFingerTable(node, i, p);
+            }
         }
     }
 
-    public synchronized void updateFingerTable() {
+    public synchronized void updateFingerTable(Node s, int i) {
         System.out.println("updateFingerTable()");
+
+        FingerTableEntry[] table = node.getFingerTable().getTable();
+
+        Node fingerNodeI = table[i].getNode();
+
+        if (isNumberInIntervalInclusiveExclusive(s.getMyIdentifier(), node, fingerNodeI)) {
+            System.out.println("s: " + s.getMyIdentifier() + " in interval: [" + node.getMyIdentifier() + " - " + fingerNodeI.getMyIdentifier() + ")");
+
+            table[i].setNode(s);
+            Node p = node.getPredecessor();
+
+
+            // if p == this node call local updateFingerTable
+            if (p.equals(node)) {
+
+                System.out.println("updateFingerTable() Updating my own fingertable with: " + node + " at i: " + i);
+
+                // infinite recursion??? REMOVE THIS?????!!!!
+//                updateFingerTable(node, i);
+
+            // else if p == another node call gRPCUpdateFingerTable
+            } else {
+                System.out.println("updateFingerTable() Telling: " + p + " to update fingertable with: " + node + " at i: " + i);
+                gRPCUpdateFingerTable(s, i, p);
+            }
+        }
+    }
+
+    public synchronized void gRPCUpdateFingerTable(Node s, int i, Node p) {
+        System.out.println("gRPCUpdateFingerTable calling node: " + p + " to insert node: " + s + " at index: " + i);
+        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(s);
+
+        initChannelAndStub(p.getMyIp(), p.getMyPort());
+        Chord.UpdateFingerTableRequest request = Chord.UpdateFingerTableRequest.newBuilder()
+                .setI(i)
+                .setChordNode(chordNode)
+                .build();
+        Chord.UpdateFingerTableReply reply = blockingStub.updateFingerTable(request);
+        shutdownChannel(channel);
     }
 
 
@@ -157,29 +208,20 @@ public class ChordBackEnd {
 //        if (isNodeAlone(nodePrime))
 //            return nodePrime;
 
-
-        // TODO: Implement this!! gRPCClosestPrecedingFinger
-        // closestPrecedingFinger needs to be a gRPC function that can also call other nodes
-
-        int i = 0; // remove i later
-        while (!isIdInIntervalFP(id, nodePrime, nodePrime.getSuccessor())) {
+        // this method does not return true for 0 in (3, 1]????????!!?!?!
+        while (!isNumberInIntervalExclusiveInclusive(id, nodePrime, nodePrime.getSuccessor())) {
             // Possible collisions with small m - but we don't care B^)
-
-            if (i == 3) break;
+            System.out.println(id + " is not in the exc/inc interval: " + nodePrime.getMyIdentifier() + " - " + nodePrime.getSuccessor().getMyIdentifier());
 
             if (nodePrime.equals(node)) {
                 System.out.println("Calling my self: " + nodePrime + " with id: " + id);
                 nodePrime = closestPrecedingFinger(id);
                 System.out.println("nodePrime: " + nodePrime);
             } else {
-                System.out.println("Calling someone else");
+                System.out.println("Calling someone else: " + nodePrime + " with id: " + id);
                 nodePrime = gRPCClosestPrecedingFinger(id, nodePrime);
                 System.out.println("nodePrime: " + nodePrime);
             }
-
-            System.out.println("i = " + i);
-            i++;
-
         }
 
         return nodePrime;
@@ -188,7 +230,7 @@ public class ChordBackEnd {
 
     // return closest finger preceding id
     public synchronized Node closestPrecedingFinger(int id) {
-        System.out.println("Closest preceding finger()");
+        System.out.println("Closest preceding finger() with id: " + id);
 
         int m = node.getM();
         FingerTableEntry[] table = node.getFingerTable().getTable();
@@ -198,22 +240,24 @@ public class ChordBackEnd {
         for (int i = m - 1; i >= 0; i--) {
             Node fingerNode = table[i].getNode();
 
-            if (isFingerNodeInIntervalCPF(fingerNode, node, id)) {
-                System.out.println("finger node: " + fingerNode + " is in interval " +
-                        node.getMyIdentifier() + " - " + id);
+            if (isNodeInIntervalExclusive(fingerNode, node, id)) {
+                System.out.println("FingerNode[" + i + "]: " + fingerNode + " in interval: (" + node.getMyIdentifier() + " - " + id + ")");
                 return fingerNode;
             }
+
+            System.out.println("FingerNode[" + i + "]: " + fingerNode + " not in interval: (" + node.getMyIdentifier() + " - " + id + ")");
 
         }
         System.out.println("finger nodes not in interval returning self node: " + node );
         return node;
     }
 
-    private boolean isIdInIntervalFP(int nodeIdentifier, Node nodePrime, Node successor) {
-
+    private boolean isNumberInIntervalExclusiveInclusive(int nodeIdentifier, Node nodePrime, Node successor) {
         int leftBound = nodePrime.getMyIdentifier();
         int rightBound = successor.getMyIdentifier();
         int m = node.getM();
+        int maxNodes = (int) Math.pow(2, m);
+
 
 //        System.out.println("id: " + nodeIdentifier + " left: " + leftBound + " right: " + rightBound);
 
@@ -221,48 +265,71 @@ public class ChordBackEnd {
         if (leftBound == rightBound)
             return true;
 
-        if (leftBound <= rightBound) {
-//            System.out.println("isIdInIntervalFP() Left lessOrEq than right - node identifier: "
-//                    + nodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
+        // old solution
+//        if (leftBound <= rightBound) {
+////            System.out.println("isIdInIntervalFP() Left lessOrEq than right - node identifier: "
+////                    + nodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
+//
+//            return nodeIdentifier > leftBound && nodeIdentifier <= rightBound;
+//        }
+//        else {
+////            System.out.println("isIdInIntervalFP() Left greater than right - node identifier: "
+////                    + nodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
+//
+//            return (nodeIdentifier > leftBound && nodeIdentifier <= m) || (nodeIdentifier > 0 && nodeIdentifier <= rightBound);
+//        }
 
+        // exc/inc e.g. (x, y]
+        if (leftBound < rightBound) {
+            // Simple range, no wrapping
             return nodeIdentifier > leftBound && nodeIdentifier <= rightBound;
-        }
-        else {
-//            System.out.println("isIdInIntervalFP() Left greater than right - node identifier: "
-//                    + nodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
-
-            return (nodeIdentifier > leftBound && nodeIdentifier <= m) || (nodeIdentifier > 0 && nodeIdentifier <= rightBound);
+        } else {
+            // Wrapped range
+            return (nodeIdentifier > leftBound && nodeIdentifier < maxNodes) ||
+                    (nodeIdentifier >= 0 && nodeIdentifier <= rightBound);
         }
     }
 
-    private boolean isFingerNodeInIntervalCPF(Node fingerNode, Node n, int id) {
+    private boolean isNodeInIntervalExclusive(Node fingerNode, Node n, int id) {
 
         int leftBound = n.getMyIdentifier();
         int rightBound = id;
         int fingerNodeIdentifier = fingerNode.getMyIdentifier();
         int m = node.getM();
+        int maxNodes = (int) Math.pow(2, m);
 
         // If full circle e.g. (1, 1)
         if (leftBound == rightBound && fingerNodeIdentifier != leftBound) {
             return true;
         }
 
-        if (leftBound <= rightBound) {
-//            System.out.println("isFingerNodeInIntervalCPF() Left lessOrEq than right - node identifier: "
-//                    + fingerNodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
+//        if (leftBound <= rightBound) {
+////            System.out.println("isFingerNodeInIntervalCPF() Left lessOrEq than right - node identifier: "
+////                    + fingerNodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
+//
+//            return fingerNodeIdentifier > leftBound && fingerNodeIdentifier < rightBound;
+//        }
+//        else {
+////            System.out.println("isFingerNodeInIntervalCPF() Left greater than right - node identifier: "
+////                    + fingerNodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
+//
+//            return (fingerNodeIdentifier > leftBound && fingerNodeIdentifier < m)
+//                    || (fingerNodeIdentifier > 0 && fingerNodeIdentifier < rightBound);
+//        }
 
+        // exc/exc e.g. (x, y)
+        if (leftBound < rightBound) {
+            // Simple range, no wrapping
             return fingerNodeIdentifier > leftBound && fingerNodeIdentifier < rightBound;
+        } else {
+            // Wrapped range
+            return (fingerNodeIdentifier > leftBound && fingerNodeIdentifier < maxNodes) ||
+                    (fingerNodeIdentifier >= 0 && fingerNodeIdentifier < rightBound);
         }
-        else {
-//            System.out.println("isFingerNodeInIntervalCPF() Left greater than right - node identifier: "
-//                    + fingerNodeIdentifier + ", left bound: " + leftBound + ", right bound: " + rightBound);
 
-            return (fingerNodeIdentifier > leftBound && fingerNodeIdentifier < m)
-                    || (fingerNodeIdentifier > 0 && fingerNodeIdentifier < rightBound);
-        }
     }
 
-    private synchronized boolean isFingerStartInIntervalIFT(int fingerStartIPlusOne, Node node, Node fingerNodeI) {
+    private synchronized boolean isNumberInIntervalInclusiveExclusive(int fingerStartIPlusOne, Node node, Node fingerNodeI) {
         int leftBound = node.getMyIdentifier();
         int rightBound = fingerNodeI.getMyIdentifier();
         int m = node.getM();
@@ -273,6 +340,7 @@ public class ChordBackEnd {
         if (leftBound == rightBound)
             return true;
 
+        // inc/exc e.g. [x, y)
         if (leftBound <= rightBound) {
             // Simple range, no wrapping
             return fingerStartIPlusOne >= leftBound && fingerStartIPlusOne < rightBound;
