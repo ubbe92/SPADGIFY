@@ -50,8 +50,13 @@ public class ChordBackEnd {
     }
 
     private void initChannelAndStub(String ip, int port) {
-        this.channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
-        this.blockingStub = NodeGrpc.newBlockingStub(channel);
+        try {
+            this.channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
+            this.blockingStub = NodeGrpc.newBlockingStub(channel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("initChannelAndStub() failed!");
+        }
     }
 
     private void shutdownChannel(ManagedChannel channel) {
@@ -325,6 +330,14 @@ public class ChordBackEnd {
 
 
 
+
+
+
+
+
+
+
+
     // TESTING WIKIPEDIA
     public synchronized void createWIKI() {
         node.setPredecessor(null);
@@ -378,15 +391,20 @@ public class ChordBackEnd {
 
     private synchronized Node gRPCGetPredecessorWIKI(Node n) {
         System.out.println("gRPCGetPredecessorWIKI()");
+        try {
+            initChannelAndStub(n.getMyIp(), n.getMyPort());
 
-        initChannelAndStub(n.getMyIp(), n.getMyPort());
-        Chord.GetPredecessorRequestWIKI request = Chord.GetPredecessorRequestWIKI.newBuilder().build();
-        Chord.GetPredecessorReplyWIKI reply = blockingStub.getPredecessorWIKI(request);
-        Node successor = chordUtil.createNodeFromGRPCChordNodeWIKI(reply.getChordNode());
+            Chord.GetPredecessorRequestWIKI request = Chord.GetPredecessorRequestWIKI.newBuilder().build();
+            Chord.GetPredecessorReplyWIKI reply = blockingStub.getPredecessorWIKI(request);
+            Node successor = chordUtil.createNodeFromGRPCChordNodeWIKI(reply.getChordNode());
 
-        shutdownChannel(channel);
-
-        return successor.getPredecessor();
+            shutdownChannel(channel);
+            return successor.getPredecessor();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("gRPCGetPredecessorWIKI() crashed");
+        }
+        return node; // should not happen lmao
     }
 
     public synchronized void notifyWIKI(Node nodePrime) {
@@ -400,9 +418,14 @@ public class ChordBackEnd {
         System.out.println("gRPCNotifyWIKI()");
         initChannelAndStub(successor.getMyIp(), successor.getMyPort());
 
-        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
-        Chord.NotifyRequestWIKI request = Chord.NotifyRequestWIKI.newBuilder().setChordNode(chordNode).build();
-        Chord.NotifyReplyWIKI reply = blockingStub.notifyWIKI(request);
+        try {
+            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
+            Chord.NotifyRequestWIKI request = Chord.NotifyRequestWIKI.newBuilder().setChordNode(chordNode).build();
+            Chord.NotifyReplyWIKI reply = blockingStub.notifyWIKI(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("gRPCNotifyWIKI() crashed");
+        }
 
         shutdownChannel(channel);
 
@@ -469,29 +492,44 @@ public class ChordBackEnd {
 
     public synchronized boolean gRPCPingNodeWIKI(Node node) {
         System.out.println("gRPCPingNodeWIKI()");
-        initChannelAndStub(node.getMyIp(), node.getMyPort());
 
-        Chord.PingNodeRequestWIKI request = Chord.PingNodeRequestWIKI.newBuilder().setIsAlive(true).build();
-        Chord.PingNodeReplyWIKI reply = blockingStub.pingNodeWIKI(request);
+        try {
+            initChannelAndStub(node.getMyIp(), node.getMyPort());
 
-        shutdownChannel(channel);
+            Chord.PingNodeRequestWIKI request = Chord.PingNodeRequestWIKI.newBuilder().setIsAlive(true).build();
+            Chord.PingNodeReplyWIKI reply = blockingStub.pingNodeWIKI(request);
 
-        return reply.getIsAlive();
+            shutdownChannel(channel);
+
+            return reply.getIsAlive();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("gRPCPingNodeWIKI() crashed");
+        }
+
+        return false; // should not happen lmao
     }
 
     private synchronized Node gRPCFindSuccessorWIKI(Node nodePrime, int id) {
         System.out.println("gRPCFindSuccessorWIKI(): " + nodePrime + " id: " + id);
 
-        initChannelAndStub(nodePrime.getMyIp(), nodePrime.getMyPort());
+        try {
+            initChannelAndStub(nodePrime.getMyIp(), nodePrime.getMyPort());
 
-        Chord.FindSuccessorRequestWIKI request = Chord.FindSuccessorRequestWIKI.newBuilder().setId(id).build();
-        Chord.FindSuccessorReplyWIKI reply = blockingStub.findSuccessorWIKI(request);
-        Chord.ChordNode chordNode = reply.getChordNode();
+            Chord.FindSuccessorRequestWIKI request = Chord.FindSuccessorRequestWIKI.newBuilder().setId(id).build();
+            Chord.FindSuccessorReplyWIKI reply = blockingStub.findSuccessorWIKI(request);
+            Chord.ChordNode chordNode = reply.getChordNode();
 
-        shutdownChannel(channel);
+            shutdownChannel(channel);
 
-        Node successor = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
-        return successor;
+            Node successor = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
+            return successor;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("gRPCFindSuccessorWIKI() crashed");
+        }
+
+        return node; // should not happen lmao
     }
 
     public synchronized Node closestPrecedingNodeWIKI(int id) {
