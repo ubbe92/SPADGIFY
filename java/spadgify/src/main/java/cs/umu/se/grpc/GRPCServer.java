@@ -29,12 +29,17 @@ public class GRPCServer implements Server {
                 case 0: // join existing DTH.
                     System.out.println("Joining existing DTH!");
                     Node nodePrime = new Node(remoteIp, remotePort, m);
-                    chordBackEnd.join(nodePrime);
+//                    chordBackEnd.join(nodePrime);
+
+                    // TESTING WIKI SOLUTION
+                    chordBackEnd.joinWIKI(nodePrime);
                     break;
                 case 1: // create new DHT
                     System.out.println("Creating new DHT!");
-                    chordBackEnd.join(null);
+//                    chordBackEnd.join(null);
 
+                    // TESTING WIKI SOLUTION
+                    chordBackEnd.createWIKI();
                     break;
                 default: // Unknown mode
                     System.out.println("Unknown mode!");

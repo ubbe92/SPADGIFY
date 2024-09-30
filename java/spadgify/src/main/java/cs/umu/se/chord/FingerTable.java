@@ -68,10 +68,12 @@ public class FingerTable {
 
         System.out.println("Start\tInterval\tSuccessor");
         for (FingerTableEntry e : table) {
+            int[] interval = e.getInterval();
+
             if (e.getNode() != null)
-                System.out.println(e.getStart() + "\t\t" + Arrays.toString(e.getInterval()) + "\t\t" + e.getNode().getMyIdentifier());
+                System.out.println(e.getStart() + "\t[" + interval[0] + ", " + interval[1] + ")\t\t" + e.getNode().getMyIdentifier());
             else
-                System.out.println(e.getStart() + "\t\t" + Arrays.toString(e.getInterval()) + "\t\t" + "null");
+                System.out.println(e.getStart() + "\t[" + interval[0] + ", " + interval[1] + ")\t\t" + "null");
 
         }
     }

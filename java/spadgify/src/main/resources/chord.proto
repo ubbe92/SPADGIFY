@@ -12,6 +12,10 @@ service Node {
   rpc UpdateFingerTable (UpdateFingerTableRequest) returns (UpdateFingerTableReply) {}
 
   rpc Join(JoinRequest) returns (JoinReply) {}
+
+  rpc FindSuccessorWIKI (FindSuccessorRequestWIKI) returns (FindSuccessorReplyWIKI) {}
+  rpc NotifyWIKI (NotifyRequestWIKI) returns (NotifyReplyWIKI) {}
+  rpc PingNodeWIKI (PingNodeRequestWIKI) returns (PingNodeReplyWIKI) {}
 }
 
 // ----------------------------------------------------
@@ -23,6 +27,33 @@ message FindSuccessorRequest {
 
 message FindSuccessorReply {
   ChordNode chordNode = 1;
+}
+
+// ----------------------------------------------------
+message FindSuccessorRequestWIKI {
+  uint64 id = 1;
+}
+
+message FindSuccessorReplyWIKI {
+  ChordNode chordNode = 1;
+}
+
+// ----------------------------------------------------
+message NotifyRequestWIKI {
+  ChordNode chordNode = 1;
+}
+
+message NotifyReplyWIKI {
+
+}
+
+// ----------------------------------------------------
+message PingNodeRequestWIKI {
+  bool isAlive = 1;
+}
+
+message PingNodeReplyWIKI {
+  bool isAlive = 1;
 }
 
 // ----------------------------------------------------

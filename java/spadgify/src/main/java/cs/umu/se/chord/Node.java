@@ -27,11 +27,13 @@ public class Node {
         predecessor = successor;
 
         System.out.println("Created node with identifier string: " + identifierString);
-        displayCurrentTable();
+//        displayCurrentTable();
     }
 
     public void displayCurrentTable() {
         fingerTable.displayCurrentTable();
+        System.out.println("My successor: " + getSuccessor());
+        System.out.println("My predecessor: " + getPredecessor());
     }
 
     public Node getSuccessor() {
