@@ -1,6 +1,7 @@
 package cs.umu.se.chord;
 
 import cs.umu.se.util.ChordUtil;
+import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import proto.Chord;
@@ -281,6 +282,8 @@ public class ChordBackEnd {
         int m = node.getM();
         int maxNodes = (int) Math.pow(2, m);
 
+        System.out.println("fingerNode: " + fingerNodeIdentifier + " in: (" + leftBound + ", " + rightBound + ")");
+
         // If full circle e.g. (1, 1)
         if (leftBound == rightBound && fingerNodeIdentifier != leftBound) {
             return true;
@@ -327,6 +330,10 @@ public class ChordBackEnd {
         node.setPredecessor(null);
         node.setSuccessor(node);
 
+        StabilizerWorker worker = new StabilizerWorker(this, node.getM());
+        Thread thread = new Thread(worker);
+        thread.start();
+
         node.displayCurrentTable();
     }
 
@@ -334,23 +341,23 @@ public class ChordBackEnd {
         node.setPredecessor(null);
         node.setSuccessor(gRPCFindSuccessorWIKI(nodePrime, nodePrime.getMyIdentifier()));
 
-        System.out.println("\nBefore stabilize!");
-        node.displayCurrentTable();
-        System.out.println("------------------------------------------\n");
-        stabilizeWIKI();
+        FingerTableEntry[] table = node.getFingerTable().getTable();
+        Node successor = node.getSuccessor();
+        for (int i = 1; i < node.getM(); i++)
+            table[i].setNode(successor);
 
-        fixFingersWIKI();
-
-        checkPredecessorWIKI();
-
-        System.out.println("\nAfter stabilize!");
-        node.displayCurrentTable();
-        System.out.println("------------------------------------------\n");
+        StabilizerWorker worker = new StabilizerWorker(this, node.getM());
+        Thread thread = new Thread(worker);
+        thread.start();
     }
 
     public synchronized void stabilizeWIKI() {
         System.out.println("stabilizeWIKI()");
-        Node x = node.getSuccessor().getPredecessor();
+//        Node x = node.getSuccessor().getPredecessor(); // GRPC CALL TO SUCCESSOR TO GET PREDECESSOR FFS
+
+        Node x = gRPCGetPredecessorWIKI(node.getSuccessor());
+
+        System.out.println("X: " + x);
 
         if (x != null) {
            if (isNodeInIntervalExclusive(x, node, node.getSuccessor().getMyIdentifier())) {
@@ -367,6 +374,19 @@ public class ChordBackEnd {
             gRPCNotifyWIKI(successor, node);
         }
 
+    }
+
+    private synchronized Node gRPCGetPredecessorWIKI(Node n) {
+        System.out.println("gRPCGetPredecessorWIKI()");
+
+        initChannelAndStub(n.getMyIp(), n.getMyPort());
+        Chord.GetPredecessorRequestWIKI request = Chord.GetPredecessorRequestWIKI.newBuilder().build();
+        Chord.GetPredecessorReplyWIKI reply = blockingStub.getPredecessorWIKI(request);
+        Node successor = chordUtil.createNodeFromGRPCChordNodeWIKI(reply.getChordNode());
+
+        shutdownChannel(channel);
+
+        return successor.getPredecessor();
     }
 
     public synchronized void notifyWIKI(Node nodePrime) {
@@ -389,7 +409,9 @@ public class ChordBackEnd {
     }
 
     public synchronized void fixFingersWIKI() {
+        System.out.println("fixFingersWIKI()");
         int m = node.getM();
+        int maxNodes = (int) Math.pow(2, m);
         FingerTableEntry[] table = node.getFingerTable().getTable();
         next++;
 
@@ -398,12 +420,18 @@ public class ChordBackEnd {
 
         int n = node.getMyIdentifier();
         int id = n + (int) Math.pow(2, next);
+
+        id = id % maxNodes;
+
+        System.out.println("Next = " + next + " id: " + id);
+
         Node successor = findSuccessorWIKI(id);
 
         table[next].setNode(successor);
     }
 
     public synchronized void checkPredecessorWIKI() {
+        System.out.println("checkPredecessorWIKI()");
         Node predecessor = node.getPredecessor();
 
         if (predecessor == null)
@@ -416,6 +444,7 @@ public class ChordBackEnd {
     }
 
     private synchronized boolean isNodeAliveWIKI(Node node) {
+        System.out.println("isNodeAliveWIKI()");
         boolean alive = true;
         try {
             alive = gRPCPingNodeWIKI(node);
@@ -428,16 +457,18 @@ public class ChordBackEnd {
     }
 
     public synchronized Node findSuccessorWIKI(int id) {
+        System.out.println("findSuccessorWIKI()");
         if (isNumberInIntervalExclusiveInclusive(id, node, node.getSuccessor())) {
             return node.getSuccessor();
         } else {
-            Node n0 = closestPrecedingNode(id);
+            Node n0 = closestPrecedingNodeWIKI(id);
             return gRPCFindSuccessorWIKI(n0, id);
         }
 
     }
 
     public synchronized boolean gRPCPingNodeWIKI(Node node) {
+        System.out.println("gRPCPingNodeWIKI()");
         initChannelAndStub(node.getMyIp(), node.getMyPort());
 
         Chord.PingNodeRequestWIKI request = Chord.PingNodeRequestWIKI.newBuilder().setIsAlive(true).build();
@@ -449,7 +480,7 @@ public class ChordBackEnd {
     }
 
     private synchronized Node gRPCFindSuccessorWIKI(Node nodePrime, int id) {
-        System.out.println("gRPCFindSuccessorWIKI()");
+        System.out.println("gRPCFindSuccessorWIKI(): " + nodePrime + " id: " + id);
 
         initChannelAndStub(nodePrime.getMyIp(), nodePrime.getMyPort());
 
@@ -463,12 +494,16 @@ public class ChordBackEnd {
         return successor;
     }
 
-    public synchronized Node closestPrecedingNode(int id) {
+    public synchronized Node closestPrecedingNodeWIKI(int id) {
+        System.out.println("closestPrecedingNode()");
+        node.displayCurrentTable();
+
         int m = node.getM();
         FingerTableEntry[] table = node.getFingerTable().getTable();
         for (int i = m - 1; i >= 0; i--) {
             Node fingerNode = table[i].getNode();
             if (isNodeInIntervalExclusive(fingerNode, node, id)) {
+                System.out.println("Returning node: " + fingerNode);
                 return fingerNode;
             }
         }

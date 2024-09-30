@@ -16,6 +16,8 @@ service Node {
   rpc FindSuccessorWIKI (FindSuccessorRequestWIKI) returns (FindSuccessorReplyWIKI) {}
   rpc NotifyWIKI (NotifyRequestWIKI) returns (NotifyReplyWIKI) {}
   rpc PingNodeWIKI (PingNodeRequestWIKI) returns (PingNodeReplyWIKI) {}
+  rpc GetPredecessorWIKI (GetPredecessorRequestWIKI) returns (GetPredecessorReplyWIKI) {}
+
 }
 
 // ----------------------------------------------------
@@ -54,6 +56,15 @@ message PingNodeRequestWIKI {
 
 message PingNodeReplyWIKI {
   bool isAlive = 1;
+}
+
+// ----------------------------------------------------
+message GetPredecessorRequestWIKI {
+
+}
+
+message GetPredecessorReplyWIKI {
+  ChordNode chordNode = 1;
 }
 
 // ----------------------------------------------------

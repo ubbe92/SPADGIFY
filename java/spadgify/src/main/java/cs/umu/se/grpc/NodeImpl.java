@@ -115,6 +115,8 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         int id = (int) req.getId();
 
         Node nodePrime = chordBackEnd.findSuccessorWIKI(id);
+        System.out.println("NODE PRIME: " + nodePrime);
+
         Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(nodePrime);
         Chord.FindSuccessorReplyWIKI reply = Chord.FindSuccessorReplyWIKI.newBuilder().setChordNode(chordNode).build();
 
@@ -150,6 +152,18 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
         System.out.println("after receiving pingNodeWIKI gRPC call");
         node.displayCurrentTable();
+
+        resp.onNext(reply);
+        resp.onCompleted();
+    }
+
+    @Override
+    public void getPredecessorWIKI(Chord.GetPredecessorRequestWIKI req, StreamObserver<Chord.GetPredecessorReplyWIKI> resp) {
+        System.out.println("SERVER GOT getPredecessorWIKI REQUEST!");
+
+        Node predecessor = node;
+        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(predecessor);
+        Chord.GetPredecessorReplyWIKI reply = Chord.GetPredecessorReplyWIKI.newBuilder().setChordNode(chordNode).build();
 
         resp.onNext(reply);
         resp.onCompleted();

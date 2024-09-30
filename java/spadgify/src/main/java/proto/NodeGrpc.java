@@ -268,6 +268,37 @@ public final class NodeGrpc {
     return getPingNodeWIKIMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.GetPredecessorRequestWIKI,
+      proto.Chord.GetPredecessorReplyWIKI> getGetPredecessorWIKIMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetPredecessorWIKI",
+      requestType = proto.Chord.GetPredecessorRequestWIKI.class,
+      responseType = proto.Chord.GetPredecessorReplyWIKI.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<proto.Chord.GetPredecessorRequestWIKI,
+      proto.Chord.GetPredecessorReplyWIKI> getGetPredecessorWIKIMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.GetPredecessorRequestWIKI, proto.Chord.GetPredecessorReplyWIKI> getGetPredecessorWIKIMethod;
+    if ((getGetPredecessorWIKIMethod = NodeGrpc.getGetPredecessorWIKIMethod) == null) {
+      synchronized (NodeGrpc.class) {
+        if ((getGetPredecessorWIKIMethod = NodeGrpc.getGetPredecessorWIKIMethod) == null) {
+          NodeGrpc.getGetPredecessorWIKIMethod = getGetPredecessorWIKIMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.GetPredecessorRequestWIKI, proto.Chord.GetPredecessorReplyWIKI>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetPredecessorWIKI"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.GetPredecessorRequestWIKI.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.GetPredecessorReplyWIKI.getDefaultInstance()))
+              .setSchemaDescriptor(new NodeMethodDescriptorSupplier("GetPredecessorWIKI"))
+              .build();
+        }
+      }
+    }
+    return getGetPredecessorWIKIMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -376,6 +407,13 @@ public final class NodeGrpc {
         io.grpc.stub.StreamObserver<proto.Chord.PingNodeReplyWIKI> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPingNodeWIKIMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getPredecessorWIKI(proto.Chord.GetPredecessorRequestWIKI request,
+        io.grpc.stub.StreamObserver<proto.Chord.GetPredecessorReplyWIKI> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetPredecessorWIKIMethod(), responseObserver);
+    }
   }
 
   /**
@@ -478,6 +516,14 @@ public final class NodeGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getPingNodeWIKIMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getPredecessorWIKI(proto.Chord.GetPredecessorRequestWIKI request,
+        io.grpc.stub.StreamObserver<proto.Chord.GetPredecessorReplyWIKI> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetPredecessorWIKIMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -555,6 +601,13 @@ public final class NodeGrpc {
     public proto.Chord.PingNodeReplyWIKI pingNodeWIKI(proto.Chord.PingNodeRequestWIKI request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getPingNodeWIKIMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public proto.Chord.GetPredecessorReplyWIKI getPredecessorWIKI(proto.Chord.GetPredecessorRequestWIKI request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetPredecessorWIKIMethod(), getCallOptions(), request);
     }
   }
 
@@ -642,6 +695,14 @@ public final class NodeGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getPingNodeWIKIMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.GetPredecessorReplyWIKI> getPredecessorWIKI(
+        proto.Chord.GetPredecessorRequestWIKI request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetPredecessorWIKIMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_FIND_SUCCESSOR = 0;
@@ -652,6 +713,7 @@ public final class NodeGrpc {
   private static final int METHODID_FIND_SUCCESSOR_WIKI = 5;
   private static final int METHODID_NOTIFY_WIKI = 6;
   private static final int METHODID_PING_NODE_WIKI = 7;
+  private static final int METHODID_GET_PREDECESSOR_WIKI = 8;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -701,6 +763,10 @@ public final class NodeGrpc {
         case METHODID_PING_NODE_WIKI:
           serviceImpl.pingNodeWIKI((proto.Chord.PingNodeRequestWIKI) request,
               (io.grpc.stub.StreamObserver<proto.Chord.PingNodeReplyWIKI>) responseObserver);
+          break;
+        case METHODID_GET_PREDECESSOR_WIKI:
+          serviceImpl.getPredecessorWIKI((proto.Chord.GetPredecessorRequestWIKI) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.GetPredecessorReplyWIKI>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -776,6 +842,13 @@ public final class NodeGrpc {
               proto.Chord.PingNodeRequestWIKI,
               proto.Chord.PingNodeReplyWIKI>(
                 service, METHODID_PING_NODE_WIKI)))
+        .addMethod(
+          getGetPredecessorWIKIMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              proto.Chord.GetPredecessorRequestWIKI,
+              proto.Chord.GetPredecessorReplyWIKI>(
+                service, METHODID_GET_PREDECESSOR_WIKI)))
         .build();
   }
 
@@ -832,6 +905,7 @@ public final class NodeGrpc {
               .addMethod(getFindSuccessorWIKIMethod())
               .addMethod(getNotifyWIKIMethod())
               .addMethod(getPingNodeWIKIMethod())
+              .addMethod(getGetPredecessorWIKIMethod())
               .build();
         }
       }

@@ -51,22 +51,32 @@ public class ChordUtil {
     }
 
     public synchronized Node createNodeFromGRPCChordNodeWIKI(Chord.ChordNode node) {
-        Chord.ChordNode succ = node.getSuccessor();
-
         String ip = node.getIp();
         int port = (int) node.getPort();
         int m = (int) node.getM();
-
         Node newNode = new Node(ip, port, m);
 
-        newNode.setPredecessor(null);
+        if (node.hasPredecessor()) {
+            Chord.ChordNode pred = node.getPredecessor();
+            ip = pred.getIp();
+            port = (int) pred.getPort();
+            m = (int) pred.getM();
 
-        ip = succ.getIp();
-        port = (int) succ.getPort();
-        m = (int) succ.getM();
+            Node predNode = new Node(ip, port, m);
+            newNode.setPredecessor(predNode);
+        } else
+            newNode.setPredecessor(null);
 
-        Node succNode = new Node(ip, port, m);
-        newNode.setSuccessor(succNode);
+        if (node.hasSuccessor()) {
+            Chord.ChordNode succ = node.getSuccessor();
+            ip = succ.getIp();
+            port = (int) succ.getPort();
+            m = (int) succ.getM();
+
+            Node succNode = new Node(ip, port, m);
+            newNode.setSuccessor(succNode);
+        } else
+            newNode.setSuccessor(null);
 
         return newNode;
     }
@@ -96,15 +106,28 @@ public class ChordUtil {
         int identifier = node.getMyIdentifier();
         int m = node.getM();
 
-        Chord.ChordNode succ = createGRPCSuccessorNodeFromNode(node.getSuccessor());
+        Node successor = node.getSuccessor();
+        Node predecessor = node.getPredecessor();
+        Chord.ChordNode succ = null;
+        Chord.ChordNode pred = null;
 
-        return Chord.ChordNode.newBuilder()
-                .setIp(ip)
-                .setPort(port)
-                .setIdentifier(identifier)
-                .setM(m)
-                .setSuccessor(succ)
-                .build();
+        Chord.ChordNode.Builder build = Chord.ChordNode.newBuilder()
+            .setIp(ip)
+            .setPort(port)
+            .setIdentifier(identifier)
+            .setM(m);
+
+        if (successor != null) {
+            succ = createGRPCNodeFromNodeWIKI(successor);
+            build.setSuccessor(succ);
+        }
+
+        if (predecessor != null) {
+            pred = createGRPCPredecessorNodeFromNode(predecessor);
+            build.setPredecessor(pred);
+        }
+
+        return build.build();
     }
 
 
@@ -115,6 +138,15 @@ public class ChordUtil {
 
     public synchronized Node createPredecessorNodeFromGRPCNode(Chord.ChordNode predecessor) {
         return null;
+    }
+
+    private synchronized Chord.ChordNode createGRPCNodeFromNodeWIKI(Node node) {
+        return Chord.ChordNode.newBuilder()
+                .setIp(node.getMyIp())
+                .setPort(node.getMyPort())
+                .setIdentifier(node.getMyIdentifier())
+                .setM(node.getM())
+                .build();
     }
 
     public synchronized Chord.ChordNode createGRPCSuccessorNodeFromNode(Node successor) {

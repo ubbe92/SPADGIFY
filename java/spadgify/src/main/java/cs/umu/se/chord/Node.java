@@ -9,7 +9,6 @@ public class Node {
     private int m;
     private int myIdentifier;
     private ChordUtil chordUtil = new ChordUtil();
-    private Node successor;
     private Node predecessor;
 
     public Node(String ip, int port, int m) {
@@ -22,9 +21,7 @@ public class Node {
         // Init finger table for this node
         fingerTable = new FingerTable(this);
 
-        // We need to update these somehow at a later date
-        successor = getSuccessor();
-        predecessor = successor;
+        predecessor = null;
 
         System.out.println("Created node with identifier string: " + identifierString);
 //        displayCurrentTable();
