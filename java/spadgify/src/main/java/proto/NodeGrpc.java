@@ -299,6 +299,68 @@ public final class NodeGrpc {
     return getGetPredecessorWIKIMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.SetPredecessorsSuccessorRequestWIKI,
+      proto.Chord.SetPredecessorsSuccessorReplyWIKI> getSetPredecessorsSuccessorWIKIMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SetPredecessorsSuccessorWIKI",
+      requestType = proto.Chord.SetPredecessorsSuccessorRequestWIKI.class,
+      responseType = proto.Chord.SetPredecessorsSuccessorReplyWIKI.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<proto.Chord.SetPredecessorsSuccessorRequestWIKI,
+      proto.Chord.SetPredecessorsSuccessorReplyWIKI> getSetPredecessorsSuccessorWIKIMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.SetPredecessorsSuccessorRequestWIKI, proto.Chord.SetPredecessorsSuccessorReplyWIKI> getSetPredecessorsSuccessorWIKIMethod;
+    if ((getSetPredecessorsSuccessorWIKIMethod = NodeGrpc.getSetPredecessorsSuccessorWIKIMethod) == null) {
+      synchronized (NodeGrpc.class) {
+        if ((getSetPredecessorsSuccessorWIKIMethod = NodeGrpc.getSetPredecessorsSuccessorWIKIMethod) == null) {
+          NodeGrpc.getSetPredecessorsSuccessorWIKIMethod = getSetPredecessorsSuccessorWIKIMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.SetPredecessorsSuccessorRequestWIKI, proto.Chord.SetPredecessorsSuccessorReplyWIKI>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetPredecessorsSuccessorWIKI"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.SetPredecessorsSuccessorRequestWIKI.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.SetPredecessorsSuccessorReplyWIKI.getDefaultInstance()))
+              .setSchemaDescriptor(new NodeMethodDescriptorSupplier("SetPredecessorsSuccessorWIKI"))
+              .build();
+        }
+      }
+    }
+    return getSetPredecessorsSuccessorWIKIMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.SetSuccessorsPredecessorRequestWIKI,
+      proto.Chord.SetSuccessorsPredecessorReplyWIKI> getSetSuccessorsPredecessorWIKIMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SetSuccessorsPredecessorWIKI",
+      requestType = proto.Chord.SetSuccessorsPredecessorRequestWIKI.class,
+      responseType = proto.Chord.SetSuccessorsPredecessorReplyWIKI.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<proto.Chord.SetSuccessorsPredecessorRequestWIKI,
+      proto.Chord.SetSuccessorsPredecessorReplyWIKI> getSetSuccessorsPredecessorWIKIMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.SetSuccessorsPredecessorRequestWIKI, proto.Chord.SetSuccessorsPredecessorReplyWIKI> getSetSuccessorsPredecessorWIKIMethod;
+    if ((getSetSuccessorsPredecessorWIKIMethod = NodeGrpc.getSetSuccessorsPredecessorWIKIMethod) == null) {
+      synchronized (NodeGrpc.class) {
+        if ((getSetSuccessorsPredecessorWIKIMethod = NodeGrpc.getSetSuccessorsPredecessorWIKIMethod) == null) {
+          NodeGrpc.getSetSuccessorsPredecessorWIKIMethod = getSetSuccessorsPredecessorWIKIMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.SetSuccessorsPredecessorRequestWIKI, proto.Chord.SetSuccessorsPredecessorReplyWIKI>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SetSuccessorsPredecessorWIKI"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.SetSuccessorsPredecessorRequestWIKI.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.SetSuccessorsPredecessorReplyWIKI.getDefaultInstance()))
+              .setSchemaDescriptor(new NodeMethodDescriptorSupplier("SetSuccessorsPredecessorWIKI"))
+              .build();
+        }
+      }
+    }
+    return getSetSuccessorsPredecessorWIKIMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -414,6 +476,20 @@ public final class NodeGrpc {
         io.grpc.stub.StreamObserver<proto.Chord.GetPredecessorReplyWIKI> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetPredecessorWIKIMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void setPredecessorsSuccessorWIKI(proto.Chord.SetPredecessorsSuccessorRequestWIKI request,
+        io.grpc.stub.StreamObserver<proto.Chord.SetPredecessorsSuccessorReplyWIKI> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetPredecessorsSuccessorWIKIMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void setSuccessorsPredecessorWIKI(proto.Chord.SetSuccessorsPredecessorRequestWIKI request,
+        io.grpc.stub.StreamObserver<proto.Chord.SetSuccessorsPredecessorReplyWIKI> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSetSuccessorsPredecessorWIKIMethod(), responseObserver);
+    }
   }
 
   /**
@@ -524,6 +600,22 @@ public final class NodeGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetPredecessorWIKIMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void setPredecessorsSuccessorWIKI(proto.Chord.SetPredecessorsSuccessorRequestWIKI request,
+        io.grpc.stub.StreamObserver<proto.Chord.SetPredecessorsSuccessorReplyWIKI> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSetPredecessorsSuccessorWIKIMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void setSuccessorsPredecessorWIKI(proto.Chord.SetSuccessorsPredecessorRequestWIKI request,
+        io.grpc.stub.StreamObserver<proto.Chord.SetSuccessorsPredecessorReplyWIKI> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSetSuccessorsPredecessorWIKIMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -608,6 +700,20 @@ public final class NodeGrpc {
     public proto.Chord.GetPredecessorReplyWIKI getPredecessorWIKI(proto.Chord.GetPredecessorRequestWIKI request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetPredecessorWIKIMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public proto.Chord.SetPredecessorsSuccessorReplyWIKI setPredecessorsSuccessorWIKI(proto.Chord.SetPredecessorsSuccessorRequestWIKI request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSetPredecessorsSuccessorWIKIMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public proto.Chord.SetSuccessorsPredecessorReplyWIKI setSuccessorsPredecessorWIKI(proto.Chord.SetSuccessorsPredecessorRequestWIKI request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSetSuccessorsPredecessorWIKIMethod(), getCallOptions(), request);
     }
   }
 
@@ -703,6 +809,22 @@ public final class NodeGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetPredecessorWIKIMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.SetPredecessorsSuccessorReplyWIKI> setPredecessorsSuccessorWIKI(
+        proto.Chord.SetPredecessorsSuccessorRequestWIKI request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSetPredecessorsSuccessorWIKIMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.SetSuccessorsPredecessorReplyWIKI> setSuccessorsPredecessorWIKI(
+        proto.Chord.SetSuccessorsPredecessorRequestWIKI request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSetSuccessorsPredecessorWIKIMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_FIND_SUCCESSOR = 0;
@@ -714,6 +836,8 @@ public final class NodeGrpc {
   private static final int METHODID_NOTIFY_WIKI = 6;
   private static final int METHODID_PING_NODE_WIKI = 7;
   private static final int METHODID_GET_PREDECESSOR_WIKI = 8;
+  private static final int METHODID_SET_PREDECESSORS_SUCCESSOR_WIKI = 9;
+  private static final int METHODID_SET_SUCCESSORS_PREDECESSOR_WIKI = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -767,6 +891,14 @@ public final class NodeGrpc {
         case METHODID_GET_PREDECESSOR_WIKI:
           serviceImpl.getPredecessorWIKI((proto.Chord.GetPredecessorRequestWIKI) request,
               (io.grpc.stub.StreamObserver<proto.Chord.GetPredecessorReplyWIKI>) responseObserver);
+          break;
+        case METHODID_SET_PREDECESSORS_SUCCESSOR_WIKI:
+          serviceImpl.setPredecessorsSuccessorWIKI((proto.Chord.SetPredecessorsSuccessorRequestWIKI) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.SetPredecessorsSuccessorReplyWIKI>) responseObserver);
+          break;
+        case METHODID_SET_SUCCESSORS_PREDECESSOR_WIKI:
+          serviceImpl.setSuccessorsPredecessorWIKI((proto.Chord.SetSuccessorsPredecessorRequestWIKI) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.SetSuccessorsPredecessorReplyWIKI>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -849,6 +981,20 @@ public final class NodeGrpc {
               proto.Chord.GetPredecessorRequestWIKI,
               proto.Chord.GetPredecessorReplyWIKI>(
                 service, METHODID_GET_PREDECESSOR_WIKI)))
+        .addMethod(
+          getSetPredecessorsSuccessorWIKIMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              proto.Chord.SetPredecessorsSuccessorRequestWIKI,
+              proto.Chord.SetPredecessorsSuccessorReplyWIKI>(
+                service, METHODID_SET_PREDECESSORS_SUCCESSOR_WIKI)))
+        .addMethod(
+          getSetSuccessorsPredecessorWIKIMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              proto.Chord.SetSuccessorsPredecessorRequestWIKI,
+              proto.Chord.SetSuccessorsPredecessorReplyWIKI>(
+                service, METHODID_SET_SUCCESSORS_PREDECESSOR_WIKI)))
         .build();
   }
 
@@ -906,6 +1052,8 @@ public final class NodeGrpc {
               .addMethod(getNotifyWIKIMethod())
               .addMethod(getPingNodeWIKIMethod())
               .addMethod(getGetPredecessorWIKIMethod())
+              .addMethod(getSetPredecessorsSuccessorWIKIMethod())
+              .addMethod(getSetSuccessorsPredecessorWIKIMethod())
               .build();
         }
       }

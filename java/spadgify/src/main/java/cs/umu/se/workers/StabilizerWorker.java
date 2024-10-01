@@ -28,6 +28,8 @@ public class StabilizerWorker implements Runnable {
 
             backEnd.checkPredecessorWIKI();
 
+            backEnd.checkSuccessorWIKI(); // Check if successor has crashed
+
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {

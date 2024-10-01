@@ -33,6 +33,28 @@ public class Chord {
         int mode = getOp.getMode();
 
         GRPCServer server = new GRPCServer();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                Thread.sleep(200);
+                System.out.println("Shutting down ...");
+                //some cleaning up code...
+
+                System.out.println("Notifying successor and predecessor and transferring keys");
+                server.leaveChordNetwork();
+
+                System.out.println("Stopping worker thread and server thread!");
+                server.stopWorkerThread();
+                server.stopServer();
+
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            }
+        }));
+
         server.startServer(port, remoteIp, remotePort, m, mode, exitCode);
+
+
     }
 }

@@ -14,6 +14,7 @@ public class ChordBackEnd {
     private NodeGrpc.NodeBlockingStub blockingStub;
     private ChordUtil chordUtil = new ChordUtil();
     private int next = 0;
+    private StabilizerWorker worker;
 
     public ChordBackEnd(Node node) {
         this.node = node;
@@ -335,15 +336,12 @@ public class ChordBackEnd {
 
 
 
-
-
-
     // TESTING WIKIPEDIA
     public synchronized void createWIKI() {
         node.setPredecessor(null);
         node.setSuccessor(node);
 
-        StabilizerWorker worker = new StabilizerWorker(this, node.getM());
+        this.worker = new StabilizerWorker(this, node.getM());
         Thread thread = new Thread(worker);
         thread.start();
 
@@ -359,10 +357,95 @@ public class ChordBackEnd {
         for (int i = 1; i < node.getM(); i++)
             table[i].setNode(successor);
 
-        StabilizerWorker worker = new StabilizerWorker(this, node.getM());
+        this.worker = new StabilizerWorker(this, node.getM());
         Thread thread = new Thread(worker);
         thread.start();
     }
+
+    public synchronized void leaveWIKI() {
+        System.out.println("leaveWIKI()");
+        Node successor = node.getSuccessor();
+        Node predecessor = node.getPredecessor();
+
+        if (successor != null && !successor.equals(node)) {
+            // Notify successor to update its predecessor
+            gRPCSetSuccessorsPredecessorInNodeWIKI(successor, predecessor);
+        }
+
+        if (predecessor != null && !successor.equals(node)) {
+            // Notify predecessor to update its successor
+            gRPCSetPredecessorsSuccessorInNodeWIKI(predecessor, successor);
+        }
+
+        // Transfer keys to correct node here
+    }
+
+    private synchronized void gRPCSetSuccessorsPredecessorInNodeWIKI(Node successor, Node predecessor) {
+        System.out.println("gRPCSetSuccessorsPredecessorInNodeWIKI()");
+
+        try {
+            initChannelAndStub(successor.getMyIp(), successor.getMyPort());
+            String ip = predecessor.getMyIp();
+            int port = predecessor.getMyPort();
+            int m = predecessor.getM();
+
+            Node n = new Node(ip, port, m);
+
+            n.setSuccessor(successor);
+
+            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
+
+            System.out.println("succ: " + n.getSuccessor());
+            System.out.println("n: " + n);
+
+
+            Chord.SetSuccessorsPredecessorRequestWIKI request = Chord.SetSuccessorsPredecessorRequestWIKI
+                    .newBuilder()
+                    .setChordNode(chordNode)
+                    .build();
+
+            Chord.SetSuccessorsPredecessorReplyWIKI reply = blockingStub.setSuccessorsPredecessorWIKI(request);
+
+            shutdownChannel(channel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("gRPCSetSuccessorsPredecessorInNodeWIKI() crashed");
+        }
+    }
+
+    private synchronized void gRPCSetPredecessorsSuccessorInNodeWIKI(Node predecessor, Node successor) {
+        System.out.println("gRPCSetPredecessorsSuccessorInNodeWIKI()");
+
+        try {
+            initChannelAndStub(predecessor.getMyIp(), predecessor.getMyPort());
+            String ip = successor.getMyIp();
+            int port = successor.getMyPort();
+            int m = successor.getM();
+
+            Node n = new Node(ip, port, m);
+
+            n.setPredecessor(predecessor);
+
+            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
+
+            System.out.println("pred: " + n.getPredecessor());
+            System.out.println("n: " + n);
+
+
+            Chord.SetPredecessorsSuccessorRequestWIKI request = Chord.SetPredecessorsSuccessorRequestWIKI
+                    .newBuilder()
+                    .setChordNode(chordNode)
+                    .build();
+
+            Chord.SetPredecessorsSuccessorReplyWIKI reply = blockingStub.setPredecessorsSuccessorWIKI(request);
+
+            shutdownChannel(channel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("gRPCSetPredecessorsSuccessorInNodeWIKI() crashed");
+        }
+    }
+
 
     public synchronized void stabilizeWIKI() {
         System.out.println("stabilizeWIKI()");
@@ -466,6 +549,19 @@ public class ChordBackEnd {
             node.setPredecessor(null);
     }
 
+    public synchronized void checkSuccessorWIKI() {
+        System.out.println("checkSuccessorWIKI()");
+        Node successor = node.getSuccessor();
+
+        if (successor == null)
+            return;
+
+        boolean alive = isNodeAliveWIKI(successor);
+
+        if (!alive) // if successor has failed
+            node.setSuccessor(null); // Can we set this to null or do we need to find a new successor somehow?
+    }
+
     private synchronized boolean isNodeAliveWIKI(Node node) {
         System.out.println("isNodeAliveWIKI()");
         boolean alive = true;
@@ -546,5 +642,9 @@ public class ChordBackEnd {
             }
         }
         return node;
+    }
+
+    public synchronized StabilizerWorker getWorkerThread() {
+        return this.worker;
     }
 }

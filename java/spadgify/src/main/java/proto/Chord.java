@@ -25,1023 +25,6 @@ public final class Chord {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface FindSuccessorRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:FindSuccessorRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint64 id = 1;</code>
-     * @return The id.
-     */
-    long getId();
-  }
-  /**
-   * <pre>
-   * ----------------------------------------------------
-   * Requests and replies definitions
-   * ----------------------------------------------------
-   * </pre>
-   *
-   * Protobuf type {@code FindSuccessorRequest}
-   */
-  public static final class FindSuccessorRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:FindSuccessorRequest)
-      FindSuccessorRequestOrBuilder {
-  private static final long serialVersionUID = 0L;
-    static {
-      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
-        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
-        /* major= */ 4,
-        /* minor= */ 28,
-        /* patch= */ 1,
-        /* suffix= */ "",
-        FindSuccessorRequest.class.getName());
-    }
-    // Use FindSuccessorRequest.newBuilder() to construct.
-    private FindSuccessorRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private FindSuccessorRequest() {
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_FindSuccessorRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              proto.Chord.FindSuccessorRequest.class, proto.Chord.FindSuccessorRequest.Builder.class);
-    }
-
-    public static final int ID_FIELD_NUMBER = 1;
-    private long id_ = 0L;
-    /**
-     * <code>uint64 id = 1;</code>
-     * @return The id.
-     */
-    @java.lang.Override
-    public long getId() {
-      return id_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (id_ != 0L) {
-        output.writeUInt64(1, id_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (id_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, id_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof proto.Chord.FindSuccessorRequest)) {
-        return super.equals(obj);
-      }
-      proto.Chord.FindSuccessorRequest other = (proto.Chord.FindSuccessorRequest) obj;
-
-      if (getId()
-          != other.getId()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getId());
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static proto.Chord.FindSuccessorRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-
-    public static proto.Chord.FindSuccessorRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
-    }
-    public static proto.Chord.FindSuccessorRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(proto.Chord.FindSuccessorRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     * ----------------------------------------------------
-     * Requests and replies definitions
-     * ----------------------------------------------------
-     * </pre>
-     *
-     * Protobuf type {@code FindSuccessorRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:FindSuccessorRequest)
-        proto.Chord.FindSuccessorRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_FindSuccessorRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                proto.Chord.FindSuccessorRequest.class, proto.Chord.FindSuccessorRequest.Builder.class);
-      }
-
-      // Construct using proto.Chord.FindSuccessorRequest.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        bitField0_ = 0;
-        id_ = 0L;
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
-      }
-
-      @java.lang.Override
-      public proto.Chord.FindSuccessorRequest getDefaultInstanceForType() {
-        return proto.Chord.FindSuccessorRequest.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public proto.Chord.FindSuccessorRequest build() {
-        proto.Chord.FindSuccessorRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public proto.Chord.FindSuccessorRequest buildPartial() {
-        proto.Chord.FindSuccessorRequest result = new proto.Chord.FindSuccessorRequest(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
-        onBuilt();
-        return result;
-      }
-
-      private void buildPartial0(proto.Chord.FindSuccessorRequest result) {
-        int from_bitField0_ = bitField0_;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.id_ = id_;
-        }
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.FindSuccessorRequest) {
-          return mergeFrom((proto.Chord.FindSuccessorRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(proto.Chord.FindSuccessorRequest other) {
-        if (other == proto.Chord.FindSuccessorRequest.getDefaultInstance()) return this;
-        if (other.getId() != 0L) {
-          setId(other.getId());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                id_ = input.readUInt64();
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 8
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private long id_ ;
-      /**
-       * <code>uint64 id = 1;</code>
-       * @return The id.
-       */
-      @java.lang.Override
-      public long getId() {
-        return id_;
-      }
-      /**
-       * <code>uint64 id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId(long value) {
-
-        id_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint64 id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:FindSuccessorRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:FindSuccessorRequest)
-    private static final proto.Chord.FindSuccessorRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorRequest();
-    }
-
-    public static proto.Chord.FindSuccessorRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<FindSuccessorRequest>
-        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorRequest>() {
-      @java.lang.Override
-      public FindSuccessorRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<FindSuccessorRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<FindSuccessorRequest> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public proto.Chord.FindSuccessorRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface FindSuccessorReplyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:FindSuccessorReply)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return Whether the chordNode field is set.
-     */
-    boolean hasChordNode();
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return The chordNode.
-     */
-    proto.Chord.ChordNode getChordNode();
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     */
-    proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder();
-  }
-  /**
-   * Protobuf type {@code FindSuccessorReply}
-   */
-  public static final class FindSuccessorReply extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:FindSuccessorReply)
-      FindSuccessorReplyOrBuilder {
-  private static final long serialVersionUID = 0L;
-    static {
-      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
-        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
-        /* major= */ 4,
-        /* minor= */ 28,
-        /* patch= */ 1,
-        /* suffix= */ "",
-        FindSuccessorReply.class.getName());
-    }
-    // Use FindSuccessorReply.newBuilder() to construct.
-    private FindSuccessorReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private FindSuccessorReply() {
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return proto.Chord.internal_static_FindSuccessorReply_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_FindSuccessorReply_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              proto.Chord.FindSuccessorReply.class, proto.Chord.FindSuccessorReply.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int CHORDNODE_FIELD_NUMBER = 1;
-    private proto.Chord.ChordNode chordNode_;
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return Whether the chordNode field is set.
-     */
-    @java.lang.Override
-    public boolean hasChordNode() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     * @return The chordNode.
-     */
-    @java.lang.Override
-    public proto.Chord.ChordNode getChordNode() {
-      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
-    }
-    /**
-     * <code>.ChordNode chordNode = 1;</code>
-     */
-    @java.lang.Override
-    public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
-      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(1, getChordNode());
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) != 0)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getChordNode());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof proto.Chord.FindSuccessorReply)) {
-        return super.equals(obj);
-      }
-      proto.Chord.FindSuccessorReply other = (proto.Chord.FindSuccessorReply) obj;
-
-      if (hasChordNode() != other.hasChordNode()) return false;
-      if (hasChordNode()) {
-        if (!getChordNode()
-            .equals(other.getChordNode())) return false;
-      }
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasChordNode()) {
-        hash = (37 * hash) + CHORDNODE_FIELD_NUMBER;
-        hash = (53 * hash) + getChordNode().hashCode();
-      }
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static proto.Chord.FindSuccessorReply parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-
-    public static proto.Chord.FindSuccessorReply parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
-    }
-    public static proto.Chord.FindSuccessorReply parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(proto.Chord.FindSuccessorReply prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code FindSuccessorReply}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:FindSuccessorReply)
-        proto.Chord.FindSuccessorReplyOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return proto.Chord.internal_static_FindSuccessorReply_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_FindSuccessorReply_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                proto.Chord.FindSuccessorReply.class, proto.Chord.FindSuccessorReply.Builder.class);
-      }
-
-      // Construct using proto.Chord.FindSuccessorReply.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage
-                .alwaysUseFieldBuilders) {
-          getChordNodeFieldBuilder();
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        bitField0_ = 0;
-        chordNode_ = null;
-        if (chordNodeBuilder_ != null) {
-          chordNodeBuilder_.dispose();
-          chordNodeBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return proto.Chord.internal_static_FindSuccessorReply_descriptor;
-      }
-
-      @java.lang.Override
-      public proto.Chord.FindSuccessorReply getDefaultInstanceForType() {
-        return proto.Chord.FindSuccessorReply.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public proto.Chord.FindSuccessorReply build() {
-        proto.Chord.FindSuccessorReply result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public proto.Chord.FindSuccessorReply buildPartial() {
-        proto.Chord.FindSuccessorReply result = new proto.Chord.FindSuccessorReply(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
-        onBuilt();
-        return result;
-      }
-
-      private void buildPartial0(proto.Chord.FindSuccessorReply result) {
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.chordNode_ = chordNodeBuilder_ == null
-              ? chordNode_
-              : chordNodeBuilder_.build();
-          to_bitField0_ |= 0x00000001;
-        }
-        result.bitField0_ |= to_bitField0_;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.FindSuccessorReply) {
-          return mergeFrom((proto.Chord.FindSuccessorReply)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(proto.Chord.FindSuccessorReply other) {
-        if (other == proto.Chord.FindSuccessorReply.getDefaultInstance()) return this;
-        if (other.hasChordNode()) {
-          mergeChordNode(other.getChordNode());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                input.readMessage(
-                    getChordNodeFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 10
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private proto.Chord.ChordNode chordNode_;
-      private com.google.protobuf.SingleFieldBuilder<
-          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> chordNodeBuilder_;
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       * @return Whether the chordNode field is set.
-       */
-      public boolean hasChordNode() {
-        return ((bitField0_ & 0x00000001) != 0);
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       * @return The chordNode.
-       */
-      public proto.Chord.ChordNode getChordNode() {
-        if (chordNodeBuilder_ == null) {
-          return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
-        } else {
-          return chordNodeBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public Builder setChordNode(proto.Chord.ChordNode value) {
-        if (chordNodeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          chordNode_ = value;
-        } else {
-          chordNodeBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public Builder setChordNode(
-          proto.Chord.ChordNode.Builder builderForValue) {
-        if (chordNodeBuilder_ == null) {
-          chordNode_ = builderForValue.build();
-        } else {
-          chordNodeBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public Builder mergeChordNode(proto.Chord.ChordNode value) {
-        if (chordNodeBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0) &&
-            chordNode_ != null &&
-            chordNode_ != proto.Chord.ChordNode.getDefaultInstance()) {
-            getChordNodeBuilder().mergeFrom(value);
-          } else {
-            chordNode_ = value;
-          }
-        } else {
-          chordNodeBuilder_.mergeFrom(value);
-        }
-        if (chordNode_ != null) {
-          bitField0_ |= 0x00000001;
-          onChanged();
-        }
-        return this;
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public Builder clearChordNode() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        chordNode_ = null;
-        if (chordNodeBuilder_ != null) {
-          chordNodeBuilder_.dispose();
-          chordNodeBuilder_ = null;
-        }
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public proto.Chord.ChordNode.Builder getChordNodeBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getChordNodeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
-        if (chordNodeBuilder_ != null) {
-          return chordNodeBuilder_.getMessageOrBuilder();
-        } else {
-          return chordNode_ == null ?
-              proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
-        }
-      }
-      /**
-       * <code>.ChordNode chordNode = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> 
-          getChordNodeFieldBuilder() {
-        if (chordNodeBuilder_ == null) {
-          chordNodeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder>(
-                  getChordNode(),
-                  getParentForChildren(),
-                  isClean());
-          chordNode_ = null;
-        }
-        return chordNodeBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:FindSuccessorReply)
-    }
-
-    // @@protoc_insertion_point(class_scope:FindSuccessorReply)
-    private static final proto.Chord.FindSuccessorReply DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorReply();
-    }
-
-    public static proto.Chord.FindSuccessorReply getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<FindSuccessorReply>
-        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorReply>() {
-      @java.lang.Override
-      public FindSuccessorReply parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<FindSuccessorReply> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<FindSuccessorReply> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public proto.Chord.FindSuccessorReply getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface FindSuccessorRequestWIKIOrBuilder extends
       // @@protoc_insertion_point(interface_extends:FindSuccessorRequestWIKI)
       com.google.protobuf.MessageOrBuilder {
@@ -4794,6 +3777,2885 @@ public final class Chord {
 
     @java.lang.Override
     public proto.Chord.GetPredecessorReplyWIKI getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SetPredecessorsSuccessorRequestWIKIOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetPredecessorsSuccessorRequestWIKI)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return Whether the chordNode field is set.
+     */
+    boolean hasChordNode();
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return The chordNode.
+     */
+    proto.Chord.ChordNode getChordNode();
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     */
+    proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder();
+  }
+  /**
+   * <pre>
+   * ----------------------------------------------------
+   * </pre>
+   *
+   * Protobuf type {@code SetPredecessorsSuccessorRequestWIKI}
+   */
+  public static final class SetPredecessorsSuccessorRequestWIKI extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:SetPredecessorsSuccessorRequestWIKI)
+      SetPredecessorsSuccessorRequestWIKIOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 1,
+        /* suffix= */ "",
+        SetPredecessorsSuccessorRequestWIKI.class.getName());
+    }
+    // Use SetPredecessorsSuccessorRequestWIKI.newBuilder() to construct.
+    private SetPredecessorsSuccessorRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private SetPredecessorsSuccessorRequestWIKI() {
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.SetPredecessorsSuccessorRequestWIKI.class, proto.Chord.SetPredecessorsSuccessorRequestWIKI.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CHORDNODE_FIELD_NUMBER = 1;
+    private proto.Chord.ChordNode chordNode_;
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return Whether the chordNode field is set.
+     */
+    @java.lang.Override
+    public boolean hasChordNode() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return The chordNode.
+     */
+    @java.lang.Override
+    public proto.Chord.ChordNode getChordNode() {
+      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+    }
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     */
+    @java.lang.Override
+    public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
+      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(1, getChordNode());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getChordNode());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.SetPredecessorsSuccessorRequestWIKI)) {
+        return super.equals(obj);
+      }
+      proto.Chord.SetPredecessorsSuccessorRequestWIKI other = (proto.Chord.SetPredecessorsSuccessorRequestWIKI) obj;
+
+      if (hasChordNode() != other.hasChordNode()) return false;
+      if (hasChordNode()) {
+        if (!getChordNode()
+            .equals(other.getChordNode())) return false;
+      }
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasChordNode()) {
+        hash = (37 * hash) + CHORDNODE_FIELD_NUMBER;
+        hash = (53 * hash) + getChordNode().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.SetPredecessorsSuccessorRequestWIKI prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * ----------------------------------------------------
+     * </pre>
+     *
+     * Protobuf type {@code SetPredecessorsSuccessorRequestWIKI}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:SetPredecessorsSuccessorRequestWIKI)
+        proto.Chord.SetPredecessorsSuccessorRequestWIKIOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.SetPredecessorsSuccessorRequestWIKI.class, proto.Chord.SetPredecessorsSuccessorRequestWIKI.Builder.class);
+      }
+
+      // Construct using proto.Chord.SetPredecessorsSuccessorRequestWIKI.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage
+                .alwaysUseFieldBuilders) {
+          getChordNodeFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        chordNode_ = null;
+        if (chordNodeBuilder_ != null) {
+          chordNodeBuilder_.dispose();
+          chordNodeBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetPredecessorsSuccessorRequestWIKI getDefaultInstanceForType() {
+        return proto.Chord.SetPredecessorsSuccessorRequestWIKI.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetPredecessorsSuccessorRequestWIKI build() {
+        proto.Chord.SetPredecessorsSuccessorRequestWIKI result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetPredecessorsSuccessorRequestWIKI buildPartial() {
+        proto.Chord.SetPredecessorsSuccessorRequestWIKI result = new proto.Chord.SetPredecessorsSuccessorRequestWIKI(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.SetPredecessorsSuccessorRequestWIKI result) {
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.chordNode_ = chordNodeBuilder_ == null
+              ? chordNode_
+              : chordNodeBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.SetPredecessorsSuccessorRequestWIKI) {
+          return mergeFrom((proto.Chord.SetPredecessorsSuccessorRequestWIKI)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.SetPredecessorsSuccessorRequestWIKI other) {
+        if (other == proto.Chord.SetPredecessorsSuccessorRequestWIKI.getDefaultInstance()) return this;
+        if (other.hasChordNode()) {
+          mergeChordNode(other.getChordNode());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getChordNodeFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private proto.Chord.ChordNode chordNode_;
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> chordNodeBuilder_;
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       * @return Whether the chordNode field is set.
+       */
+      public boolean hasChordNode() {
+        return ((bitField0_ & 0x00000001) != 0);
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       * @return The chordNode.
+       */
+      public proto.Chord.ChordNode getChordNode() {
+        if (chordNodeBuilder_ == null) {
+          return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+        } else {
+          return chordNodeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder setChordNode(proto.Chord.ChordNode value) {
+        if (chordNodeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          chordNode_ = value;
+        } else {
+          chordNodeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder setChordNode(
+          proto.Chord.ChordNode.Builder builderForValue) {
+        if (chordNodeBuilder_ == null) {
+          chordNode_ = builderForValue.build();
+        } else {
+          chordNodeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder mergeChordNode(proto.Chord.ChordNode value) {
+        if (chordNodeBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0) &&
+            chordNode_ != null &&
+            chordNode_ != proto.Chord.ChordNode.getDefaultInstance()) {
+            getChordNodeBuilder().mergeFrom(value);
+          } else {
+            chordNode_ = value;
+          }
+        } else {
+          chordNodeBuilder_.mergeFrom(value);
+        }
+        if (chordNode_ != null) {
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder clearChordNode() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        chordNode_ = null;
+        if (chordNodeBuilder_ != null) {
+          chordNodeBuilder_.dispose();
+          chordNodeBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public proto.Chord.ChordNode.Builder getChordNodeBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getChordNodeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
+        if (chordNodeBuilder_ != null) {
+          return chordNodeBuilder_.getMessageOrBuilder();
+        } else {
+          return chordNode_ == null ?
+              proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+        }
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> 
+          getChordNodeFieldBuilder() {
+        if (chordNodeBuilder_ == null) {
+          chordNodeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder>(
+                  getChordNode(),
+                  getParentForChildren(),
+                  isClean());
+          chordNode_ = null;
+        }
+        return chordNodeBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SetPredecessorsSuccessorRequestWIKI)
+    }
+
+    // @@protoc_insertion_point(class_scope:SetPredecessorsSuccessorRequestWIKI)
+    private static final proto.Chord.SetPredecessorsSuccessorRequestWIKI DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.SetPredecessorsSuccessorRequestWIKI();
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SetPredecessorsSuccessorRequestWIKI>
+        PARSER = new com.google.protobuf.AbstractParser<SetPredecessorsSuccessorRequestWIKI>() {
+      @java.lang.Override
+      public SetPredecessorsSuccessorRequestWIKI parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<SetPredecessorsSuccessorRequestWIKI> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SetPredecessorsSuccessorRequestWIKI> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.SetPredecessorsSuccessorRequestWIKI getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SetPredecessorsSuccessorReplyWIKIOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetPredecessorsSuccessorReplyWIKI)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code SetPredecessorsSuccessorReplyWIKI}
+   */
+  public static final class SetPredecessorsSuccessorReplyWIKI extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:SetPredecessorsSuccessorReplyWIKI)
+      SetPredecessorsSuccessorReplyWIKIOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 1,
+        /* suffix= */ "",
+        SetPredecessorsSuccessorReplyWIKI.class.getName());
+    }
+    // Use SetPredecessorsSuccessorReplyWIKI.newBuilder() to construct.
+    private SetPredecessorsSuccessorReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private SetPredecessorsSuccessorReplyWIKI() {
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.SetPredecessorsSuccessorReplyWIKI.class, proto.Chord.SetPredecessorsSuccessorReplyWIKI.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.SetPredecessorsSuccessorReplyWIKI)) {
+        return super.equals(obj);
+      }
+      proto.Chord.SetPredecessorsSuccessorReplyWIKI other = (proto.Chord.SetPredecessorsSuccessorReplyWIKI) obj;
+
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.SetPredecessorsSuccessorReplyWIKI prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SetPredecessorsSuccessorReplyWIKI}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:SetPredecessorsSuccessorReplyWIKI)
+        proto.Chord.SetPredecessorsSuccessorReplyWIKIOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.SetPredecessorsSuccessorReplyWIKI.class, proto.Chord.SetPredecessorsSuccessorReplyWIKI.Builder.class);
+      }
+
+      // Construct using proto.Chord.SetPredecessorsSuccessorReplyWIKI.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetPredecessorsSuccessorReplyWIKI getDefaultInstanceForType() {
+        return proto.Chord.SetPredecessorsSuccessorReplyWIKI.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetPredecessorsSuccessorReplyWIKI build() {
+        proto.Chord.SetPredecessorsSuccessorReplyWIKI result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetPredecessorsSuccessorReplyWIKI buildPartial() {
+        proto.Chord.SetPredecessorsSuccessorReplyWIKI result = new proto.Chord.SetPredecessorsSuccessorReplyWIKI(this);
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.SetPredecessorsSuccessorReplyWIKI) {
+          return mergeFrom((proto.Chord.SetPredecessorsSuccessorReplyWIKI)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.SetPredecessorsSuccessorReplyWIKI other) {
+        if (other == proto.Chord.SetPredecessorsSuccessorReplyWIKI.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SetPredecessorsSuccessorReplyWIKI)
+    }
+
+    // @@protoc_insertion_point(class_scope:SetPredecessorsSuccessorReplyWIKI)
+    private static final proto.Chord.SetPredecessorsSuccessorReplyWIKI DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.SetPredecessorsSuccessorReplyWIKI();
+    }
+
+    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SetPredecessorsSuccessorReplyWIKI>
+        PARSER = new com.google.protobuf.AbstractParser<SetPredecessorsSuccessorReplyWIKI>() {
+      @java.lang.Override
+      public SetPredecessorsSuccessorReplyWIKI parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<SetPredecessorsSuccessorReplyWIKI> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SetPredecessorsSuccessorReplyWIKI> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.SetPredecessorsSuccessorReplyWIKI getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SetSuccessorsPredecessorRequestWIKIOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetSuccessorsPredecessorRequestWIKI)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return Whether the chordNode field is set.
+     */
+    boolean hasChordNode();
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return The chordNode.
+     */
+    proto.Chord.ChordNode getChordNode();
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     */
+    proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder();
+  }
+  /**
+   * <pre>
+   * ----------------------------------------------------
+   * </pre>
+   *
+   * Protobuf type {@code SetSuccessorsPredecessorRequestWIKI}
+   */
+  public static final class SetSuccessorsPredecessorRequestWIKI extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:SetSuccessorsPredecessorRequestWIKI)
+      SetSuccessorsPredecessorRequestWIKIOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 1,
+        /* suffix= */ "",
+        SetSuccessorsPredecessorRequestWIKI.class.getName());
+    }
+    // Use SetSuccessorsPredecessorRequestWIKI.newBuilder() to construct.
+    private SetSuccessorsPredecessorRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private SetSuccessorsPredecessorRequestWIKI() {
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.SetSuccessorsPredecessorRequestWIKI.class, proto.Chord.SetSuccessorsPredecessorRequestWIKI.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CHORDNODE_FIELD_NUMBER = 1;
+    private proto.Chord.ChordNode chordNode_;
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return Whether the chordNode field is set.
+     */
+    @java.lang.Override
+    public boolean hasChordNode() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return The chordNode.
+     */
+    @java.lang.Override
+    public proto.Chord.ChordNode getChordNode() {
+      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+    }
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     */
+    @java.lang.Override
+    public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
+      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(1, getChordNode());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getChordNode());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.SetSuccessorsPredecessorRequestWIKI)) {
+        return super.equals(obj);
+      }
+      proto.Chord.SetSuccessorsPredecessorRequestWIKI other = (proto.Chord.SetSuccessorsPredecessorRequestWIKI) obj;
+
+      if (hasChordNode() != other.hasChordNode()) return false;
+      if (hasChordNode()) {
+        if (!getChordNode()
+            .equals(other.getChordNode())) return false;
+      }
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasChordNode()) {
+        hash = (37 * hash) + CHORDNODE_FIELD_NUMBER;
+        hash = (53 * hash) + getChordNode().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.SetSuccessorsPredecessorRequestWIKI prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * ----------------------------------------------------
+     * </pre>
+     *
+     * Protobuf type {@code SetSuccessorsPredecessorRequestWIKI}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:SetSuccessorsPredecessorRequestWIKI)
+        proto.Chord.SetSuccessorsPredecessorRequestWIKIOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.SetSuccessorsPredecessorRequestWIKI.class, proto.Chord.SetSuccessorsPredecessorRequestWIKI.Builder.class);
+      }
+
+      // Construct using proto.Chord.SetSuccessorsPredecessorRequestWIKI.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage
+                .alwaysUseFieldBuilders) {
+          getChordNodeFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        chordNode_ = null;
+        if (chordNodeBuilder_ != null) {
+          chordNodeBuilder_.dispose();
+          chordNodeBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetSuccessorsPredecessorRequestWIKI getDefaultInstanceForType() {
+        return proto.Chord.SetSuccessorsPredecessorRequestWIKI.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetSuccessorsPredecessorRequestWIKI build() {
+        proto.Chord.SetSuccessorsPredecessorRequestWIKI result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetSuccessorsPredecessorRequestWIKI buildPartial() {
+        proto.Chord.SetSuccessorsPredecessorRequestWIKI result = new proto.Chord.SetSuccessorsPredecessorRequestWIKI(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.SetSuccessorsPredecessorRequestWIKI result) {
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.chordNode_ = chordNodeBuilder_ == null
+              ? chordNode_
+              : chordNodeBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.SetSuccessorsPredecessorRequestWIKI) {
+          return mergeFrom((proto.Chord.SetSuccessorsPredecessorRequestWIKI)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.SetSuccessorsPredecessorRequestWIKI other) {
+        if (other == proto.Chord.SetSuccessorsPredecessorRequestWIKI.getDefaultInstance()) return this;
+        if (other.hasChordNode()) {
+          mergeChordNode(other.getChordNode());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getChordNodeFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private proto.Chord.ChordNode chordNode_;
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> chordNodeBuilder_;
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       * @return Whether the chordNode field is set.
+       */
+      public boolean hasChordNode() {
+        return ((bitField0_ & 0x00000001) != 0);
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       * @return The chordNode.
+       */
+      public proto.Chord.ChordNode getChordNode() {
+        if (chordNodeBuilder_ == null) {
+          return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+        } else {
+          return chordNodeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder setChordNode(proto.Chord.ChordNode value) {
+        if (chordNodeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          chordNode_ = value;
+        } else {
+          chordNodeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder setChordNode(
+          proto.Chord.ChordNode.Builder builderForValue) {
+        if (chordNodeBuilder_ == null) {
+          chordNode_ = builderForValue.build();
+        } else {
+          chordNodeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder mergeChordNode(proto.Chord.ChordNode value) {
+        if (chordNodeBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0) &&
+            chordNode_ != null &&
+            chordNode_ != proto.Chord.ChordNode.getDefaultInstance()) {
+            getChordNodeBuilder().mergeFrom(value);
+          } else {
+            chordNode_ = value;
+          }
+        } else {
+          chordNodeBuilder_.mergeFrom(value);
+        }
+        if (chordNode_ != null) {
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder clearChordNode() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        chordNode_ = null;
+        if (chordNodeBuilder_ != null) {
+          chordNodeBuilder_.dispose();
+          chordNodeBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public proto.Chord.ChordNode.Builder getChordNodeBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getChordNodeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
+        if (chordNodeBuilder_ != null) {
+          return chordNodeBuilder_.getMessageOrBuilder();
+        } else {
+          return chordNode_ == null ?
+              proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+        }
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> 
+          getChordNodeFieldBuilder() {
+        if (chordNodeBuilder_ == null) {
+          chordNodeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder>(
+                  getChordNode(),
+                  getParentForChildren(),
+                  isClean());
+          chordNode_ = null;
+        }
+        return chordNodeBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SetSuccessorsPredecessorRequestWIKI)
+    }
+
+    // @@protoc_insertion_point(class_scope:SetSuccessorsPredecessorRequestWIKI)
+    private static final proto.Chord.SetSuccessorsPredecessorRequestWIKI DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.SetSuccessorsPredecessorRequestWIKI();
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SetSuccessorsPredecessorRequestWIKI>
+        PARSER = new com.google.protobuf.AbstractParser<SetSuccessorsPredecessorRequestWIKI>() {
+      @java.lang.Override
+      public SetSuccessorsPredecessorRequestWIKI parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<SetSuccessorsPredecessorRequestWIKI> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SetSuccessorsPredecessorRequestWIKI> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.SetSuccessorsPredecessorRequestWIKI getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SetSuccessorsPredecessorReplyWIKIOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetSuccessorsPredecessorReplyWIKI)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code SetSuccessorsPredecessorReplyWIKI}
+   */
+  public static final class SetSuccessorsPredecessorReplyWIKI extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:SetSuccessorsPredecessorReplyWIKI)
+      SetSuccessorsPredecessorReplyWIKIOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 1,
+        /* suffix= */ "",
+        SetSuccessorsPredecessorReplyWIKI.class.getName());
+    }
+    // Use SetSuccessorsPredecessorReplyWIKI.newBuilder() to construct.
+    private SetSuccessorsPredecessorReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private SetSuccessorsPredecessorReplyWIKI() {
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.SetSuccessorsPredecessorReplyWIKI.class, proto.Chord.SetSuccessorsPredecessorReplyWIKI.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.SetSuccessorsPredecessorReplyWIKI)) {
+        return super.equals(obj);
+      }
+      proto.Chord.SetSuccessorsPredecessorReplyWIKI other = (proto.Chord.SetSuccessorsPredecessorReplyWIKI) obj;
+
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.SetSuccessorsPredecessorReplyWIKI prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SetSuccessorsPredecessorReplyWIKI}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:SetSuccessorsPredecessorReplyWIKI)
+        proto.Chord.SetSuccessorsPredecessorReplyWIKIOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.SetSuccessorsPredecessorReplyWIKI.class, proto.Chord.SetSuccessorsPredecessorReplyWIKI.Builder.class);
+      }
+
+      // Construct using proto.Chord.SetSuccessorsPredecessorReplyWIKI.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetSuccessorsPredecessorReplyWIKI getDefaultInstanceForType() {
+        return proto.Chord.SetSuccessorsPredecessorReplyWIKI.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetSuccessorsPredecessorReplyWIKI build() {
+        proto.Chord.SetSuccessorsPredecessorReplyWIKI result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.SetSuccessorsPredecessorReplyWIKI buildPartial() {
+        proto.Chord.SetSuccessorsPredecessorReplyWIKI result = new proto.Chord.SetSuccessorsPredecessorReplyWIKI(this);
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.SetSuccessorsPredecessorReplyWIKI) {
+          return mergeFrom((proto.Chord.SetSuccessorsPredecessorReplyWIKI)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.SetSuccessorsPredecessorReplyWIKI other) {
+        if (other == proto.Chord.SetSuccessorsPredecessorReplyWIKI.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:SetSuccessorsPredecessorReplyWIKI)
+    }
+
+    // @@protoc_insertion_point(class_scope:SetSuccessorsPredecessorReplyWIKI)
+    private static final proto.Chord.SetSuccessorsPredecessorReplyWIKI DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.SetSuccessorsPredecessorReplyWIKI();
+    }
+
+    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SetSuccessorsPredecessorReplyWIKI>
+        PARSER = new com.google.protobuf.AbstractParser<SetSuccessorsPredecessorReplyWIKI>() {
+      @java.lang.Override
+      public SetSuccessorsPredecessorReplyWIKI parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<SetSuccessorsPredecessorReplyWIKI> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SetSuccessorsPredecessorReplyWIKI> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.SetSuccessorsPredecessorReplyWIKI getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface FindSuccessorRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FindSuccessorRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>uint64 id = 1;</code>
+     * @return The id.
+     */
+    long getId();
+  }
+  /**
+   * <pre>
+   * ----------------------------------------------------
+   * </pre>
+   *
+   * Protobuf type {@code FindSuccessorRequest}
+   */
+  public static final class FindSuccessorRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:FindSuccessorRequest)
+      FindSuccessorRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 1,
+        /* suffix= */ "",
+        FindSuccessorRequest.class.getName());
+    }
+    // Use FindSuccessorRequest.newBuilder() to construct.
+    private FindSuccessorRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private FindSuccessorRequest() {
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_FindSuccessorRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.FindSuccessorRequest.class, proto.Chord.FindSuccessorRequest.Builder.class);
+    }
+
+    public static final int ID_FIELD_NUMBER = 1;
+    private long id_ = 0L;
+    /**
+     * <code>uint64 id = 1;</code>
+     * @return The id.
+     */
+    @java.lang.Override
+    public long getId() {
+      return id_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (id_ != 0L) {
+        output.writeUInt64(1, id_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (id_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, id_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.FindSuccessorRequest)) {
+        return super.equals(obj);
+      }
+      proto.Chord.FindSuccessorRequest other = (proto.Chord.FindSuccessorRequest) obj;
+
+      if (getId()
+          != other.getId()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.FindSuccessorRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.FindSuccessorRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.FindSuccessorRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.FindSuccessorRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * ----------------------------------------------------
+     * </pre>
+     *
+     * Protobuf type {@code FindSuccessorRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:FindSuccessorRequest)
+        proto.Chord.FindSuccessorRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_FindSuccessorRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.FindSuccessorRequest.class, proto.Chord.FindSuccessorRequest.Builder.class);
+      }
+
+      // Construct using proto.Chord.FindSuccessorRequest.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        id_ = 0L;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.FindSuccessorRequest getDefaultInstanceForType() {
+        return proto.Chord.FindSuccessorRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.FindSuccessorRequest build() {
+        proto.Chord.FindSuccessorRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.FindSuccessorRequest buildPartial() {
+        proto.Chord.FindSuccessorRequest result = new proto.Chord.FindSuccessorRequest(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.FindSuccessorRequest result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.id_ = id_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.FindSuccessorRequest) {
+          return mergeFrom((proto.Chord.FindSuccessorRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.FindSuccessorRequest other) {
+        if (other == proto.Chord.FindSuccessorRequest.getDefaultInstance()) return this;
+        if (other.getId() != 0L) {
+          setId(other.getId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                id_ = input.readUInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private long id_ ;
+      /**
+       * <code>uint64 id = 1;</code>
+       * @return The id.
+       */
+      @java.lang.Override
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <code>uint64 id = 1;</code>
+       * @param value The id to set.
+       * @return This builder for chaining.
+       */
+      public Builder setId(long value) {
+
+        id_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 id = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:FindSuccessorRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:FindSuccessorRequest)
+    private static final proto.Chord.FindSuccessorRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorRequest();
+    }
+
+    public static proto.Chord.FindSuccessorRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FindSuccessorRequest>
+        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorRequest>() {
+      @java.lang.Override
+      public FindSuccessorRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<FindSuccessorRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FindSuccessorRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.FindSuccessorRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface FindSuccessorReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FindSuccessorReply)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return Whether the chordNode field is set.
+     */
+    boolean hasChordNode();
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return The chordNode.
+     */
+    proto.Chord.ChordNode getChordNode();
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     */
+    proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder();
+  }
+  /**
+   * Protobuf type {@code FindSuccessorReply}
+   */
+  public static final class FindSuccessorReply extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:FindSuccessorReply)
+      FindSuccessorReplyOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 1,
+        /* suffix= */ "",
+        FindSuccessorReply.class.getName());
+    }
+    // Use FindSuccessorReply.newBuilder() to construct.
+    private FindSuccessorReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private FindSuccessorReply() {
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_FindSuccessorReply_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_FindSuccessorReply_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.FindSuccessorReply.class, proto.Chord.FindSuccessorReply.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CHORDNODE_FIELD_NUMBER = 1;
+    private proto.Chord.ChordNode chordNode_;
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return Whether the chordNode field is set.
+     */
+    @java.lang.Override
+    public boolean hasChordNode() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     * @return The chordNode.
+     */
+    @java.lang.Override
+    public proto.Chord.ChordNode getChordNode() {
+      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+    }
+    /**
+     * <code>.ChordNode chordNode = 1;</code>
+     */
+    @java.lang.Override
+    public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
+      return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(1, getChordNode());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getChordNode());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.FindSuccessorReply)) {
+        return super.equals(obj);
+      }
+      proto.Chord.FindSuccessorReply other = (proto.Chord.FindSuccessorReply) obj;
+
+      if (hasChordNode() != other.hasChordNode()) return false;
+      if (hasChordNode()) {
+        if (!getChordNode()
+            .equals(other.getChordNode())) return false;
+      }
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasChordNode()) {
+        hash = (37 * hash) + CHORDNODE_FIELD_NUMBER;
+        hash = (53 * hash) + getChordNode().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.FindSuccessorReply parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.FindSuccessorReply parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.FindSuccessorReply parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.FindSuccessorReply prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code FindSuccessorReply}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:FindSuccessorReply)
+        proto.Chord.FindSuccessorReplyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_FindSuccessorReply_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_FindSuccessorReply_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.FindSuccessorReply.class, proto.Chord.FindSuccessorReply.Builder.class);
+      }
+
+      // Construct using proto.Chord.FindSuccessorReply.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage
+                .alwaysUseFieldBuilders) {
+          getChordNodeFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        chordNode_ = null;
+        if (chordNodeBuilder_ != null) {
+          chordNodeBuilder_.dispose();
+          chordNodeBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_FindSuccessorReply_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.FindSuccessorReply getDefaultInstanceForType() {
+        return proto.Chord.FindSuccessorReply.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.FindSuccessorReply build() {
+        proto.Chord.FindSuccessorReply result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.FindSuccessorReply buildPartial() {
+        proto.Chord.FindSuccessorReply result = new proto.Chord.FindSuccessorReply(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.FindSuccessorReply result) {
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.chordNode_ = chordNodeBuilder_ == null
+              ? chordNode_
+              : chordNodeBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.FindSuccessorReply) {
+          return mergeFrom((proto.Chord.FindSuccessorReply)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.FindSuccessorReply other) {
+        if (other == proto.Chord.FindSuccessorReply.getDefaultInstance()) return this;
+        if (other.hasChordNode()) {
+          mergeChordNode(other.getChordNode());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                input.readMessage(
+                    getChordNodeFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private proto.Chord.ChordNode chordNode_;
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> chordNodeBuilder_;
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       * @return Whether the chordNode field is set.
+       */
+      public boolean hasChordNode() {
+        return ((bitField0_ & 0x00000001) != 0);
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       * @return The chordNode.
+       */
+      public proto.Chord.ChordNode getChordNode() {
+        if (chordNodeBuilder_ == null) {
+          return chordNode_ == null ? proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+        } else {
+          return chordNodeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder setChordNode(proto.Chord.ChordNode value) {
+        if (chordNodeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          chordNode_ = value;
+        } else {
+          chordNodeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder setChordNode(
+          proto.Chord.ChordNode.Builder builderForValue) {
+        if (chordNodeBuilder_ == null) {
+          chordNode_ = builderForValue.build();
+        } else {
+          chordNodeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder mergeChordNode(proto.Chord.ChordNode value) {
+        if (chordNodeBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0) &&
+            chordNode_ != null &&
+            chordNode_ != proto.Chord.ChordNode.getDefaultInstance()) {
+            getChordNodeBuilder().mergeFrom(value);
+          } else {
+            chordNode_ = value;
+          }
+        } else {
+          chordNodeBuilder_.mergeFrom(value);
+        }
+        if (chordNode_ != null) {
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public Builder clearChordNode() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        chordNode_ = null;
+        if (chordNodeBuilder_ != null) {
+          chordNodeBuilder_.dispose();
+          chordNodeBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public proto.Chord.ChordNode.Builder getChordNodeBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getChordNodeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      public proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder() {
+        if (chordNodeBuilder_ != null) {
+          return chordNodeBuilder_.getMessageOrBuilder();
+        } else {
+          return chordNode_ == null ?
+              proto.Chord.ChordNode.getDefaultInstance() : chordNode_;
+        }
+      }
+      /**
+       * <code>.ChordNode chordNode = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder> 
+          getChordNodeFieldBuilder() {
+        if (chordNodeBuilder_ == null) {
+          chordNodeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              proto.Chord.ChordNode, proto.Chord.ChordNode.Builder, proto.Chord.ChordNodeOrBuilder>(
+                  getChordNode(),
+                  getParentForChildren(),
+                  isClean());
+          chordNode_ = null;
+        }
+        return chordNodeBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:FindSuccessorReply)
+    }
+
+    // @@protoc_insertion_point(class_scope:FindSuccessorReply)
+    private static final proto.Chord.FindSuccessorReply DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorReply();
+    }
+
+    public static proto.Chord.FindSuccessorReply getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FindSuccessorReply>
+        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorReply>() {
+      @java.lang.Override
+      public FindSuccessorReply parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<FindSuccessorReply> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FindSuccessorReply> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.FindSuccessorReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -9834,16 +11696,6 @@ public final class Chord {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_FindSuccessorRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_FindSuccessorRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_FindSuccessorReply_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_FindSuccessorReply_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_FindSuccessorRequestWIKI_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9883,6 +11735,36 @@ public final class Chord {
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_GetPredecessorReplyWIKI_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_FindSuccessorRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_FindSuccessorRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_FindSuccessorReply_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_FindSuccessorReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_FindPredecessorRequest_descriptor;
   private static final 
@@ -9937,160 +11819,195 @@ public final class Chord {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013chord.proto\"\"\n\024FindSuccessorRequest\022\n\n" +
-      "\002id\030\001 \001(\004\"3\n\022FindSuccessorReply\022\035\n\tchord" +
-      "Node\030\001 \001(\0132\n.ChordNode\"&\n\030FindSuccessorR" +
-      "equestWIKI\022\n\n\002id\030\001 \001(\004\"7\n\026FindSuccessorR" +
-      "eplyWIKI\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"" +
-      "2\n\021NotifyRequestWIKI\022\035\n\tchordNode\030\001 \001(\0132" +
-      "\n.ChordNode\"\021\n\017NotifyReplyWIKI\"&\n\023PingNo" +
-      "deRequestWIKI\022\017\n\007isAlive\030\001 \001(\010\"$\n\021PingNo" +
-      "deReplyWIKI\022\017\n\007isAlive\030\001 \001(\010\"\033\n\031GetPrede" +
-      "cessorRequestWIKI\"8\n\027GetPredecessorReply" +
-      "WIKI\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"\030\n\026F" +
-      "indPredecessorRequest\"\026\n\024FindPredecessor" +
-      "Reply\"+\n\035ClosestPrecedingFingerRequest\022\n" +
-      "\n\002id\030\001 \001(\004\"<\n\033ClosestPrecedingFingerRepl" +
-      "y\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"D\n\030Upda" +
-      "teFingerTableRequest\022\t\n\001i\030\001 \001(\004\022\035\n\tchord" +
-      "Node\030\002 \001(\0132\n.ChordNode\"\030\n\026UpdateFingerTa" +
-      "bleReply\",\n\013JoinRequest\022\035\n\tchordNode\030\001 \001" +
-      "(\0132\n.ChordNode\"*\n\tJoinReply\022\035\n\tchordNode" +
-      "\030\001 \001(\0132\n.ChordNode\"\204\001\n\tChordNode\022\n\n\002ip\030\001" +
-      " \001(\t\022\014\n\004port\030\002 \001(\004\022\022\n\nidentifier\030\003 \001(\004\022\t" +
-      "\n\001m\030\004 \001(\004\022\035\n\tsuccessor\030\005 \001(\0132\n.ChordNode" +
-      "\022\037\n\013predecessor\030\006 \001(\0132\n.ChordNode2\336\004\n\004No" +
-      "de\022=\n\rFindSuccessor\022\025.FindSuccessorReque" +
-      "st\032\023.FindSuccessorReply\"\000\022C\n\017FindPredece" +
-      "ssor\022\027.FindPredecessorRequest\032\025.FindPred" +
-      "ecessorReply\"\000\022X\n\026ClosestPrecedingFinger" +
-      "\022\036.ClosestPrecedingFingerRequest\032\034.Close" +
-      "stPrecedingFingerReply\"\000\022I\n\021UpdateFinger" +
-      "Table\022\031.UpdateFingerTableRequest\032\027.Updat" +
-      "eFingerTableReply\"\000\022\"\n\004Join\022\014.JoinReques" +
-      "t\032\n.JoinReply\"\000\022I\n\021FindSuccessorWIKI\022\031.F" +
-      "indSuccessorRequestWIKI\032\027.FindSuccessorR" +
-      "eplyWIKI\"\000\0224\n\nNotifyWIKI\022\022.NotifyRequest" +
-      "WIKI\032\020.NotifyReplyWIKI\"\000\022:\n\014PingNodeWIKI" +
-      "\022\024.PingNodeRequestWIKI\032\022.PingNodeReplyWI" +
-      "KI\"\000\022L\n\022GetPredecessorWIKI\022\032.GetPredeces" +
-      "sorRequestWIKI\032\030.GetPredecessorReplyWIKI" +
-      "\"\000B\007\n\005protob\006proto3"
+      "\n\013chord.proto\"&\n\030FindSuccessorRequestWIK" +
+      "I\022\n\n\002id\030\001 \001(\004\"7\n\026FindSuccessorReplyWIKI\022" +
+      "\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"2\n\021Notify" +
+      "RequestWIKI\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNo" +
+      "de\"\021\n\017NotifyReplyWIKI\"&\n\023PingNodeRequest" +
+      "WIKI\022\017\n\007isAlive\030\001 \001(\010\"$\n\021PingNodeReplyWI" +
+      "KI\022\017\n\007isAlive\030\001 \001(\010\"\033\n\031GetPredecessorReq" +
+      "uestWIKI\"8\n\027GetPredecessorReplyWIKI\022\035\n\tc" +
+      "hordNode\030\001 \001(\0132\n.ChordNode\"D\n#SetPredece" +
+      "ssorsSuccessorRequestWIKI\022\035\n\tchordNode\030\001" +
+      " \001(\0132\n.ChordNode\"#\n!SetPredecessorsSucce" +
+      "ssorReplyWIKI\"D\n#SetSuccessorsPredecesso" +
+      "rRequestWIKI\022\035\n\tchordNode\030\001 \001(\0132\n.ChordN" +
+      "ode\"#\n!SetSuccessorsPredecessorReplyWIKI" +
+      "\"\"\n\024FindSuccessorRequest\022\n\n\002id\030\001 \001(\004\"3\n\022" +
+      "FindSuccessorReply\022\035\n\tchordNode\030\001 \001(\0132\n." +
+      "ChordNode\"\030\n\026FindPredecessorRequest\"\026\n\024F" +
+      "indPredecessorReply\"+\n\035ClosestPrecedingF" +
+      "ingerRequest\022\n\n\002id\030\001 \001(\004\"<\n\033ClosestPrece" +
+      "dingFingerReply\022\035\n\tchordNode\030\001 \001(\0132\n.Cho" +
+      "rdNode\"D\n\030UpdateFingerTableRequest\022\t\n\001i\030" +
+      "\001 \001(\004\022\035\n\tchordNode\030\002 \001(\0132\n.ChordNode\"\030\n\026" +
+      "UpdateFingerTableReply\",\n\013JoinRequest\022\035\n" +
+      "\tchordNode\030\001 \001(\0132\n.ChordNode\"*\n\tJoinRepl" +
+      "y\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"\204\001\n\tCho" +
+      "rdNode\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004\022\022\n\niden" +
+      "tifier\030\003 \001(\004\022\t\n\001m\030\004 \001(\004\022\035\n\tsuccessor\030\005 \001" +
+      "(\0132\n.ChordNode\022\037\n\013predecessor\030\006 \001(\0132\n.Ch" +
+      "ordNode2\266\006\n\004Node\022=\n\rFindSuccessor\022\025.Find" +
+      "SuccessorRequest\032\023.FindSuccessorReply\"\000\022" +
+      "C\n\017FindPredecessor\022\027.FindPredecessorRequ" +
+      "est\032\025.FindPredecessorReply\"\000\022X\n\026ClosestP" +
+      "recedingFinger\022\036.ClosestPrecedingFingerR" +
+      "equest\032\034.ClosestPrecedingFingerReply\"\000\022I" +
+      "\n\021UpdateFingerTable\022\031.UpdateFingerTableR" +
+      "equest\032\027.UpdateFingerTableReply\"\000\022\"\n\004Joi" +
+      "n\022\014.JoinRequest\032\n.JoinReply\"\000\022I\n\021FindSuc" +
+      "cessorWIKI\022\031.FindSuccessorRequestWIKI\032\027." +
+      "FindSuccessorReplyWIKI\"\000\0224\n\nNotifyWIKI\022\022" +
+      ".NotifyRequestWIKI\032\020.NotifyReplyWIKI\"\000\022:" +
+      "\n\014PingNodeWIKI\022\024.PingNodeRequestWIKI\032\022.P" +
+      "ingNodeReplyWIKI\"\000\022L\n\022GetPredecessorWIKI" +
+      "\022\032.GetPredecessorRequestWIKI\032\030.GetPredec" +
+      "essorReplyWIKI\"\000\022j\n\034SetPredecessorsSucce" +
+      "ssorWIKI\022$.SetPredecessorsSuccessorReque" +
+      "stWIKI\032\".SetPredecessorsSuccessorReplyWI" +
+      "KI\"\000\022j\n\034SetSuccessorsPredecessorWIKI\022$.S" +
+      "etSuccessorsPredecessorRequestWIKI\032\".Set" +
+      "SuccessorsPredecessorReplyWIKI\"\000B\007\n\005prot" +
+      "ob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_FindSuccessorRequest_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_FindSuccessorRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_FindSuccessorRequest_descriptor,
-        new java.lang.String[] { "Id", });
-    internal_static_FindSuccessorReply_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_FindSuccessorReply_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_FindSuccessorReply_descriptor,
-        new java.lang.String[] { "ChordNode", });
     internal_static_FindSuccessorRequestWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_FindSuccessorRequestWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_FindSuccessorRequestWIKI_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_FindSuccessorReplyWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_FindSuccessorReplyWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_FindSuccessorReplyWIKI_descriptor,
         new java.lang.String[] { "ChordNode", });
     internal_static_NotifyRequestWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_NotifyRequestWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_NotifyRequestWIKI_descriptor,
         new java.lang.String[] { "ChordNode", });
     internal_static_NotifyReplyWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_NotifyReplyWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_NotifyReplyWIKI_descriptor,
         new java.lang.String[] { });
     internal_static_PingNodeRequestWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_PingNodeRequestWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_PingNodeRequestWIKI_descriptor,
         new java.lang.String[] { "IsAlive", });
     internal_static_PingNodeReplyWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_PingNodeReplyWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_PingNodeReplyWIKI_descriptor,
         new java.lang.String[] { "IsAlive", });
     internal_static_GetPredecessorRequestWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_GetPredecessorRequestWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_GetPredecessorRequestWIKI_descriptor,
         new java.lang.String[] { });
     internal_static_GetPredecessorReplyWIKI_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_GetPredecessorReplyWIKI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_GetPredecessorReplyWIKI_descriptor,
         new java.lang.String[] { "ChordNode", });
-    internal_static_FindPredecessorRequest_descriptor =
+    internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor,
+        new java.lang.String[] { "ChordNode", });
+    internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor,
+        new java.lang.String[] { });
+    internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor =
       getDescriptor().getMessageTypes().get(10);
+    internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor,
+        new java.lang.String[] { "ChordNode", });
+    internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor,
+        new java.lang.String[] { });
+    internal_static_FindSuccessorRequest_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_FindSuccessorRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_FindSuccessorRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_FindSuccessorReply_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_FindSuccessorReply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_FindSuccessorReply_descriptor,
+        new java.lang.String[] { "ChordNode", });
+    internal_static_FindPredecessorRequest_descriptor =
+      getDescriptor().getMessageTypes().get(14);
     internal_static_FindPredecessorRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_FindPredecessorRequest_descriptor,
         new java.lang.String[] { });
     internal_static_FindPredecessorReply_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_FindPredecessorReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_FindPredecessorReply_descriptor,
         new java.lang.String[] { });
     internal_static_ClosestPrecedingFingerRequest_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_ClosestPrecedingFingerRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ClosestPrecedingFingerRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_ClosestPrecedingFingerReply_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_ClosestPrecedingFingerReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ClosestPrecedingFingerReply_descriptor,
         new java.lang.String[] { "ChordNode", });
     internal_static_UpdateFingerTableRequest_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_UpdateFingerTableRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_UpdateFingerTableRequest_descriptor,
         new java.lang.String[] { "I", "ChordNode", });
     internal_static_UpdateFingerTableReply_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_UpdateFingerTableReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_UpdateFingerTableReply_descriptor,
         new java.lang.String[] { });
     internal_static_JoinRequest_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_JoinRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_JoinRequest_descriptor,
         new java.lang.String[] { "ChordNode", });
     internal_static_JoinReply_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_JoinReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_JoinReply_descriptor,
         new java.lang.String[] { "ChordNode", });
     internal_static_ChordNode_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_ChordNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ChordNode_descriptor,

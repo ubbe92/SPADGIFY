@@ -3,12 +3,15 @@ package cs.umu.se.grpc;
 import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Server;
+import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
 
 public class GRPCServer implements Server {
     private io.grpc.Server server;
+    private StabilizerWorker worker;
+    private ChordBackEnd chordBackEnd;
 
     public GRPCServer() {}
 
@@ -24,7 +27,7 @@ public class GRPCServer implements Server {
             server.start();
             System.out.println("gRPCServer started on port: " + port);
 
-            ChordBackEnd chordBackEnd = nodeImpl.getChordBackEnd();
+            chordBackEnd = nodeImpl.getChordBackEnd();
             switch (mode) {
                 case 0: // join existing DTH.
                     System.out.println("Joining existing DTH!");
@@ -47,6 +50,8 @@ public class GRPCServer implements Server {
                     break;
             }
 
+            worker = chordBackEnd.getWorkerThread();
+
             server.awaitTermination();
         } catch (IOException | InterruptedException e) {
             System.out.println("gRPCServer could not start on port: " + port + " - " + e.getMessage());
@@ -58,6 +63,14 @@ public class GRPCServer implements Server {
     @Override
     public void stopServer() {
         this.server.shutdown();
+    }
+
+    public void stopWorkerThread() {
+        this.worker.stopStabilize();
+    }
+
+    public void leaveChordNetwork() {
+        chordBackEnd.leaveWIKI();
     }
 
     public boolean isShutdown() {

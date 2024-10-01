@@ -169,6 +169,37 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         resp.onCompleted();
     }
 
+    @Override
+    public void setPredecessorsSuccessorWIKI(Chord.SetPredecessorsSuccessorRequestWIKI req, StreamObserver<Chord.SetPredecessorsSuccessorReplyWIKI> resp) {
+        System.out.println("SERVER GOT setPredecessorsSuccessorWIKI REQUEST!");
+
+        Chord.ChordNode chordNode = req.getChordNode();
+        Node newSuccessor = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
+        node.setSuccessor(newSuccessor);
+        Chord.SetPredecessorsSuccessorReplyWIKI reply = Chord.SetPredecessorsSuccessorReplyWIKI.newBuilder().build();
+
+
+        node.displayCurrentTable();
+
+        resp.onNext(reply);
+        resp.onCompleted();
+    }
+
+    @Override
+    public void setSuccessorsPredecessorWIKI(Chord.SetSuccessorsPredecessorRequestWIKI req, StreamObserver<Chord.SetSuccessorsPredecessorReplyWIKI> resp) {
+        System.out.println("SERVER GOT setSuccessorsPredecessorWIKI REQUEST!");
+
+        Chord.ChordNode chordNode = req.getChordNode();
+        Node newPredecessor = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
+        node.setPredecessor(newPredecessor);
+        Chord.SetSuccessorsPredecessorReplyWIKI reply = Chord.SetSuccessorsPredecessorReplyWIKI.newBuilder().build();
+
+        node.displayCurrentTable();
+
+        resp.onNext(reply);
+        resp.onCompleted();
+    }
+
     public ChordBackEnd getChordBackEnd() {
         return chordBackEnd;
     }

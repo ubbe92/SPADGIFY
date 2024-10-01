@@ -10,26 +10,19 @@ service Node {
   rpc FindPredecessor (FindPredecessorRequest) returns (FindPredecessorReply) {}
   rpc ClosestPrecedingFinger (ClosestPrecedingFingerRequest) returns (ClosestPrecedingFingerReply) {}
   rpc UpdateFingerTable (UpdateFingerTableRequest) returns (UpdateFingerTableReply) {}
-
   rpc Join(JoinRequest) returns (JoinReply) {}
 
   rpc FindSuccessorWIKI (FindSuccessorRequestWIKI) returns (FindSuccessorReplyWIKI) {}
   rpc NotifyWIKI (NotifyRequestWIKI) returns (NotifyReplyWIKI) {}
   rpc PingNodeWIKI (PingNodeRequestWIKI) returns (PingNodeReplyWIKI) {}
   rpc GetPredecessorWIKI (GetPredecessorRequestWIKI) returns (GetPredecessorReplyWIKI) {}
-
+  rpc SetPredecessorsSuccessorWIKI (SetPredecessorsSuccessorRequestWIKI) returns (SetPredecessorsSuccessorReplyWIKI) {}
+  rpc SetSuccessorsPredecessorWIKI (SetSuccessorsPredecessorRequestWIKI) returns (SetSuccessorsPredecessorReplyWIKI) {}
 }
 
 // ----------------------------------------------------
 // Requests and replies definitions
 // ----------------------------------------------------
-message FindSuccessorRequest {
-  uint64 id = 1;
-}
-
-message FindSuccessorReply {
-  ChordNode chordNode = 1;
-}
 
 // ----------------------------------------------------
 message FindSuccessorRequestWIKI {
@@ -64,6 +57,40 @@ message GetPredecessorRequestWIKI {
 }
 
 message GetPredecessorReplyWIKI {
+  ChordNode chordNode = 1;
+}
+
+// ----------------------------------------------------
+message SetPredecessorsSuccessorRequestWIKI {
+  ChordNode chordNode = 1;
+}
+
+message SetPredecessorsSuccessorReplyWIKI {
+}
+// ----------------------------------------------------
+message SetSuccessorsPredecessorRequestWIKI {
+  ChordNode chordNode = 1;
+}
+
+message SetSuccessorsPredecessorReplyWIKI {
+}
+
+// ----------------------------------------------------
+// ----------------------------------------------------
+
+
+
+
+
+
+
+
+// ----------------------------------------------------
+message FindSuccessorRequest {
+  uint64 id = 1;
+}
+
+message FindSuccessorReply {
   ChordNode chordNode = 1;
 }
 
