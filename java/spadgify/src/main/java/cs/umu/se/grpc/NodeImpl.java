@@ -61,6 +61,7 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
         Chord.ChordNode chordNode = req.getChordNode();
         Node nodePrime = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
+        System.out.println("Request from: " + nodePrime);
         chordBackEnd.notifyWIKI(nodePrime);
         Chord.NotifyReplyWIKI reply = Chord.NotifyReplyWIKI.newBuilder().build();
 

@@ -26,7 +26,7 @@ public class Node {
 //        displayCurrentTable();
     }
 
-    public void displayCurrentTable() {
+    public synchronized void displayCurrentTable() {
         fingerTable.displayCurrentTable();
         System.out.println("My successor: " + getSuccessor());
         System.out.println("My predecessor: " + getPredecessor());
@@ -37,7 +37,7 @@ public class Node {
         return table[0].getNode();
     }
 
-    public void setSuccessor(Node successor) {
+    public synchronized void setSuccessor(Node successor) {
         FingerTableEntry[] table = fingerTable.getTable();
         table[0].setNode(successor);
     }
@@ -46,7 +46,7 @@ public class Node {
         return predecessor;
     }
 
-    public void setPredecessor(Node predecessor) {
+    public synchronized void setPredecessor(Node predecessor) {
         this.predecessor = predecessor;
     }
 

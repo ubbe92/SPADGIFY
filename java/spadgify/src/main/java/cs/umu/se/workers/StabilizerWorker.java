@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class StabilizerWorker implements Runnable {
     private final ChordBackEnd backEnd;
     private final AtomicBoolean runStabilize = new AtomicBoolean(true);
-    private long delay = 2000;
+    private long delay = 100;
     private int m = -1;
     private final AtomicBoolean isAlive = new AtomicBoolean(true);
 

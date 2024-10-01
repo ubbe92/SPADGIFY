@@ -15,7 +15,7 @@ public class FingerTableEntry {
         return node;
     }
 
-    public void setNode(Node node) {
+    public synchronized void setNode(Node node) {
         this.node = node;
     }
 

@@ -36,27 +36,22 @@ public class Chord {
 
         System.out.println("Thread: " + Thread.currentThread().getName());
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                System.out.println("Thread in try: " + Thread.currentThread().getName());
-                Thread.sleep(200);
-                System.out.println("Shutting down ...");
-                //some cleaning up code...
+            System.out.println("Thread in try: " + Thread.currentThread().getName());
+//                Thread.sleep(200);
+            System.out.println("Shutting down ...");
+            //some cleaning up code...
 
-                server.stopWorkerThread();
-                while (server.isStabilizerWorkerAlive());
+            server.stopWorkerThread();
+            while (server.isStabilizerWorkerAlive());
 
-                System.out.println("Past while loop");
+            System.out.println("Past while loop");
 
-                System.out.println("Notifying successor and predecessor and transferring keys");
-                server.leaveChordNetwork();
+            System.out.println("Notifying successor and predecessor and transferring keys");
+            server.leaveChordNetwork();
 
-                System.out.println("Stopping worker thread and server thread!");
-                server.stopServer();
+            System.out.println("Stopping worker thread and server thread!");
+            server.stopServer();
 
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                e.printStackTrace();
-            }
         }));
 
         server.startServer(port, remoteIp, remotePort, m, mode, exitCode);
