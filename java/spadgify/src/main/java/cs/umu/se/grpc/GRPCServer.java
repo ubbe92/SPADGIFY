@@ -73,6 +73,10 @@ public class GRPCServer implements Server {
         chordBackEnd.leaveWIKI();
     }
 
+    public boolean isStabilizerWorkerAlive() {
+        return this.worker.isAlive();
+    }
+
     public boolean isShutdown() {
         return server.isShutdown();
     }

@@ -1,26 +1,18 @@
 package cs.umu.se.chord;
 
-import cs.umu.se.util.ChordUtil;
-
-import java.util.Arrays;
-
 public class FingerTable {
     private int m;
-    private int port;
     private int myIdentifier;
     private FingerTableEntry[] table;
     private Node thisNode;
-    private ChordUtil chordUtil = new ChordUtil();
 
     public FingerTable(Node thisNode) {
         this.m = thisNode.getM();
-        this.port = thisNode.getMyPort();
         this.myIdentifier = thisNode.getMyIdentifier();
         this.thisNode = thisNode;
         this.table = new FingerTableEntry[m];
 
         // Calculate the start and intervals and put this node as the successor node for each entry
-//        fillTableWithEntries(myIdentifier, m, thisNode);
         fillTableWithEntries(myIdentifier, m, null);
     }
 
@@ -47,18 +39,6 @@ public class FingerTable {
             // Fill table with entries that does not at the moment have any nodes.
             table[i] = new FingerTableEntry(start, interval, node);
         }
-    }
-
-    public Node firstNodeBiggerThanNFingerKStart(int k) {
-        Node node = thisNode;
-
-        for (int i = m - 1; i >= 0; i--) {
-            node = table[i].getNode();
-            if (node.getMyIdentifier() >= table[k].getStart())
-                return node;
-        }
-
-        return node;
     }
 
     public void displayCurrentTable() {

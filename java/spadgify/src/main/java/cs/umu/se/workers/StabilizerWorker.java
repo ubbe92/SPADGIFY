@@ -10,6 +10,7 @@ public class StabilizerWorker implements Runnable {
     private final AtomicBoolean runStabilize = new AtomicBoolean(true);
     private long delay = 2000;
     private int m = -1;
+    private final AtomicBoolean isAlive = new AtomicBoolean(true);
 
     public StabilizerWorker(ChordBackEnd backEnd, int m) {
         this.backEnd = backEnd;
@@ -18,7 +19,7 @@ public class StabilizerWorker implements Runnable {
 
     @Override
     public void run() {
-
+        System.out.println("Thread in worker: " + Thread.currentThread().getName());
         // called periodically
         while (runStabilize.get()) {
             backEnd.stabilizeWIKI();
@@ -37,9 +38,14 @@ public class StabilizerWorker implements Runnable {
                 stopStabilize();
             }
         }
+        isAlive.set(false);
     }
 
     public void stopStabilize() {
         this.runStabilize.set(false);
+    }
+    public boolean isAlive() {
+//        System.out.println("isAlive: " + isAlive.get());
+        return isAlive.get();
     }
 }

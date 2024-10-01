@@ -37,78 +37,6 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
     }
 
     @Override
-    public void findSuccessor(Chord.FindSuccessorRequest req, StreamObserver<Chord.FindSuccessorReply> resp) {
-        System.out.println("SERVER GOT findSuccessor REQUEST!");
-
-        int id = (int) req.getId();
-
-        Node nodePrime = chordBackEnd.findPredecessor(id); // change to find_predecessor(id)
-
-        Node nodePrimeSuccessor = nodePrime.getSuccessor();
-        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(nodePrimeSuccessor);
-        Chord.FindSuccessorReply reply = Chord.FindSuccessorReply.newBuilder().setChordNode(chordNode).build();
-
-        System.out.println("after receiving findSuccessor gRPC call");
-        node.displayCurrentTable();
-
-        resp.onNext(reply);
-        resp.onCompleted();
-    }
-
-    @Override
-    public void findPredecessor(Chord.FindPredecessorRequest req, StreamObserver<Chord.FindPredecessorReply> resp) {
-
-    }
-
-    @Override
-    public void closestPrecedingFinger(Chord.ClosestPrecedingFingerRequest req, StreamObserver<Chord.ClosestPrecedingFingerReply> resp) {
-        System.out.println("SERVER GOT closestPrecedingFinger REQUEST!");
-        int id = (int) req.getId();
-
-        Node nodePrime = chordBackEnd.closestPrecedingFinger(id);
-        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(nodePrime);
-        Chord.ClosestPrecedingFingerReply reply = Chord.ClosestPrecedingFingerReply.newBuilder().setChordNode(chordNode).build();
-
-        System.out.println("after receiving closestPrecedingFinger gRPC call");
-        node.displayCurrentTable();
-
-        resp.onNext(reply);
-        resp.onCompleted();
-
-    }
-
-    @Override
-    public void updateFingerTable(Chord.UpdateFingerTableRequest req, StreamObserver<Chord.UpdateFingerTableReply> resp) {
-        System.out.println("SERVER GOT updateFingerTable REQUEST");
-
-        int i = (int) req.getI();
-        Chord.ChordNode chordNode = req.getChordNode();
-        Node s = chordUtil.createNodeFromGRPCChordNode(chordNode);
-
-        System.out.println("i: " + i + " s: " + s);
-        chordBackEnd.updateFingerTable(s, i); // this crashes the program
-
-//        updateFingerTable()
-//        s: 1 in interval: [1 - 1)
-//        updateFingerTable() Updating my own fingertable with: 192.168.38.126:8185 identifier: 1 at i: 0
-//        updateFingerTable()
-//        s: 1 in interval: [1 - 1)
-//        updateFingerTable() Updating my own fingertable with: 192.168.38.126:8185 identifier: 1 at i: 0
-//        Exception in thread "grpc-default-executor-0" java.lang.StackOverflowError
-//        at cs.umu.se.chord.ChordBackEnd.updateFingerTable(ChordBackEnd.java:148)
-//        at cs.umu.se.chord.ChordBackEnd.updateFingerTable(ChordBackEnd.java:163)
-
-        Chord.UpdateFingerTableReply reply = Chord.UpdateFingerTableReply.newBuilder().build();
-
-        System.out.println("after receiving updateFingerTable gRPC call");
-        node.displayCurrentTable();
-
-        resp.onNext(reply);
-        resp.onCompleted();
-
-    }
-
-    @Override
     public void findSuccessorWIKI(Chord.FindSuccessorRequestWIKI req, StreamObserver<Chord.FindSuccessorReplyWIKI> resp) {
         System.out.println("SERVER GOT findSuccessorWIKI REQUEST!");
 
@@ -160,6 +88,7 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
     @Override
     public void getPredecessorWIKI(Chord.GetPredecessorRequestWIKI req, StreamObserver<Chord.GetPredecessorReplyWIKI> resp) {
         System.out.println("SERVER GOT getPredecessorWIKI REQUEST!");
+        System.out.println("Thread in server: " + Thread.currentThread().getName());
 
         Node predecessor = node;
         Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(predecessor);

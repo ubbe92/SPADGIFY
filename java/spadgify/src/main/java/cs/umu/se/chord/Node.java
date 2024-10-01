@@ -8,7 +8,6 @@ public class Node {
     private int myPort;
     private int m;
     private int myIdentifier;
-    private ChordUtil chordUtil = new ChordUtil();
     private Node predecessor;
 
     public Node(String ip, int port, int m) {
