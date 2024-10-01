@@ -558,8 +558,26 @@ public class ChordBackEnd {
 
         boolean alive = isNodeAliveWIKI(successor);
 
-        if (!alive) // if successor has failed
-            node.setSuccessor(null); // Can we set this to null or do we need to find a new successor somehow?
+//        if (!alive) // if successor has failed
+//            node.setSuccessor(null); // Can we set this to null or do we need to find a new successor somehow?
+
+
+        if (!alive) { // if successor has failed
+            FingerTableEntry[] table = node.getFingerTable().getTable();
+
+            for (int i = 1; i < node.getM(); i++) { // try to find a new successor
+                Node fingerNode = table[i].getNode();
+                if (fingerNode.equals(node))
+                    continue;
+
+                alive = isNodeAliveWIKI(fingerNode);
+                if (alive) {
+                    node.setSuccessor(fingerNode);
+                    return;
+                }
+            }
+            node.setSuccessor(node); // worst case, we are alone
+        }
     }
 
     private synchronized boolean isNodeAliveWIKI(Node node) {
