@@ -41,7 +41,6 @@ public class Chord {
 
         GRPCServer server = new GRPCServer();
 
-
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Shutting down...");
 

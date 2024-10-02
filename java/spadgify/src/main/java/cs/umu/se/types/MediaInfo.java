@@ -11,16 +11,18 @@ public class MediaInfo {
     private final long size;
     private final int hash;
     private final String identifierString;
+    private int m;
 
-    public MediaInfo(String artist, String song, String album, int duration, String genre, long size, int hash) {
+    public MediaInfo(String artist, String song, String album, int duration, String genre, long size, int m) {
         this.artist = artist;
         this.song = song;
         this.album = album;
         this.duration = duration;
         this.genre = genre;
         this.size = size;
-        this.hash = hash;
+        this.m = m;
         identifierString = song + "-" + artist + "-" + album;
+        this.hash = Hash.getNodeIdentifierFromString(identifierString, m);
     }
 
     public String getArtist() {
