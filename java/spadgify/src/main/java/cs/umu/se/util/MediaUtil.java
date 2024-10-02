@@ -22,7 +22,7 @@ public class MediaUtil {
         int duration = chordMediaInfo.getDuration();
         String genre = chordMediaInfo.getGenre();
         long size = chordMediaInfo.getSize();
-        String identifierString = song + ":" + artist + ":" + album;
+        String identifierString = song + "-" + artist + "-" + album;
         int hash = Hash.getNodeIdentifierFromString(identifierString, m);
 
         return new MediaInfo(artist, song, album, duration, genre, size, hash);
