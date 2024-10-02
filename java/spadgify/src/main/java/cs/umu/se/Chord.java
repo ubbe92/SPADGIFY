@@ -44,7 +44,6 @@ public class Chord {
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Shutting down...");
-            //some cleaning up code...
 
             server.stopWorkerThread();
             while (server.isStabilizerWorkerAlive()); // Wait a while for the worker thread to stop

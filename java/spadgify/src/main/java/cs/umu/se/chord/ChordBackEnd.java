@@ -106,7 +106,7 @@ public class ChordBackEnd {
     }
 
 
-    // TESTING WIKIPEDIA
+    // TESTING WIKIPEDIA SOLUTION
     public void createWIKI() {
         node.setPredecessor(null);
         node.setSuccessor(node);

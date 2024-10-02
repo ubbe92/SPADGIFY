@@ -14,8 +14,12 @@ service Node {
   rpc SetSuccessorsPredecessorWIKI (SetSuccessorsPredecessorRequestWIKI) returns (SetSuccessorsPredecessorReplyWIKI) {}
 }
 
+service File {
+  rpc Upload (stream FileChunk) returns (UploadStatus) {}
+}
+
 // ----------------------------------------------------
-// Requests and replies definitions
+// Requests and replies definitions for Node service
 // ----------------------------------------------------
 
 // ----------------------------------------------------
@@ -79,4 +83,32 @@ message ChordNode {
   uint64 m = 4;
   ChordNode successor = 5;
   ChordNode predecessor = 6;
+}
+
+// ----------------------------------------------------
+// Requests and replies definitions for File service
+// ----------------------------------------------------
+
+// ----------------------------------------------------
+message FileChunk {
+  bytes content = 1;
+  MediaInfo mediaInfo = 2;
+}
+
+message UploadStatus {
+  string message = 1;
+  bool success = 2;
+}
+
+// ----------------------------------------------------
+// File service messages
+// ----------------------------------------------------
+
+message MediaInfo {
+  string artist = 1;
+  string song = 2;
+  string album = 3;
+  uint32 duration = 4;
+  string genre = 5;
+  uint64 size = 6;
 }

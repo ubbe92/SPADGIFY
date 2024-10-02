@@ -6796,6 +6796,2339 @@ public final class Chord {
 
   }
 
+  public interface FileChunkOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FileChunk)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bytes content = 1;</code>
+     * @return The content.
+     */
+    com.google.protobuf.ByteString getContent();
+
+    /**
+     * <code>.MediaInfo mediaInfo = 2;</code>
+     * @return Whether the mediaInfo field is set.
+     */
+    boolean hasMediaInfo();
+    /**
+     * <code>.MediaInfo mediaInfo = 2;</code>
+     * @return The mediaInfo.
+     */
+    proto.Chord.MediaInfo getMediaInfo();
+    /**
+     * <code>.MediaInfo mediaInfo = 2;</code>
+     */
+    proto.Chord.MediaInfoOrBuilder getMediaInfoOrBuilder();
+  }
+  /**
+   * <pre>
+   * ----------------------------------------------------
+   * </pre>
+   *
+   * Protobuf type {@code FileChunk}
+   */
+  public static final class FileChunk extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:FileChunk)
+      FileChunkOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 26,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        FileChunk.class.getName());
+    }
+    // Use FileChunk.newBuilder() to construct.
+    private FileChunk(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private FileChunk() {
+      content_ = com.google.protobuf.ByteString.EMPTY;
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_FileChunk_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_FileChunk_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.FileChunk.class, proto.Chord.FileChunk.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CONTENT_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString content_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes content = 1;</code>
+     * @return The content.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getContent() {
+      return content_;
+    }
+
+    public static final int MEDIAINFO_FIELD_NUMBER = 2;
+    private proto.Chord.MediaInfo mediaInfo_;
+    /**
+     * <code>.MediaInfo mediaInfo = 2;</code>
+     * @return Whether the mediaInfo field is set.
+     */
+    @java.lang.Override
+    public boolean hasMediaInfo() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.MediaInfo mediaInfo = 2;</code>
+     * @return The mediaInfo.
+     */
+    @java.lang.Override
+    public proto.Chord.MediaInfo getMediaInfo() {
+      return mediaInfo_ == null ? proto.Chord.MediaInfo.getDefaultInstance() : mediaInfo_;
+    }
+    /**
+     * <code>.MediaInfo mediaInfo = 2;</code>
+     */
+    @java.lang.Override
+    public proto.Chord.MediaInfoOrBuilder getMediaInfoOrBuilder() {
+      return mediaInfo_ == null ? proto.Chord.MediaInfo.getDefaultInstance() : mediaInfo_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!content_.isEmpty()) {
+        output.writeBytes(1, content_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(2, getMediaInfo());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!content_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, content_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getMediaInfo());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.FileChunk)) {
+        return super.equals(obj);
+      }
+      proto.Chord.FileChunk other = (proto.Chord.FileChunk) obj;
+
+      if (!getContent()
+          .equals(other.getContent())) return false;
+      if (hasMediaInfo() != other.hasMediaInfo()) return false;
+      if (hasMediaInfo()) {
+        if (!getMediaInfo()
+            .equals(other.getMediaInfo())) return false;
+      }
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CONTENT_FIELD_NUMBER;
+      hash = (53 * hash) + getContent().hashCode();
+      if (hasMediaInfo()) {
+        hash = (37 * hash) + MEDIAINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getMediaInfo().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.FileChunk parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FileChunk parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FileChunk parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FileChunk parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FileChunk parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.FileChunk parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.FileChunk parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.FileChunk parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.FileChunk parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.FileChunk parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.FileChunk parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.FileChunk parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.FileChunk prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * ----------------------------------------------------
+     * </pre>
+     *
+     * Protobuf type {@code FileChunk}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:FileChunk)
+        proto.Chord.FileChunkOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_FileChunk_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_FileChunk_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.FileChunk.class, proto.Chord.FileChunk.Builder.class);
+      }
+
+      // Construct using proto.Chord.FileChunk.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage
+                .alwaysUseFieldBuilders) {
+          getMediaInfoFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        content_ = com.google.protobuf.ByteString.EMPTY;
+        mediaInfo_ = null;
+        if (mediaInfoBuilder_ != null) {
+          mediaInfoBuilder_.dispose();
+          mediaInfoBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_FileChunk_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.FileChunk getDefaultInstanceForType() {
+        return proto.Chord.FileChunk.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.FileChunk build() {
+        proto.Chord.FileChunk result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.FileChunk buildPartial() {
+        proto.Chord.FileChunk result = new proto.Chord.FileChunk(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.FileChunk result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.content_ = content_;
+        }
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.mediaInfo_ = mediaInfoBuilder_ == null
+              ? mediaInfo_
+              : mediaInfoBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.FileChunk) {
+          return mergeFrom((proto.Chord.FileChunk)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.FileChunk other) {
+        if (other == proto.Chord.FileChunk.getDefaultInstance()) return this;
+        if (other.getContent() != com.google.protobuf.ByteString.EMPTY) {
+          setContent(other.getContent());
+        }
+        if (other.hasMediaInfo()) {
+          mergeMediaInfo(other.getMediaInfo());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                content_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                input.readMessage(
+                    getMediaInfoFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.ByteString content_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes content = 1;</code>
+       * @return The content.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString getContent() {
+        return content_;
+      }
+      /**
+       * <code>bytes content = 1;</code>
+       * @param value The content to set.
+       * @return This builder for chaining.
+       */
+      public Builder setContent(com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        content_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes content = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearContent() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        content_ = getDefaultInstance().getContent();
+        onChanged();
+        return this;
+      }
+
+      private proto.Chord.MediaInfo mediaInfo_;
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.MediaInfo, proto.Chord.MediaInfo.Builder, proto.Chord.MediaInfoOrBuilder> mediaInfoBuilder_;
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       * @return Whether the mediaInfo field is set.
+       */
+      public boolean hasMediaInfo() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       * @return The mediaInfo.
+       */
+      public proto.Chord.MediaInfo getMediaInfo() {
+        if (mediaInfoBuilder_ == null) {
+          return mediaInfo_ == null ? proto.Chord.MediaInfo.getDefaultInstance() : mediaInfo_;
+        } else {
+          return mediaInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       */
+      public Builder setMediaInfo(proto.Chord.MediaInfo value) {
+        if (mediaInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          mediaInfo_ = value;
+        } else {
+          mediaInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       */
+      public Builder setMediaInfo(
+          proto.Chord.MediaInfo.Builder builderForValue) {
+        if (mediaInfoBuilder_ == null) {
+          mediaInfo_ = builderForValue.build();
+        } else {
+          mediaInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       */
+      public Builder mergeMediaInfo(proto.Chord.MediaInfo value) {
+        if (mediaInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0) &&
+            mediaInfo_ != null &&
+            mediaInfo_ != proto.Chord.MediaInfo.getDefaultInstance()) {
+            getMediaInfoBuilder().mergeFrom(value);
+          } else {
+            mediaInfo_ = value;
+          }
+        } else {
+          mediaInfoBuilder_.mergeFrom(value);
+        }
+        if (mediaInfo_ != null) {
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       */
+      public Builder clearMediaInfo() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        mediaInfo_ = null;
+        if (mediaInfoBuilder_ != null) {
+          mediaInfoBuilder_.dispose();
+          mediaInfoBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       */
+      public proto.Chord.MediaInfo.Builder getMediaInfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getMediaInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       */
+      public proto.Chord.MediaInfoOrBuilder getMediaInfoOrBuilder() {
+        if (mediaInfoBuilder_ != null) {
+          return mediaInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return mediaInfo_ == null ?
+              proto.Chord.MediaInfo.getDefaultInstance() : mediaInfo_;
+        }
+      }
+      /**
+       * <code>.MediaInfo mediaInfo = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          proto.Chord.MediaInfo, proto.Chord.MediaInfo.Builder, proto.Chord.MediaInfoOrBuilder> 
+          getMediaInfoFieldBuilder() {
+        if (mediaInfoBuilder_ == null) {
+          mediaInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              proto.Chord.MediaInfo, proto.Chord.MediaInfo.Builder, proto.Chord.MediaInfoOrBuilder>(
+                  getMediaInfo(),
+                  getParentForChildren(),
+                  isClean());
+          mediaInfo_ = null;
+        }
+        return mediaInfoBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:FileChunk)
+    }
+
+    // @@protoc_insertion_point(class_scope:FileChunk)
+    private static final proto.Chord.FileChunk DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.FileChunk();
+    }
+
+    public static proto.Chord.FileChunk getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FileChunk>
+        PARSER = new com.google.protobuf.AbstractParser<FileChunk>() {
+      @java.lang.Override
+      public FileChunk parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<FileChunk> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FileChunk> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.FileChunk getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface UploadStatusOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:UploadStatus)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string message = 1;</code>
+     * @return The message.
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>string message = 1;</code>
+     * @return The bytes for message.
+     */
+    com.google.protobuf.ByteString
+        getMessageBytes();
+
+    /**
+     * <code>bool success = 2;</code>
+     * @return The success.
+     */
+    boolean getSuccess();
+  }
+  /**
+   * Protobuf type {@code UploadStatus}
+   */
+  public static final class UploadStatus extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:UploadStatus)
+      UploadStatusOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 26,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        UploadStatus.class.getName());
+    }
+    // Use UploadStatus.newBuilder() to construct.
+    private UploadStatus(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private UploadStatus() {
+      message_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_UploadStatus_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_UploadStatus_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.UploadStatus.class, proto.Chord.UploadStatus.Builder.class);
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object message_ = "";
+    /**
+     * <code>string message = 1;</code>
+     * @return The message.
+     */
+    @java.lang.Override
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string message = 1;</code>
+     * @return The bytes for message.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SUCCESS_FIELD_NUMBER = 2;
+    private boolean success_ = false;
+    /**
+     * <code>bool success = 2;</code>
+     * @return The success.
+     */
+    @java.lang.Override
+    public boolean getSuccess() {
+      return success_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, message_);
+      }
+      if (success_ != false) {
+        output.writeBool(2, success_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, message_);
+      }
+      if (success_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, success_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.UploadStatus)) {
+        return super.equals(obj);
+      }
+      proto.Chord.UploadStatus other = (proto.Chord.UploadStatus) obj;
+
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (getSuccess()
+          != other.getSuccess()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSuccess());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.UploadStatus parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.UploadStatus parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.UploadStatus parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.UploadStatus parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.UploadStatus parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.UploadStatus parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.UploadStatus parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.UploadStatus parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.UploadStatus parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.UploadStatus parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.UploadStatus parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.UploadStatus parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.UploadStatus prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code UploadStatus}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:UploadStatus)
+        proto.Chord.UploadStatusOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_UploadStatus_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_UploadStatus_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.UploadStatus.class, proto.Chord.UploadStatus.Builder.class);
+      }
+
+      // Construct using proto.Chord.UploadStatus.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        message_ = "";
+        success_ = false;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_UploadStatus_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.UploadStatus getDefaultInstanceForType() {
+        return proto.Chord.UploadStatus.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.UploadStatus build() {
+        proto.Chord.UploadStatus result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.UploadStatus buildPartial() {
+        proto.Chord.UploadStatus result = new proto.Chord.UploadStatus(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.UploadStatus result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.message_ = message_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.success_ = success_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.UploadStatus) {
+          return mergeFrom((proto.Chord.UploadStatus)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.UploadStatus other) {
+        if (other == proto.Chord.UploadStatus.getDefaultInstance()) return this;
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (other.getSuccess() != false) {
+          setSuccess(other.getSuccess());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                message_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                success_ = input.readBool();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>string message = 1;</code>
+       * @return The message.
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @return The bytes for message.
+       */
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessage(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        message_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMessage() {
+        message_ = getDefaultInstance().getMessage();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 1;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        message_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private boolean success_ ;
+      /**
+       * <code>bool success = 2;</code>
+       * @return The success.
+       */
+      @java.lang.Override
+      public boolean getSuccess() {
+        return success_;
+      }
+      /**
+       * <code>bool success = 2;</code>
+       * @param value The success to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSuccess(boolean value) {
+
+        success_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool success = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSuccess() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        success_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:UploadStatus)
+    }
+
+    // @@protoc_insertion_point(class_scope:UploadStatus)
+    private static final proto.Chord.UploadStatus DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.UploadStatus();
+    }
+
+    public static proto.Chord.UploadStatus getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<UploadStatus>
+        PARSER = new com.google.protobuf.AbstractParser<UploadStatus>() {
+      @java.lang.Override
+      public UploadStatus parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<UploadStatus> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UploadStatus> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.UploadStatus getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface MediaInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:MediaInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string artist = 1;</code>
+     * @return The artist.
+     */
+    java.lang.String getArtist();
+    /**
+     * <code>string artist = 1;</code>
+     * @return The bytes for artist.
+     */
+    com.google.protobuf.ByteString
+        getArtistBytes();
+
+    /**
+     * <code>string song = 2;</code>
+     * @return The song.
+     */
+    java.lang.String getSong();
+    /**
+     * <code>string song = 2;</code>
+     * @return The bytes for song.
+     */
+    com.google.protobuf.ByteString
+        getSongBytes();
+
+    /**
+     * <code>string album = 3;</code>
+     * @return The album.
+     */
+    java.lang.String getAlbum();
+    /**
+     * <code>string album = 3;</code>
+     * @return The bytes for album.
+     */
+    com.google.protobuf.ByteString
+        getAlbumBytes();
+
+    /**
+     * <code>uint32 duration = 4;</code>
+     * @return The duration.
+     */
+    int getDuration();
+
+    /**
+     * <code>string genre = 5;</code>
+     * @return The genre.
+     */
+    java.lang.String getGenre();
+    /**
+     * <code>string genre = 5;</code>
+     * @return The bytes for genre.
+     */
+    com.google.protobuf.ByteString
+        getGenreBytes();
+
+    /**
+     * <code>uint64 size = 6;</code>
+     * @return The size.
+     */
+    long getSize();
+  }
+  /**
+   * Protobuf type {@code MediaInfo}
+   */
+  public static final class MediaInfo extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:MediaInfo)
+      MediaInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 26,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        MediaInfo.class.getName());
+    }
+    // Use MediaInfo.newBuilder() to construct.
+    private MediaInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private MediaInfo() {
+      artist_ = "";
+      song_ = "";
+      album_ = "";
+      genre_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_MediaInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_MediaInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.MediaInfo.class, proto.Chord.MediaInfo.Builder.class);
+    }
+
+    public static final int ARTIST_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object artist_ = "";
+    /**
+     * <code>string artist = 1;</code>
+     * @return The artist.
+     */
+    @java.lang.Override
+    public java.lang.String getArtist() {
+      java.lang.Object ref = artist_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        artist_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string artist = 1;</code>
+     * @return The bytes for artist.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getArtistBytes() {
+      java.lang.Object ref = artist_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        artist_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SONG_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object song_ = "";
+    /**
+     * <code>string song = 2;</code>
+     * @return The song.
+     */
+    @java.lang.Override
+    public java.lang.String getSong() {
+      java.lang.Object ref = song_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        song_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string song = 2;</code>
+     * @return The bytes for song.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getSongBytes() {
+      java.lang.Object ref = song_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        song_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ALBUM_FIELD_NUMBER = 3;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object album_ = "";
+    /**
+     * <code>string album = 3;</code>
+     * @return The album.
+     */
+    @java.lang.Override
+    public java.lang.String getAlbum() {
+      java.lang.Object ref = album_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        album_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string album = 3;</code>
+     * @return The bytes for album.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getAlbumBytes() {
+      java.lang.Object ref = album_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        album_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DURATION_FIELD_NUMBER = 4;
+    private int duration_ = 0;
+    /**
+     * <code>uint32 duration = 4;</code>
+     * @return The duration.
+     */
+    @java.lang.Override
+    public int getDuration() {
+      return duration_;
+    }
+
+    public static final int GENRE_FIELD_NUMBER = 5;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object genre_ = "";
+    /**
+     * <code>string genre = 5;</code>
+     * @return The genre.
+     */
+    @java.lang.Override
+    public java.lang.String getGenre() {
+      java.lang.Object ref = genre_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        genre_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string genre = 5;</code>
+     * @return The bytes for genre.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getGenreBytes() {
+      java.lang.Object ref = genre_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        genre_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SIZE_FIELD_NUMBER = 6;
+    private long size_ = 0L;
+    /**
+     * <code>uint64 size = 6;</code>
+     * @return The size.
+     */
+    @java.lang.Override
+    public long getSize() {
+      return size_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(artist_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, artist_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(song_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, song_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(album_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 3, album_);
+      }
+      if (duration_ != 0) {
+        output.writeUInt32(4, duration_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(genre_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 5, genre_);
+      }
+      if (size_ != 0L) {
+        output.writeUInt64(6, size_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(artist_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, artist_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(song_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, song_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(album_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, album_);
+      }
+      if (duration_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, duration_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(genre_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(5, genre_);
+      }
+      if (size_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(6, size_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.MediaInfo)) {
+        return super.equals(obj);
+      }
+      proto.Chord.MediaInfo other = (proto.Chord.MediaInfo) obj;
+
+      if (!getArtist()
+          .equals(other.getArtist())) return false;
+      if (!getSong()
+          .equals(other.getSong())) return false;
+      if (!getAlbum()
+          .equals(other.getAlbum())) return false;
+      if (getDuration()
+          != other.getDuration()) return false;
+      if (!getGenre()
+          .equals(other.getGenre())) return false;
+      if (getSize()
+          != other.getSize()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ARTIST_FIELD_NUMBER;
+      hash = (53 * hash) + getArtist().hashCode();
+      hash = (37 * hash) + SONG_FIELD_NUMBER;
+      hash = (53 * hash) + getSong().hashCode();
+      hash = (37 * hash) + ALBUM_FIELD_NUMBER;
+      hash = (53 * hash) + getAlbum().hashCode();
+      hash = (37 * hash) + DURATION_FIELD_NUMBER;
+      hash = (53 * hash) + getDuration();
+      hash = (37 * hash) + GENRE_FIELD_NUMBER;
+      hash = (53 * hash) + getGenre().hashCode();
+      hash = (37 * hash) + SIZE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getSize());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.MediaInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.MediaInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.MediaInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.MediaInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.MediaInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.MediaInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.MediaInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.MediaInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.MediaInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.MediaInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.MediaInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.MediaInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.MediaInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code MediaInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:MediaInfo)
+        proto.Chord.MediaInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_MediaInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_MediaInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.MediaInfo.class, proto.Chord.MediaInfo.Builder.class);
+      }
+
+      // Construct using proto.Chord.MediaInfo.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        artist_ = "";
+        song_ = "";
+        album_ = "";
+        duration_ = 0;
+        genre_ = "";
+        size_ = 0L;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_MediaInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.MediaInfo getDefaultInstanceForType() {
+        return proto.Chord.MediaInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.MediaInfo build() {
+        proto.Chord.MediaInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.MediaInfo buildPartial() {
+        proto.Chord.MediaInfo result = new proto.Chord.MediaInfo(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.MediaInfo result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.artist_ = artist_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.song_ = song_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.album_ = album_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.duration_ = duration_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.genre_ = genre_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.size_ = size_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.MediaInfo) {
+          return mergeFrom((proto.Chord.MediaInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.MediaInfo other) {
+        if (other == proto.Chord.MediaInfo.getDefaultInstance()) return this;
+        if (!other.getArtist().isEmpty()) {
+          artist_ = other.artist_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (!other.getSong().isEmpty()) {
+          song_ = other.song_;
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        if (!other.getAlbum().isEmpty()) {
+          album_ = other.album_;
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
+        if (other.getDuration() != 0) {
+          setDuration(other.getDuration());
+        }
+        if (!other.getGenre().isEmpty()) {
+          genre_ = other.genre_;
+          bitField0_ |= 0x00000010;
+          onChanged();
+        }
+        if (other.getSize() != 0L) {
+          setSize(other.getSize());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                artist_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                song_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                album_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                duration_ = input.readUInt32();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 42: {
+                genre_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 48: {
+                size_ = input.readUInt64();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 48
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object artist_ = "";
+      /**
+       * <code>string artist = 1;</code>
+       * @return The artist.
+       */
+      public java.lang.String getArtist() {
+        java.lang.Object ref = artist_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          artist_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string artist = 1;</code>
+       * @return The bytes for artist.
+       */
+      public com.google.protobuf.ByteString
+          getArtistBytes() {
+        java.lang.Object ref = artist_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          artist_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string artist = 1;</code>
+       * @param value The artist to set.
+       * @return This builder for chaining.
+       */
+      public Builder setArtist(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        artist_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string artist = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearArtist() {
+        artist_ = getDefaultInstance().getArtist();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string artist = 1;</code>
+       * @param value The bytes for artist to set.
+       * @return This builder for chaining.
+       */
+      public Builder setArtistBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        artist_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object song_ = "";
+      /**
+       * <code>string song = 2;</code>
+       * @return The song.
+       */
+      public java.lang.String getSong() {
+        java.lang.Object ref = song_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          song_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string song = 2;</code>
+       * @return The bytes for song.
+       */
+      public com.google.protobuf.ByteString
+          getSongBytes() {
+        java.lang.Object ref = song_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          song_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string song = 2;</code>
+       * @param value The song to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSong(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        song_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string song = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSong() {
+        song_ = getDefaultInstance().getSong();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string song = 2;</code>
+       * @param value The bytes for song to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSongBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        song_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object album_ = "";
+      /**
+       * <code>string album = 3;</code>
+       * @return The album.
+       */
+      public java.lang.String getAlbum() {
+        java.lang.Object ref = album_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          album_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string album = 3;</code>
+       * @return The bytes for album.
+       */
+      public com.google.protobuf.ByteString
+          getAlbumBytes() {
+        java.lang.Object ref = album_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          album_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string album = 3;</code>
+       * @param value The album to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAlbum(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        album_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string album = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAlbum() {
+        album_ = getDefaultInstance().getAlbum();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string album = 3;</code>
+       * @param value The bytes for album to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAlbumBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        album_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+
+      private int duration_ ;
+      /**
+       * <code>uint32 duration = 4;</code>
+       * @return The duration.
+       */
+      @java.lang.Override
+      public int getDuration() {
+        return duration_;
+      }
+      /**
+       * <code>uint32 duration = 4;</code>
+       * @param value The duration to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDuration(int value) {
+
+        duration_ = value;
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 duration = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDuration() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        duration_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object genre_ = "";
+      /**
+       * <code>string genre = 5;</code>
+       * @return The genre.
+       */
+      public java.lang.String getGenre() {
+        java.lang.Object ref = genre_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          genre_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string genre = 5;</code>
+       * @return The bytes for genre.
+       */
+      public com.google.protobuf.ByteString
+          getGenreBytes() {
+        java.lang.Object ref = genre_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          genre_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string genre = 5;</code>
+       * @param value The genre to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGenre(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        genre_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string genre = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGenre() {
+        genre_ = getDefaultInstance().getGenre();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string genre = 5;</code>
+       * @param value The bytes for genre to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGenreBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        genre_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+
+      private long size_ ;
+      /**
+       * <code>uint64 size = 6;</code>
+       * @return The size.
+       */
+      @java.lang.Override
+      public long getSize() {
+        return size_;
+      }
+      /**
+       * <code>uint64 size = 6;</code>
+       * @param value The size to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSize(long value) {
+
+        size_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 size = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSize() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        size_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:MediaInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:MediaInfo)
+    private static final proto.Chord.MediaInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.MediaInfo();
+    }
+
+    public static proto.Chord.MediaInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<MediaInfo>
+        PARSER = new com.google.protobuf.AbstractParser<MediaInfo>() {
+      @java.lang.Override
+      public MediaInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<MediaInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MediaInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.MediaInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_FindSuccessorRequestWIKI_descriptor;
   private static final 
@@ -6861,6 +9194,21 @@ public final class Chord {
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ChordNode_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_FileChunk_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_FileChunk_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_UploadStatus_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_UploadStatus_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_MediaInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_MediaInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6887,20 +9235,26 @@ public final class Chord {
       "\"\204\001\n\tChordNode\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004" +
       "\022\022\n\nidentifier\030\003 \001(\004\022\t\n\001m\030\004 \001(\004\022\035\n\tsucce" +
       "ssor\030\005 \001(\0132\n.ChordNode\022\037\n\013predecessor\030\006 " +
-      "\001(\0132\n.ChordNode2\351\003\n\004Node\022I\n\021FindSuccesso" +
-      "rWIKI\022\031.FindSuccessorRequestWIKI\032\027.FindS" +
-      "uccessorReplyWIKI\"\000\0224\n\nNotifyWIKI\022\022.Noti" +
-      "fyRequestWIKI\032\020.NotifyReplyWIKI\"\000\022:\n\014Pin" +
-      "gNodeWIKI\022\024.PingNodeRequestWIKI\032\022.PingNo" +
-      "deReplyWIKI\"\000\022L\n\022GetPredecessorWIKI\022\032.Ge" +
-      "tPredecessorRequestWIKI\032\030.GetPredecessor" +
-      "ReplyWIKI\"\000\022j\n\034SetPredecessorsSuccessorW" +
-      "IKI\022$.SetPredecessorsSuccessorRequestWIK" +
-      "I\032\".SetPredecessorsSuccessorReplyWIKI\"\000\022" +
-      "j\n\034SetSuccessorsPredecessorWIKI\022$.SetSuc" +
-      "cessorsPredecessorRequestWIKI\032\".SetSucce" +
-      "ssorsPredecessorReplyWIKI\"\000B\007\n\005protob\006pr" +
-      "oto3"
+      "\001(\0132\n.ChordNode\";\n\tFileChunk\022\017\n\007content\030" +
+      "\001 \001(\014\022\035\n\tmediaInfo\030\002 \001(\0132\n.MediaInfo\"0\n\014" +
+      "UploadStatus\022\017\n\007message\030\001 \001(\t\022\017\n\007success" +
+      "\030\002 \001(\010\"g\n\tMediaInfo\022\016\n\006artist\030\001 \001(\t\022\014\n\004s" +
+      "ong\030\002 \001(\t\022\r\n\005album\030\003 \001(\t\022\020\n\010duration\030\004 \001" +
+      "(\r\022\r\n\005genre\030\005 \001(\t\022\014\n\004size\030\006 \001(\0042\351\003\n\004Node" +
+      "\022I\n\021FindSuccessorWIKI\022\031.FindSuccessorReq" +
+      "uestWIKI\032\027.FindSuccessorReplyWIKI\"\000\0224\n\nN" +
+      "otifyWIKI\022\022.NotifyRequestWIKI\032\020.NotifyRe" +
+      "plyWIKI\"\000\022:\n\014PingNodeWIKI\022\024.PingNodeRequ" +
+      "estWIKI\032\022.PingNodeReplyWIKI\"\000\022L\n\022GetPred" +
+      "ecessorWIKI\022\032.GetPredecessorRequestWIKI\032" +
+      "\030.GetPredecessorReplyWIKI\"\000\022j\n\034SetPredec" +
+      "essorsSuccessorWIKI\022$.SetPredecessorsSuc" +
+      "cessorRequestWIKI\032\".SetPredecessorsSucce" +
+      "ssorReplyWIKI\"\000\022j\n\034SetSuccessorsPredeces" +
+      "sorWIKI\022$.SetSuccessorsPredecessorReques" +
+      "tWIKI\032\".SetSuccessorsPredecessorReplyWIK" +
+      "I\"\0002/\n\004File\022\'\n\006Upload\022\n.FileChunk\032\r.Uplo" +
+      "adStatus\"\000(\001B\007\n\005protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6984,6 +9338,24 @@ public final class Chord {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ChordNode_descriptor,
         new java.lang.String[] { "Ip", "Port", "Identifier", "M", "Successor", "Predecessor", });
+    internal_static_FileChunk_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_FileChunk_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_FileChunk_descriptor,
+        new java.lang.String[] { "Content", "MediaInfo", });
+    internal_static_UploadStatus_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_UploadStatus_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_UploadStatus_descriptor,
+        new java.lang.String[] { "Message", "Success", });
+    internal_static_MediaInfo_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_MediaInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_MediaInfo_descriptor,
+        new java.lang.String[] { "Artist", "Song", "Album", "Duration", "Genre", "Size", });
     descriptor.resolveAllFeaturesImmutable();
   }
 

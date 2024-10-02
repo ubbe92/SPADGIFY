@@ -19,9 +19,11 @@ public class GRPCServer implements Server {
     public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay) {
 
         NodeImpl nodeImpl = new NodeImpl(port, remoteIp, remotePort, m, mode, exitCode, delay);
+        FileImpl fileImpl = new FileImpl();
         this.server = ServerBuilder
                 .forPort(port)
                 .addService(nodeImpl)
+                .addService(fileImpl)
                 .build();
         try {
             server.start();
