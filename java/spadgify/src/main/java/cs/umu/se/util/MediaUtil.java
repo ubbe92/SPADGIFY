@@ -57,7 +57,7 @@ public class MediaUtil {
         return destinationNode;
     }
 
-    public void saveToFile(byte[] fileData, String filePath) throws IOException {
+    public void writeToFile(byte[] fileData, String filePath) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             fos.write(fileData);
         }

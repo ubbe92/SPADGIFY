@@ -16,6 +16,7 @@ service Node {
 
 service File {
   rpc Upload (stream FileChunk) returns (UploadStatus) {}
+  rpc Download (DownloadRequest) returns (stream FileChunk) {}
 }
 
 // ----------------------------------------------------
@@ -98,6 +99,10 @@ message FileChunk {
 message UploadStatus {
   string message = 1;
   bool success = 2;
+}
+
+message DownloadRequest {
+  MediaInfo mediaInfo = 1;
 }
 
 // ----------------------------------------------------

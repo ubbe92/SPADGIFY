@@ -46,6 +46,37 @@ public final class FileGrpc {
     return getUploadMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.DownloadRequest,
+      proto.Chord.FileChunk> getDownloadMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Download",
+      requestType = proto.Chord.DownloadRequest.class,
+      responseType = proto.Chord.FileChunk.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<proto.Chord.DownloadRequest,
+      proto.Chord.FileChunk> getDownloadMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.DownloadRequest, proto.Chord.FileChunk> getDownloadMethod;
+    if ((getDownloadMethod = FileGrpc.getDownloadMethod) == null) {
+      synchronized (FileGrpc.class) {
+        if ((getDownloadMethod = FileGrpc.getDownloadMethod) == null) {
+          FileGrpc.getDownloadMethod = getDownloadMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.DownloadRequest, proto.Chord.FileChunk>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Download"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.DownloadRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.FileChunk.getDefaultInstance()))
+              .setSchemaDescriptor(new FileMethodDescriptorSupplier("Download"))
+              .build();
+        }
+      }
+    }
+    return getDownloadMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class FileGrpc {
         io.grpc.stub.StreamObserver<proto.Chord.UploadStatus> responseObserver) {
       return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getUploadMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void download(proto.Chord.DownloadRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.FileChunk> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDownloadMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class FileGrpc {
       return io.grpc.stub.ClientCalls.asyncClientStreamingCall(
           getChannel().newCall(getUploadMethod(), getCallOptions()), responseObserver);
     }
+
+    /**
+     */
+    public void download(proto.Chord.DownloadRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.FileChunk> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getDownloadMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -152,6 +198,14 @@ public final class FileGrpc {
     protected FileBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new FileBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public java.util.Iterator<proto.Chord.FileChunk> download(
+        proto.Chord.DownloadRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getDownloadMethod(), getCallOptions(), request);
     }
   }
 
@@ -172,7 +226,8 @@ public final class FileGrpc {
     }
   }
 
-  private static final int METHODID_UPLOAD = 0;
+  private static final int METHODID_DOWNLOAD = 0;
+  private static final int METHODID_UPLOAD = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -191,6 +246,10 @@ public final class FileGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_DOWNLOAD:
+          serviceImpl.download((proto.Chord.DownloadRequest) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.FileChunk>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -219,6 +278,13 @@ public final class FileGrpc {
               proto.Chord.FileChunk,
               proto.Chord.UploadStatus>(
                 service, METHODID_UPLOAD)))
+        .addMethod(
+          getDownloadMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              proto.Chord.DownloadRequest,
+              proto.Chord.FileChunk>(
+                service, METHODID_DOWNLOAD)))
         .build();
   }
 
@@ -268,6 +334,7 @@ public final class FileGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new FileFileDescriptorSupplier())
               .addMethod(getUploadMethod())
+              .addMethod(getDownloadMethod())
               .build();
         }
       }

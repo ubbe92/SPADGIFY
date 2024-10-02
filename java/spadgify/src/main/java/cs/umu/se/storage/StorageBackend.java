@@ -1,7 +1,6 @@
 package cs.umu.se.storage;
 
 import cs.umu.se.interfaces.Storage;
-import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.MediaUtil;
 
@@ -18,35 +17,37 @@ public class StorageBackend implements Storage {
     }
 
     @Override
-    public synchronized void store(Song song) {
-
+    public void store(Song song) {
         try {
-            mediaUtil.saveToFile(song.getData(), song.getFilePath());
-            String key = song.getIdentifierString();
-            songHashMap.put(key, song);
-
-            song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
+            synchronized (this) {
+                mediaUtil.writeToFile(song.getData(), song.getFilePath());
+                songHashMap.put(song.getIdentifierString(), song);
+                song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
+            }
         } catch (IOException e) {
             throw new IllegalArgumentException("Could not save song: '" + song + "' to disc: " + e.getMessage());
         }
 
-        System.out.println("Storing song: " + song + " at: " + song.getFilePath());
+        System.out.println("Storing: '" + song + "' at: " + song.getFilePath());
     }
 
     @Override
-    public synchronized Song retrieve(String identifierString) {
+    public Song retrieve(String identifierString) {
         Song song;
         try {
-            song = songHashMap.get(identifierString);
-            String filePath = song.getFilePath();
-            byte[] data = mediaUtil.readFromFile(filePath);
-            song.setData(data); // loaded data from disc back into memory
+            synchronized (this) {
+                song = songHashMap.get(identifierString);
+                String filePath = song.getFilePath();
+                byte[] data = mediaUtil.readFromFile(filePath);
+                song.setData(data); // loaded data from disc back into memory
+            }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("retrive() Could not retrieve song: " + identifierString + " from disc");
+            System.out.println("retrieve() Could not retrieve song: " + identifierString + " from disc");
             song = null;
         }
 
+        System.out.println("Retrieved song: '" + song + "'");
         return song;
     }
 

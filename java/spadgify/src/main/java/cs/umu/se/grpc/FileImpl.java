@@ -1,7 +1,7 @@
 package cs.umu.se.grpc;
 
 
-import cs.umu.se.chord.FingerTableEntry;
+import com.google.protobuf.ByteString;
 import cs.umu.se.chord.Node;
 import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.types.MediaInfo;
@@ -12,9 +12,7 @@ import proto.Chord;
 import proto.FileGrpc;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.annotation.Target;
 
 public class FileImpl extends FileGrpc.FileImplBase {
     private Node node;
@@ -22,6 +20,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private MediaUtil mediaUtil;
     private StorageBackend storageBackend;
     private String directory = "./media-spadgify/";
+    private int chunkSize = 2048;
+
 
     public FileImpl(Node node) {
         System.out.println("File service up!");
@@ -36,8 +36,10 @@ public class FileImpl extends FileGrpc.FileImplBase {
         System.out.println("SERVER GOT upload REQUEST!");
 
         return new StreamObserver<Chord.FileChunk>() {
-            ByteArrayOutputStream fileOutputStream = new ByteArrayOutputStream();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             Chord.MediaInfo chordMediaInfo;
+            boolean success = true;
+            String message = "File uploaded and saved successfully";
             int i = 0;
 
             @Override
@@ -49,7 +51,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 }
 
                 try {
-                    fileOutputStream.write(value.getContent().toByteArray());
+                    byteArrayOutputStream.write(value.getContent().toByteArray());
                 } catch (IOException e) {
                     e.printStackTrace();
                     System.out.println("upload() onNext method caught exception!");
@@ -68,10 +70,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 // Create media info and hash song
                 MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
                 int hash = mediaInfo.getHash();
-                byte[] data = fileOutputStream.toByteArray();
+                byte[] data = byteArrayOutputStream.toByteArray();
                 String filePath = directory + mediaInfo.getIdentifierString() + ".mp3";
-                boolean success = true;
-                String message = "File uploaded and saved successfully";
 
                 System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
 
@@ -81,6 +81,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 if (destinationNode.equals(node)) { // Store in this node
                     Song song = new Song(mediaInfo, filePath, data);
                     try {
+                        byteArrayOutputStream.close();
                         storageBackend.store(song);
                         message = message + " at node: " + node;
                     } catch (Exception e) {
@@ -101,19 +102,41 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 // Save the accumulated data to a file
 //                    saveToFile(fileOutputStream.toByteArray(), filePath);
 
-                // Send the response to the client
-                resp.onNext(Chord.UploadStatus.newBuilder()
-                        .setMessage(message)
-                        .setSuccess(success)
-                        .build());
-                resp.onCompleted();
-            }
 
-            private void saveToFile(byte[] fileData, String filePath) throws IOException {
-                try (FileOutputStream fos = new FileOutputStream(filePath)) {
-                    fos.write(fileData);
-                }
+                // Send the response to the client
+                resp.onNext(Chord.UploadStatus.newBuilder().setMessage(message).setSuccess(success).build());
+                resp.onCompleted();
             }
         };
     }
+
+    @Override
+    public void download(Chord.DownloadRequest req, StreamObserver<Chord.FileChunk> responseObserver) {
+        int offset = 0;
+
+        Chord.MediaInfo chordMediaInfo = req.getMediaInfo();
+        MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
+        String identifierString = mediaInfo.getIdentifierString();
+
+        Song song = storageBackend.retrieve(identifierString);
+        byte[] data = song.getData();
+        chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
+
+        while (offset < data.length) {
+            int remaining = data.length - offset;
+            int currentChunkSize = Math.min(chunkSize, remaining);
+
+            ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
+            Chord.FileChunk response = Chord.FileChunk.newBuilder()
+                    .setContent(chunk)
+                    .setMediaInfo(chordMediaInfo)
+                    .build();
+            responseObserver.onNext(response);
+
+            offset += currentChunkSize;
+        }
+
+        responseObserver.onCompleted();
+    }
+
 }
