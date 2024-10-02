@@ -19,11 +19,15 @@ public class Chord {
         CommandLine commandLine = new CommandLine(getOp);
         int exitCode = commandLine.execute(args);
 
+        if (getOp.isHelp())
+            System.exit(0);
+
         if (exitCode != 0) {
             System.out.println("Exit code: " + exitCode + " reason: " + getOp.translateExitCode(exitCode));
 //            commandLine.usage(System.out);
             System.exit(exitCode);
         }
+
         System.out.println("args: " + Arrays.toString(args));
 
         int port = getOp.getPort();
@@ -31,20 +35,19 @@ public class Chord {
         int remotePort = getOp.getRemotePort();
         int m = getOp.getM();
         int mode = getOp.getMode();
+        int delay = getOp.getDelay();
+
+        System.out.println("Delay: " + delay);
 
         GRPCServer server = new GRPCServer();
 
-        System.out.println("Thread: " + Thread.currentThread().getName());
+
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Thread in try: " + Thread.currentThread().getName());
-//                Thread.sleep(200);
-            System.out.println("Shutting down ...");
+            System.out.println("Shutting down...");
             //some cleaning up code...
 
             server.stopWorkerThread();
-            while (server.isStabilizerWorkerAlive());
-
-            System.out.println("Past while loop");
+            while (server.isStabilizerWorkerAlive()); // Wait a while for the worker thread to stop
 
             System.out.println("Notifying successor and predecessor and transferring keys");
             server.leaveChordNetwork();
@@ -55,7 +58,5 @@ public class Chord {
         }));
 
         server.startServer(port, remoteIp, remotePort, m, mode, exitCode);
-
-
     }
 }

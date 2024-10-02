@@ -8,13 +8,13 @@ import java.util.concurrent.Callable;
         description = "Starts a node and lets it either join or create a DHT.")
 public class GetOP implements Callable<Integer> {
 
-    @CommandLine.Parameters(index = "0", paramLabel = "mode", description = "0 = join existing DTH. 1 = create new DHT")
+    @CommandLine.Parameters(index = "0", paramLabel = "mode", description = "0 = join existing DTH. 1 = create new DHT.")
     private int mode = -1;
 
     @CommandLine.Parameters(index = "1", paramLabel = "port", description = "Which port should this node use.")
     private int port = -1;
 
-    @CommandLine.Parameters(index = "2", paramLabel = "m", description = "The identifier length m")
+    @CommandLine.Parameters(index = "2", paramLabel = "m", description = "The identifier length m.")
     private int m = -1;
 
     @CommandLine.Option(names = {"-p", "--port"}, description = "The port of a node in the DTH.")
@@ -22,6 +22,12 @@ public class GetOP implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-i", "--ip"}, description = "The ip of a node in the DTH.")
     private String remoteIp = "";
+
+    @CommandLine.Option(names = {"-d", "--delay"}, description = "How often shall the node perform stabilize (ms).")
+    private int delay = 1000;
+
+    @CommandLine.Option(names = {"-h", "--help"}, description = "Show this help message and exit!")
+    private boolean help;
 
     @Override
     public Integer call() throws Exception {
@@ -61,6 +67,14 @@ public class GetOP implements Callable<Integer> {
 
     public int getM() {
         return m;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public boolean isHelp() {
+        return help;
     }
 
     public String translateExitCode(int exitCode) {
