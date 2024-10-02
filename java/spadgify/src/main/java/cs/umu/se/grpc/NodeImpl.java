@@ -20,7 +20,7 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
     private ChordBackEnd chordBackEnd;
     private String ip;
 
-    public NodeImpl(int port, String remoteIp, int remotePort, int m, int mode, int exitCode) {
+    public NodeImpl(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay) {
         this.remoteIp = remoteIp;
         this.port = port;
         this.remotePort = remotePort;
@@ -32,6 +32,8 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
         this.node = new Node(ip, port, m);
         this.chordBackEnd = new ChordBackEnd(node);
+
+        this.chordBackEnd.setDelay(delay); // Set the delay of stabilize (default to 1000 ms)
 
         System.out.println("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
     }

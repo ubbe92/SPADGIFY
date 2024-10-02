@@ -14,6 +14,7 @@ public class ChordBackEnd {
     private NodeGrpc.NodeBlockingStub blockingStub;
     private ChordUtil chordUtil = new ChordUtil();
     private int next = 0;
+    private int delay = 1000;
     private StabilizerWorker worker;
 
     public ChordBackEnd(Node node) {
@@ -110,7 +111,7 @@ public class ChordBackEnd {
         node.setPredecessor(null);
         node.setSuccessor(node);
 
-        this.worker = new StabilizerWorker(this, node.getM());
+        this.worker = new StabilizerWorker(this, node.getM(), delay);
         Thread thread = new Thread(worker);
         thread.start();
 
@@ -126,7 +127,7 @@ public class ChordBackEnd {
         for (int i = 1; i < node.getM(); i++)
             table[i].setNode(successor);
 
-        this.worker = new StabilizerWorker(this, node.getM());
+        this.worker = new StabilizerWorker(this, node.getM(), delay);
         Thread thread = new Thread(worker);
         thread.start();
     }
@@ -429,5 +430,13 @@ public class ChordBackEnd {
 
     public synchronized StabilizerWorker getWorkerThread() {
         return this.worker;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }

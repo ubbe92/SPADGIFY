@@ -16,9 +16,9 @@ public class GRPCServer implements Server {
     public GRPCServer() {}
 
     @Override
-    public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode) {
+    public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay) {
 
-        NodeImpl nodeImpl = new NodeImpl(port, remoteIp, remotePort, m, mode, exitCode);
+        NodeImpl nodeImpl = new NodeImpl(port, remoteIp, remotePort, m, mode, exitCode, delay);
         this.server = ServerBuilder
                 .forPort(port)
                 .addService(nodeImpl)
@@ -32,14 +32,12 @@ public class GRPCServer implements Server {
                 case 0: // join existing DTH.
                     System.out.println("Joining existing DTH!");
                     Node nodePrime = new Node(remoteIp, remotePort, m);
-//                    chordBackEnd.join(nodePrime);
 
                     // TESTING WIKI SOLUTION
                     chordBackEnd.joinWIKI(nodePrime);
                     break;
                 case 1: // create new DHT
                     System.out.println("Creating new DHT!");
-//                    chordBackEnd.join(null);
 
                     // TESTING WIKI SOLUTION
                     chordBackEnd.createWIKI();
