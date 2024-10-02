@@ -1,6 +1,10 @@
 package cs.umu.se.grpc;
 
 
+import cs.umu.se.chord.FingerTableEntry;
+import cs.umu.se.chord.Node;
+import cs.umu.se.types.MediaInfo;
+import cs.umu.se.util.MediaUtil;
 import io.grpc.stub.StreamObserver;
 import proto.Chord;
 import proto.FileGrpc;
@@ -8,12 +12,19 @@ import proto.FileGrpc;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.annotation.Target;
 
 public class FileImpl extends FileGrpc.FileImplBase {
-
+    private Node node;
+    private int m;
+    private MediaUtil mediaUtil;
     private String filePath = "/Users/antondacklin/Downloads/testMedia/output-music/testUpload.mp3";
-    public FileImpl() {
+
+    public FileImpl(Node node) {
         System.out.println("File service up!");
+        this.node = node;
+        m = node.getM();
+        mediaUtil = new MediaUtil(m);
     }
 
     @Override
@@ -22,13 +33,14 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
         return new StreamObserver<Chord.FileChunk>() {
             ByteArrayOutputStream fileOutputStream = new ByteArrayOutputStream();
+            Chord.MediaInfo chordMediaInfo;
             int i = 0;
 
             @Override
             public void onNext(Chord.FileChunk value) {
                 if (i == 0) {
-                    Chord.MediaInfo mediaInfo = value.getMediaInfo();
-                    System.out.println("Artist: " + mediaInfo.getArtist());
+                    chordMediaInfo = value.getMediaInfo();
+                    System.out.println("Artist: " + chordMediaInfo.getArtist());
                     i++;
                 }
 
@@ -50,6 +62,27 @@ public class FileImpl extends FileGrpc.FileImplBase {
             @Override
             public void onCompleted() {
                 try {
+
+                    // Create media info and hash song
+                    MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
+                    int hash = mediaInfo.getHash();
+                    System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
+
+                    // Check which node that is responsible for the interval containing the hash value for the song
+                    Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
+
+                    if (destinationNode.equals(node)) { // Store in this node
+                        System.out.println("We will store song: " + mediaInfo.getSong() + " in this node: " + destinationNode);
+                    } else { // Forward data to destination node
+                        System.out.println("Forwarding song to node: " + destinationNode);
+                    }
+
+                    // If hash == this node -> store message in this node and save to disc
+
+                    // else search for correct node and transfer file to that node.
+
+
+
                     // Save the accumulated data to a file
                     saveToFile(fileOutputStream.toByteArray(), filePath);
 

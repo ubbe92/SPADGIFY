@@ -11,18 +11,22 @@ import proto.FileGrpc;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 
 public class TestClient {
 
-    public static <InputStream> void main(String[] args) throws InterruptedException {
+    public static <InputStream> void main(String[] args) throws InterruptedException, ExecutionException {
         System.out.println("Test client running...");
 
         String ip = "192.168.38.126";
-        int port = 8185;
+        int port = 8187;
         String pathToFile = "/Users/antondacklin/Downloads/testMedia/input-music/freeDemoSong.mp3";
 
-        CountDownLatch latch = new CountDownLatch(1);
+//        CountDownLatch latch = new CountDownLatch(1); // makes client wait until transfer complete
+        CompletableFuture<String> future = new CompletableFuture<>(); // or this can be used to wait until complete
+
 
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port)
                 .usePlaintext()
@@ -39,23 +43,29 @@ public class TestClient {
             @Override
             public void onError(Throwable t) {
                 t.printStackTrace();
-                latch.countDown();
+//                latch.countDown();
+                future.completeExceptionally(t);  // Complete future with exception in case of error
+
             }
 
             @Override
             public void onCompleted() {
                 System.out.println("File upload completed.");
-                latch.countDown();
+//                latch.countDown();
+                future.complete("File uploaded successfully");  // Complete the future when the server is done
+
             }
         });
+
         Chord.MediaInfo mediaInfo = Chord.MediaInfo.newBuilder()
-                .setArtist("Sinthu")
-                .setSong("Lalala land")
+                .setArtist("Anton Dacklin Gaied")
+                .setSong("Mot graven vi går!")
                 .setAlbum("Datas album")
                 .setDuration(110)
                 .setGenre("Chill musik!")
                 .setSize(3535934)
                 .build();
+
         try (FileInputStream inputStream = new FileInputStream(pathToFile)) {
             byte[] buffer = new byte[2048];
             int bytesRead;
@@ -74,8 +84,8 @@ public class TestClient {
             e.printStackTrace();
         }
 
-//        Thread.sleep(3000);
-        latch.await();
+//        latch.await();
+        future.get();
         System.out.println("Done");
     }
 }

@@ -136,4 +136,7 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         return chordBackEnd;
     }
 
+    public Node getNode() {
+        return node;
+    }
 }

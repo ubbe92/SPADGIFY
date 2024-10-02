@@ -1,22 +1,23 @@
 package cs.umu.se.storage;
 
 import cs.umu.se.interfaces.Storage;
+import cs.umu.se.types.Song;
 
 public class StorageBackend implements Storage {
 
 
     @Override
-    public void store() {
+    public synchronized void store(Song song) {
 
     }
 
     @Override
-    public void retrieve() {
+    public synchronized void retrieve(Song song) {
 
     }
 
     @Override
-    public void delete() {
+    public synchronized void delete(Song song) {
 
     }
 }
