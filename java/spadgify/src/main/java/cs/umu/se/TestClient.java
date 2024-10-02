@@ -21,7 +21,7 @@ public class TestClient {
         System.out.println("Test client running...");
 
         String ip = "192.168.38.126";
-        int port = 8187;
+        int port = 8185;
         String pathToFile = "/Users/antondacklin/Downloads/testMedia/input-music/freeDemoSong.mp3";
 
 //        CountDownLatch latch = new CountDownLatch(1); // makes client wait until transfer complete

@@ -1,19 +1,15 @@
 package cs.umu.se.interfaces;
 
+import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
+
+import java.io.IOException;
 
 public interface Storage {
 
     public void store(Song song);
 
-//    public void store();
-    public void retrieve(Song song);
+    public Song retrieve(String identifierString);
 
-//    public void retrieve();
-
-    public void delete(Song song);
-
-//    public void delete();
-
-
+    public void delete(String identifierString);
 }

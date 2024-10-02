@@ -6,6 +6,8 @@ import cs.umu.se.chord.Node;
 import cs.umu.se.types.MediaInfo;
 import proto.Chord;
 
+import java.io.*;
+
 public class MediaUtil {
     private int m;
 
@@ -53,6 +55,32 @@ public class MediaUtil {
         }
 
         return destinationNode;
+    }
+
+    public void saveToFile(byte[] fileData, String filePath) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            fos.write(fileData);
+        }
+    }
+
+    public byte[] readFromFile(String filePath) throws IOException {
+        File file = new File(filePath);
+
+        // Using a FileInputStream to read the file
+        try (FileInputStream fis = new FileInputStream(file);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+            byte[] buffer = new byte[1024];  // Buffer to read chunks of the file
+            int bytesRead;
+
+            // Reading file in chunks of 1024 bytes
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+
+            // Return the file content as a byte array
+            return baos.toByteArray();
+        }
     }
 
 

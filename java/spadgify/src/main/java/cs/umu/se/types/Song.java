@@ -1,5 +1,7 @@
 package cs.umu.se.types;
 
+import java.util.Arrays;
+
 public class Song {
 
     private MediaInfo mediaInfo;
@@ -26,5 +28,14 @@ public class Song {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public String getIdentifierString() {
+        return mediaInfo.getIdentifierString();
+    }
+
+    @Override
+    public String toString() {
+        return mediaInfo.getIdentifierString();
     }
 }

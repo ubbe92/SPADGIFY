@@ -7,6 +7,9 @@ import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class GRPCServer implements Server {
     private io.grpc.Server server;
@@ -17,6 +20,7 @@ public class GRPCServer implements Server {
 
     @Override
     public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay) {
+        createDirectories();
 
         NodeImpl nodeImpl = new NodeImpl(port, remoteIp, remotePort, m, mode, exitCode, delay);
         FileImpl fileImpl = new FileImpl(nodeImpl.getNode());
@@ -80,5 +84,19 @@ public class GRPCServer implements Server {
 
     public boolean isShutdown() {
         return server.isShutdown();
+    }
+
+    private void createDirectories() {
+        try {
+            Files.createDirectory(Paths.get("./media-spadgify"));
+            Files.createDirectory(Paths.get("./logs-spadgify"));
+
+        } catch (FileAlreadyExistsException e) {
+            System.out.println("createDirectories() directories already exists!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("createDirectories() could not create directories!");
+            System.exit(1);
+        }
     }
 }

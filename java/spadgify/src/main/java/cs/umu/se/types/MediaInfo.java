@@ -20,7 +20,7 @@ public class MediaInfo {
         this.genre = genre;
         this.size = size;
         this.hash = hash;
-        identifierString = song + ":" + artist + ":" + album;
+        identifierString = song + "-" + artist + "-" + album;
     }
 
     public String getArtist() {
@@ -53,5 +53,19 @@ public class MediaInfo {
 
     public String getIdentifierString() {
         return identifierString;
+    }
+
+    @Override
+    public String toString() {
+        return "MediaInfo{" +
+                "artist='" + artist + '\'' +
+                ", song='" + song + '\'' +
+                ", album='" + album + '\'' +
+                ", duration=" + duration +
+                ", genre='" + genre + '\'' +
+                ", size=" + size +
+                ", hash=" + hash +
+                ", identifierString='" + identifierString + '\'' +
+                '}';
     }
 }

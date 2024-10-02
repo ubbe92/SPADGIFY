@@ -3,7 +3,9 @@ package cs.umu.se.grpc;
 
 import cs.umu.se.chord.FingerTableEntry;
 import cs.umu.se.chord.Node;
+import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.types.MediaInfo;
+import cs.umu.se.types.Song;
 import cs.umu.se.util.MediaUtil;
 import io.grpc.stub.StreamObserver;
 import proto.Chord;
@@ -18,6 +20,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private Node node;
     private int m;
     private MediaUtil mediaUtil;
+    private StorageBackend storageBackend;
+
     private String filePath = "/Users/antondacklin/Downloads/testMedia/output-music/testUpload.mp3";
 
     public FileImpl(Node node) {
@@ -25,6 +29,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
         this.node = node;
         m = node.getM();
         mediaUtil = new MediaUtil(m);
+        storageBackend = new StorageBackend(m);
     }
 
     @Override
@@ -61,40 +66,44 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             @Override
             public void onCompleted() {
-                try {
 
-                    // Create media info and hash song
-                    MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
-                    int hash = mediaInfo.getHash();
-                    System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
+                // Create media info and hash song
+                MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
+                int hash = mediaInfo.getHash();
+                byte[] data = fileOutputStream.toByteArray();
+                String filePath = "./" + mediaInfo.getIdentifierString() + ".mp3";
 
-                    // Check which node that is responsible for the interval containing the hash value for the song
-                    Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
+                System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
 
-                    if (destinationNode.equals(node)) { // Store in this node
-                        System.out.println("We will store song: " + mediaInfo.getSong() + " in this node: " + destinationNode);
-                    } else { // Forward data to destination node
-                        System.out.println("Forwarding song to node: " + destinationNode);
-                    }
+                // Check which node that is responsible for the interval containing the hash value for the song
+                Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
 
-                    // If hash == this node -> store message in this node and save to disc
+                if (destinationNode.equals(node)) { // Store in this node
+                    System.out.println("We will store song: " + mediaInfo.getSong() + " in this node: " +
+                            destinationNode + " file path: " + filePath);
 
-                    // else search for correct node and transfer file to that node.
+                    Song song = new Song(mediaInfo, filePath, data);
+                    storageBackend.store(song);
 
+                } else { // Forward data to destination node
+                    System.out.println("Forwarding song to node: " + destinationNode);
 
-
-                    // Save the accumulated data to a file
-                    saveToFile(fileOutputStream.toByteArray(), filePath);
-
-                    // Send the response to the client
-                    resp.onNext(Chord.UploadStatus.newBuilder()
-                            .setMessage("File uploaded and saved successfully")
-                            .setSuccess(true)
-                            .build());
-                    resp.onCompleted();
-                } catch (IOException e) {
-                    resp.onError(e);
                 }
+
+                // If hash == this node -> store message in this node and save to disc
+
+                // else search for correct node and transfer file to that node.
+
+
+                // Save the accumulated data to a file
+//                    saveToFile(fileOutputStream.toByteArray(), filePath);
+
+                // Send the response to the client
+                resp.onNext(Chord.UploadStatus.newBuilder()
+                        .setMessage("File uploaded and saved successfully")
+                        .setSuccess(true)
+                        .build());
+                resp.onCompleted();
             }
 
             private void saveToFile(byte[] fileData, String filePath) throws IOException {
