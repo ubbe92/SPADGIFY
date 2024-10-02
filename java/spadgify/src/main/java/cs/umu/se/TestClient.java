@@ -52,6 +52,7 @@ public class TestClient {
             public void onCompleted() {
                 System.out.println("File upload completed.");
 //                latch.countDown();
+
                 future.complete("File uploaded successfully");  // Complete the future when the server is done
 
             }
@@ -86,6 +87,72 @@ public class TestClient {
 
 //        latch.await();
         future.get();
+
+
         System.out.println("Done");
+    }
+
+
+    private static void store(String ip, int port, String pathToFile) throws ExecutionException, InterruptedException {
+//        CountDownLatch latch = new CountDownLatch(1); // makes client wait until transfer complete
+        CompletableFuture<String> future = new CompletableFuture<>(); // or this can be used to wait until complete
+
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
+        FileGrpc.FileStub stub = FileGrpc.newStub(channel);
+
+        // define a requestObserver
+        StreamObserver<Chord.FileChunk> requestObserver = stub.upload(new StreamObserver<Chord.UploadStatus>() {
+            @Override
+            public void onNext(Chord.UploadStatus value) {
+                System.out.println("Response from server: " + value.getMessage());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                t.printStackTrace();
+//                latch.countDown();
+                future.completeExceptionally(t);  // Complete future with exception in case of error
+
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("File upload completed.");
+//                latch.countDown();
+
+                future.complete("File uploaded successfully");  // Complete the future when the server is done
+
+            }
+        });
+
+        Chord.MediaInfo mediaInfo = Chord.MediaInfo.newBuilder()
+                .setArtist("Anton Dacklin Gaied")
+                .setSong("Mot graven vi går!")
+                .setAlbum("Datas album")
+                .setDuration(110)
+                .setGenre("Chill musik!")
+                .setSize(3535934)
+                .build();
+
+        try (FileInputStream inputStream = new FileInputStream(pathToFile)) {
+            byte[] buffer = new byte[2048];
+            int bytesRead;
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+
+                Chord.FileChunk chunk = Chord.FileChunk.newBuilder()
+                        .setContent(ByteString.copyFrom(buffer, 0, bytesRead))
+                        .setMediaInfo(mediaInfo)
+                        .build();
+                requestObserver.onNext(chunk);
+            }
+
+            requestObserver.onCompleted();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        latch.await();
+        future.get();
     }
 }

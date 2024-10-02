@@ -21,8 +21,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private int m;
     private MediaUtil mediaUtil;
     private StorageBackend storageBackend;
-
-    private String filePath = "/Users/antondacklin/Downloads/testMedia/output-music/testUpload.mp3";
+    private String directory = "./media-spadgify/";
 
     public FileImpl(Node node) {
         System.out.println("File service up!");
@@ -66,12 +65,13 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             @Override
             public void onCompleted() {
-
                 // Create media info and hash song
                 MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
                 int hash = mediaInfo.getHash();
                 byte[] data = fileOutputStream.toByteArray();
-                String filePath = "./" + mediaInfo.getIdentifierString() + ".mp3";
+                String filePath = directory + mediaInfo.getIdentifierString() + ".mp3";
+                boolean success = true;
+                String message = "File uploaded and saved successfully";
 
                 System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
 
@@ -79,11 +79,14 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
 
                 if (destinationNode.equals(node)) { // Store in this node
-                    System.out.println("We will store song: " + mediaInfo.getSong() + " in this node: " +
-                            destinationNode + " file path: " + filePath);
-
                     Song song = new Song(mediaInfo, filePath, data);
-                    storageBackend.store(song);
+                    try {
+                        storageBackend.store(song);
+                        message = message + " at node: " + node;
+                    } catch (Exception e) {
+                        message = e.getMessage();
+                        success = false;
+                    }
 
                 } else { // Forward data to destination node
                     System.out.println("Forwarding song to node: " + destinationNode);
@@ -100,8 +103,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
                 // Send the response to the client
                 resp.onNext(Chord.UploadStatus.newBuilder()
-                        .setMessage("File uploaded and saved successfully")
-                        .setSuccess(true)
+                        .setMessage(message)
+                        .setSuccess(success)
                         .build());
                 resp.onCompleted();
             }

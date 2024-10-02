@@ -27,9 +27,10 @@ public class StorageBackend implements Storage {
 
             song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("store() Could not save song: '" + song + "' to disc.");
+            throw new IllegalArgumentException("Could not save song: '" + song + "' to disc: " + e.getMessage());
         }
+
+        System.out.println("Storing song: " + song + " at: " + song.getFilePath());
     }
 
     @Override
