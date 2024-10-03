@@ -7,6 +7,9 @@ import cs.umu.se.types.MediaInfo;
 import proto.Chord;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MediaUtil {
     private int m;
@@ -77,6 +80,15 @@ public class MediaUtil {
 
             // Return the file content as a byte array
             return baos.toByteArray();
+        }
+    }
+
+    public void deleteFile(String filePath) {
+        Path path = Paths.get(filePath);
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Could not delete file: '" + filePath  + "' reason: " + e.getMessage());
         }
     }
 

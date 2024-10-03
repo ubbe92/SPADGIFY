@@ -7,9 +7,15 @@ import java.io.IOException;
 
 public interface Storage {
 
-    public void store(Song song);
+    void store(Song song);
 
-    public Song retrieve(String identifierString);
+    void store(Song[] song);
 
-    public void delete(String identifierString);
+    Song retrieve(String identifierString);
+
+    Song[] retrieve(String[] identifierString);
+
+    void delete(String identifierString);
+
+    void delete(String[] identifierString);
 }

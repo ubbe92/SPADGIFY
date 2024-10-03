@@ -32,6 +32,11 @@ public class StorageBackend implements Storage {
     }
 
     @Override
+    public void store(Song[] song) {
+
+    }
+
+    @Override
     public Song retrieve(String identifierString) {
         Song song;
         try {
@@ -52,7 +57,22 @@ public class StorageBackend implements Storage {
     }
 
     @Override
-    public synchronized void delete(String identifierString) {
+    public Song[] retrieve(String[] identifierString) {
+        return new Song[0];
+    }
+
+    @Override
+    public synchronized void delete(String identifierString) throws IllegalArgumentException {
+        Song song = songHashMap.get(identifierString);
+
+        // delete file on disc
+        mediaUtil.deleteFile(song.getFilePath());
+
+        songHashMap.remove(identifierString);
+    }
+
+    @Override
+    public void delete(String[] identifierString) {
 
     }
 

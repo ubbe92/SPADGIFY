@@ -77,6 +77,37 @@ public final class FileGrpc {
     return getDownloadMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.DeleteRequest,
+      proto.Chord.DeleteStatus> getDeleteMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Delete",
+      requestType = proto.Chord.DeleteRequest.class,
+      responseType = proto.Chord.DeleteStatus.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<proto.Chord.DeleteRequest,
+      proto.Chord.DeleteStatus> getDeleteMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.DeleteRequest, proto.Chord.DeleteStatus> getDeleteMethod;
+    if ((getDeleteMethod = FileGrpc.getDeleteMethod) == null) {
+      synchronized (FileGrpc.class) {
+        if ((getDeleteMethod = FileGrpc.getDeleteMethod) == null) {
+          FileGrpc.getDeleteMethod = getDeleteMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.DeleteRequest, proto.Chord.DeleteStatus>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Delete"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.DeleteRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.DeleteStatus.getDefaultInstance()))
+              .setSchemaDescriptor(new FileMethodDescriptorSupplier("Delete"))
+              .build();
+        }
+      }
+    }
+    return getDeleteMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -138,6 +169,13 @@ public final class FileGrpc {
         io.grpc.stub.StreamObserver<proto.Chord.FileChunk> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDownloadMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void delete(proto.Chord.DeleteRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.DeleteStatus> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteMethod(), responseObserver);
+    }
   }
 
   /**
@@ -182,6 +220,14 @@ public final class FileGrpc {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getDownloadMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void delete(proto.Chord.DeleteRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.DeleteStatus> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDeleteMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -207,6 +253,13 @@ public final class FileGrpc {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getDownloadMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public proto.Chord.DeleteStatus delete(proto.Chord.DeleteRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDeleteMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -224,10 +277,19 @@ public final class FileGrpc {
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new FileFutureStub(channel, callOptions);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.DeleteStatus> delete(
+        proto.Chord.DeleteRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDeleteMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_DOWNLOAD = 0;
-  private static final int METHODID_UPLOAD = 1;
+  private static final int METHODID_DELETE = 1;
+  private static final int METHODID_UPLOAD = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -249,6 +311,10 @@ public final class FileGrpc {
         case METHODID_DOWNLOAD:
           serviceImpl.download((proto.Chord.DownloadRequest) request,
               (io.grpc.stub.StreamObserver<proto.Chord.FileChunk>) responseObserver);
+          break;
+        case METHODID_DELETE:
+          serviceImpl.delete((proto.Chord.DeleteRequest) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.DeleteStatus>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -285,6 +351,13 @@ public final class FileGrpc {
               proto.Chord.DownloadRequest,
               proto.Chord.FileChunk>(
                 service, METHODID_DOWNLOAD)))
+        .addMethod(
+          getDeleteMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              proto.Chord.DeleteRequest,
+              proto.Chord.DeleteStatus>(
+                service, METHODID_DELETE)))
         .build();
   }
 
@@ -335,6 +408,7 @@ public final class FileGrpc {
               .setSchemaDescriptor(new FileFileDescriptorSupplier())
               .addMethod(getUploadMethod())
               .addMethod(getDownloadMethod())
+              .addMethod(getDeleteMethod())
               .build();
         }
       }

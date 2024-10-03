@@ -17,6 +17,7 @@ service Node {
 service File {
   rpc Upload (stream FileChunk) returns (UploadStatus) {}
   rpc Download (DownloadRequest) returns (stream FileChunk) {}
+  rpc Delete (DeleteRequest) returns (DeleteStatus) {}
 }
 
 // ----------------------------------------------------
@@ -102,7 +103,16 @@ message UploadStatus {
 }
 
 message DownloadRequest {
-  MediaInfo mediaInfo = 1;
+  string identifierString = 1;
+}
+
+message DeleteRequest {
+  string identifierString = 1;
+}
+
+message DeleteStatus {
+  string message = 1;
+  bool success = 2;
 }
 
 // ----------------------------------------------------

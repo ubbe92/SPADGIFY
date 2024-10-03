@@ -113,30 +113,52 @@ public class FileImpl extends FileGrpc.FileImplBase {
     @Override
     public void download(Chord.DownloadRequest req, StreamObserver<Chord.FileChunk> responseObserver) {
         int offset = 0;
-
-        Chord.MediaInfo chordMediaInfo = req.getMediaInfo();
-        MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
-        String identifierString = mediaInfo.getIdentifierString();
+        String identifierString = req.getIdentifierString();
 
         Song song = storageBackend.retrieve(identifierString);
-        byte[] data = song.getData();
-        chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
 
-        while (offset < data.length) {
-            int remaining = data.length - offset;
-            int currentChunkSize = Math.min(chunkSize, remaining);
-
-            ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
-            Chord.FileChunk response = Chord.FileChunk.newBuilder()
-                    .setContent(chunk)
-                    .setMediaInfo(chordMediaInfo)
-                    .build();
+        if (song == null) {
+            Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
             responseObserver.onNext(response);
+        } else {
+            byte[] data = song.getData();
+            Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
+            while (offset < data.length) {
+                int remaining = data.length - offset;
+                int currentChunkSize = Math.min(chunkSize, remaining);
 
-            offset += currentChunkSize;
+                ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
+                Chord.FileChunk response = Chord.FileChunk.newBuilder()
+                        .setContent(chunk)
+                        .setMediaInfo(chordMediaInfo)
+                        .build();
+                responseObserver.onNext(response);
+
+                offset += currentChunkSize;
+            }
+
         }
 
         responseObserver.onCompleted();
+    }
+
+
+    @Override
+    public void delete(Chord.DeleteRequest req, StreamObserver<Chord.DeleteStatus> resp) {
+        String identifierString = req.getIdentifierString();
+        boolean success = true;
+        String message = "File: " + identifierString + " deleted successfully!";
+
+        try {
+            storageBackend.delete(identifierString);
+        } catch (Exception e) {
+            success = false;
+            message = "Delete of file: " + identifierString + " failed. Reason: " + e.getMessage();
+        }
+
+        Chord.DeleteStatus response = Chord.DeleteStatus.newBuilder().setMessage(message).setSuccess(success).build();
+        resp.onNext(response);
+        resp.onCompleted();
     }
 
 }
