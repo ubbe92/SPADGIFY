@@ -38,18 +38,20 @@ public class StorageBackend implements Storage {
 
     @Override
     public Song retrieve(String identifierString) {
-        Song song;
+        Song song = null;
         try {
             synchronized (this) {
                 song = songHashMap.get(identifierString);
+                if (song == null)
+                    return song;
+
                 String filePath = song.getFilePath();
                 byte[] data = mediaUtil.readFromFile(filePath);
                 song.setData(data); // loaded data from disc back into memory
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("retrieve() Could not retrieve song: " + identifierString + " from disc");
-            song = null;
         }
 
         System.out.println("Retrieved song: '" + song + "'");

@@ -175,6 +175,7 @@ public class ClientBackend implements Storage {
             public void onCompleted() {
                 if (chordMediaInfo == null) {
                     atomicSong.set(null);
+                    future.complete("File could not be retrieved");
                     return;
                 }
 
@@ -192,7 +193,8 @@ public class ClientBackend implements Storage {
 
                     System.out.println("File download complete!");
                     future.complete("File downloaded successfully");  // Complete the future when the server is done
-                } catch (IOException e) {
+                } catch (Exception e) {
+                    future.complete("File could not be retrieved: " + e.getMessage());  // Complete the future when the server is done
                     throw new RuntimeException(e);
                 }
             }

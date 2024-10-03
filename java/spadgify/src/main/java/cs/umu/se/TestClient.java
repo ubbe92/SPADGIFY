@@ -26,9 +26,11 @@ public class TestClient {
         System.out.println("Test client running...");
 
         String ip = "192.168.38.126";
-        int port = 8185;
-        String inputFilePath = "/Users/antondacklin/Downloads/testMedia/input-music/freeDemoSong.mp3";
-        String outputFolderPath = "/Users/antondacklin/Downloads/testMedia/output-music/";
+        int port = 8187;
+//        String inputFilePath = "./../../../../../../../../../testMedia/input-music/freeDemoSong.mp3";
+        String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
+//        String outputFolderPath = "./../../../../../../../../testMedia/output-music/";
+        String outputFolderPath = "./../../testMedia/output-music/";
         ClientBackend backend = new ClientBackend(ip, port, outputFolderPath, m);
 
         byte[] bytes = mediaUtil.readFromFile(inputFilePath);
@@ -37,16 +39,21 @@ public class TestClient {
 
         Song song = new Song(mediaInfo, "", bytes);
 
+        System.out.println("Hash of mediaInfo: " + mediaInfo.getHash());
+
         backend.store(song);
         System.out.println("Sent song: " + song);
         Thread.sleep(2000);
 
         Song songRet = backend.retrieve(song.getIdentifierString());
-        mediaUtil.writeToFile(songRet.getData(), songRet.getFilePath());
+        if (songRet != null)
+            mediaUtil.writeToFile(songRet.getData(), songRet.getFilePath());
+
         System.out.println("Got song: " + songRet);
         Thread.sleep(2000);
 
-        backend.delete(songRet.getIdentifierString());
+        if (songRet != null)
+            backend.delete(songRet.getIdentifierString());
 
         System.out.println("Done");
     }
