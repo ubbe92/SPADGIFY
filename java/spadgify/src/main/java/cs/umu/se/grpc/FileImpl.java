@@ -83,12 +83,13 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 byte[] data = byteArrayOutputStream.toByteArray();
                 String filePath = directory + mediaInfo.getIdentifierString() + ".mp3";
 
-//                System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
+                int predIdentifier = node.getPredecessor().getMyIdentifier();
+                int nodeIdentifier = node.getMyIdentifier();
 
                 // Check which node that is responsible for the interval containing the hash value for the song
                 Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
                 Song song = new Song(mediaInfo, filePath, data);
-                if (destinationNode.equals(node)) { // Store in this node
+                if (destinationNode.equals(node) || mediaUtil.isNumberInIntervalExclusiveInclusive(hash, predIdentifier, nodeIdentifier)) { // Store in this node
                     try {
                         byteArrayOutputStream.close();
                         storageBackend.store(song);
@@ -144,8 +145,11 @@ public class FileImpl extends FileGrpc.FileImplBase {
             return;
         }
 
+        int predIdentifier = node.getPredecessor().getMyIdentifier();
+        int nodeIdentifier = node.getMyIdentifier();
+
         Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
-        if (destinationNode.equals(node)) { // If song is stored in our backend
+        if (destinationNode.equals(node) || mediaUtil.isNumberInIntervalExclusiveInclusive(hash, predIdentifier, nodeIdentifier)) { // If song is stored in our backend
             song = storageBackend.retrieve(identifierString);
 
             if (song == null) {
@@ -199,7 +203,10 @@ public class FileImpl extends FileGrpc.FileImplBase {
         if (song != null)
             lruCache.remove(identifierString);
 
-        if (destinationNode.equals(node)) { // If song is stored in our backend
+        int predIdentifier = node.getPredecessor().getMyIdentifier();
+        int nodeIdentifier = node.getMyIdentifier();
+
+        if (destinationNode.equals(node) || mediaUtil.isNumberInIntervalExclusiveInclusive(hash, predIdentifier, nodeIdentifier)) { // If song is stored in our backend
             try {
                 storageBackend.delete(identifierString);
                 logger.info(message);
@@ -241,7 +248,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             offset += currentChunkSize;
         }
-        logger.info("Sent chunks of file: \"" + song + ".mp3\"");
+
+        logger.info("Node: " + node + " sent chunks of file: \"" + song + ".mp3\"");
     }
 
 }

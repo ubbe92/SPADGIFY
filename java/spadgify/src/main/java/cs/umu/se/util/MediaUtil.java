@@ -93,7 +93,7 @@ public class MediaUtil {
     }
 
 
-    private boolean isNumberInIntervalInclusiveExclusive(int hash, int leftBound, int rightBound) {
+    public boolean isNumberInIntervalInclusiveExclusive(int hash, int leftBound, int rightBound) {
         int maxNodes = (int) Math.pow(2, m);
 
         // If full circle e.g. [1, 1)
@@ -108,6 +108,24 @@ public class MediaUtil {
             // Wrapped range
             return (hash >= leftBound && hash < maxNodes) ||
                     (hash >= 0 && hash < rightBound);
+        }
+    }
+
+    public boolean isNumberInIntervalExclusiveInclusive(int hash, int leftBound, int rightBound) {
+        int maxNodes = (int) Math.pow(2, m);
+
+        // If full circle interval e.g. (1, 1]
+        if (leftBound == rightBound)
+            return true;
+
+        // exc/inc e.g. (x, y]
+        if (leftBound < rightBound) {
+            // Simple range, no wrapping
+            return hash > leftBound && hash <= rightBound;
+        } else {
+            // Wrapped range
+            return (hash > leftBound && hash < maxNodes) ||
+                    (hash >= 0 && hash <= rightBound);
         }
     }
 }
