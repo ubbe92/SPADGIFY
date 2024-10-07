@@ -86,32 +86,6 @@ public class ClientBackend implements Storage {
         }
         requestObserver.onCompleted();
 
-
-//        Chord.MediaInfo mediaInfo = Chord.MediaInfo.newBuilder()
-//                .setArtist("Anton Dacklin Gaied")
-//                .setSong("Mot graven vi går!")
-//                .setAlbum("Datas album")
-//                .setDuration(110)
-//                .setGenre("Chill musik!")
-//                .setSize(3535934)
-//                .build();
-//
-//        try (FileInputStream inputStream = new FileInputStream(filePath)) {
-//            byte[] buffer = new byte[chunkSize];
-//            int bytesRead;
-//            while ((bytesRead = inputStream.read(buffer)) != -1) {
-//                Chord.FileChunk chunk = Chord.FileChunk.newBuilder()
-//                        .setContent(ByteString.copyFrom(buffer, 0, bytesRead))
-//                        .setMediaInfo(mediaInfo)
-//                        .build();
-//                requestObserver.onNext(chunk);
-//            }
-//            requestObserver.onCompleted();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-//        latch.await();
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {

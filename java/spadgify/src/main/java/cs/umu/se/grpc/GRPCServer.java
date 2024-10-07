@@ -3,8 +3,10 @@ package cs.umu.se.grpc;
 import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Server;
+import cs.umu.se.util.ChordUtil;
 import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ServerBuilder;
+import org.checkerframework.checker.units.qual.N;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -15,6 +17,8 @@ public class GRPCServer implements Server {
     private io.grpc.Server server;
     private StabilizerWorker worker;
     private ChordBackEnd chordBackEnd;
+    private ChordUtil chordUtil = new ChordUtil();
+
 
     public GRPCServer() {}
 
@@ -22,8 +26,11 @@ public class GRPCServer implements Server {
     public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay) {
         createDirectories();
 
-        NodeImpl nodeImpl = new NodeImpl(port, remoteIp, remotePort, m, mode, exitCode, delay);
-        FileImpl fileImpl = new FileImpl(nodeImpl.getNode());
+        String ip = chordUtil.getLocalIp();
+        Node node = new Node(ip, port, m);
+
+        NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay);
+        FileImpl fileImpl = new FileImpl(node);
 
         this.server = ServerBuilder
                 .forPort(port)

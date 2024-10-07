@@ -3,11 +3,13 @@ package cs.umu.se.grpc;
 
 import com.google.protobuf.ByteString;
 import cs.umu.se.chord.Node;
+import cs.umu.se.client.ClientBackend;
 import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.MediaUtil;
 import io.grpc.stub.StreamObserver;
+import org.restlet.Client;
 import proto.Chord;
 import proto.FileGrpc;
 
@@ -15,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class FileImpl extends FileGrpc.FileImplBase {
+    private ClientBackend clientBackend;
     private Node node;
     private int m;
     private MediaUtil mediaUtil;
@@ -29,6 +32,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
         m = node.getM();
         mediaUtil = new MediaUtil(m);
         storageBackend = new StorageBackend(m);
+        this.clientBackend = new ClientBackend(node.getMyIp(), node.getMyPort(), directory, node.getM());
     }
 
     @Override

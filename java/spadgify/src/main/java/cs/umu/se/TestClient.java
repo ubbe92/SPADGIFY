@@ -26,10 +26,8 @@ public class TestClient {
         System.out.println("Test client running...");
 
         String ip = "192.168.38.126";
-        int port = 8187;
-//        String inputFilePath = "./../../../../../../../../../testMedia/input-music/freeDemoSong.mp3";
+        int port = 8185;
         String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
-//        String outputFolderPath = "./../../../../../../../../testMedia/output-music/";
         String outputFolderPath = "./../../testMedia/output-music/";
         ClientBackend backend = new ClientBackend(ip, port, outputFolderPath, m);
 
