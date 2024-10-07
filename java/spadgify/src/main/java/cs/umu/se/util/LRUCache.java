@@ -47,6 +47,11 @@ public class LRUCache<K, V> {
         }
     }
 
+    public void remove(K key) {
+        Node<K, V> node = cacheMap.get(key);
+        cacheList.remove(node);
+    }
+
     private void moveToHead(Node<K, V> node) {
         cacheList.remove(node);
         cacheList.addFirst(node);

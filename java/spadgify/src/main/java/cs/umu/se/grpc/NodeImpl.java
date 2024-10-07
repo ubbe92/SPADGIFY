@@ -29,7 +29,7 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         this.mode = mode;
         this.maxNodes = (long) Math.pow(2, m);
         this.exitCode = exitCode;
-        this.ip = chordUtil.getLocalIp();
+        this.ip = node.getMyIp();
 
         this.node = node;
         this.chordBackEnd = new ChordBackEnd(node);

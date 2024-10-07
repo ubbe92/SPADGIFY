@@ -3,10 +3,8 @@ package cs.umu.se.util;
 import cs.umu.se.chord.Node;
 import proto.Chord;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.io.IOException;
+import java.net.*;
 
 public class ChordUtil {
 
@@ -22,6 +20,20 @@ public class ChordUtil {
         }
         return ip;
     }
+
+    public int getAvailablePort(int startRange, int stopRange) {
+        for (int port = startRange; port < stopRange; port++) {
+            try (ServerSocket serverSocket = new ServerSocket(port)) {
+                if (!(serverSocket.getLocalPort() == port)) continue;
+
+                return port;
+            } catch (IOException e) {
+                System.out.println("port in use..." + e.getMessage());
+            }
+        }
+        return -1;
+    }
+
 
     public synchronized Node createNodeFromGRPCChordNodeWIKI(Chord.ChordNode node) {
         String ip = node.getIp();

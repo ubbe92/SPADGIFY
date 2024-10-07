@@ -2,6 +2,7 @@ package cs.umu.se.grpc;
 
 
 import com.google.protobuf.ByteString;
+import cs.umu.se.chord.Hash;
 import cs.umu.se.chord.Node;
 import cs.umu.se.client.ClientBackend;
 import cs.umu.se.storage.StorageBackend;
@@ -110,15 +111,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
                     }
                 }
 
-                // If hash == this node -> store message in this node and save to disc
-
-                // else search for correct node and transfer file to that node.
-
-
-                // Save the accumulated data to a file
-//                    saveToFile(fileOutputStream.toByteArray(), filePath);
-
-
                 // Send the response to the client
                 resp.onNext(Chord.UploadStatus.newBuilder().setMessage(message).setSuccess(success).build());
                 resp.onCompleted();
@@ -128,45 +120,69 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
     @Override
     public void download(Chord.DownloadRequest req, StreamObserver<Chord.FileChunk> responseObserver) {
-        int offset = 0;
+        Song song = null;
         String identifierString = req.getIdentifierString();
 
-        // Hämta hash
-        // Kolla våran cache
-        // om ej i cache kolla vilken nod som bör ha låten
-        // om oss själva kolla i storage, cacha svaret
-        // annars kontakta annan nod, cacha svaret
+        // Get hash for the song
+        int hash =  Hash.getNodeIdentifierFromString(identifierString, m);
 
-
-
-        Song song = storageBackend.retrieve(identifierString);
-
-        if (song == null) {
-            Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
-            responseObserver.onNext(response);
-        } else {
-            byte[] data = song.getData();
-            Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
-            while (offset < data.length) {
-                int remaining = data.length - offset;
-                int currentChunkSize = Math.min(chunkSize, remaining);
-
-                ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
-                Chord.FileChunk response = Chord.FileChunk.newBuilder()
-                        .setContent(chunk)
-                        .setMediaInfo(chordMediaInfo)
-                        .build();
-                responseObserver.onNext(response);
-
-                offset += currentChunkSize;
-            }
-
-            // Make deep copy to store in cache
-            Song songCopy = new Song(song);
-            lruCache.put(songCopy.getIdentifierString(), songCopy);
-
-            song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
+        // Do we have the song in our cache
+        song = (Song) lruCache.get(identifierString);
+        if (song != null) {
+            sendChunks(song, responseObserver);
+            responseObserver.onCompleted();
+            return;
         }
+
+        Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
+        if (destinationNode.equals(node)) { // If song is stored in our backend
+            song = storageBackend.retrieve(identifierString);
+
+            if (song == null) {
+                Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
+                responseObserver.onNext(response);
+                responseObserver.onCompleted();
+                return;
+            }
+        } else { // Forward request to destination node
+            String destIp = destinationNode.getMyIp();
+            int destPort = destinationNode.getMyPort();
+            int destM = destinationNode.getM();
+            clientBackend = new ClientBackend(destIp, destPort, "", destM);
+            song = clientBackend.retrieve(identifierString);
+
+            if (song == null) {
+                Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
+                responseObserver.onNext(response);
+                responseObserver.onCompleted();
+                return;
+            }
+        }
+
+//        byte[] data = song.getData();
+//        Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
+//        while (offset < data.length) {
+//            int remaining = data.length - offset;
+//            int currentChunkSize = Math.min(chunkSize, remaining);
+//
+//            ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
+//            Chord.FileChunk response = Chord.FileChunk.newBuilder()
+//                    .setContent(chunk)
+//                    .setMediaInfo(chordMediaInfo)
+//                    .build();
+//            responseObserver.onNext(response);
+//
+//            offset += currentChunkSize;
+//        }
+
+        // Send the song in chunks
+        sendChunks(song, responseObserver);
+
+        // Make deep copy to store in cache
+        Song songCopy = new Song(song);
+        lruCache.put(songCopy.getIdentifierString(), songCopy);
+
+        song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
 
         responseObserver.onCompleted();
     }
@@ -175,19 +191,60 @@ public class FileImpl extends FileGrpc.FileImplBase {
     @Override
     public void delete(Chord.DeleteRequest req, StreamObserver<Chord.DeleteStatus> resp) {
         String identifierString = req.getIdentifierString();
+
+        // Get hash for the song
+        int hash =  Hash.getNodeIdentifierFromString(identifierString, m);
         boolean success = true;
         String message = "File: " + identifierString + " deleted successfully!";
 
-        try {
-            storageBackend.delete(identifierString);
-        } catch (Exception e) {
-            success = false;
-            message = "Delete of file: " + identifierString + " failed. Reason: " + e.getMessage();
+
+        Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
+        Song song = (Song) lruCache.get(identifierString);
+
+        if (song != null)
+            lruCache.remove(identifierString);
+
+        if (destinationNode.equals(node)) { // If song is stored in our backend
+            try {
+                storageBackend.delete(identifierString);
+            } catch (Exception e) {
+                success = false;
+                message = "Delete of file: " + identifierString + " failed. Reason: " + e.getMessage();
+            }
+        } else {
+            String destIp = destinationNode.getMyIp();
+            int destPort = destinationNode.getMyPort();
+            int destM = destinationNode.getM();
+            clientBackend = new ClientBackend(destIp, destPort, "", destM);
+            clientBackend.delete(identifierString);
         }
+
+
 
         Chord.DeleteStatus response = Chord.DeleteStatus.newBuilder().setMessage(message).setSuccess(success).build();
         resp.onNext(response);
         resp.onCompleted();
+    }
+
+
+    private void sendChunks(Song song, StreamObserver<Chord.FileChunk> responseObserver) {
+        int offset = 0;
+
+        byte[] data = song.getData();
+        Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
+        while (offset < data.length) {
+            int remaining = data.length - offset;
+            int currentChunkSize = Math.min(chunkSize, remaining);
+
+            ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
+            Chord.FileChunk response = Chord.FileChunk.newBuilder()
+                    .setContent(chunk)
+                    .setMediaInfo(chordMediaInfo)
+                    .build();
+            responseObserver.onNext(response);
+
+            offset += currentChunkSize;
+        }
     }
 
 }
