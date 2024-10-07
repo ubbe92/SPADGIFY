@@ -30,7 +30,7 @@ public class Chord {
             System.exit(exitCode);
         }
 
-        System.out.println("args: " + Arrays.toString(args));
+        // System.out.println("args: " + Arrays.toString(args));
 
         int port = getOp.getPort();
         String remoteIp = getOp.getRemoteIp();
@@ -40,7 +40,7 @@ public class Chord {
         int delay = getOp.getDelay();
         int cacheSize = getOp.getCache();
 
-        System.out.println("Delay: " + delay);
+        // System.out.println("Delay: " + delay);
 
         GRPCServer server = new GRPCServer();
 

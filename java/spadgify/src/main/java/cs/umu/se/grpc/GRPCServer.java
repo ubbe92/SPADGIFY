@@ -19,6 +19,7 @@ public class GRPCServer implements Server {
     private StabilizerWorker worker;
     private ChordBackEnd chordBackEnd;
     private ChordUtil chordUtil = new ChordUtil();
+    private Logger logger  = LogManager.getLogger();
 
 
     public GRPCServer() {}
@@ -29,8 +30,6 @@ public class GRPCServer implements Server {
 
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
-
-        Logger logger  = LogManager.getLogger();
 
 
         NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay, logger);
@@ -43,25 +42,29 @@ public class GRPCServer implements Server {
                 .build();
         try {
             server.start();
-            System.out.println("gRPCServer started on port: " + port);
+            // System.out.println("gRPCServer started on port: " + port);
+            logger.info("gRPCServer started on port: " + port);
 
             chordBackEnd = nodeImpl.getChordBackEnd();
             switch (mode) {
                 case 0: // join existing DTH.
-                    System.out.println("Joining existing DTH!");
+//                    System.out.println("Joining existing DTH!");
+                    logger.info("Joining existing DHT!");
                     Node nodePrime = new Node(remoteIp, remotePort, m);
 
                     // TESTING WIKI SOLUTION
                     chordBackEnd.joinWIKI(nodePrime);
                     break;
                 case 1: // create new DHT
-                    System.out.println("Creating new DHT!");
+//                    System.out.println("Creating new DHT!");
+                    logger.info("Creating new DHT!");
 
                     // TESTING WIKI SOLUTION
                     chordBackEnd.createWIKI();
                     break;
                 default: // Unknown mode
-                    System.out.println("Unknown mode!");
+//                    System.out.println("Unknown mode!");
+                    logger.error("Unknown mode!: " + mode);
                     System.exit(exitCode);
                     break;
             }
@@ -70,7 +73,8 @@ public class GRPCServer implements Server {
 
             server.awaitTermination();
         } catch (IOException | InterruptedException e) {
-            System.out.println("gRPCServer could not start on port: " + port + " - " + e.getMessage());
+//            System.out.println("gRPCServer could not start on port: " + port + " - " + e.getMessage());
+            logger.error("gRPCServer could not start on port: " + port + " - " + e.getMessage());
             System.exit(1);
         }
 
@@ -103,10 +107,12 @@ public class GRPCServer implements Server {
             Files.createDirectory(Paths.get("./logs-spadgify"));
 
         } catch (FileAlreadyExistsException e) {
-            System.out.println("createDirectories() directories already exists!");
+//            System.out.println("createDirectories() directories already exists!");
+            logger.info("createDirectories() directories already exists!");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("createDirectories() could not create directories!");
+//            System.out.println("createDirectories() could not create directories!");
+            logger.error("createDirectories() could not create directories!");
             System.exit(1);
         }
     }

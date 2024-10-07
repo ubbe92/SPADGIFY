@@ -31,10 +31,11 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private Logger logger;
 
     public FileImpl(Node node, int cacheSize, Logger logger) {
-        System.out.println("File service up!");
-        this.node = node;
+//        System.out.println("File service up!");
         this.logger = logger;
-        this.logger.info("Fileimpl");
+        this.logger.info("File service is up for node: " + node);
+
+        this.node = node;
         m = node.getM();
         lruCache = new LRUCache(cacheSize);
         mediaUtil = new MediaUtil(m);
@@ -43,7 +44,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
     @Override
     public StreamObserver<Chord.FileChunk> upload(StreamObserver<Chord.UploadStatus> resp) {
-        System.out.println("SERVER GOT upload REQUEST!");
+//        System.out.println("SERVER GOT upload REQUEST!");
 
         return new StreamObserver<Chord.FileChunk>() {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -56,7 +57,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
             public void onNext(Chord.FileChunk value) {
                 if (i == 0) {
                     chordMediaInfo = value.getMediaInfo();
-                    System.out.println("Artist: " + chordMediaInfo.getArtist());
+//                    System.out.println("Artist: " + chordMediaInfo.getArtist());
                     i++;
                 }
 
@@ -64,7 +65,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
                     byteArrayOutputStream.write(value.getContent().toByteArray());
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("upload() onNext method caught exception!");
+//                    System.out.println("upload() onNext method caught exception!");
+                    logger.error("upload() onNext method caught exception!");
                 }
 
             }
@@ -72,7 +74,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
             @Override
             public void onError(Throwable t) {
                 t.printStackTrace();
-                System.out.println("upload() onError method!");
+//                System.out.println("upload() onError method!");
+                logger.error("upload() onError method caught exception!");
             }
 
             @Override
@@ -83,7 +86,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 byte[] data = byteArrayOutputStream.toByteArray();
                 String filePath = directory + mediaInfo.getIdentifierString() + ".mp3";
 
-                System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
+//                System.out.println("Hash for song: " + mediaInfo.getSong() + " is: " + hash);
 
                 // Check which node that is responsible for the interval containing the hash value for the song
                 Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
@@ -92,14 +95,19 @@ public class FileImpl extends FileGrpc.FileImplBase {
                     try {
                         byteArrayOutputStream.close();
                         storageBackend.store(song);
-                        message = message + " at node: " + node;
+                        message = message + " at node: " + node + " Song: \"" + song + "\" Hash: \"" + hash + "\"";
+                        System.out.println(message);
+                        logger.info(message);
                     } catch (Exception e) {
                         message = e.getMessage();
+                        logger.error(message);
                         success = false;
                     }
 
                 } else { // Forward data to destination node
-                    System.out.println("Forwarding song to node: " + destinationNode);
+                    System.out.println("Forwarding song \"" + song + "\" with hash: \"" + hash + "\" to node: " + destinationNode);
+                    logger.info("Forwarding song \"" + song + "\" with hash: \"" +  hash + "\" to node: " + destinationNode);
+
                     String destIp = destinationNode.getMyIp();
                     int destPort = destinationNode.getMyPort();
                     int destM = destinationNode.getM();
@@ -109,8 +117,11 @@ public class FileImpl extends FileGrpc.FileImplBase {
                         byteArrayOutputStream.close();
                         clientBackend.store(song);
                         message = message + " at node: " + node;
+                        System.out.println(message);
+                        logger.info(message);
                     } catch (Exception e) {
                         message = e.getMessage();
+                        logger.error(message);
                         success = false;
                     }
                 }
@@ -144,6 +155,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             if (song == null) {
                 Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
+                logger.info("Song not found in node " + node);
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
                 return;
@@ -157,6 +169,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             if (song == null) {
                 Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
+                logger.info("Song not found in destination node " + destinationNode);
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
                 return;
@@ -211,9 +224,11 @@ public class FileImpl extends FileGrpc.FileImplBase {
         if (destinationNode.equals(node)) { // If song is stored in our backend
             try {
                 storageBackend.delete(identifierString);
+                logger.info(message);
             } catch (Exception e) {
                 success = false;
                 message = "Delete of file: " + identifierString + " failed. Reason: " + e.getMessage();
+                logger.error(message);
             }
         } else {
             String destIp = destinationNode.getMyIp();
@@ -221,9 +236,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
             int destM = destinationNode.getM();
             clientBackend = new ClientBackend(destIp, destPort, "", destM);
             clientBackend.delete(identifierString);
+            logger.info(message);
         }
-
-
 
         Chord.DeleteStatus response = Chord.DeleteStatus.newBuilder().setMessage(message).setSuccess(success).build();
         resp.onNext(response);
@@ -249,6 +263,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             offset += currentChunkSize;
         }
+        logger.info("Sent chunks of file: \"" + song + ".mp3\"");
     }
 
 }
