@@ -16,6 +16,8 @@ import proto.FileGrpc;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FileImpl extends FileGrpc.FileImplBase {
     private ClientBackend clientBackend;
@@ -26,11 +28,13 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private String directory = "./media-spadgify/";
     private int chunkSize = 2048;
     private LRUCache lruCache;
+    private Logger logger;
 
-
-    public FileImpl(Node node, int cacheSize) {
+    public FileImpl(Node node, int cacheSize, Logger logger) {
         System.out.println("File service up!");
         this.node = node;
+        this.logger = logger;
+        this.logger.info("Fileimpl");
         m = node.getM();
         lruCache = new LRUCache(cacheSize);
         mediaUtil = new MediaUtil(m);

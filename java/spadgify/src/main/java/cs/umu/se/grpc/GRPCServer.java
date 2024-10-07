@@ -6,7 +6,8 @@ import cs.umu.se.interfaces.Server;
 import cs.umu.se.util.ChordUtil;
 import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ServerBuilder;
-import org.checkerframework.checker.units.qual.N;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -29,8 +30,11 @@ public class GRPCServer implements Server {
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
 
-        NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay);
-        FileImpl fileImpl = new FileImpl(node, cacheSize);
+        Logger logger  = LogManager.getLogger();
+
+
+        NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay, logger);
+        FileImpl fileImpl = new FileImpl(node, cacheSize, logger);
 
         this.server = ServerBuilder
                 .forPort(port)

@@ -4,6 +4,8 @@ import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.util.ChordUtil;
 import io.grpc.stub.StreamObserver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import proto.Chord;
 import proto.NodeGrpc;
 
@@ -19,8 +21,9 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
     private ChordUtil chordUtil = new ChordUtil();
     private ChordBackEnd chordBackEnd;
     private String ip;
+    private Logger logger;
 
-    public NodeImpl(Node node, String remoteIp, int remotePort, int mode, int exitCode, int delay) {
+    public NodeImpl(Node node, String remoteIp, int remotePort, int mode, int exitCode, int delay, Logger logger) {
         System.out.println("Node service up!");
         this.remoteIp = remoteIp;
         this.port = node.getMyPort();
@@ -35,6 +38,9 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         this.chordBackEnd = new ChordBackEnd(node);
 
         this.chordBackEnd.setDelay(delay); // Set the delay of stabilize (default to 1000 ms)
+
+        this.logger = logger;
+        this.logger.info("Nodeimpl");
 
         System.out.println("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
     }
