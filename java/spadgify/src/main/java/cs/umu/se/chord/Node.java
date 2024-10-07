@@ -22,7 +22,7 @@ public class Node {
 
         predecessor = null;
 
-        System.out.println("Created node with identifier string: " + identifierString);
+        System.out.println("Created node with identifier string: " + identifierString + " and hash (identifier): " + myIdentifier);
 //        displayCurrentTable();
     }
 

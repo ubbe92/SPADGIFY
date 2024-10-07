@@ -32,7 +32,10 @@ public class TestClient {
         ClientBackend backend = new ClientBackend(ip, port, outputFolderPath, m);
 
         byte[] bytes = mediaUtil.readFromFile(inputFilePath);
-        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",
+//        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",
+//                "Datas album", 110, "Chill music", 3535934, m);
+
+        MediaInfo mediaInfo = new MediaInfo("DJ Dick", "Mot graven vi går!",
                 "Datas album", 110, "Chill music", 3535934, m);
 
         Song song = new Song(mediaInfo, "", bytes);
@@ -42,16 +45,16 @@ public class TestClient {
         backend.store(song);
         System.out.println("Sent song: " + song);
         Thread.sleep(2000);
-
-        Song songRet = backend.retrieve(song.getIdentifierString());
-        if (songRet != null)
-            mediaUtil.writeToFile(songRet.getData(), songRet.getFilePath());
-
-        System.out.println("Got song: " + songRet);
-        Thread.sleep(2000);
-
-        if (songRet != null)
-            backend.delete(songRet.getIdentifierString());
+//
+//        Song songRet = backend.retrieve(song.getIdentifierString());
+//        if (songRet != null)
+//            mediaUtil.writeToFile(songRet.getData(), songRet.getFilePath());
+//
+//        System.out.println("Got song: " + songRet);
+//        Thread.sleep(2000);
+//
+//        if (songRet != null)
+//            backend.delete(songRet.getIdentifierString());
 
         System.out.println("Done");
     }

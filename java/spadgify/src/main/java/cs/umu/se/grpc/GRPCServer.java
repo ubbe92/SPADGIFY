@@ -23,14 +23,14 @@ public class GRPCServer implements Server {
     public GRPCServer() {}
 
     @Override
-    public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay) {
+    public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay, int cacheSize) {
         createDirectories();
 
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
 
         NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay);
-        FileImpl fileImpl = new FileImpl(node);
+        FileImpl fileImpl = new FileImpl(node, cacheSize);
 
         this.server = ServerBuilder
                 .forPort(port)

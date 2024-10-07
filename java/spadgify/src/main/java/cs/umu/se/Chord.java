@@ -11,10 +11,11 @@ public class Chord {
 
 
         // Examples on how to run this chord node
-        // Start new DHT:       java -jar spadgify-1.0-SNAPSHOT.jar -d 2000 1 8185 3 (id 1)
-        // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -d 2000 -p 8185 -i 192.168.38.126 0 8187 3 (id 3)
-        // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -d 2000 -p 8185 -i 192.168.38.126 0 8193 3 (id 0)
-        // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -d 2000 -p 8185 -i 192.168.38.126 0 8188 3 (id 0)
+        // Start new DHT:       java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 1 8185 3 (id 1)
+        // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8187 3 (id 3)
+        // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8193 3 (id 0)
+        // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8188 3 (id 6)
+        // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8206 3 (id 4)
         GetOP getOp = new GetOP();
         CommandLine commandLine = new CommandLine(getOp);
         int exitCode = commandLine.execute(args);
@@ -36,6 +37,7 @@ public class Chord {
         int m = getOp.getM();
         int mode = getOp.getMode();
         int delay = getOp.getDelay();
+        int cacheSize = getOp.getCache();
 
         System.out.println("Delay: " + delay);
 
@@ -55,6 +57,6 @@ public class Chord {
 
         }));
 
-        server.startServer(port, remoteIp, remotePort, m, mode, exitCode, delay);
+        server.startServer(port, remoteIp, remotePort, m, mode, exitCode, delay, cacheSize);
     }
 }

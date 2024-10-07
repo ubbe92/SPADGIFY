@@ -1,6 +1,7 @@
 package cs.umu.se.types;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Song {
 
@@ -12,6 +13,14 @@ public class Song {
         this.mediaInfo = mediaInfo;
         this.filePath = filePath;
         this.data = data;
+    }
+
+    /**
+     * To make a deep copy of a song object
+     * @param that the song object to make a deep copy off
+     */
+    public Song(Song that) {
+        this(that.getMediaInfo(), that.getFilePath(), that.getData());
     }
 
     public MediaInfo getMediaInfo() {
@@ -41,5 +50,13 @@ public class Song {
     @Override
     public String toString() {
         return mediaInfo.getIdentifierString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return song.getIdentifierString().equals(this.getIdentifierString());
     }
 }

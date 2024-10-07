@@ -2,6 +2,7 @@ package cs.umu.se.storage;
 
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.Song;
+import cs.umu.se.util.LRUCache;
 import cs.umu.se.util.MediaUtil;
 
 import java.io.IOException;

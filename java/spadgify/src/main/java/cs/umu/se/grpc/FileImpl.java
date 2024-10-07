@@ -7,9 +7,9 @@ import cs.umu.se.client.ClientBackend;
 import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
+import cs.umu.se.util.LRUCache;
 import cs.umu.se.util.MediaUtil;
 import io.grpc.stub.StreamObserver;
-import org.restlet.Client;
 import proto.Chord;
 import proto.FileGrpc;
 
@@ -24,15 +24,16 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private StorageBackend storageBackend;
     private String directory = "./media-spadgify/";
     private int chunkSize = 2048;
+    private LRUCache lruCache;
 
 
-    public FileImpl(Node node) {
+    public FileImpl(Node node, int cacheSize) {
         System.out.println("File service up!");
         this.node = node;
         m = node.getM();
+        lruCache = new LRUCache(cacheSize);
         mediaUtil = new MediaUtil(m);
         storageBackend = new StorageBackend(m);
-        this.clientBackend = new ClientBackend(node.getMyIp(), node.getMyPort(), directory, node.getM());
     }
 
     @Override
@@ -81,9 +82,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
                 // Check which node that is responsible for the interval containing the hash value for the song
                 Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
-
+                Song song = new Song(mediaInfo, filePath, data);
                 if (destinationNode.equals(node)) { // Store in this node
-                    Song song = new Song(mediaInfo, filePath, data);
                     try {
                         byteArrayOutputStream.close();
                         storageBackend.store(song);
@@ -95,7 +95,19 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
                 } else { // Forward data to destination node
                     System.out.println("Forwarding song to node: " + destinationNode);
+                    String destIp = destinationNode.getMyIp();
+                    int destPort = destinationNode.getMyPort();
+                    int destM = destinationNode.getM();
+                    clientBackend = new ClientBackend(destIp, destPort, "", destM);
 
+                    try {
+                        byteArrayOutputStream.close();
+                        clientBackend.store(song);
+                        message = message + " at node: " + node;
+                    } catch (Exception e) {
+                        message = e.getMessage();
+                        success = false;
+                    }
                 }
 
                 // If hash == this node -> store message in this node and save to disc
@@ -119,6 +131,14 @@ public class FileImpl extends FileGrpc.FileImplBase {
         int offset = 0;
         String identifierString = req.getIdentifierString();
 
+        // Hämta hash
+        // Kolla våran cache
+        // om ej i cache kolla vilken nod som bör ha låten
+        // om oss själva kolla i storage, cacha svaret
+        // annars kontakta annan nod, cacha svaret
+
+
+
         Song song = storageBackend.retrieve(identifierString);
 
         if (song == null) {
@@ -141,6 +161,11 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 offset += currentChunkSize;
             }
 
+            // Make deep copy to store in cache
+            Song songCopy = new Song(song);
+            lruCache.put(songCopy.getIdentifierString(), songCopy);
+
+            song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
         }
 
         responseObserver.onCompleted();

@@ -2,6 +2,8 @@ package cs.umu.se.types;
 
 import cs.umu.se.chord.Hash;
 
+import java.util.Objects;
+
 public class MediaInfo {
     private final String artist;
     private final String song;
@@ -69,5 +71,13 @@ public class MediaInfo {
                 ", hash=" + hash +
                 ", identifierString='" + identifierString + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaInfo mediaInfo = (MediaInfo) o;
+        return hash == mediaInfo.hash && m == mediaInfo.m && identifierString.equals(mediaInfo.getIdentifierString());
     }
 }

@@ -29,6 +29,9 @@ public class GetOP implements Callable<Integer> {
     @CommandLine.Option(names = {"-h", "--help"}, description = "Show this help message and exit!")
     private boolean help;
 
+    @CommandLine.Option(names = {"-c", "--cache"}, description = "Sets the desired size of the cache used to store songs.")
+    private int cache = 100;
+
     @Override
     public Integer call() throws Exception {
         int ret = 0;
@@ -75,6 +78,10 @@ public class GetOP implements Callable<Integer> {
 
     public boolean isHelp() {
         return help;
+    }
+
+    public int getCache() {
+        return cache;
     }
 
     public String translateExitCode(int exitCode) {
