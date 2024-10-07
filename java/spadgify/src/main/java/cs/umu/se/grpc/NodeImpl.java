@@ -44,13 +44,12 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
 
 //        System.out.println("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
-        logger.debug("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
+        this.logger.info("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
     }
 
     @Override
     public void findSuccessorWIKI(Chord.FindSuccessorRequestWIKI req, StreamObserver<Chord.FindSuccessorReplyWIKI> resp) {
 //        System.out.println("SERVER GOT findSuccessorWIKI REQUEST!");
-
         int id = (int) req.getId();
 
         Node nodePrime = chordBackEnd.findSuccessorWIKI(id);

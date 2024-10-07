@@ -31,7 +31,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private Logger logger;
 
     public FileImpl(Node node, int cacheSize, Logger logger) {
-//        System.out.println("File service up!");
         this.logger = logger;
         this.logger.info("File service is up for node: " + node);
 
@@ -65,7 +64,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
                     byteArrayOutputStream.write(value.getContent().toByteArray());
                 } catch (IOException e) {
                     e.printStackTrace();
-//                    System.out.println("upload() onNext method caught exception!");
                     logger.error("upload() onNext method caught exception!");
                 }
 
@@ -74,7 +72,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
             @Override
             public void onError(Throwable t) {
                 t.printStackTrace();
-//                System.out.println("upload() onError method!");
                 logger.error("upload() onError method caught exception!");
             }
 
@@ -96,7 +93,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
                         byteArrayOutputStream.close();
                         storageBackend.store(song);
                         message = message + " at node: " + node + " Song: \"" + song + "\" Hash: \"" + hash + "\"";
-                        System.out.println(message);
                         logger.info(message);
                     } catch (Exception e) {
                         message = e.getMessage();
@@ -105,7 +101,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
                     }
 
                 } else { // Forward data to destination node
-                    System.out.println("Forwarding song \"" + song + "\" with hash: \"" + hash + "\" to node: " + destinationNode);
                     logger.info("Forwarding song \"" + song + "\" with hash: \"" +  hash + "\" to node: " + destinationNode);
 
                     String destIp = destinationNode.getMyIp();
@@ -117,7 +112,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
                         byteArrayOutputStream.close();
                         clientBackend.store(song);
                         message = message + " at node: " + node;
-                        System.out.println(message);
                         logger.info(message);
                     } catch (Exception e) {
                         message = e.getMessage();
@@ -145,6 +139,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
         song = (Song) lruCache.get(identifierString);
         if (song != null) {
             sendChunks(song, responseObserver);
+            logger.info("Found \"" + song + "\" in cache");
             responseObserver.onCompleted();
             return;
         }
@@ -176,22 +171,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
             }
         }
 
-//        byte[] data = song.getData();
-//        Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
-//        while (offset < data.length) {
-//            int remaining = data.length - offset;
-//            int currentChunkSize = Math.min(chunkSize, remaining);
-//
-//            ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
-//            Chord.FileChunk response = Chord.FileChunk.newBuilder()
-//                    .setContent(chunk)
-//                    .setMediaInfo(chordMediaInfo)
-//                    .build();
-//            responseObserver.onNext(response);
-//
-//            offset += currentChunkSize;
-//        }
-
         // Send the song in chunks
         sendChunks(song, responseObserver);
 
@@ -213,7 +192,6 @@ public class FileImpl extends FileGrpc.FileImplBase {
         int hash =  Hash.getNodeIdentifierFromString(identifierString, m);
         boolean success = true;
         String message = "File: " + identifierString + " deleted successfully!";
-
 
         Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
         Song song = (Song) lruCache.get(identifierString);

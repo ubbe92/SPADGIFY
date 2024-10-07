@@ -32,7 +32,6 @@ public class ChordBackEnd {
             this.blockingStub = NodeGrpc.newBlockingStub(channel);
         } catch (Exception e) {
             e.printStackTrace();
-//            System.out.println("initChannelAndStub() failed!");
             logger.error("initChannelAndStub() failed!" + Arrays.toString(e.getStackTrace()));
         }
     }
@@ -69,8 +68,6 @@ public class ChordBackEnd {
         int fingerNodeIdentifier = fingerNode.getMyIdentifier();
         int m = node.getM();
         int maxNodes = (int) Math.pow(2, m);
-
-//        System.out.println("fingerNode: " + fingerNodeIdentifier + " in: (" + leftBound + ", " + rightBound + ")");
 
         // If full circle e.g. (1, 1)
         if (leftBound == rightBound && fingerNodeIdentifier != leftBound) {
@@ -153,7 +150,7 @@ public class ChordBackEnd {
             gRPCSetPredecessorsSuccessorInNodeWIKI(predecessor, successor);
         }
 
-        // Transfer keys to correct node here
+        // TODO: Transfer keys to correct node here
     }
 
     private void gRPCSetSuccessorsPredecessorInNodeWIKI(Node successor, Node predecessor) {
@@ -171,10 +168,6 @@ public class ChordBackEnd {
 
             Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
 
-//            System.out.println("succ: " + n.getSuccessor());
-//            System.out.println("n: " + n);
-
-
             Chord.SetSuccessorsPredecessorRequestWIKI request = Chord.SetSuccessorsPredecessorRequestWIKI
                     .newBuilder()
                     .setChordNode(chordNode)
@@ -185,7 +178,6 @@ public class ChordBackEnd {
             shutdownChannel(channel);
         } catch (Exception e) {
             e.printStackTrace();
-//            System.out.println("gRPCSetSuccessorsPredecessorInNodeWIKI() crashed");
             logger.error("gRPCSetSuccessorsPredecessorInNodeWIKI() crashed" + Arrays.toString(e.getStackTrace()));
         }
     }
@@ -205,10 +197,6 @@ public class ChordBackEnd {
 
             Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
 
-//            System.out.println("pred: " + n.getPredecessor());
-//            System.out.println("n: " + n);
-
-
             Chord.SetPredecessorsSuccessorRequestWIKI request = Chord.SetPredecessorsSuccessorRequestWIKI
                     .newBuilder()
                     .setChordNode(chordNode)
@@ -219,7 +207,6 @@ public class ChordBackEnd {
             shutdownChannel(channel);
         } catch (Exception e) {
             e.printStackTrace();
-//            System.out.println("gRPCSetPredecessorsSuccessorInNodeWIKI() crashed");
             logger.error("gRPCSetPredecessorsSuccessorInNodeWIKI() crashed" + Arrays.toString(e.getStackTrace()));
         }
     }
@@ -227,7 +214,6 @@ public class ChordBackEnd {
 
     public void stabilizeWIKI() {
 //        System.out.println("stabilizeWIKI()");
-//        Node x = node.getSuccessor().getPredecessor(); // GRPC CALL TO SUCCESSOR TO GET PREDECESSOR FFS
         Node successor = node.getSuccessor();
         Node x;
 
@@ -263,7 +249,6 @@ public class ChordBackEnd {
             return successor.getPredecessor();
         } catch (Exception e) {
             e.printStackTrace();
-//            System.out.println("gRPCGetPredecessorWIKI() crashed");
             logger.error("gRPCGetPredecessorWIKI() crashed" + Arrays.toString(e.getStackTrace()));
         }
         return node; // should not happen lmao
@@ -286,7 +271,6 @@ public class ChordBackEnd {
             shutdownChannel(channel);
         } catch (Exception e) {
             e.printStackTrace();
-//            System.out.println("gRPCNotifyWIKI() crashed");
             logger.error("gRPCNotifyWIKI() crashed" + Arrays.toString(e.getStackTrace()));
         }
 
@@ -395,7 +379,6 @@ public class ChordBackEnd {
             return reply.getIsAlive();
         } catch (Exception e) {
             e.printStackTrace();
-//            System.out.println("gRPCPingNodeWIKI() crashed");
             logger.error("gRPCPingNodeWIKI()" + Arrays.toString(e.getStackTrace()));
         }
 
@@ -418,7 +401,6 @@ public class ChordBackEnd {
             return successor;
         } catch (Exception e) {
             e.printStackTrace();
-//            System.out.println("gRPCFindSuccessorWIKI() crashed");
             logger.error("gRPCFindSuccessorWIKI() crashed" + Arrays.toString(e.getStackTrace()));
         }
 

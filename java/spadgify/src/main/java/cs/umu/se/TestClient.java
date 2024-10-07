@@ -54,8 +54,8 @@ public class TestClient {
         System.out.println("Got song: " + songRet);
         Thread.sleep(2000);
 
-        if (songRet != null)
-            backend.delete(songRet.getIdentifierString());
+//        if (songRet != null)
+//            backend.delete(songRet.getIdentifierString());
 
         System.out.println("Done");
     }
