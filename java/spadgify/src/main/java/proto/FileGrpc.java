@@ -170,6 +170,68 @@ public final class FileGrpc {
     return getListNodeSongsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.ListSongsInIntervalRequest,
+      proto.Chord.ListNodeSongsReply> getListSongsInIntervalMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListSongsInInterval",
+      requestType = proto.Chord.ListSongsInIntervalRequest.class,
+      responseType = proto.Chord.ListNodeSongsReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<proto.Chord.ListSongsInIntervalRequest,
+      proto.Chord.ListNodeSongsReply> getListSongsInIntervalMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.ListSongsInIntervalRequest, proto.Chord.ListNodeSongsReply> getListSongsInIntervalMethod;
+    if ((getListSongsInIntervalMethod = FileGrpc.getListSongsInIntervalMethod) == null) {
+      synchronized (FileGrpc.class) {
+        if ((getListSongsInIntervalMethod = FileGrpc.getListSongsInIntervalMethod) == null) {
+          FileGrpc.getListSongsInIntervalMethod = getListSongsInIntervalMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.ListSongsInIntervalRequest, proto.Chord.ListNodeSongsReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListSongsInInterval"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.ListSongsInIntervalRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.ListNodeSongsReply.getDefaultInstance()))
+              .setSchemaDescriptor(new FileMethodDescriptorSupplier("ListSongsInInterval"))
+              .build();
+        }
+      }
+    }
+    return getListSongsInIntervalMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.DownloadRequest,
+      proto.Chord.FileChunk> getDownloadFromNodeMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DownloadFromNode",
+      requestType = proto.Chord.DownloadRequest.class,
+      responseType = proto.Chord.FileChunk.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<proto.Chord.DownloadRequest,
+      proto.Chord.FileChunk> getDownloadFromNodeMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.DownloadRequest, proto.Chord.FileChunk> getDownloadFromNodeMethod;
+    if ((getDownloadFromNodeMethod = FileGrpc.getDownloadFromNodeMethod) == null) {
+      synchronized (FileGrpc.class) {
+        if ((getDownloadFromNodeMethod = FileGrpc.getDownloadFromNodeMethod) == null) {
+          FileGrpc.getDownloadFromNodeMethod = getDownloadFromNodeMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.DownloadRequest, proto.Chord.FileChunk>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DownloadFromNode"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.DownloadRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.FileChunk.getDefaultInstance()))
+              .setSchemaDescriptor(new FileMethodDescriptorSupplier("DownloadFromNode"))
+              .build();
+        }
+      }
+    }
+    return getDownloadFromNodeMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -252,6 +314,20 @@ public final class FileGrpc {
         io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListNodeSongsMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void listSongsInInterval(proto.Chord.ListSongsInIntervalRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListSongsInIntervalMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void downloadFromNode(proto.Chord.DownloadRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.FileChunk> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDownloadFromNodeMethod(), responseObserver);
+    }
   }
 
   /**
@@ -320,6 +396,22 @@ public final class FileGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getListNodeSongsMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void listSongsInInterval(proto.Chord.ListSongsInIntervalRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getListSongsInIntervalMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void downloadFromNode(proto.Chord.DownloadRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.FileChunk> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getDownloadFromNodeMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -366,6 +458,21 @@ public final class FileGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListNodeSongsMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public proto.Chord.ListNodeSongsReply listSongsInInterval(proto.Chord.ListSongsInIntervalRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getListSongsInIntervalMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<proto.Chord.FileChunk> downloadFromNode(
+        proto.Chord.DownloadRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getDownloadFromNodeMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -407,13 +514,23 @@ public final class FileGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getListNodeSongsMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.ListNodeSongsReply> listSongsInInterval(
+        proto.Chord.ListSongsInIntervalRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getListSongsInIntervalMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_DOWNLOAD = 0;
   private static final int METHODID_DELETE = 1;
   private static final int METHODID_LIST_ALL_SONGS = 2;
   private static final int METHODID_LIST_NODE_SONGS = 3;
-  private static final int METHODID_UPLOAD = 4;
+  private static final int METHODID_LIST_SONGS_IN_INTERVAL = 4;
+  private static final int METHODID_DOWNLOAD_FROM_NODE = 5;
+  private static final int METHODID_UPLOAD = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -447,6 +564,14 @@ public final class FileGrpc {
         case METHODID_LIST_NODE_SONGS:
           serviceImpl.listNodeSongs((proto.Chord.ListNodeSongsRequest) request,
               (io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply>) responseObserver);
+          break;
+        case METHODID_LIST_SONGS_IN_INTERVAL:
+          serviceImpl.listSongsInInterval((proto.Chord.ListSongsInIntervalRequest) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply>) responseObserver);
+          break;
+        case METHODID_DOWNLOAD_FROM_NODE:
+          serviceImpl.downloadFromNode((proto.Chord.DownloadRequest) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.FileChunk>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -504,6 +629,20 @@ public final class FileGrpc {
               proto.Chord.ListNodeSongsRequest,
               proto.Chord.ListNodeSongsReply>(
                 service, METHODID_LIST_NODE_SONGS)))
+        .addMethod(
+          getListSongsInIntervalMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              proto.Chord.ListSongsInIntervalRequest,
+              proto.Chord.ListNodeSongsReply>(
+                service, METHODID_LIST_SONGS_IN_INTERVAL)))
+        .addMethod(
+          getDownloadFromNodeMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              proto.Chord.DownloadRequest,
+              proto.Chord.FileChunk>(
+                service, METHODID_DOWNLOAD_FROM_NODE)))
         .build();
   }
 
@@ -557,6 +696,8 @@ public final class FileGrpc {
               .addMethod(getDeleteMethod())
               .addMethod(getListAllSongsMethod())
               .addMethod(getListNodeSongsMethod())
+              .addMethod(getListSongsInIntervalMethod())
+              .addMethod(getDownloadFromNodeMethod())
               .build();
         }
       }

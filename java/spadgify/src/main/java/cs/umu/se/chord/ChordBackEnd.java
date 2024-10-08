@@ -1,8 +1,6 @@
 package cs.umu.se.chord;
 
 import cs.umu.se.client.ClientBackend;
-import cs.umu.se.grpc.GRPCServer;
-import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.ChordUtil;
@@ -139,7 +137,46 @@ public class ChordBackEnd {
         Thread thread = new Thread(worker);
         thread.start();
 
-        // TODO: request keys from predecessor
+
+
+
+        // Give the node some time to stabilize before requesting songs from predecessor
+        try {
+            int m = node.getM();
+            int gracePeriod = delay * m;
+            Thread.sleep(gracePeriod);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // list all node songs between my predecessor and me
+        Node predecessor = node.getPredecessor();
+        String predIp = predecessor.getMyIp();
+        int predPort = predecessor.getMyPort();
+        int m = node.getM();
+
+        ClientBackend clientBackend = new ClientBackend(predIp, predPort, "", m);
+        int myIdentifier = node.getMyIdentifier();
+        MediaInfo[] mediaInfos = clientBackend.listSongsInIntervalFromNode(myIdentifier);
+
+        for (MediaInfo mediaInfo : mediaInfos)
+            System.out.println("Media info: " + mediaInfo);
+
+        Song[] songs = new Song[mediaInfos.length];
+
+        // Retrieve all songs from predecessor
+        int i = 0;
+        for (MediaInfo mediaInfo : mediaInfos) { // retrieve and delete
+            String identifierString = mediaInfo.getIdentifierString();
+            songs[i] = clientBackend.retrieveFromNode(identifierString);
+//            clientBackend.deleteFromNode(identifierString);               // Implement this to remove the song in the old node
+            System.out.println("Got song: " + songs[i]);
+            i++;
+        }
+
+        clientBackend = new ClientBackend(node.getMyIp(), node.getMyPort(), "", m);
+        for (Song s : songs)
+            clientBackend.store(s);
     }
 
     public void leaveWIKI() {
@@ -165,7 +202,7 @@ public class ChordBackEnd {
 
         // Get all our songs
         ClientBackend clientBackend = new ClientBackend(node.getMyIp(), node.getMyPort(), "", m);
-        MediaInfo[] mediaInfos = clientBackend.listNodeSongs();
+        MediaInfo[] mediaInfos = clientBackend.listSongsFromNode();
         Song[] songs = new Song[mediaInfos.length];
 
         int i = 0;

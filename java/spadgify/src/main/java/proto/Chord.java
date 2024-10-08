@@ -12124,6 +12124,441 @@ public final class Chord {
 
   }
 
+  public interface ListSongsInIntervalRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ListSongsInIntervalRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>uint64 identifier = 1;</code>
+     * @return The identifier.
+     */
+    long getIdentifier();
+  }
+  /**
+   * Protobuf type {@code ListSongsInIntervalRequest}
+   */
+  public static final class ListSongsInIntervalRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:ListSongsInIntervalRequest)
+      ListSongsInIntervalRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 26,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        ListSongsInIntervalRequest.class.getName());
+    }
+    // Use ListSongsInIntervalRequest.newBuilder() to construct.
+    private ListSongsInIntervalRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private ListSongsInIntervalRequest() {
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_ListSongsInIntervalRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_ListSongsInIntervalRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.ListSongsInIntervalRequest.class, proto.Chord.ListSongsInIntervalRequest.Builder.class);
+    }
+
+    public static final int IDENTIFIER_FIELD_NUMBER = 1;
+    private long identifier_ = 0L;
+    /**
+     * <code>uint64 identifier = 1;</code>
+     * @return The identifier.
+     */
+    @java.lang.Override
+    public long getIdentifier() {
+      return identifier_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (identifier_ != 0L) {
+        output.writeUInt64(1, identifier_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (identifier_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, identifier_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.ListSongsInIntervalRequest)) {
+        return super.equals(obj);
+      }
+      proto.Chord.ListSongsInIntervalRequest other = (proto.Chord.ListSongsInIntervalRequest) obj;
+
+      if (getIdentifier()
+          != other.getIdentifier()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + IDENTIFIER_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getIdentifier());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.ListSongsInIntervalRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.ListSongsInIntervalRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.ListSongsInIntervalRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.ListSongsInIntervalRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ListSongsInIntervalRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ListSongsInIntervalRequest)
+        proto.Chord.ListSongsInIntervalRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_ListSongsInIntervalRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_ListSongsInIntervalRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.ListSongsInIntervalRequest.class, proto.Chord.ListSongsInIntervalRequest.Builder.class);
+      }
+
+      // Construct using proto.Chord.ListSongsInIntervalRequest.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        identifier_ = 0L;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_ListSongsInIntervalRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListSongsInIntervalRequest getDefaultInstanceForType() {
+        return proto.Chord.ListSongsInIntervalRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListSongsInIntervalRequest build() {
+        proto.Chord.ListSongsInIntervalRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListSongsInIntervalRequest buildPartial() {
+        proto.Chord.ListSongsInIntervalRequest result = new proto.Chord.ListSongsInIntervalRequest(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.ListSongsInIntervalRequest result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.identifier_ = identifier_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.ListSongsInIntervalRequest) {
+          return mergeFrom((proto.Chord.ListSongsInIntervalRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.ListSongsInIntervalRequest other) {
+        if (other == proto.Chord.ListSongsInIntervalRequest.getDefaultInstance()) return this;
+        if (other.getIdentifier() != 0L) {
+          setIdentifier(other.getIdentifier());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                identifier_ = input.readUInt64();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private long identifier_ ;
+      /**
+       * <code>uint64 identifier = 1;</code>
+       * @return The identifier.
+       */
+      @java.lang.Override
+      public long getIdentifier() {
+        return identifier_;
+      }
+      /**
+       * <code>uint64 identifier = 1;</code>
+       * @param value The identifier to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIdentifier(long value) {
+
+        identifier_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 identifier = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIdentifier() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        identifier_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ListSongsInIntervalRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ListSongsInIntervalRequest)
+    private static final proto.Chord.ListSongsInIntervalRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.ListSongsInIntervalRequest();
+    }
+
+    public static proto.Chord.ListSongsInIntervalRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ListSongsInIntervalRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ListSongsInIntervalRequest>() {
+      @java.lang.Override
+      public ListSongsInIntervalRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<ListSongsInIntervalRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ListSongsInIntervalRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.ListSongsInIntervalRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface MediaInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:MediaInfo)
       com.google.protobuf.MessageOrBuilder {
@@ -13334,6 +13769,11 @@ public final class Chord {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ListNodeSongsReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ListSongsInIntervalRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ListSongsInIntervalRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_MediaInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -13375,29 +13815,33 @@ public final class Chord {
       "ntifier\030\003 \001(\004\"3\n\021ListAllSongsReply\022\036\n\nme" +
       "diaInfos\030\001 \003(\0132\n.MediaInfo\"\026\n\024ListNodeSo" +
       "ngsRequest\"4\n\022ListNodeSongsReply\022\036\n\nmedi" +
-      "aInfos\030\001 \003(\0132\n.MediaInfo\"g\n\tMediaInfo\022\016\n" +
-      "\006artist\030\001 \001(\t\022\014\n\004song\030\002 \001(\t\022\r\n\005album\030\003 \001" +
-      "(\t\022\020\n\010duration\030\004 \001(\r\022\r\n\005genre\030\005 \001(\t\022\014\n\004s" +
-      "ize\030\006 \001(\0042\351\003\n\004Node\022I\n\021FindSuccessorWIKI\022" +
-      "\031.FindSuccessorRequestWIKI\032\027.FindSuccess" +
-      "orReplyWIKI\"\000\0224\n\nNotifyWIKI\022\022.NotifyRequ" +
-      "estWIKI\032\020.NotifyReplyWIKI\"\000\022:\n\014PingNodeW" +
-      "IKI\022\024.PingNodeRequestWIKI\032\022.PingNodeRepl" +
-      "yWIKI\"\000\022L\n\022GetPredecessorWIKI\022\032.GetPrede" +
-      "cessorRequestWIKI\032\030.GetPredecessorReplyW" +
-      "IKI\"\000\022j\n\034SetPredecessorsSuccessorWIKI\022$." +
-      "SetPredecessorsSuccessorRequestWIKI\032\".Se" +
-      "tPredecessorsSuccessorReplyWIKI\"\000\022j\n\034Set" +
-      "SuccessorsPredecessorWIKI\022$.SetSuccessor" +
-      "sPredecessorRequestWIKI\032\".SetSuccessorsP" +
-      "redecessorReplyWIKI\"\0002\203\002\n\004File\022\'\n\006Upload" +
-      "\022\n.FileChunk\032\r.UploadStatus\"\000(\001\022,\n\010Downl" +
-      "oad\022\020.DownloadRequest\032\n.FileChunk\"\0000\001\022)\n" +
-      "\006Delete\022\016.DeleteRequest\032\r.DeleteStatus\"\000" +
-      "\022:\n\014ListAllSongs\022\024.ListAllSongsRequest\032\022" +
-      ".ListAllSongsReply\"\000\022=\n\rListNodeSongs\022\025." +
-      "ListNodeSongsRequest\032\023.ListNodeSongsRepl" +
-      "y\"\000B\007\n\005protob\006proto3"
+      "aInfos\030\001 \003(\0132\n.MediaInfo\"0\n\032ListSongsInI" +
+      "ntervalRequest\022\022\n\nidentifier\030\001 \001(\004\"g\n\tMe" +
+      "diaInfo\022\016\n\006artist\030\001 \001(\t\022\014\n\004song\030\002 \001(\t\022\r\n" +
+      "\005album\030\003 \001(\t\022\020\n\010duration\030\004 \001(\r\022\r\n\005genre\030" +
+      "\005 \001(\t\022\014\n\004size\030\006 \001(\0042\351\003\n\004Node\022I\n\021FindSucc" +
+      "essorWIKI\022\031.FindSuccessorRequestWIKI\032\027.F" +
+      "indSuccessorReplyWIKI\"\000\0224\n\nNotifyWIKI\022\022." +
+      "NotifyRequestWIKI\032\020.NotifyReplyWIKI\"\000\022:\n" +
+      "\014PingNodeWIKI\022\024.PingNodeRequestWIKI\032\022.Pi" +
+      "ngNodeReplyWIKI\"\000\022L\n\022GetPredecessorWIKI\022" +
+      "\032.GetPredecessorRequestWIKI\032\030.GetPredece" +
+      "ssorReplyWIKI\"\000\022j\n\034SetPredecessorsSucces" +
+      "sorWIKI\022$.SetPredecessorsSuccessorReques" +
+      "tWIKI\032\".SetPredecessorsSuccessorReplyWIK" +
+      "I\"\000\022j\n\034SetSuccessorsPredecessorWIKI\022$.Se" +
+      "tSuccessorsPredecessorRequestWIKI\032\".SetS" +
+      "uccessorsPredecessorReplyWIKI\"\0002\204\003\n\004File" +
+      "\022\'\n\006Upload\022\n.FileChunk\032\r.UploadStatus\"\000(" +
+      "\001\022,\n\010Download\022\020.DownloadRequest\032\n.FileCh" +
+      "unk\"\0000\001\022)\n\006Delete\022\016.DeleteRequest\032\r.Dele" +
+      "teStatus\"\000\022:\n\014ListAllSongs\022\024.ListAllSong" +
+      "sRequest\032\022.ListAllSongsReply\"\000\022=\n\rListNo" +
+      "deSongs\022\025.ListNodeSongsRequest\032\023.ListNod" +
+      "eSongsReply\"\000\022I\n\023ListSongsInInterval\022\033.L" +
+      "istSongsInIntervalRequest\032\023.ListNodeSong" +
+      "sReply\"\000\0224\n\020DownloadFromNode\022\020.DownloadR" +
+      "equest\032\n.FileChunk\"\0000\001B\007\n\005protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -13535,8 +13979,14 @@ public final class Chord {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_ListNodeSongsReply_descriptor,
         new java.lang.String[] { "MediaInfos", });
-    internal_static_MediaInfo_descriptor =
+    internal_static_ListSongsInIntervalRequest_descriptor =
       getDescriptor().getMessageTypes().get(22);
+    internal_static_ListSongsInIntervalRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ListSongsInIntervalRequest_descriptor,
+        new java.lang.String[] { "Identifier", });
+    internal_static_MediaInfo_descriptor =
+      getDescriptor().getMessageTypes().get(23);
     internal_static_MediaInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MediaInfo_descriptor,

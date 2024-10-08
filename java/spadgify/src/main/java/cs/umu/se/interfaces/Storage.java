@@ -3,8 +3,6 @@ package cs.umu.se.interfaces;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 
-import java.io.IOException;
-
 public interface Storage {
 
     void store(Song song);
@@ -23,5 +21,11 @@ public interface Storage {
 
     MediaInfo[] listAllSongs(String identifierString);
 
-    MediaInfo[] listNodeSongs();
+    MediaInfo[] listSongsFromNode();
+
+    MediaInfo[] listSongsInIntervalFromNode(int nodeIdentifier);
+
+    Song retrieveFromNode(String identifierString);
+
+    void deleteFromNode(String identifierString);
 }

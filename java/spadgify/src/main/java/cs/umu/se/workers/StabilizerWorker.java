@@ -25,7 +25,6 @@ public class StabilizerWorker implements Runnable {
         while (runStabilize.get()) {
             backEnd.stabilizeWIKI();
 
-//            for (int i = 0; i < m; i++)
             backEnd.fixFingersWIKI();
 
             backEnd.checkPredecessorWIKI();

@@ -20,6 +20,9 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import javax.print.attribute.standard.Media;
+import javax.print.attribute.standard.MediaPrintableArea;
+
 public class FileImpl extends FileGrpc.FileImplBase {
 //    private ClientBackend clientBackend;
     private Node node;
@@ -271,7 +274,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
     @Override
     public void listNodeSongs(Chord.ListNodeSongsRequest req, StreamObserver<Chord.ListNodeSongsReply> resp) {
-        MediaInfo[] mediaInfos = storageBackend.listNodeSongs();
+        MediaInfo[] mediaInfos = storageBackend.listSongsFromNode();
 
         Chord.ListNodeSongsReply.Builder responseBuilder = Chord.ListNodeSongsReply.newBuilder();
         Chord.ListNodeSongsReply reply;
@@ -285,6 +288,49 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
         resp.onNext(reply);
         resp.onCompleted();
+    }
+
+    @Override
+    public void listSongsInInterval(Chord.ListSongsInIntervalRequest req, StreamObserver<Chord.ListNodeSongsReply> resp) {
+        int identifier = (int) req.getIdentifier();
+        MediaInfo[] mediaInfos = storageBackend.listSongsInIntervalFromNode(identifier);
+
+        Chord.ListNodeSongsReply.Builder responseBuilder = Chord.ListNodeSongsReply.newBuilder();
+        Chord.ListNodeSongsReply reply;
+
+        if (mediaInfos != null) {
+            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
+            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
+        } else {
+            reply = responseBuilder.build();
+        }
+
+        resp.onNext(reply);
+        resp.onCompleted();
+    }
+
+
+    @Override
+    public void downloadFromNode(Chord.DownloadRequest req, StreamObserver<Chord.FileChunk> responseObserver) {
+        Song song = null;
+        String identifierString = req.getIdentifierString();
+
+        song = storageBackend.retrieve(identifierString);
+
+        if (song == null) {
+            Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
+            logger.info("Song not found in node " + node);
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+            return;
+        }
+
+        // Send the song in chunks
+        sendChunks(song, responseObserver);
+
+        song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
+
+        responseObserver.onCompleted();
     }
 
 

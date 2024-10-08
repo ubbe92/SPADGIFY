@@ -21,6 +21,9 @@ service File {
   rpc ListAllSongs (ListAllSongsRequest) returns (ListAllSongsReply) {}
 
   rpc ListNodeSongs (ListNodeSongsRequest) returns (ListNodeSongsReply) {}
+  rpc ListSongsInInterval (ListSongsInIntervalRequest) returns (ListNodeSongsReply) {}
+  rpc DownloadFromNode (DownloadRequest) returns (stream FileChunk) {}
+
 }
 
 // ----------------------------------------------------
@@ -134,6 +137,10 @@ message ListNodeSongsRequest {
 
 message ListNodeSongsReply {
   repeated MediaInfo mediaInfos = 1;
+}
+
+message ListSongsInIntervalRequest {
+  uint64 identifier = 1;
 }
 
 // ----------------------------------------------------

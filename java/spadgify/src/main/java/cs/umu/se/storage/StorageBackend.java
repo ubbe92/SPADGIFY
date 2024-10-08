@@ -1,19 +1,27 @@
 package cs.umu.se.storage;
 
+import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.MediaUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+
+import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.Array;
 
 public class StorageBackend implements Storage {
 
     private MediaUtil mediaUtil;
     private HashMap<String, Song> songHashMap = new HashMap<>(); // Key format: song + "-" + artist + "-" + album
+    private Node node;
 
-    public StorageBackend(int m) {
+    public StorageBackend(Node node, int m) {
+        this.node = node;
         mediaUtil = new MediaUtil(m);
     }
 
@@ -49,6 +57,8 @@ public class StorageBackend implements Storage {
                 String filePath = song.getFilePath();
                 byte[] data = mediaUtil.readFromFile(filePath);
                 song.setData(data); // loaded data from disc back into memory
+
+                displayFilePaths();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,7 +113,7 @@ public class StorageBackend implements Storage {
     }
 
     @Override
-    public MediaInfo[] listNodeSongs() {
+    public MediaInfo[] listSongsFromNode() {
         synchronized (this) {
             int size = songHashMap.size();
             MediaInfo[] mediaInfos = new MediaInfo[size];
@@ -115,6 +125,41 @@ public class StorageBackend implements Storage {
             }
 
             return mediaInfos;
+        }
+    }
+
+    @Override
+    public MediaInfo[] listSongsInIntervalFromNode(int nodeIdentifier) {
+        synchronized (this) {
+            ArrayList<MediaInfo> mediaInfoArrayList = new ArrayList<>();
+
+            for (Song s: songHashMap.values()) {
+                MediaInfo mediaInfo = s.getMediaInfo();
+                boolean isInInterval = mediaUtil.isNumberInIntervalExclusiveInclusive(mediaInfo.getHash(), node.getMyIdentifier(), nodeIdentifier);
+
+                if (isInInterval) {
+                    mediaInfoArrayList.add(mediaInfo);
+                }
+            }
+
+            MediaInfo[] mediaInfos = new MediaInfo[mediaInfoArrayList.size()];
+            return mediaInfoArrayList.toArray(mediaInfos);
+        }
+    }
+
+    @Override
+    public Song retrieveFromNode(String identifierString) {
+        return null;
+    }
+
+    @Override
+    public void deleteFromNode(String identifierString) {
+
+    }
+
+    private void displayFilePaths() {
+        for (Song s : songHashMap.values()) {
+            System.out.println("path: " + s.getFilePath() + " for file: " + s);
         }
     }
 }
