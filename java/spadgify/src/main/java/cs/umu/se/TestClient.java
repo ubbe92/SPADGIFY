@@ -51,7 +51,7 @@ public class TestClient {
             backend.store(song);
         }
 
-        Thread.sleep(6000);
+        Thread.sleep(2000);
 
         String firstNodeIdentifierString = ip + ":" + port;
         MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);

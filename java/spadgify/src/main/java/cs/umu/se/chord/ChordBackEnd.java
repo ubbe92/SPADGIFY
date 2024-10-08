@@ -157,9 +157,6 @@ public class ChordBackEnd {
             gRPCSetPredecessorsSuccessorInNodeWIKI(predecessor, successor);
         }
 
-        // We are alone in the ring
-        if (successor.equals(node) && predecessor.equals(node))
-            return;
 
         // Start transfer keys to successor
         String succIp = successor.getMyIp();
@@ -171,19 +168,20 @@ public class ChordBackEnd {
         MediaInfo[] mediaInfos = clientBackend.listNodeSongs();
         Song[] songs = new Song[mediaInfos.length];
 
-        for (MediaInfo mediaInfo : mediaInfos)
-            System.out.println("MediaInfo: " + mediaInfo);
-
         int i = 0;
         for (MediaInfo mediaInfo : mediaInfos) { // retrieve and delete
             String identifierString = mediaInfo.getIdentifierString();
-            songs[i] = clientBackend.retrieve(identifierString);
+
+            if (!(successor.equals(node) && predecessor.equals(node)))
+                songs[i] = clientBackend.retrieve(identifierString);
+
             clientBackend.delete(identifierString);
             i++;
         }
 
-        for (Song song : songs)
-            System.out.println("Song: " + song);
+        // We are alone in the ring
+        if (successor.equals(node) && predecessor.equals(node))
+            return;
 
         // Transfer all songs to successor
         clientBackend = new ClientBackend(succIp, succPort, "", m);
