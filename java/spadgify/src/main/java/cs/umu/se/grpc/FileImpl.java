@@ -16,11 +16,12 @@ import proto.FileGrpc;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import org.apache.logging.log4j.LogManager;
+import java.util.List;
+
 import org.apache.logging.log4j.Logger;
 
 public class FileImpl extends FileGrpc.FileImplBase {
-    private ClientBackend clientBackend;
+//    private ClientBackend clientBackend;
     private Node node;
     private int m;
     private MediaUtil mediaUtil;
@@ -107,12 +108,12 @@ public class FileImpl extends FileGrpc.FileImplBase {
                     String destIp = destinationNode.getMyIp();
                     int destPort = destinationNode.getMyPort();
                     int destM = destinationNode.getM();
-                    clientBackend = new ClientBackend(destIp, destPort, "", destM);
+                    ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
 
                     try {
                         byteArrayOutputStream.close();
                         clientBackend.store(song);
-                        message = message + " at node: " + node;
+                        message = message + " at node: " + destinationNode;
                         logger.info(message);
                     } catch (Exception e) {
                         message = e.getMessage();
@@ -163,7 +164,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
             String destIp = destinationNode.getMyIp();
             int destPort = destinationNode.getMyPort();
             int destM = destinationNode.getM();
-            clientBackend = new ClientBackend(destIp, destPort, "", destM);
+            ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
             song = clientBackend.retrieve(identifierString);
 
             if (song == null) {
@@ -219,7 +220,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
             String destIp = destinationNode.getMyIp();
             int destPort = destinationNode.getMyPort();
             int destM = destinationNode.getM();
-            clientBackend = new ClientBackend(destIp, destPort, "", destM);
+            ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
             clientBackend.delete(identifierString);
             logger.info(message);
         }
@@ -228,6 +229,46 @@ public class FileImpl extends FileGrpc.FileImplBase {
         resp.onNext(response);
         resp.onCompleted();
     }
+
+    @Override
+    public void listAllSongs(Chord.ListAllSongsRequest req, StreamObserver<Chord.ListAllSongsReply> resp) {
+        int sourceIdentifier = (int) req.getIdentifier();
+        int successorIdentifier = node.getSuccessor().getMyIdentifier();
+        Node successor = node.getSuccessor();
+        String firstNodeIdentifierString = req.getIp() + ":" + req.getPort();
+
+        MediaInfo[] mediaInfos = null;
+        MediaInfo[] theirMediaInfos = null;
+
+        // Ask successor for its content
+        if (successorIdentifier != sourceIdentifier) {
+            System.out.println("Asking successor for its content!");
+            String destIp = successor.getMyIp();
+            int destPort = successor.getMyPort();
+            int destM = successor.getM();
+            ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
+            theirMediaInfos = clientBackend.listAllSongs(firstNodeIdentifierString);
+        }
+
+        // Add our content
+        MediaInfo[] ourMediaInfos = storageBackend.listAllSongs(firstNodeIdentifierString);
+        mediaInfos = mediaUtil.mergeMediaUtilsArrays(ourMediaInfos, theirMediaInfos);
+
+        // send reply
+        Chord.ListAllSongsReply.Builder responseBuilder = Chord.ListAllSongsReply.newBuilder();
+        Chord.ListAllSongsReply reply;
+
+        if (mediaInfos != null) {
+            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
+            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
+        } else {
+            reply = responseBuilder.build();
+        }
+
+        resp.onNext(reply);
+        resp.onCompleted();
+    }
+
 
 
     private void sendChunks(Song song, StreamObserver<Chord.FileChunk> responseObserver) {

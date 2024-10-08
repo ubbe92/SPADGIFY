@@ -9633,6 +9633,1402 @@ public final class Chord {
 
   }
 
+  public interface ListAllSongsRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ListAllSongsRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string ip = 1;</code>
+     * @return The ip.
+     */
+    java.lang.String getIp();
+    /**
+     * <code>string ip = 1;</code>
+     * @return The bytes for ip.
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
+
+    /**
+     * <code>uint64 port = 2;</code>
+     * @return The port.
+     */
+    long getPort();
+
+    /**
+     * <code>uint64 identifier = 3;</code>
+     * @return The identifier.
+     */
+    long getIdentifier();
+  }
+  /**
+   * Protobuf type {@code ListAllSongsRequest}
+   */
+  public static final class ListAllSongsRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:ListAllSongsRequest)
+      ListAllSongsRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 26,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        ListAllSongsRequest.class.getName());
+    }
+    // Use ListAllSongsRequest.newBuilder() to construct.
+    private ListAllSongsRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private ListAllSongsRequest() {
+      ip_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_ListAllSongsRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_ListAllSongsRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.ListAllSongsRequest.class, proto.Chord.ListAllSongsRequest.Builder.class);
+    }
+
+    public static final int IP_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object ip_ = "";
+    /**
+     * <code>string ip = 1;</code>
+     * @return The ip.
+     */
+    @java.lang.Override
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ip_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ip = 1;</code>
+     * @return The bytes for ip.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PORT_FIELD_NUMBER = 2;
+    private long port_ = 0L;
+    /**
+     * <code>uint64 port = 2;</code>
+     * @return The port.
+     */
+    @java.lang.Override
+    public long getPort() {
+      return port_;
+    }
+
+    public static final int IDENTIFIER_FIELD_NUMBER = 3;
+    private long identifier_ = 0L;
+    /**
+     * <code>uint64 identifier = 3;</code>
+     * @return The identifier.
+     */
+    @java.lang.Override
+    public long getIdentifier() {
+      return identifier_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, ip_);
+      }
+      if (port_ != 0L) {
+        output.writeUInt64(2, port_);
+      }
+      if (identifier_ != 0L) {
+        output.writeUInt64(3, identifier_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(ip_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, ip_);
+      }
+      if (port_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, port_);
+      }
+      if (identifier_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, identifier_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.ListAllSongsRequest)) {
+        return super.equals(obj);
+      }
+      proto.Chord.ListAllSongsRequest other = (proto.Chord.ListAllSongsRequest) obj;
+
+      if (!getIp()
+          .equals(other.getIp())) return false;
+      if (getPort()
+          != other.getPort()) return false;
+      if (getIdentifier()
+          != other.getIdentifier()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + IP_FIELD_NUMBER;
+      hash = (53 * hash) + getIp().hashCode();
+      hash = (37 * hash) + PORT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getPort());
+      hash = (37 * hash) + IDENTIFIER_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getIdentifier());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.ListAllSongsRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.ListAllSongsRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.ListAllSongsRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.ListAllSongsRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ListAllSongsRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ListAllSongsRequest)
+        proto.Chord.ListAllSongsRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_ListAllSongsRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_ListAllSongsRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.ListAllSongsRequest.class, proto.Chord.ListAllSongsRequest.Builder.class);
+      }
+
+      // Construct using proto.Chord.ListAllSongsRequest.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        ip_ = "";
+        port_ = 0L;
+        identifier_ = 0L;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_ListAllSongsRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListAllSongsRequest getDefaultInstanceForType() {
+        return proto.Chord.ListAllSongsRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListAllSongsRequest build() {
+        proto.Chord.ListAllSongsRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListAllSongsRequest buildPartial() {
+        proto.Chord.ListAllSongsRequest result = new proto.Chord.ListAllSongsRequest(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(proto.Chord.ListAllSongsRequest result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ip_ = ip_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.port_ = port_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.identifier_ = identifier_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.ListAllSongsRequest) {
+          return mergeFrom((proto.Chord.ListAllSongsRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.ListAllSongsRequest other) {
+        if (other == proto.Chord.ListAllSongsRequest.getDefaultInstance()) return this;
+        if (!other.getIp().isEmpty()) {
+          ip_ = other.ip_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (other.getPort() != 0L) {
+          setPort(other.getPort());
+        }
+        if (other.getIdentifier() != 0L) {
+          setIdentifier(other.getIdentifier());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ip_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 16: {
+                port_ = input.readUInt64();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                identifier_ = input.readUInt64();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object ip_ = "";
+      /**
+       * <code>string ip = 1;</code>
+       * @return The ip.
+       */
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @return The bytes for ip.
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @param value The ip to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIp(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        ip_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIp() {
+        ip_ = getDefaultInstance().getIp();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @param value The bytes for ip to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        ip_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private long port_ ;
+      /**
+       * <code>uint64 port = 2;</code>
+       * @return The port.
+       */
+      @java.lang.Override
+      public long getPort() {
+        return port_;
+      }
+      /**
+       * <code>uint64 port = 2;</code>
+       * @param value The port to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPort(long value) {
+
+        port_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 port = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPort() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        port_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long identifier_ ;
+      /**
+       * <code>uint64 identifier = 3;</code>
+       * @return The identifier.
+       */
+      @java.lang.Override
+      public long getIdentifier() {
+        return identifier_;
+      }
+      /**
+       * <code>uint64 identifier = 3;</code>
+       * @param value The identifier to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIdentifier(long value) {
+
+        identifier_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 identifier = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIdentifier() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        identifier_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ListAllSongsRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ListAllSongsRequest)
+    private static final proto.Chord.ListAllSongsRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.ListAllSongsRequest();
+    }
+
+    public static proto.Chord.ListAllSongsRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ListAllSongsRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ListAllSongsRequest>() {
+      @java.lang.Override
+      public ListAllSongsRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<ListAllSongsRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ListAllSongsRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.ListAllSongsRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ListAllSongsReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ListAllSongsReply)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    java.util.List<proto.Chord.MediaInfo> 
+        getMediaInfosList();
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    proto.Chord.MediaInfo getMediaInfos(int index);
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    int getMediaInfosCount();
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    java.util.List<? extends proto.Chord.MediaInfoOrBuilder> 
+        getMediaInfosOrBuilderList();
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    proto.Chord.MediaInfoOrBuilder getMediaInfosOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ListAllSongsReply}
+   */
+  public static final class ListAllSongsReply extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:ListAllSongsReply)
+      ListAllSongsReplyOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 26,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        ListAllSongsReply.class.getName());
+    }
+    // Use ListAllSongsReply.newBuilder() to construct.
+    private ListAllSongsReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private ListAllSongsReply() {
+      mediaInfos_ = java.util.Collections.emptyList();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Chord.internal_static_ListAllSongsReply_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Chord.internal_static_ListAllSongsReply_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Chord.ListAllSongsReply.class, proto.Chord.ListAllSongsReply.Builder.class);
+    }
+
+    public static final int MEDIAINFOS_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private java.util.List<proto.Chord.MediaInfo> mediaInfos_;
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<proto.Chord.MediaInfo> getMediaInfosList() {
+      return mediaInfos_;
+    }
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends proto.Chord.MediaInfoOrBuilder> 
+        getMediaInfosOrBuilderList() {
+      return mediaInfos_;
+    }
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    @java.lang.Override
+    public int getMediaInfosCount() {
+      return mediaInfos_.size();
+    }
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    @java.lang.Override
+    public proto.Chord.MediaInfo getMediaInfos(int index) {
+      return mediaInfos_.get(index);
+    }
+    /**
+     * <code>repeated .MediaInfo mediaInfos = 1;</code>
+     */
+    @java.lang.Override
+    public proto.Chord.MediaInfoOrBuilder getMediaInfosOrBuilder(
+        int index) {
+      return mediaInfos_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < mediaInfos_.size(); i++) {
+        output.writeMessage(1, mediaInfos_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < mediaInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, mediaInfos_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Chord.ListAllSongsReply)) {
+        return super.equals(obj);
+      }
+      proto.Chord.ListAllSongsReply other = (proto.Chord.ListAllSongsReply) obj;
+
+      if (!getMediaInfosList()
+          .equals(other.getMediaInfosList())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getMediaInfosCount() > 0) {
+        hash = (37 * hash) + MEDIAINFOS_FIELD_NUMBER;
+        hash = (53 * hash) + getMediaInfosList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static proto.Chord.ListAllSongsReply parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static proto.Chord.ListAllSongsReply parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Chord.ListAllSongsReply parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Chord.ListAllSongsReply prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ListAllSongsReply}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ListAllSongsReply)
+        proto.Chord.ListAllSongsReplyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Chord.internal_static_ListAllSongsReply_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Chord.internal_static_ListAllSongsReply_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Chord.ListAllSongsReply.class, proto.Chord.ListAllSongsReply.Builder.class);
+      }
+
+      // Construct using proto.Chord.ListAllSongsReply.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        if (mediaInfosBuilder_ == null) {
+          mediaInfos_ = java.util.Collections.emptyList();
+        } else {
+          mediaInfos_ = null;
+          mediaInfosBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Chord.internal_static_ListAllSongsReply_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListAllSongsReply getDefaultInstanceForType() {
+        return proto.Chord.ListAllSongsReply.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListAllSongsReply build() {
+        proto.Chord.ListAllSongsReply result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Chord.ListAllSongsReply buildPartial() {
+        proto.Chord.ListAllSongsReply result = new proto.Chord.ListAllSongsReply(this);
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(proto.Chord.ListAllSongsReply result) {
+        if (mediaInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            mediaInfos_ = java.util.Collections.unmodifiableList(mediaInfos_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.mediaInfos_ = mediaInfos_;
+        } else {
+          result.mediaInfos_ = mediaInfosBuilder_.build();
+        }
+      }
+
+      private void buildPartial0(proto.Chord.ListAllSongsReply result) {
+        int from_bitField0_ = bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Chord.ListAllSongsReply) {
+          return mergeFrom((proto.Chord.ListAllSongsReply)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Chord.ListAllSongsReply other) {
+        if (other == proto.Chord.ListAllSongsReply.getDefaultInstance()) return this;
+        if (mediaInfosBuilder_ == null) {
+          if (!other.mediaInfos_.isEmpty()) {
+            if (mediaInfos_.isEmpty()) {
+              mediaInfos_ = other.mediaInfos_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureMediaInfosIsMutable();
+              mediaInfos_.addAll(other.mediaInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.mediaInfos_.isEmpty()) {
+            if (mediaInfosBuilder_.isEmpty()) {
+              mediaInfosBuilder_.dispose();
+              mediaInfosBuilder_ = null;
+              mediaInfos_ = other.mediaInfos_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              mediaInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMediaInfosFieldBuilder() : null;
+            } else {
+              mediaInfosBuilder_.addAllMessages(other.mediaInfos_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                proto.Chord.MediaInfo m =
+                    input.readMessage(
+                        proto.Chord.MediaInfo.parser(),
+                        extensionRegistry);
+                if (mediaInfosBuilder_ == null) {
+                  ensureMediaInfosIsMutable();
+                  mediaInfos_.add(m);
+                } else {
+                  mediaInfosBuilder_.addMessage(m);
+                }
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<proto.Chord.MediaInfo> mediaInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureMediaInfosIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          mediaInfos_ = new java.util.ArrayList<proto.Chord.MediaInfo>(mediaInfos_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          proto.Chord.MediaInfo, proto.Chord.MediaInfo.Builder, proto.Chord.MediaInfoOrBuilder> mediaInfosBuilder_;
+
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public java.util.List<proto.Chord.MediaInfo> getMediaInfosList() {
+        if (mediaInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(mediaInfos_);
+        } else {
+          return mediaInfosBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public int getMediaInfosCount() {
+        if (mediaInfosBuilder_ == null) {
+          return mediaInfos_.size();
+        } else {
+          return mediaInfosBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public proto.Chord.MediaInfo getMediaInfos(int index) {
+        if (mediaInfosBuilder_ == null) {
+          return mediaInfos_.get(index);
+        } else {
+          return mediaInfosBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder setMediaInfos(
+          int index, proto.Chord.MediaInfo value) {
+        if (mediaInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMediaInfosIsMutable();
+          mediaInfos_.set(index, value);
+          onChanged();
+        } else {
+          mediaInfosBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder setMediaInfos(
+          int index, proto.Chord.MediaInfo.Builder builderForValue) {
+        if (mediaInfosBuilder_ == null) {
+          ensureMediaInfosIsMutable();
+          mediaInfos_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          mediaInfosBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder addMediaInfos(proto.Chord.MediaInfo value) {
+        if (mediaInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMediaInfosIsMutable();
+          mediaInfos_.add(value);
+          onChanged();
+        } else {
+          mediaInfosBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder addMediaInfos(
+          int index, proto.Chord.MediaInfo value) {
+        if (mediaInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMediaInfosIsMutable();
+          mediaInfos_.add(index, value);
+          onChanged();
+        } else {
+          mediaInfosBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder addMediaInfos(
+          proto.Chord.MediaInfo.Builder builderForValue) {
+        if (mediaInfosBuilder_ == null) {
+          ensureMediaInfosIsMutable();
+          mediaInfos_.add(builderForValue.build());
+          onChanged();
+        } else {
+          mediaInfosBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder addMediaInfos(
+          int index, proto.Chord.MediaInfo.Builder builderForValue) {
+        if (mediaInfosBuilder_ == null) {
+          ensureMediaInfosIsMutable();
+          mediaInfos_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          mediaInfosBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder addAllMediaInfos(
+          java.lang.Iterable<? extends proto.Chord.MediaInfo> values) {
+        if (mediaInfosBuilder_ == null) {
+          ensureMediaInfosIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, mediaInfos_);
+          onChanged();
+        } else {
+          mediaInfosBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder clearMediaInfos() {
+        if (mediaInfosBuilder_ == null) {
+          mediaInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          mediaInfosBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public Builder removeMediaInfos(int index) {
+        if (mediaInfosBuilder_ == null) {
+          ensureMediaInfosIsMutable();
+          mediaInfos_.remove(index);
+          onChanged();
+        } else {
+          mediaInfosBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public proto.Chord.MediaInfo.Builder getMediaInfosBuilder(
+          int index) {
+        return getMediaInfosFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public proto.Chord.MediaInfoOrBuilder getMediaInfosOrBuilder(
+          int index) {
+        if (mediaInfosBuilder_ == null) {
+          return mediaInfos_.get(index);  } else {
+          return mediaInfosBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public java.util.List<? extends proto.Chord.MediaInfoOrBuilder> 
+           getMediaInfosOrBuilderList() {
+        if (mediaInfosBuilder_ != null) {
+          return mediaInfosBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(mediaInfos_);
+        }
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public proto.Chord.MediaInfo.Builder addMediaInfosBuilder() {
+        return getMediaInfosFieldBuilder().addBuilder(
+            proto.Chord.MediaInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public proto.Chord.MediaInfo.Builder addMediaInfosBuilder(
+          int index) {
+        return getMediaInfosFieldBuilder().addBuilder(
+            index, proto.Chord.MediaInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .MediaInfo mediaInfos = 1;</code>
+       */
+      public java.util.List<proto.Chord.MediaInfo.Builder> 
+           getMediaInfosBuilderList() {
+        return getMediaInfosFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          proto.Chord.MediaInfo, proto.Chord.MediaInfo.Builder, proto.Chord.MediaInfoOrBuilder> 
+          getMediaInfosFieldBuilder() {
+        if (mediaInfosBuilder_ == null) {
+          mediaInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              proto.Chord.MediaInfo, proto.Chord.MediaInfo.Builder, proto.Chord.MediaInfoOrBuilder>(
+                  mediaInfos_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          mediaInfos_ = null;
+        }
+        return mediaInfosBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ListAllSongsReply)
+    }
+
+    // @@protoc_insertion_point(class_scope:ListAllSongsReply)
+    private static final proto.Chord.ListAllSongsReply DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Chord.ListAllSongsReply();
+    }
+
+    public static proto.Chord.ListAllSongsReply getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ListAllSongsReply>
+        PARSER = new com.google.protobuf.AbstractParser<ListAllSongsReply>() {
+      @java.lang.Override
+      public ListAllSongsReply parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<ListAllSongsReply> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ListAllSongsReply> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Chord.ListAllSongsReply getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface MediaInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:MediaInfo)
       com.google.protobuf.MessageOrBuilder {
@@ -10823,6 +12219,16 @@ public final class Chord {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_DeleteStatus_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ListAllSongsRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ListAllSongsRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ListAllSongsReply_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ListAllSongsReply_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_MediaInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -10859,26 +12265,30 @@ public final class Chord {
       "\030\002 \001(\010\"+\n\017DownloadRequest\022\030\n\020identifierS" +
       "tring\030\001 \001(\t\")\n\rDeleteRequest\022\030\n\020identifi" +
       "erString\030\001 \001(\t\"0\n\014DeleteStatus\022\017\n\007messag" +
-      "e\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"g\n\tMediaInfo\022\016\n" +
-      "\006artist\030\001 \001(\t\022\014\n\004song\030\002 \001(\t\022\r\n\005album\030\003 \001" +
-      "(\t\022\020\n\010duration\030\004 \001(\r\022\r\n\005genre\030\005 \001(\t\022\014\n\004s" +
-      "ize\030\006 \001(\0042\351\003\n\004Node\022I\n\021FindSuccessorWIKI\022" +
-      "\031.FindSuccessorRequestWIKI\032\027.FindSuccess" +
-      "orReplyWIKI\"\000\0224\n\nNotifyWIKI\022\022.NotifyRequ" +
-      "estWIKI\032\020.NotifyReplyWIKI\"\000\022:\n\014PingNodeW" +
-      "IKI\022\024.PingNodeRequestWIKI\032\022.PingNodeRepl" +
-      "yWIKI\"\000\022L\n\022GetPredecessorWIKI\022\032.GetPrede" +
-      "cessorRequestWIKI\032\030.GetPredecessorReplyW" +
-      "IKI\"\000\022j\n\034SetPredecessorsSuccessorWIKI\022$." +
-      "SetPredecessorsSuccessorRequestWIKI\032\".Se" +
-      "tPredecessorsSuccessorReplyWIKI\"\000\022j\n\034Set" +
-      "SuccessorsPredecessorWIKI\022$.SetSuccessor" +
-      "sPredecessorRequestWIKI\032\".SetSuccessorsP" +
-      "redecessorReplyWIKI\"\0002\210\001\n\004File\022\'\n\006Upload" +
-      "\022\n.FileChunk\032\r.UploadStatus\"\000(\001\022,\n\010Downl" +
-      "oad\022\020.DownloadRequest\032\n.FileChunk\"\0000\001\022)\n" +
-      "\006Delete\022\016.DeleteRequest\032\r.DeleteStatus\"\000" +
-      "B\007\n\005protob\006proto3"
+      "e\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"C\n\023ListAllSongs" +
+      "Request\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004\022\022\n\nide" +
+      "ntifier\030\003 \001(\004\"3\n\021ListAllSongsReply\022\036\n\nme" +
+      "diaInfos\030\001 \003(\0132\n.MediaInfo\"g\n\tMediaInfo\022" +
+      "\016\n\006artist\030\001 \001(\t\022\014\n\004song\030\002 \001(\t\022\r\n\005album\030\003" +
+      " \001(\t\022\020\n\010duration\030\004 \001(\r\022\r\n\005genre\030\005 \001(\t\022\014\n" +
+      "\004size\030\006 \001(\0042\351\003\n\004Node\022I\n\021FindSuccessorWIK" +
+      "I\022\031.FindSuccessorRequestWIKI\032\027.FindSucce" +
+      "ssorReplyWIKI\"\000\0224\n\nNotifyWIKI\022\022.NotifyRe" +
+      "questWIKI\032\020.NotifyReplyWIKI\"\000\022:\n\014PingNod" +
+      "eWIKI\022\024.PingNodeRequestWIKI\032\022.PingNodeRe" +
+      "plyWIKI\"\000\022L\n\022GetPredecessorWIKI\022\032.GetPre" +
+      "decessorRequestWIKI\032\030.GetPredecessorRepl" +
+      "yWIKI\"\000\022j\n\034SetPredecessorsSuccessorWIKI\022" +
+      "$.SetPredecessorsSuccessorRequestWIKI\032\"." +
+      "SetPredecessorsSuccessorReplyWIKI\"\000\022j\n\034S" +
+      "etSuccessorsPredecessorWIKI\022$.SetSuccess" +
+      "orsPredecessorRequestWIKI\032\".SetSuccessor" +
+      "sPredecessorReplyWIKI\"\0002\304\001\n\004File\022\'\n\006Uplo" +
+      "ad\022\n.FileChunk\032\r.UploadStatus\"\000(\001\022,\n\010Dow" +
+      "nload\022\020.DownloadRequest\032\n.FileChunk\"\0000\001\022" +
+      ")\n\006Delete\022\016.DeleteRequest\032\r.DeleteStatus" +
+      "\"\000\022:\n\014ListAllSongs\022\024.ListAllSongsRequest" +
+      "\032\022.ListAllSongsReply\"\000B\007\n\005protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -10992,8 +12402,20 @@ public final class Chord {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_DeleteStatus_descriptor,
         new java.lang.String[] { "Message", "Success", });
-    internal_static_MediaInfo_descriptor =
+    internal_static_ListAllSongsRequest_descriptor =
       getDescriptor().getMessageTypes().get(18);
+    internal_static_ListAllSongsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ListAllSongsRequest_descriptor,
+        new java.lang.String[] { "Ip", "Port", "Identifier", });
+    internal_static_ListAllSongsReply_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_ListAllSongsReply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_ListAllSongsReply_descriptor,
+        new java.lang.String[] { "MediaInfos", });
+    internal_static_MediaInfo_descriptor =
+      getDescriptor().getMessageTypes().get(20);
     internal_static_MediaInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MediaInfo_descriptor,

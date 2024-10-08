@@ -1,7 +1,6 @@
 package cs.umu.se.util;
 
 import cs.umu.se.chord.FingerTableEntry;
-import cs.umu.se.chord.Hash;
 import cs.umu.se.chord.Node;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
@@ -15,6 +14,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class MediaUtil {
@@ -34,6 +35,18 @@ public class MediaUtil {
         return new MediaInfo(artist, song, album, duration, genre, size, m);
     }
 
+
+    public MediaInfo[] convertGRPCChordMediaInfosToMediaInfos(List<Chord.MediaInfo> mediaInfosList) {
+        int size = mediaInfosList.size();
+        MediaInfo[] mediaInfos = new MediaInfo[size];
+
+        for (int i = 0; i < size; i++) {
+            mediaInfos[i] = convertGRPCChordMediaInfoToMediaInfo(mediaInfosList.get(i));
+        }
+
+        return mediaInfos;
+    }
+
     public Chord.MediaInfo convertMediaInfoToGRPCChordMediaInfo(MediaInfo mediaInfo) {
         return Chord.MediaInfo.newBuilder()
                 .setArtist(mediaInfo.getArtist())
@@ -43,6 +56,18 @@ public class MediaUtil {
                 .setGenre(mediaInfo.getGenre())
                 .setSize(mediaInfo.getSize())
                 .build();
+    }
+
+    public List<Chord.MediaInfo> convertMediaInfosToGRPCChordMediaInfos(MediaInfo[] mediaInfos) {
+        Chord.MediaInfo[] chordMediaInfos = new Chord.MediaInfo[mediaInfos.length];
+
+        int i = 0;
+        for (MediaInfo m : mediaInfos) {
+            chordMediaInfos[i] = convertMediaInfoToGRPCChordMediaInfo(m);
+            i++;
+        }
+
+        return Arrays.asList(chordMediaInfos);
     }
 
     public Node getResponsibleNodeForHash(Node node, int hash) {
@@ -189,5 +214,27 @@ public class MediaUtil {
             return (hash > leftBound && hash < maxNodes) ||
                     (hash >= 0 && hash <= rightBound);
         }
+    }
+
+    public MediaInfo[] mergeMediaUtilsArrays(MediaInfo[] mediaInfos1, MediaInfo[] mediaInfos2) {
+        int size1 = 0;
+        int size2 = 0;
+
+        if (mediaInfos1 != null)
+            size1 = mediaInfos1.length;
+
+        if (mediaInfos2 != null)
+            size2 = mediaInfos2.length;
+
+        int totalSize = size1 + size2;
+        MediaInfo[] mediaInfos = new MediaInfo[totalSize];
+
+        if (mediaInfos1 != null)
+            System.arraycopy(mediaInfos1, 0, mediaInfos, 0, size1);
+
+        if (mediaInfos2 != null)
+            System.arraycopy(mediaInfos2, 0, mediaInfos, size1, size2);
+
+        return mediaInfos;
     }
 }

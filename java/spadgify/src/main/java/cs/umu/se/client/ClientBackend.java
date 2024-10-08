@@ -1,6 +1,7 @@
 package cs.umu.se.client;
 
 import com.google.protobuf.ByteString;
+import cs.umu.se.chord.Hash;
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
@@ -14,6 +15,7 @@ import proto.FileGrpc;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
@@ -25,6 +27,7 @@ public class ClientBackend implements Storage {
     private String saveFolderPath;
     private MediaUtil mediaUtil;
     private final int chunkSize = 2048;
+    private int m;
 
 
     public ClientBackend(String ip, int port, String saveFolderPath, int m) {
@@ -32,6 +35,7 @@ public class ClientBackend implements Storage {
         this.port = port;
         this.saveFolderPath = saveFolderPath;
         this.mediaUtil = new MediaUtil(m);
+        this.m = m;
     }
 
 
@@ -210,5 +214,32 @@ public class ClientBackend implements Storage {
     @Override
     public void delete(String[] identifierString) {
 
+    }
+
+    @Override
+    public MediaInfo[] listAllSongs(String firstNodeIdentifierString) {
+        MediaInfo[] mediaInfos = null;
+
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
+        FileGrpc.FileBlockingStub stub = FileGrpc.newBlockingStub(channel);
+
+        int firstNodeIdentifier = Hash.getNodeIdentifierFromString(firstNodeIdentifierString, m);
+        String[] ipPort = firstNodeIdentifierString.split(":");
+        String firstNodeIp = ipPort[0];
+        int firstNodePort = Integer.parseInt(ipPort[1]);
+
+        Chord.ListAllSongsRequest request = Chord.ListAllSongsRequest.newBuilder()
+                .setIp(firstNodeIp)
+                .setPort(firstNodePort)
+                .setIdentifier(firstNodeIdentifier)
+                .build();
+        Chord.ListAllSongsReply reply = stub.listAllSongs(request);
+
+        List<Chord.MediaInfo> mediaInfosList = reply.getMediaInfosList();
+        mediaInfos = mediaUtil.convertGRPCChordMediaInfosToMediaInfos(mediaInfosList);
+
+        channel.shutdown();
+
+        return mediaInfos;
     }
 }

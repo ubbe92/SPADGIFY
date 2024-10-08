@@ -18,4 +18,6 @@ public interface Storage {
     void delete(String identifierString);
 
     void delete(String[] identifierString);
+
+    MediaInfo[] listAllSongs(String identifierString);
 }

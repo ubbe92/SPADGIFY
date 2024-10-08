@@ -18,6 +18,7 @@ service File {
   rpc Upload (stream FileChunk) returns (UploadStatus) {}
   rpc Download (DownloadRequest) returns (stream FileChunk) {}
   rpc Delete (DeleteRequest) returns (DeleteStatus) {}
+  rpc ListAllSongs (ListAllSongsRequest) returns (ListAllSongsReply) {}
 }
 
 // ----------------------------------------------------
@@ -113,6 +114,16 @@ message DeleteRequest {
 message DeleteStatus {
   string message = 1;
   bool success = 2;
+}
+
+message ListAllSongsRequest {
+  string ip = 1;
+  uint64 port = 2;
+  uint64 identifier = 3;
+}
+
+message ListAllSongsReply {
+  repeated MediaInfo mediaInfos = 1;
 }
 
 // ----------------------------------------------------

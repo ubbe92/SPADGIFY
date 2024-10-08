@@ -15,6 +15,7 @@ import proto.FileGrpc;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
@@ -49,6 +50,14 @@ public class TestClient {
         for (Song song : songs) {
             backend.store(song);
         }
+
+        Thread.sleep(2000);
+
+        String firstNodeIdentifierString = ip + ":" + port;
+        MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);
+        for (MediaInfo m : mediaInfos)
+            System.out.println("Media info: " + m);
+
 
 //        byte[] bytes = mediaUtil.readFromFile(inputFilePath);
 ////        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",
