@@ -53,7 +53,7 @@ public class ClientBackend implements Storage {
 
             @Override
             public void onNext(Chord.UploadStatus value) {
-                System.out.println("Response from server: " + value.getMessage());
+//                System.out.println("Response from server: " + value.getMessage());
             }
 
             @Override

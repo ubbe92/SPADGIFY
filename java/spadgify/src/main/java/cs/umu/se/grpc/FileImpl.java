@@ -113,7 +113,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
                     try {
                         byteArrayOutputStream.close();
                         clientBackend.store(song);
-                        message = message + " at node: " + destinationNode;
+                        message = "Forwarding Song \"" + song + " with Hash: \"" + hash + "\" to node: " + destinationNode;
                         logger.info(message);
                     } catch (Exception e) {
                         message = e.getMessage();
