@@ -104,7 +104,10 @@ public class MediaUtil {
     }
 
     public String[] parseFileName(String fileName) {
-        return fileName.split("-");
+        String[] fileInfo = fileName.split("-");
+        String[] albumInfo = fileInfo[2].split("\\."); // remove the .mp3 ending of the file
+        fileInfo[2] = albumInfo[0];
+        return fileInfo;
     }
 
     public File[] getAllFilesInDirectory(String path) {

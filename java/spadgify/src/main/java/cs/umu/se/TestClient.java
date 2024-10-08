@@ -55,6 +55,7 @@ public class TestClient {
 
         String firstNodeIdentifierString = ip + ":" + port;
         MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);
+
         for (MediaInfo m : mediaInfos)
             System.out.println("Media info: " + m);
 
