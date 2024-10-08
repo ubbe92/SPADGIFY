@@ -3,7 +3,6 @@ package cs.umu.se.storage;
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
-import cs.umu.se.util.LRUCache;
 import cs.umu.se.util.MediaUtil;
 
 import java.io.IOException;
@@ -66,6 +65,11 @@ public class StorageBackend implements Storage {
     }
 
     @Override
+    public Song[] retrieve(int nodeIdentifier) {
+        return new Song[0];
+    }
+
+    @Override
     public  void delete(String identifierString) throws IllegalArgumentException {
         synchronized (this) {
             Song song = songHashMap.get(identifierString);
@@ -98,4 +102,19 @@ public class StorageBackend implements Storage {
         }
     }
 
+    @Override
+    public MediaInfo[] listNodeSongs() {
+        synchronized (this) {
+            int size = songHashMap.size();
+            MediaInfo[] mediaInfos = new MediaInfo[size];
+
+            int i = 0;
+            for (Song s: songHashMap.values()) {
+                mediaInfos[i] = s.getMediaInfo();
+                i++;
+            }
+
+            return mediaInfos;
+        }
+    }
 }

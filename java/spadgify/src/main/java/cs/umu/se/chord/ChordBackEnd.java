@@ -1,5 +1,10 @@
 package cs.umu.se.chord;
 
+import cs.umu.se.client.ClientBackend;
+import cs.umu.se.grpc.GRPCServer;
+import cs.umu.se.storage.StorageBackend;
+import cs.umu.se.types.MediaInfo;
+import cs.umu.se.types.Song;
 import cs.umu.se.util.ChordUtil;
 import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ManagedChannel;
@@ -19,8 +24,8 @@ public class ChordBackEnd {
     private int next = 0;
     private int delay = 1000;
     private StabilizerWorker worker;
-
     private Logger logger;
+
     public ChordBackEnd(Node node, Logger logger) {
         this.node = node;
         this.logger = logger;
@@ -133,6 +138,8 @@ public class ChordBackEnd {
         this.worker = new StabilizerWorker(this, node.getM(), delay);
         Thread thread = new Thread(worker);
         thread.start();
+
+        // TODO: request keys from predecessor
     }
 
     public void leaveWIKI() {
@@ -150,7 +157,38 @@ public class ChordBackEnd {
             gRPCSetPredecessorsSuccessorInNodeWIKI(predecessor, successor);
         }
 
-        // TODO: Transfer keys to correct node here
+        // We are alone in the ring
+        if (successor.equals(node) && predecessor.equals(node))
+            return;
+
+        // Start transfer keys to successor
+        String succIp = successor.getMyIp();
+        int succPort = successor.getMyPort();
+        int m = node.getM();
+
+        // Get all our songs
+        ClientBackend clientBackend = new ClientBackend(node.getMyIp(), node.getMyPort(), "", m);
+        MediaInfo[] mediaInfos = clientBackend.listNodeSongs();
+        Song[] songs = new Song[mediaInfos.length];
+
+        for (MediaInfo mediaInfo : mediaInfos)
+            System.out.println("MediaInfo: " + mediaInfo);
+
+        int i = 0;
+        for (MediaInfo mediaInfo : mediaInfos) { // retrieve and delete
+            String identifierString = mediaInfo.getIdentifierString();
+            songs[i] = clientBackend.retrieve(identifierString);
+            clientBackend.delete(identifierString);
+            i++;
+        }
+
+        for (Song song : songs)
+            System.out.println("Song: " + song);
+
+        // Transfer all songs to successor
+        clientBackend = new ClientBackend(succIp, succPort, "", m);
+        for (Song s : songs)
+            clientBackend.store(s);
     }
 
     private void gRPCSetSuccessorsPredecessorInNodeWIKI(Node successor, Node predecessor) {

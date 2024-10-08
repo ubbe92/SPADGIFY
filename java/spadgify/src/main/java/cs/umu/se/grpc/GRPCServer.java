@@ -3,11 +3,14 @@ package cs.umu.se.grpc;
 import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Server;
+import cs.umu.se.interfaces.Storage;
+import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.util.ChordUtil;
 import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ServerBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -18,6 +21,7 @@ public class GRPCServer implements Server {
     private io.grpc.Server server;
     private StabilizerWorker worker;
     private ChordBackEnd chordBackEnd;
+    private StorageBackend storageBackend;
     private ChordUtil chordUtil = new ChordUtil();
     private Logger logger  = LogManager.getLogger();
 
@@ -31,9 +35,11 @@ public class GRPCServer implements Server {
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
 
+        storageBackend = new StorageBackend(m);
+        chordBackEnd = new ChordBackEnd(node, this.logger);
 
-        NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay, logger);
-        FileImpl fileImpl = new FileImpl(node, cacheSize, logger);
+        NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay, logger, chordBackEnd);
+        FileImpl fileImpl = new FileImpl(node, cacheSize, logger, storageBackend);
 
         this.server = ServerBuilder
                 .forPort(port)
@@ -44,7 +50,7 @@ public class GRPCServer implements Server {
             server.start();
             logger.info("gRPCServer started on port: " + port);
 
-            chordBackEnd = nodeImpl.getChordBackEnd();
+//            chordBackEnd = nodeImpl.getChordBackEnd();
             switch (mode) {
                 case 0: // join existing DTH.
                     logger.info("Joining existing DHT!");
@@ -109,5 +115,9 @@ public class GRPCServer implements Server {
             logger.error("createDirectories() could not create directories!");
             System.exit(1);
         }
+    }
+
+    public StorageBackend getStorageBackend() {
+        return this.storageBackend;
     }
 }

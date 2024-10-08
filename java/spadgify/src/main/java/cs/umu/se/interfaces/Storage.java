@@ -15,9 +15,13 @@ public interface Storage {
 
     Song[] retrieve(String[] identifierString);
 
+    Song[] retrieve(int nodeIdentifier);
+
     void delete(String identifierString);
 
     void delete(String[] identifierString);
 
     MediaInfo[] listAllSongs(String identifierString);
+
+    MediaInfo[] listNodeSongs();
 }

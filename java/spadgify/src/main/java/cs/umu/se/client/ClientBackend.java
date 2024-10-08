@@ -198,6 +198,11 @@ public class ClientBackend implements Storage {
     }
 
     @Override
+    public Song[] retrieve(int nodeIdentifier) {
+        return new Song[0];
+    }
+
+    @Override
     public void delete(String identifierString) {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
         FileGrpc.FileBlockingStub stub = FileGrpc.newBlockingStub(channel);
@@ -216,6 +221,15 @@ public class ClientBackend implements Storage {
 
     }
 
+    /**
+     * Lists all songs stored in the cluster.
+     *
+     * @param firstNodeIdentifierString an identifier string on the format: 'ip:port'. This is used to determine which
+     *                                  node received this request first. When a client calls a node this should be set
+     *                                  to 'firstNodeIp:firstNodePort'
+     *
+     * @return an array of media info objects or null if there are none.
+     */
     @Override
     public MediaInfo[] listAllSongs(String firstNodeIdentifierString) {
         MediaInfo[] mediaInfos = null;
@@ -237,6 +251,24 @@ public class ClientBackend implements Storage {
 
         List<Chord.MediaInfo> mediaInfosList = reply.getMediaInfosList();
         mediaInfos = mediaUtil.convertGRPCChordMediaInfosToMediaInfos(mediaInfosList);
+
+        channel.shutdown();
+
+        return mediaInfos;
+    }
+
+    @Override
+    public MediaInfo[] listNodeSongs() {
+        MediaInfo[] mediaInfos = null;
+
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
+        FileGrpc.FileBlockingStub stub = FileGrpc.newBlockingStub(channel);
+
+        Chord.ListNodeSongsRequest request = Chord.ListNodeSongsRequest.newBuilder().build();
+        Chord.ListNodeSongsReply reply = stub.listNodeSongs(request);
+
+        List<Chord.MediaInfo> mediaInfoList = reply.getMediaInfosList();
+        mediaInfos = mediaUtil.convertGRPCChordMediaInfosToMediaInfos(mediaInfoList);
 
         channel.shutdown();
 

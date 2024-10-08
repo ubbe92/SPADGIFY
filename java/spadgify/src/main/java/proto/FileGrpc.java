@@ -139,6 +139,37 @@ public final class FileGrpc {
     return getListAllSongsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.ListNodeSongsRequest,
+      proto.Chord.ListNodeSongsReply> getListNodeSongsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListNodeSongs",
+      requestType = proto.Chord.ListNodeSongsRequest.class,
+      responseType = proto.Chord.ListNodeSongsReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<proto.Chord.ListNodeSongsRequest,
+      proto.Chord.ListNodeSongsReply> getListNodeSongsMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.ListNodeSongsRequest, proto.Chord.ListNodeSongsReply> getListNodeSongsMethod;
+    if ((getListNodeSongsMethod = FileGrpc.getListNodeSongsMethod) == null) {
+      synchronized (FileGrpc.class) {
+        if ((getListNodeSongsMethod = FileGrpc.getListNodeSongsMethod) == null) {
+          FileGrpc.getListNodeSongsMethod = getListNodeSongsMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.ListNodeSongsRequest, proto.Chord.ListNodeSongsReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListNodeSongs"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.ListNodeSongsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.ListNodeSongsReply.getDefaultInstance()))
+              .setSchemaDescriptor(new FileMethodDescriptorSupplier("ListNodeSongs"))
+              .build();
+        }
+      }
+    }
+    return getListNodeSongsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -214,6 +245,13 @@ public final class FileGrpc {
         io.grpc.stub.StreamObserver<proto.Chord.ListAllSongsReply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListAllSongsMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void listNodeSongs(proto.Chord.ListNodeSongsRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListNodeSongsMethod(), responseObserver);
+    }
   }
 
   /**
@@ -274,6 +312,14 @@ public final class FileGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getListAllSongsMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void listNodeSongs(proto.Chord.ListNodeSongsRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getListNodeSongsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -313,6 +359,13 @@ public final class FileGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListAllSongsMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public proto.Chord.ListNodeSongsReply listNodeSongs(proto.Chord.ListNodeSongsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getListNodeSongsMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -346,12 +399,21 @@ public final class FileGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getListAllSongsMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.ListNodeSongsReply> listNodeSongs(
+        proto.Chord.ListNodeSongsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getListNodeSongsMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_DOWNLOAD = 0;
   private static final int METHODID_DELETE = 1;
   private static final int METHODID_LIST_ALL_SONGS = 2;
-  private static final int METHODID_UPLOAD = 3;
+  private static final int METHODID_LIST_NODE_SONGS = 3;
+  private static final int METHODID_UPLOAD = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -381,6 +443,10 @@ public final class FileGrpc {
         case METHODID_LIST_ALL_SONGS:
           serviceImpl.listAllSongs((proto.Chord.ListAllSongsRequest) request,
               (io.grpc.stub.StreamObserver<proto.Chord.ListAllSongsReply>) responseObserver);
+          break;
+        case METHODID_LIST_NODE_SONGS:
+          serviceImpl.listNodeSongs((proto.Chord.ListNodeSongsRequest) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -431,6 +497,13 @@ public final class FileGrpc {
               proto.Chord.ListAllSongsRequest,
               proto.Chord.ListAllSongsReply>(
                 service, METHODID_LIST_ALL_SONGS)))
+        .addMethod(
+          getListNodeSongsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              proto.Chord.ListNodeSongsRequest,
+              proto.Chord.ListNodeSongsReply>(
+                service, METHODID_LIST_NODE_SONGS)))
         .build();
   }
 
@@ -483,6 +556,7 @@ public final class FileGrpc {
               .addMethod(getDownloadMethod())
               .addMethod(getDeleteMethod())
               .addMethod(getListAllSongsMethod())
+              .addMethod(getListNodeSongsMethod())
               .build();
         }
       }

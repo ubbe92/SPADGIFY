@@ -31,7 +31,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private LRUCache lruCache;
     private Logger logger;
 
-    public FileImpl(Node node, int cacheSize, Logger logger) {
+    public FileImpl(Node node, int cacheSize, Logger logger, StorageBackend storageBackend) {
         this.logger = logger;
         this.logger.info("File service is up for node: " + node);
 
@@ -39,7 +39,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
         m = node.getM();
         lruCache = new LRUCache(cacheSize);
         mediaUtil = new MediaUtil(m);
-        storageBackend = new StorageBackend(m);
+        this.storageBackend = storageBackend;
     }
 
     @Override
@@ -269,6 +269,23 @@ public class FileImpl extends FileGrpc.FileImplBase {
         resp.onCompleted();
     }
 
+    @Override
+    public void listNodeSongs(Chord.ListNodeSongsRequest req, StreamObserver<Chord.ListNodeSongsReply> resp) {
+        MediaInfo[] mediaInfos = storageBackend.listNodeSongs();
+
+        Chord.ListNodeSongsReply.Builder responseBuilder = Chord.ListNodeSongsReply.newBuilder();
+        Chord.ListNodeSongsReply reply;
+
+        if (mediaInfos != null) {
+            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
+            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
+        } else {
+            reply = responseBuilder.build();
+        }
+
+        resp.onNext(reply);
+        resp.onCompleted();
+    }
 
 
     private void sendChunks(Song song, StreamObserver<Chord.FileChunk> responseObserver) {

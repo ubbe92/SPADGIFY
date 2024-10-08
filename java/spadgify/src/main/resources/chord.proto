@@ -19,6 +19,8 @@ service File {
   rpc Download (DownloadRequest) returns (stream FileChunk) {}
   rpc Delete (DeleteRequest) returns (DeleteStatus) {}
   rpc ListAllSongs (ListAllSongsRequest) returns (ListAllSongsReply) {}
+
+  rpc ListNodeSongs (ListNodeSongsRequest) returns (ListNodeSongsReply) {}
 }
 
 // ----------------------------------------------------
@@ -123,6 +125,14 @@ message ListAllSongsRequest {
 }
 
 message ListAllSongsReply {
+  repeated MediaInfo mediaInfos = 1;
+}
+
+message ListNodeSongsRequest {
+
+}
+
+message ListNodeSongsReply {
   repeated MediaInfo mediaInfos = 1;
 }
 

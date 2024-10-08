@@ -23,8 +23,7 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
     private String ip;
     private Logger logger;
 
-    public NodeImpl(Node node, String remoteIp, int remotePort, int mode, int exitCode, int delay, Logger logger) {
-//        System.out.println("Node service up!");
+    public NodeImpl(Node node, String remoteIp, int remotePort, int mode, int exitCode, int delay, Logger logger, ChordBackEnd chordBackEnd) {
         this.logger = logger;
         this.logger.info("Node service is up for node: " + node);
 
@@ -38,10 +37,8 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         this.ip = node.getMyIp();
 
         this.node = node;
-        this.chordBackEnd = new ChordBackEnd(node, this.logger);
-
+        this.chordBackEnd = chordBackEnd;
         this.chordBackEnd.setDelay(delay); // Set the delay of stabilize (default to 1000 ms)
-
 
 //        System.out.println("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
         this.logger.info("NodeImpl m: " + m + ", maxNodes: " + maxNodes);

@@ -51,14 +51,13 @@ public class TestClient {
             backend.store(song);
         }
 
-        Thread.sleep(2000);
+        Thread.sleep(6000);
 
         String firstNodeIdentifierString = ip + ":" + port;
         MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);
 
         for (MediaInfo m : mediaInfos)
             System.out.println("Media info: " + m);
-
 
 //        byte[] bytes = mediaUtil.readFromFile(inputFilePath);
 ////        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",
