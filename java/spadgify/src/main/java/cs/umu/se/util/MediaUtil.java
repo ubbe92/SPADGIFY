@@ -4,12 +4,18 @@ import cs.umu.se.chord.FingerTableEntry;
 import cs.umu.se.chord.Hash;
 import cs.umu.se.chord.Node;
 import cs.umu.se.types.MediaInfo;
+import cs.umu.se.types.Song;
+import org.tritonus.share.sampled.file.TAudioFileFormat;
 import proto.Chord;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 public class MediaUtil {
     private int m;
@@ -55,6 +61,62 @@ public class MediaUtil {
         }
 
         return destinationNode;
+    }
+
+    public int getDurationOfMp3(File file) throws UnsupportedAudioFileException, IOException {
+        int duration = -1;
+
+        AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(file);
+        if (fileFormat instanceof TAudioFileFormat) {
+            Map<?, ?> properties = fileFormat.properties();
+            String key = "duration";
+            Long microseconds = (Long) properties.get(key);
+            int mili = (int) (microseconds / 1000);
+            duration = (mili / 1000); // get the duration in seconds
+        }
+
+        return duration;
+    }
+
+    public String[] parseFileName(String fileName) {
+        return fileName.split("-");
+    }
+
+    public File[] getAllFilesInDirectory(String path) {
+        File dir = new File(path);
+        return dir.listFiles();
+    }
+
+    public Song getSongFromFile(File file) throws IOException, UnsupportedAudioFileException {
+        String filePath = file.getPath(); // Used to denote where the file is stored
+
+        byte[] bytes = readFromFile(filePath);
+        String[] fileInfo = parseFileName(file.getName());
+
+        String title = fileInfo[0];
+        String artist = fileInfo[1];
+        String album = fileInfo[2];
+        int duration = getDurationOfMp3(file);
+        String genre = "UNKNOWN";
+        long size = bytes.length;
+        int m = this.m;
+
+        MediaInfo mediaInfo = new MediaInfo(artist, title, album, duration, genre, size, m);
+
+        return new Song(mediaInfo, filePath, bytes);
+    }
+
+    public Song[] getSongsFromFiles(File[] files) throws UnsupportedAudioFileException, IOException {
+        int size = files.length;
+        Song[] songs = new Song[size];
+
+        if (files != null)
+            for (int i = 0; i < size; i++)
+                songs[i] = getSongFromFile(files[i]);
+        else
+            songs = null;
+
+        return songs;
     }
 
     public void writeToFile(byte[] fileData, String filePath) throws IOException {

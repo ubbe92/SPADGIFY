@@ -8,11 +8,13 @@ import cs.umu.se.util.MediaUtil;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
+import org.checkerframework.checker.units.qual.A;
 import org.checkerframework.checker.units.qual.C;
 import proto.Chord;
 import proto.FileGrpc;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
@@ -32,30 +34,47 @@ public class TestClient {
         String outputFolderPath = "./../../testMedia/output-music/";
         ClientBackend backend = new ClientBackend(ip, port, outputFolderPath, m);
 
-        byte[] bytes = mediaUtil.readFromFile(inputFilePath);
-//        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",
-//                "Datas album", 110, "Chill music", 3535934, m); // id 3
 
-        MediaInfo mediaInfo = new MediaInfo("DJ Dick", "Mot graven vi går!",
-                "Datas album", 110, "Chill music", 3535934, m); // id 4
+        // Open all files in the input directory, parse them and create song objects
+        String inputDirectoryPath = "./../../testMedia/input-music";
+        File[] files = mediaUtil.getAllFilesInDirectory(inputDirectoryPath);
+        Song[] songs = mediaUtil.getSongsFromFiles(files);
 
-        Song song = new Song(mediaInfo, "", bytes);
+        for (Song song : songs)
+            System.out.println("hash: " + song.getMediaInfo().getHash() +
+                    "\tduration: " + song.getMediaInfo().getDuration() +
+                    "\tsize: " + song.getMediaInfo().getSize() +
+                    "\tSong: " + song);
 
-        System.out.println("Hash of mediaInfo: " + mediaInfo.getHash());
+        for (Song song : songs) {
+            backend.store(song);
+        }
 
-        backend.store(song);
-        System.out.println("Sent song: " + song);
-        Thread.sleep(2000);
-
-        Song songRet = backend.retrieve(song.getIdentifierString());
-        if (songRet != null)
-            mediaUtil.writeToFile(songRet.getData(), songRet.getFilePath());
-
-        System.out.println("Got song: " + songRet);
-        Thread.sleep(2000);
-
-        if (songRet != null)
-            backend.delete(songRet.getIdentifierString());
+//        byte[] bytes = mediaUtil.readFromFile(inputFilePath);
+////        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",
+////                "Datas album", 110, "Chill music", 3535934, m); // id 3
+//
+//        MediaInfo mediaInfo = new MediaInfo("DJ Dick", "Mot graven vi går!",
+//                "Datas album", 110, "Chill music", 3535934, m); // id 4
+//
+//        Song song = new Song(mediaInfo, "", bytes);
+//
+//        System.out.println("Hash of mediaInfo: " + mediaInfo.getHash());
+//
+//
+//        backend.store(song);
+//        System.out.println("Sent song: " + song);
+//        Thread.sleep(2000);
+//
+//        Song songRet = backend.retrieve(song.getIdentifierString());
+//        if (songRet != null)
+//            mediaUtil.writeToFile(songRet.getData(), songRet.getFilePath());
+//
+//        System.out.println("Got song: " + songRet);
+//        Thread.sleep(2000);
+//
+//        if (songRet != null)
+//            backend.delete(songRet.getIdentifierString());
 
         System.out.println("Done");
     }
