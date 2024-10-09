@@ -16,23 +16,26 @@ import proto.Chord;
 import proto.FileGrpc;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Class to handle the backend work of a client
+ */
 public class ClientBackend implements Storage {
 
-    private String ip;
-    private int port;
-    private String saveFolderPath;
-    private MediaUtil mediaUtil;
+    private final String ip;
+    private final int port;
+    private final String saveFolderPath;
+    private final MediaUtil mediaUtil;
     private final int chunkSize = 2048;
-    private int m;
+    private final int m;
 
-    private Logger logger = LogManager.getLogger();
+    private final Logger logger = LogManager.getLogger();
 
     public ClientBackend(String ip, int port, String saveFolderPath, int m) {
         this.ip = ip;
@@ -42,13 +45,15 @@ public class ClientBackend implements Storage {
         this.m = m;
     }
 
-
-
+    /**
+     * Store a song at a node
+     * @param song the song to store
+     */
     @Override
     public void store(Song song) {
         String filePath = song.getFilePath();
-        //        CountDownLatch latch = new CountDownLatch(1); // makes client wait until transfer complete
-        CompletableFuture<String> future = new CompletableFuture<>(); // or this can be used to wait until complete
+
+        CompletableFuture<String> future = new CompletableFuture<>(); // makes client wait until transfer complete
 
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
         FileGrpc.FileStub stub = FileGrpc.newStub(channel);
@@ -57,50 +62,23 @@ public class ClientBackend implements Storage {
 
             @Override
             public void onNext(Chord.UploadStatus value) {
-//                System.out.println("Response from server: " + value.getMessage());
             }
 
             @Override
             public void onError(Throwable t) {
-                t.printStackTrace();
-//                latch.countDown();
+                logger.error(t.getMessage());
                 future.completeExceptionally(t);  // Complete future with exception in case of error
 
             }
 
             @Override
             public void onCompleted() {
-                System.out.println("File upload completed.");
-//                latch.countDown();
+                logger.info("File upload completed.");
                 future.complete("File uploaded successfully");  // Complete the future when the server is done
             }
         });
 
-        int offset = 0;
-        byte[] data = song.getData();
-        Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
-        while (offset < data.length) {
-            int remaining = data.length - offset;
-            int currentChunkSize = Math.min(chunkSize, remaining);
-
-            ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
-            Chord.FileChunk request = Chord.FileChunk.newBuilder()
-                    .setContent(chunk)
-                    .setMediaInfo(chordMediaInfo)
-                    .build();
-            requestObserver.onNext(request);
-
-            offset += currentChunkSize;
-        }
-        requestObserver.onCompleted();
-
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        channel.shutdown();
+        sendChunks(song, future, channel, requestObserver);
     }
 
     @Override
@@ -108,9 +86,14 @@ public class ClientBackend implements Storage {
 
     }
 
+    /**
+     * Retrieves a song from the Chord network
+     * @param identifierString the song identifier (song-artist-album)
+     * @return the song to the corresponding identifier
+     */
     @Override
     public Song retrieve(String identifierString) {
-        CompletableFuture<String> future = new CompletableFuture<>(); // or this can be used to wait until complete
+        CompletableFuture<String> future = new CompletableFuture<>();
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
         FileGrpc.FileStub stub = FileGrpc.newStub(channel);
 
@@ -131,13 +114,11 @@ public class ClientBackend implements Storage {
                 if (i == 0) {
                     if (!value.hasMediaInfo()) {
                         chordMediaInfo = null;
-                        System.out.println("onNext() value has no media info");
                         logger.info("onNext() value has no media info");
                         return;
                     }
 
                     chordMediaInfo = value.getMediaInfo();
-                    System.out.println("Artist: " + chordMediaInfo.getArtist());
                     logger.info("Artist: {}", chordMediaInfo.getArtist());
                     i++;
                 }
@@ -145,13 +126,13 @@ public class ClientBackend implements Storage {
                 try {
                     byteArrayOutputStream.write(value.getContent().toByteArray());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error(Arrays.toString(e.getStackTrace()));
                 }
             }
 
             @Override
             public void onError(Throwable t) {
-                t.printStackTrace();
+                logger.error(Arrays.toString(t.getStackTrace()));
                 future.completeExceptionally(t);  // Complete future with exception in case of error
             }
 
@@ -160,6 +141,7 @@ public class ClientBackend implements Storage {
                 if (chordMediaInfo == null) {
                     atomicSong.set(null);
                     future.complete("File could not be retrieved");
+                    logger.info("File could not be retrieved");
                     return;
                 }
 
@@ -170,16 +152,14 @@ public class ClientBackend implements Storage {
                     byte[] data = byteArrayOutputStream.toByteArray();
                     song = new Song(mediaInfo, "", data);
 
-//                    mediaUtil.writeToFile(data, savePath);
-
                     song.setFilePath(savePath);
                     atomicSong.set(song);
 
-                    System.out.println("File download complete!");
-                    logger.info("File download complete!");
-                    future.complete("File downloaded successfully");  // Complete the future when the server is done
+                    logger.info("File downloaded successfully!");
+                    future.complete("File downloaded successfully!");  // Complete the future when the server is done
                 } catch (Exception e) {
-                    future.complete("File could not be retrieved: " + e.getMessage());  // Complete the future when the server is done
+                    future.complete("File could not be retrieved: " + Arrays.toString(e.getStackTrace()));  // Complete the future when the server is done
+                    logger.error(Arrays.toString(e.getStackTrace()));
                     throw new RuntimeException(e);
                 }
             }
@@ -192,7 +172,7 @@ public class ClientBackend implements Storage {
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            logger.error(Arrays.toString(e.getStackTrace()));
             return null;
         }
 
@@ -209,6 +189,10 @@ public class ClientBackend implements Storage {
         return new Song[0];
     }
 
+    /**
+     * Delete a song from the Chord network
+     * @param identifierString the identifier for the song to delete
+     */
     @Override
     public void delete(String identifierString) {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
@@ -264,6 +248,10 @@ public class ClientBackend implements Storage {
         return mediaInfos;
     }
 
+    /**
+     * Retrieve all songs for a specific node
+     * @return metadata for each song
+     */
     @Override
     public MediaInfo[] listNodeSongs() {
         MediaInfo[] mediaInfos = null;
@@ -283,6 +271,10 @@ public class ClientBackend implements Storage {
     }
 
 
+    /**
+     * Request a transfer of songs that belongs to a particular node
+     * @param node the node that requested the songs
+     */
     @Override
     public void requestTransfer(Node node) {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
@@ -308,6 +300,10 @@ public class ClientBackend implements Storage {
         channel.shutdown();
     }
 
+    /**
+     * Transfers a song to a node
+     * @param song the song to transfer
+     */
     @Override
     public void transfer(Song song) {
         String filePath = song.getFilePath();
@@ -324,18 +320,29 @@ public class ClientBackend implements Storage {
 
             @Override
             public void onError(Throwable t) {
-                t.printStackTrace();
+                logger.error(Arrays.toString(t.getStackTrace()));
                 future.completeExceptionally(t);  // Complete future with exception in case of error
 
             }
 
             @Override
             public void onCompleted() {
-                System.out.println("File upload completed.");
+                logger.info("File upload completed.");
                 future.complete("File uploaded successfully");  // Complete the future when the server is done
             }
         });
 
+        sendChunks(song, future, channel, requestObserver);
+    }
+
+    /**
+     * Send chunks of data
+     * @param song the song to send
+     * @param future a latch to ensure that the transmission is complete before continuing
+     * @param channel the current channel
+     * @param requestObserver observes the request
+     */
+    private void sendChunks(Song song, CompletableFuture<String> future, ManagedChannel channel, StreamObserver<Chord.FileChunk> requestObserver) {
         int offset = 0;
         byte[] data = song.getData();
         Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
@@ -357,7 +364,7 @@ public class ClientBackend implements Storage {
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            logger.error(Arrays.toString(e.getStackTrace()));
         }
 
         channel.shutdown();
