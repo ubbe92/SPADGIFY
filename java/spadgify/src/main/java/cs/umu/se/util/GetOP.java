@@ -4,6 +4,22 @@ import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
 
+/**
+ * The `GetOP` class is responsible for parsing command line arguments and initiating the operation
+ * of a node in a Chord network. It can either create a new network or join an existing one.
+ *
+ * Command line parameters:
+ * - mode: 0 to join an existing network, 1 to create a new network.
+ * - port: The port number for this node.
+ * - m: The identifier size for the network.
+ *
+ * Command line options:
+ * - -p, --port: The port of a node in the network.
+ * - -i, --ip: The IP address of a node in the network.
+ * - -d, --delay: The delay in milliseconds for the stabilization process.
+ * - -h, --help: Show the help message and exit.
+ * - -c, --cache: Sets the desired size of the cache for storing songs.
+ */
 @CommandLine.Command(name = "chord", mixinStandardHelpOptions = true, version = "Ubbes Chord DHT 1.0",
         description = "Starts a node and lets it either join or create a DHT.")
 public class GetOP implements Callable<Integer> {

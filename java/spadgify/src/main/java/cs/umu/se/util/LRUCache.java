@@ -3,11 +3,15 @@ package cs.umu.se.util;
 import java.util.HashMap;
 
 /**
+ * Implementation of a Least Recently Used (LRU) cache.
  * Code found at:
  * https://medium.com/@germainnsibula/implementing-an-lru-cache-in-java-a-comprehensive-guide-94e8884ff17b
  *
- * @param <K>
- * @param <V>
+ * The cache has a fixed capacity and uses a doubly linked list and a hash map
+ * to store the entries efficiently.
+ *
+ * @param <K> The type of keys maintained by this cache
+ * @param <V> The type of mapped values
  */
 public class LRUCache<K, V> {
     private final int capacity;

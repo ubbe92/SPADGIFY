@@ -4,10 +4,15 @@ import cs.umu.se.chord.ChordBackEnd;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * The StabilizerWorker class implements a Runnable task that periodically
+ * performs maintenance operations on a ChordBackEnd instance to ensure
+ * the stability of the Chord distributed system.
+ */
 public class StabilizerWorker implements Runnable {
     private final ChordBackEnd backEnd;
     private final AtomicBoolean runStabilize = new AtomicBoolean(true);
-    private long delay;
+    private final long delay;
     private int m = -1;
     private final AtomicBoolean isAlive = new AtomicBoolean(true);
 
@@ -17,6 +22,11 @@ public class StabilizerWorker implements Runnable {
         this.delay = delay;
     }
 
+    /**
+     * Performs periodic stabilization tasks on a ChordBackEnd instance to maintain the network's stability.
+     * Runs in a separate thread and continuously executes the stabilization, finger fixing,
+     * and successor/predecessor checking operations until requested to stop.
+     */
     @Override
     public void run() {
         System.out.println("Thread in worker: " + Thread.currentThread().getName());
@@ -44,7 +54,6 @@ public class StabilizerWorker implements Runnable {
         this.runStabilize.set(false);
     }
     public boolean isAlive() {
-//        System.out.println("isAlive: " + isAlive.get());
         return isAlive.get();
     }
 }

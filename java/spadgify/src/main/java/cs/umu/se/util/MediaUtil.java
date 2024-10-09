@@ -18,8 +18,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * MediaUtil is a utility class for various media-related operations including converting media information
+ * between different formats, extracting metadata from files, and performing hash calculations for a distributed
+ * chord network.
+ */
 public class MediaUtil {
-    private int m;
+    private final int m;
 
     public MediaUtil(int m) {
         this.m = m;
@@ -70,6 +75,13 @@ public class MediaUtil {
         return Arrays.asList(chordMediaInfos);
     }
 
+    /**
+     * Determines the responsible node for the given hash value.
+     *
+     * @param node the starting node for the searching process
+     * @param hash the hash value for which the responsible node is to be found
+     * @return the node responsible for handling the given hash
+     */
     public Node getResponsibleNodeForHash(Node node, int hash) {
         Node destinationNode = node;
         FingerTableEntry[] table = node.getFingerTable().getTable();
@@ -88,6 +100,14 @@ public class MediaUtil {
         return destinationNode;
     }
 
+    /**
+     * Retrieves the duration of an MP3 file in seconds.
+     *
+     * @param file the MP3 file for which the duration is to be retrieved
+     * @return the duration of the MP3 file in seconds, or -1 if the duration could not be determined
+     * @throws UnsupportedAudioFileException if the specified file is not a valid audio file format
+     * @throws IOException if an I/O error occurs while reading the file
+     */
     public int getDurationOfMp3(File file) throws UnsupportedAudioFileException, IOException {
         int duration = -1;
 
@@ -115,6 +135,14 @@ public class MediaUtil {
         return dir.listFiles();
     }
 
+    /**
+     * Retrieves a Song object from a specified file.
+     *
+     * @param file the File object representing the audio file to be processed
+     * @return a Song object containing the media information and data derived from the specified file
+     * @throws IOException if an I/O error occurs while reading the file
+     * @throws UnsupportedAudioFileException if the specified file is not a valid audio file format
+     */
     public Song getSongFromFile(File file) throws IOException, UnsupportedAudioFileException {
         String filePath = file.getPath(); // Used to denote where the file is stored
 
@@ -219,6 +247,13 @@ public class MediaUtil {
         }
     }
 
+    /**
+     * Merges two arrays of MediaInfo objects into a single array.
+     *
+     * @param mediaInfos1 the first array of MediaInfo objects to be merged
+     * @param mediaInfos2 the second array of MediaInfo objects to be merged
+     * @return a new array of MediaInfo objects containing all elements from both input arrays
+     */
     public MediaInfo[] mergeMediaUtilsArrays(MediaInfo[] mediaInfos1, MediaInfo[] mediaInfos2) {
         int size1 = 0;
         int size2 = 0;

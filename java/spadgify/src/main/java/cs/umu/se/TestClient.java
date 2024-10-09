@@ -1,29 +1,21 @@
 package cs.umu.se;
 
-import com.google.protobuf.ByteString;
 import cs.umu.se.client.ClientBackend;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.MediaUtil;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.StreamObserver;
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
-import proto.Chord;
-import proto.FileGrpc;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * The TestClient class is responsible for initializing and running a test client
+ * for media management. It interacts with a backend system to store, list, and
+ * retrieve songs.
+ */
 public class TestClient {
-    private static int m = 3;
-    private static int chunkSize = 2048;
-    private static MediaUtil mediaUtil = new MediaUtil(m);
+    private static final int m = 3;
+    //private static int chunkSize = 2048;
+    private static final MediaUtil mediaUtil = new MediaUtil(m);
 
     public static void main(String[] args) throws Exception {
         System.out.println("Test client running...");

@@ -2,8 +2,11 @@ package cs.umu.se.types;
 
 import cs.umu.se.chord.Hash;
 
-import java.util.Objects;
-
+/**
+ * The MediaInfo class holds information about a song.
+ * It includes details about the artist, song title, album, duration, genre, and size.
+ * The class also generates a unique identifier string and hash for identifying the song.
+ */
 public class MediaInfo {
     private final String artist;
     private final String song;
@@ -13,7 +16,7 @@ public class MediaInfo {
     private final long size;
     private final int hash;
     private final String identifierString;
-    private int m;
+    private final int m;
 
     public MediaInfo(String artist, String song, String album, int duration, String genre, long size, int m) {
         this.artist = artist;

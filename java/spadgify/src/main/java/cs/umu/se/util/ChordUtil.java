@@ -6,10 +6,18 @@ import proto.Chord;
 import java.io.IOException;
 import java.net.*;
 
+/**
+ * Utility class providing various helper methods for handling Chord protocol operations.
+ */
 public class ChordUtil {
 
     public ChordUtil() {}
 
+    /**
+     * Retrieves the local IP address of the machine by creating a UDP connection to a remote server.
+     *
+     * @return A string representing the local IP address of the machine. If the IP address cannot be determined, an empty string is returned.
+     */
     public synchronized String getLocalIp() {
         String ip = "";
         try(final DatagramSocket socket = new DatagramSocket()){
@@ -21,6 +29,13 @@ public class ChordUtil {
         return ip;
     }
 
+    /**
+     * Scans the given port range for an available port.
+     *
+     * @param startRange The starting port number of the range to scan.
+     * @param stopRange The ending port number of the range to scan.
+     * @return The first available port in the specified range, or -1 if no ports are available.
+     */
     public int getAvailablePort(int startRange, int stopRange) {
         for (int port = startRange; port < stopRange; port++) {
             try (ServerSocket serverSocket = new ServerSocket(port)) {
@@ -35,6 +50,12 @@ public class ChordUtil {
     }
 
 
+    /**
+     * Creates a new Node instance from a given GRPC ChordNode.
+     *
+     * @param node The GRPC ChordNode to be converted to a Node instance.
+     * @return A new Node instance created from the given GRPC ChordNode.
+     */
     public synchronized Node createNodeFromGRPCChordNode(Chord.ChordNode node) {
         String ip = node.getIp();
         int port = (int) node.getPort();
@@ -66,6 +87,12 @@ public class ChordUtil {
         return newNode;
     }
 
+    /**
+     * Creates a GRPC ChordNode from a given Node instance.
+     *
+     * @param node The Node instance to be converted to a GRPC ChordNode.
+     * @return A GRPC ChordNode representation of the given Node instance.
+     */
     public synchronized Chord.ChordNode createGRPCChordNodeFromNode(Node node) {
         String ip = node.getMyIp();
         int port = node.getMyPort();
@@ -89,7 +116,7 @@ public class ChordUtil {
         }
 
         if (predecessor != null) {
-            pred = createGRPCPredecessorNodeFromNode(predecessor);
+            pred = createGRPCNodeFromNode(predecessor);
             build.setPredecessor(pred);
         }
 
@@ -103,18 +130,6 @@ public class ChordUtil {
                 .setPort(node.getMyPort())
                 .setIdentifier(node.getMyIdentifier())
                 .setM(node.getM())
-                .build();
-    }
-
-    public synchronized Chord.ChordNode createGRPCPredecessorNodeFromNode(Node predecessor) {
-        if (predecessor == null)
-            return null;
-
-        return Chord.ChordNode.newBuilder()
-                .setIp(predecessor.getMyIp())
-                .setPort(predecessor.getMyPort())
-                .setIdentifier(predecessor.getMyIdentifier())
-                .setM(predecessor.getM())
                 .build();
     }
 }

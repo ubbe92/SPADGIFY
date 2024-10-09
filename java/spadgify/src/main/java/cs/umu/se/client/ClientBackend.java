@@ -233,13 +233,13 @@ public class ClientBackend implements Storage {
         String firstNodeIp = ipPort[0];
         int firstNodePort = Integer.parseInt(ipPort[1]);
 
-//        Chord.ListAllSongsRequest request = Chord.ListAllSongsRequest.newBuilder()
-//                .setIp(firstNodeIp)
-//                .setPort(firstNodePort)
-//                .setIdentifier(firstNodeIdentifier)
-//                .build();
+        Chord.ListAllSongsRequest request = Chord.ListAllSongsRequest.newBuilder()
+                .setIp(firstNodeIp)
+                .setPort(firstNodePort)
+                .setIdentifier(firstNodeIdentifier)
+                .build();
 
-        Chord.ListAllSongsRequest request = Chord.ListAllSongsRequest.newBuilder().build();
+//        Chord.ListAllSongsRequest request = Chord.ListAllSongsRequest.newBuilder().build();
 
         Chord.ListAllSongsReply reply = stub.listAllSongs(request);
 

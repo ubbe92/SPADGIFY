@@ -266,44 +266,44 @@ public class FileImpl extends FileGrpc.FileImplBase {
      * @param req The request containing the identifier of the requesting node and its IP and port.
      * @param resp The observer to send the list of all songs back to the client.
      */
-//    @Override
-//    public void listAllSongs(Chord.ListAllSongsRequest req, StreamObserver<Chord.ListAllSongsReply> resp) {
-//        int sourceIdentifier = (int) req.getIdentifier();
-//        int successorIdentifier = node.getSuccessor().getMyIdentifier();
-//        Node successor = node.getSuccessor();
-//        String firstNodeIdentifierString = req.getIp() + ":" + req.getPort();
-//
-//        MediaInfo[] mediaInfos = null;
-//        MediaInfo[] theirMediaInfos = null;
-//
-//        // Ask successor for its content
-//        if (successorIdentifier != sourceIdentifier) {
-//            System.out.println("Asking successor for its content!");
-//            String destIp = successor.getMyIp();
-//            int destPort = successor.getMyPort();
-//            int destM = successor.getM();
-//            ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
-//            theirMediaInfos = clientBackend.listAllSongs(firstNodeIdentifierString);
-//        }
-//
-//        // Add our content
-//        MediaInfo[] ourMediaInfos = storageBackend.listAllSongs(firstNodeIdentifierString);
-//        mediaInfos = mediaUtil.mergeMediaUtilsArrays(ourMediaInfos, theirMediaInfos);
-//
-//        // send reply
-//        Chord.ListAllSongsReply.Builder responseBuilder = Chord.ListAllSongsReply.newBuilder();
-//        Chord.ListAllSongsReply reply;
-//
-//        if (mediaInfos != null) {
-//            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
-//            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
-//        } else {
-//            reply = responseBuilder.build();
-//        }
-//
-//        resp.onNext(reply);
-//        resp.onCompleted();
-//    }
+    @Override
+    public void listAllSongs(Chord.ListAllSongsRequest req, StreamObserver<Chord.ListAllSongsReply> resp) {
+        int sourceIdentifier = (int) req.getIdentifier();
+        int successorIdentifier = node.getSuccessor().getMyIdentifier();
+        Node successor = node.getSuccessor();
+        String firstNodeIdentifierString = req.getIp() + ":" + req.getPort();
+
+        MediaInfo[] mediaInfos = null;
+        MediaInfo[] theirMediaInfos = null;
+
+        // Ask successor for its content
+        if (successorIdentifier != sourceIdentifier) {
+            System.out.println("Asking successor for its content!");
+            String destIp = successor.getMyIp();
+            int destPort = successor.getMyPort();
+            int destM = successor.getM();
+            ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
+            theirMediaInfos = clientBackend.listAllSongs(firstNodeIdentifierString);
+        }
+
+        // Add our content
+        MediaInfo[] ourMediaInfos = storageBackend.listAllSongs(firstNodeIdentifierString);
+        mediaInfos = mediaUtil.mergeMediaUtilsArrays(ourMediaInfos, theirMediaInfos);
+
+        // send reply
+        Chord.ListAllSongsReply.Builder responseBuilder = Chord.ListAllSongsReply.newBuilder();
+        Chord.ListAllSongsReply reply;
+
+        if (mediaInfos != null) {
+            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
+            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
+        } else {
+            reply = responseBuilder.build();
+        }
+
+        resp.onNext(reply);
+        resp.onCompleted();
+    }
 
 
     /**
@@ -314,36 +314,47 @@ public class FileImpl extends FileGrpc.FileImplBase {
      * @param req The request object containing metadata for listing songs.
      * @param resp The StreamObserver used to send the list of songs back to the client.
      */
-    @Override
-    public void listAllSongs(Chord.ListAllSongsRequest req, StreamObserver<Chord.ListAllSongsReply> resp) {
-        // Create a set to keep track of already visited nodes
-        Set<String> visitedNodes = new HashSet<>();
-        Chord.ListAllSongsReply.Builder replyBuilder = Chord.ListAllSongsReply.newBuilder();
-        // Start from the current node
-        Node currentNode = this.node;
-
-        while (!visitedNodes.contains(currentNode.getMyIp() + ":" + currentNode.getMyPort()))
-        {
-            String nodeIdentifierString = currentNode.getMyIp() + ":" + currentNode.getMyPort();
-            // Mark the current node as visited
-            visitedNodes.add(nodeIdentifierString);
-
-            ClientBackend clientBackend = new ClientBackend(currentNode.getMyIp(), currentNode.getMyPort(), "", m);
-            // Fetch the songs from the current node either locally or remotely
-            MediaInfo[] mediaInfos = this.node.equals(currentNode) ? storageBackend.listNodeSongs() : clientBackend.listNodeSongs();
-
-            for (MediaInfo mediaInfo : mediaInfos) {
-                // Add songs to the reply
-                replyBuilder.addMediaInfos(mediaUtil.convertMediaInfoToGRPCChordMediaInfo(mediaInfo));
-            }
-            // Move to the successor node
-            currentNode = currentNode.getSuccessor();
-        }
-
-        // Send the accumulated list of songs to the client
-        resp.onNext(replyBuilder.build());
-        resp.onCompleted();
-    }
+//    @Override
+//    public void listAllSongs(Chord.ListAllSongsRequest req, StreamObserver<Chord.ListAllSongsReply> resp) {
+//        // Create a set to keep track of already visited nodes
+//        Set<String> visitedNodes = new HashSet<>();
+//        Chord.ListAllSongsReply.Builder replyBuilder = Chord.ListAllSongsReply.newBuilder();
+//        // Start from the current node
+//        Node currentNode = this.node;
+//
+//        while (!visitedNodes.contains(currentNode.getMyIp() + ":" + currentNode.getMyPort()))
+//        {
+//            String nodeIdentifierString = currentNode.getMyIp() + ":" + currentNode.getMyPort();
+//            // Mark the current node as visited
+//            visitedNodes.add(nodeIdentifierString);
+//
+//            ClientBackend clientBackend = new ClientBackend(currentNode.getMyIp(), currentNode.getMyPort(), "", m);
+//            // Fetch the songs from the current node either locally or remotely
+////            MediaInfo[] mediaInfos = this.node.equals(currentNode) ? storageBackend.listNodeSongs() : clientBackend.listNodeSongs();
+//            MediaInfo[] mediaInfos;
+//
+//            if (this.node.equals(currentNode)) {
+//                logger.info("Retrieving local songs at node {}, successor: {}", currentNode, currentNode.getSuccessor());
+//                mediaInfos = storageBackend.listNodeSongs();
+//            } else {
+//                logger.info("Retrieving remote songs at node {}, successor: {}", currentNode, currentNode.getSuccessor());
+//                mediaInfos = clientBackend.listNodeSongs();
+//            }
+//
+//            for (MediaInfo mediaInfo : mediaInfos) {
+//                // Add songs to the reply
+//                replyBuilder.addMediaInfos(mediaUtil.convertMediaInfoToGRPCChordMediaInfo(mediaInfo));
+//            }
+//
+//            // this needs to be rpc call when more than 2 nodes because we don't know successors successor.
+//            // Move to the successor node
+//            currentNode = currentNode.getSuccessor();
+//        }
+//
+//        // Send the accumulated list of songs to the client
+//        resp.onNext(replyBuilder.build());
+//        resp.onCompleted();
+//    }
 
     /**
      * Retrieves a list of songs stored on the current node and sends this list back to the client.

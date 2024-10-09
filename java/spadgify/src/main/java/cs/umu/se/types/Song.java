@@ -1,11 +1,12 @@
 package cs.umu.se.types;
 
-import java.util.Arrays;
-import java.util.Objects;
-
+/**
+ * The Song class represents a song with associated media information, file path, and data.
+ * It provides methods to retrieve and update these attributes, as well as to make deep copies of Song objects.
+ */
 public class Song {
 
-    private MediaInfo mediaInfo;
+    private final MediaInfo mediaInfo;
     private String filePath = "";
     private byte[] data;
 

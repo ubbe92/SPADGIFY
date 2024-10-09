@@ -6,6 +6,11 @@ import org.knowm.xchart.SwingWrapper;
 
 import java.util.List;
 
+/**
+ * This class is responsible for creating and displaying a box plot chart using the XChart library.
+ * It provides methods to create a box plot with specific labels and title,
+ * add data series to the plot, and display the plot.
+ */
 public class BoxPlotXChart {
 
     private BoxChart chart;
@@ -23,6 +28,12 @@ public class BoxPlotXChart {
             .build();
     }
 
+    /**
+     * Adds a new data series to the plot.
+     *
+     * @param seriesName the name of the data series to be added to the plot
+     * @param values the list of values to be included in the data series
+     */
     public void addToPlot(String seriesName, List<Long> values) {
         chart.addSeries(seriesName, values);
     }

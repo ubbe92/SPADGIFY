@@ -10,7 +10,6 @@ public class Chord {
 
     public static void main(String[] args) {
 
-
         // Examples on how to run this chord node
         // Start new DHT:       java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 1 8185 3 (id 1) (sinthu: id 4)
         // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8187 3 (id 3) (sinthu: id 6)
