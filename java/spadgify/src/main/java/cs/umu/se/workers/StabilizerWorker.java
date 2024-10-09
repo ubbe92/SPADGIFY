@@ -2,7 +2,6 @@ package cs.umu.se.workers;
 
 import cs.umu.se.chord.ChordBackEnd;
 
-import javax.swing.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class StabilizerWorker implements Runnable {
@@ -23,13 +22,13 @@ public class StabilizerWorker implements Runnable {
         System.out.println("Thread in worker: " + Thread.currentThread().getName());
         // called periodically
         while (runStabilize.get()) {
-            backEnd.stabilizeWIKI();
+            backEnd.stabilize();
 
-            backEnd.fixFingersWIKI();
+            backEnd.fixFingers();
 
-            backEnd.checkPredecessorWIKI();
+            backEnd.checkPredecessor();
 
-            backEnd.checkSuccessorWIKI(); // Check if successor has crashed
+            backEnd.checkSuccessor(); // Check if successor has crashed
 
             try {
                 Thread.sleep(delay);

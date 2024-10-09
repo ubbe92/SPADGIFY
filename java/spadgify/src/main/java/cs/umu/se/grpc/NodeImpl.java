@@ -4,7 +4,6 @@ import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.util.ChordUtil;
 import io.grpc.stub.StreamObserver;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import proto.Chord;
 import proto.NodeGrpc;
@@ -46,16 +45,16 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
     @Override
     public void findSuccessorWIKI(Chord.FindSuccessorRequestWIKI req, StreamObserver<Chord.FindSuccessorReplyWIKI> resp) {
-//        System.out.println("SERVER GOT findSuccessorWIKI REQUEST!");
+//        System.out.println("SERVER GOT findSuccessor REQUEST!");
         int id = (int) req.getId();
 
-        Node nodePrime = chordBackEnd.findSuccessorWIKI(id);
+        Node nodePrime = chordBackEnd.findSuccessor(id);
 //        System.out.println("NODE PRIME: " + nodePrime);
 
         Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(nodePrime);
         Chord.FindSuccessorReplyWIKI reply = Chord.FindSuccessorReplyWIKI.newBuilder().setChordNode(chordNode).build();
 
-//        System.out.println("after receiving findSuccessorWIKI gRPC call");
+//        System.out.println("after receiving findSuccessor gRPC call");
         node.displayCurrentTable();
 
         resp.onNext(reply);
@@ -64,15 +63,15 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
 
     @Override
     public void notifyWIKI(Chord.NotifyRequestWIKI req, StreamObserver<Chord.NotifyReplyWIKI> resp) {
-//        System.out.println("SERVER GOT notifyWIKI REQUEST!");
+//        System.out.println("SERVER GOT notify REQUEST!");
 
         Chord.ChordNode chordNode = req.getChordNode();
         Node nodePrime = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
 //        System.out.println("Request from: " + nodePrime);
-        chordBackEnd.notifyWIKI(nodePrime);
+        chordBackEnd.notify(nodePrime);
         Chord.NotifyReplyWIKI reply = Chord.NotifyReplyWIKI.newBuilder().build();
 
-//        System.out.println("after receiving notifyWIKI gRPC call");
+//        System.out.println("after receiving notify gRPC call");
         node.displayCurrentTable();
 
         resp.onNext(reply);

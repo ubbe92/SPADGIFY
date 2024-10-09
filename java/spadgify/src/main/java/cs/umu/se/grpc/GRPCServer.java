@@ -3,14 +3,12 @@ package cs.umu.se.grpc;
 import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Server;
-import cs.umu.se.interfaces.Storage;
 import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.util.ChordUtil;
 import cs.umu.se.workers.StabilizerWorker;
 import io.grpc.ServerBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -57,13 +55,13 @@ public class GRPCServer implements Server {
                     Node nodePrime = new Node(remoteIp, remotePort, m);
 
                     // TESTING WIKI SOLUTION
-                    chordBackEnd.joinWIKI(nodePrime);
+                    chordBackEnd.join(nodePrime);
                     break;
                 case 1: // create new DHT
                     logger.info("Creating new DHT!");
 
                     // TESTING WIKI SOLUTION
-                    chordBackEnd.createWIKI();
+                    chordBackEnd.create();
                     break;
                 default: // Unknown mode
 //                    System.out.println("Unknown mode!");
@@ -92,7 +90,7 @@ public class GRPCServer implements Server {
     }
 
     public void leaveChordNetwork() {
-        chordBackEnd.leaveWIKI();
+        chordBackEnd.leave();
     }
 
     public boolean isStabilizerWorkerAlive() {
