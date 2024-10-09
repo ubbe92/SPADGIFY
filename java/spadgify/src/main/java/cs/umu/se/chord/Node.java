@@ -28,8 +28,8 @@ public class Node {
      */
     public synchronized void displayCurrentTable() {
         fingerTable.displayCurrentTable();
-        System.out.println("My successor: " + getSuccessor());
         System.out.println("My predecessor: " + getPredecessor());
+        System.out.println("My successor: " + getSuccessor());
     }
 
     public Node getSuccessor() {

@@ -15,17 +15,33 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * The GRPCServer class implements the Server interface and is responsible
+ * for initializing and managing a gRPC server instance that supports a
+ * distributed hash table (DHT) through the Chord protocol.
+ */
 public class GRPCServer implements Server {
     private io.grpc.Server server;
     private StabilizerWorker worker;
     private ChordBackEnd chordBackEnd;
     private StorageBackend storageBackend;
-    private ChordUtil chordUtil = new ChordUtil();
-    private Logger logger  = LogManager.getLogger();
-
+    private final ChordUtil chordUtil = new ChordUtil();
+    private final Logger logger  = LogManager.getLogger();
 
     public GRPCServer() {}
 
+    /**
+     * Starts the gRPC server for the node.
+     *
+     * @param port The local port to start the server on.
+     * @param remoteIp The remote IP address to connect to for existing DHT, if applicable.
+     * @param remotePort The remote port to connect to for existing DHT, if applicable.
+     * @param m The number of bits for the node identifier.
+     * @param mode The operational mode of the server (0 for joining existing DHT, 1 for creating new DHT).
+     * @param exitCode The exit code to use in case of a critical error.
+     * @param delay The delay in milliseconds between each stabilize.
+     * @param cacheSize The cache size for the storage backend.
+     */
     @Override
     public void startServer(int port, String remoteIp, int remotePort, int m, int mode, int exitCode, int delay, int cacheSize) {
         createDirectories();
@@ -46,26 +62,22 @@ public class GRPCServer implements Server {
                 .build();
         try {
             server.start();
-            logger.info("gRPCServer started on port: " + port);
+            logger.info("gRPCServer started on port: {}",  port);
 
-//            chordBackEnd = nodeImpl.getChordBackEnd();
             switch (mode) {
                 case 0: // join existing DTH.
                     logger.info("Joining existing DHT!");
                     Node nodePrime = new Node(remoteIp, remotePort, m);
 
-                    // TESTING WIKI SOLUTION
                     chordBackEnd.join(nodePrime);
                     break;
                 case 1: // create new DHT
                     logger.info("Creating new DHT!");
 
-                    // TESTING WIKI SOLUTION
                     chordBackEnd.create();
                     break;
                 default: // Unknown mode
-//                    System.out.println("Unknown mode!");
-                    logger.error("Unknown mode!: " + mode);
+                    logger.error("Unknown mode!: {}", mode);
                     System.exit(exitCode);
                     break;
             }
@@ -74,10 +86,9 @@ public class GRPCServer implements Server {
 
             server.awaitTermination();
         } catch (IOException | InterruptedException e) {
-            logger.error("gRPCServer could not start on port: " + port + " - " + e.getMessage());
+            logger.error("gRPCServer could not start on port: {} - {}", port,  e.getMessage());
             System.exit(1);
         }
-
     }
 
     @Override
@@ -101,6 +112,9 @@ public class GRPCServer implements Server {
         return server.isShutdown();
     }
 
+    /**
+     * Creates the necessary directories for the gRPC server to store media and log files.
+     */
     private void createDirectories() {
         try {
             Files.createDirectory(Paths.get("./media-spadgify"));

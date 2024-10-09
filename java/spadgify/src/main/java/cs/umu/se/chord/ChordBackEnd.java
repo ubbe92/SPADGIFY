@@ -111,7 +111,7 @@ public class ChordBackEnd {
     }
 
 
-    // TESTING WIKIPEDIA SOLUTION - WORKS!
+    // TESTING PEDIA SOLUTION - WORKS!
 
     /**
      * Create a new Chord network
@@ -229,14 +229,14 @@ public class ChordBackEnd {
 
             n.setSuccessor(successor);
 
-            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
+            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(n);
 
-            Chord.SetSuccessorsPredecessorRequestWIKI request = Chord.SetSuccessorsPredecessorRequestWIKI
+            Chord.SetSuccessorsPredecessorRequest request = Chord.SetSuccessorsPredecessorRequest
                     .newBuilder()
                     .setChordNode(chordNode)
                     .build();
 
-            Chord.SetSuccessorsPredecessorReplyWIKI reply = blockingStub.setSuccessorsPredecessorWIKI(request);
+            Chord.SetSuccessorsPredecessorReply reply = blockingStub.setSuccessorsPredecessor(request);
 
             shutdownChannel(channel);
         } catch (Exception e) {
@@ -260,14 +260,14 @@ public class ChordBackEnd {
 
             n.setPredecessor(predecessor);
 
-            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
+            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(n);
 
-            Chord.SetPredecessorsSuccessorRequestWIKI request = Chord.SetPredecessorsSuccessorRequestWIKI
+            Chord.SetPredecessorsSuccessorRequest request = Chord.SetPredecessorsSuccessorRequest
                     .newBuilder()
                     .setChordNode(chordNode)
                     .build();
 
-            Chord.SetPredecessorsSuccessorReplyWIKI reply = blockingStub.setPredecessorsSuccessorWIKI(request);
+            Chord.SetPredecessorsSuccessorReply reply = blockingStub.setPredecessorsSuccessor(request);
 
             shutdownChannel(channel);
         } catch (Exception e) {
@@ -305,9 +305,9 @@ public class ChordBackEnd {
         try {
             initChannelAndStub(n.getMyIp(), n.getMyPort());
 
-            Chord.GetPredecessorRequestWIKI request = Chord.GetPredecessorRequestWIKI.newBuilder().build();
-            Chord.GetPredecessorReplyWIKI reply = blockingStub.getPredecessorWIKI(request);
-            Node successor = chordUtil.createNodeFromGRPCChordNodeWIKI(reply.getChordNode());
+            Chord.GetPredecessorRequest request = Chord.GetPredecessorRequest.newBuilder().build();
+            Chord.GetPredecessorReply reply = blockingStub.getPredecessor(request);
+            Node successor = chordUtil.createNodeFromGRPCChordNode(reply.getChordNode());
 
             shutdownChannel(channel);
             return successor.getPredecessor();
@@ -335,9 +335,9 @@ public class ChordBackEnd {
     public void gRPCNotify(Node successor, Node n) {
         try {
             initChannelAndStub(successor.getMyIp(), successor.getMyPort());
-            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(n);
-            Chord.NotifyRequestWIKI request = Chord.NotifyRequestWIKI.newBuilder().setChordNode(chordNode).build();
-            Chord.NotifyReplyWIKI reply = blockingStub.notifyWIKI(request);
+            Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(n);
+            Chord.NotifyRequest request = Chord.NotifyRequest.newBuilder().setChordNode(chordNode).build();
+            Chord.NotifyReply reply = blockingStub.notify(request);
             shutdownChannel(channel);
         } catch (Exception e) {
             logger.error("gRPCNotify() crashed {}", Arrays.toString(e.getStackTrace()));
@@ -425,7 +425,7 @@ public class ChordBackEnd {
             alive = gRPCPingNode(node);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("isNodeAliveWiki crashed" + Arrays.toString(e.getStackTrace()));
+            logger.error("isNodeAlive crashed" + Arrays.toString(e.getStackTrace()));
             alive = false;
         }
 
@@ -455,8 +455,8 @@ public class ChordBackEnd {
         try {
             initChannelAndStub(node.getMyIp(), node.getMyPort());
 
-            Chord.PingNodeRequestWIKI request = Chord.PingNodeRequestWIKI.newBuilder().setIsAlive(true).build();
-            Chord.PingNodeReplyWIKI reply = blockingStub.pingNodeWIKI(request);
+            Chord.PingNodeRequest request = Chord.PingNodeRequest.newBuilder().setIsAlive(true).build();
+            Chord.PingNodeReply reply = blockingStub.pingNode(request);
 
             shutdownChannel(channel);
 
@@ -478,13 +478,13 @@ public class ChordBackEnd {
         try {
             initChannelAndStub(nodePrime.getMyIp(), nodePrime.getMyPort());
 
-            Chord.FindSuccessorRequestWIKI request = Chord.FindSuccessorRequestWIKI.newBuilder().setId(id).build();
-            Chord.FindSuccessorReplyWIKI reply = blockingStub.findSuccessorWIKI(request);
+            Chord.FindSuccessorRequest request = Chord.FindSuccessorRequest.newBuilder().setId(id).build();
+            Chord.FindSuccessorReply reply = blockingStub.findSuccessor(request);
             Chord.ChordNode chordNode = reply.getChordNode();
 
             shutdownChannel(channel);
 
-            Node successor = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
+            Node successor = chordUtil.createNodeFromGRPCChordNode(chordNode);
             return successor;
         } catch (Exception e) {
             logger.error("gRPCFindSuccessor() crashed {}", Arrays.toString(e.getStackTrace()));

@@ -25,8 +25,8 @@ public final class Chord {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface FindSuccessorRequestWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:FindSuccessorRequestWIKI)
+  public interface FindSuccessorRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FindSuccessorRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -40,12 +40,12 @@ public final class Chord {
    * ----------------------------------------------------
    * </pre>
    *
-   * Protobuf type {@code FindSuccessorRequestWIKI}
+   * Protobuf type {@code FindSuccessorRequest}
    */
-  public static final class FindSuccessorRequestWIKI extends
+  public static final class FindSuccessorRequest extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:FindSuccessorRequestWIKI)
-      FindSuccessorRequestWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:FindSuccessorRequest)
+      FindSuccessorRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -54,26 +54,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        FindSuccessorRequestWIKI.class.getName());
+        FindSuccessorRequest.class.getName());
     }
-    // Use FindSuccessorRequestWIKI.newBuilder() to construct.
-    private FindSuccessorRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use FindSuccessorRequest.newBuilder() to construct.
+    private FindSuccessorRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private FindSuccessorRequestWIKI() {
+    private FindSuccessorRequest() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_FindSuccessorRequestWIKI_descriptor;
+      return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_FindSuccessorRequestWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_FindSuccessorRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.FindSuccessorRequestWIKI.class, proto.Chord.FindSuccessorRequestWIKI.Builder.class);
+              proto.Chord.FindSuccessorRequest.class, proto.Chord.FindSuccessorRequest.Builder.class);
     }
 
     public static final int ID_FIELD_NUMBER = 1;
@@ -127,10 +127,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.FindSuccessorRequestWIKI)) {
+      if (!(obj instanceof proto.Chord.FindSuccessorRequest)) {
         return super.equals(obj);
       }
-      proto.Chord.FindSuccessorRequestWIKI other = (proto.Chord.FindSuccessorRequestWIKI) obj;
+      proto.Chord.FindSuccessorRequest other = (proto.Chord.FindSuccessorRequest) obj;
 
       if (getId()
           != other.getId()) return false;
@@ -153,44 +153,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(byte[] data)
+    public static proto.Chord.FindSuccessorRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.FindSuccessorRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -198,26 +198,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.FindSuccessorRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.FindSuccessorRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.FindSuccessorRequestWIKI parseDelimitedFrom(
+    public static proto.Chord.FindSuccessorRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.FindSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.FindSuccessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -230,7 +230,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.FindSuccessorRequestWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.FindSuccessorRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -250,26 +250,26 @@ public final class Chord {
      * ----------------------------------------------------
      * </pre>
      *
-     * Protobuf type {@code FindSuccessorRequestWIKI}
+     * Protobuf type {@code FindSuccessorRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:FindSuccessorRequestWIKI)
-        proto.Chord.FindSuccessorRequestWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:FindSuccessorRequest)
+        proto.Chord.FindSuccessorRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_FindSuccessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_FindSuccessorRequestWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_FindSuccessorRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.FindSuccessorRequestWIKI.class, proto.Chord.FindSuccessorRequestWIKI.Builder.class);
+                proto.Chord.FindSuccessorRequest.class, proto.Chord.FindSuccessorRequest.Builder.class);
       }
 
-      // Construct using proto.Chord.FindSuccessorRequestWIKI.newBuilder()
+      // Construct using proto.Chord.FindSuccessorRequest.newBuilder()
       private Builder() {
 
       }
@@ -290,17 +290,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_FindSuccessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_FindSuccessorRequest_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.FindSuccessorRequestWIKI getDefaultInstanceForType() {
-        return proto.Chord.FindSuccessorRequestWIKI.getDefaultInstance();
+      public proto.Chord.FindSuccessorRequest getDefaultInstanceForType() {
+        return proto.Chord.FindSuccessorRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.FindSuccessorRequestWIKI build() {
-        proto.Chord.FindSuccessorRequestWIKI result = buildPartial();
+      public proto.Chord.FindSuccessorRequest build() {
+        proto.Chord.FindSuccessorRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -308,14 +308,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.FindSuccessorRequestWIKI buildPartial() {
-        proto.Chord.FindSuccessorRequestWIKI result = new proto.Chord.FindSuccessorRequestWIKI(this);
+      public proto.Chord.FindSuccessorRequest buildPartial() {
+        proto.Chord.FindSuccessorRequest result = new proto.Chord.FindSuccessorRequest(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.FindSuccessorRequestWIKI result) {
+      private void buildPartial0(proto.Chord.FindSuccessorRequest result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.id_ = id_;
@@ -324,16 +324,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.FindSuccessorRequestWIKI) {
-          return mergeFrom((proto.Chord.FindSuccessorRequestWIKI)other);
+        if (other instanceof proto.Chord.FindSuccessorRequest) {
+          return mergeFrom((proto.Chord.FindSuccessorRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.FindSuccessorRequestWIKI other) {
-        if (other == proto.Chord.FindSuccessorRequestWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.FindSuccessorRequest other) {
+        if (other == proto.Chord.FindSuccessorRequest.getDefaultInstance()) return this;
         if (other.getId() != 0L) {
           setId(other.getId());
         }
@@ -417,23 +417,23 @@ public final class Chord {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:FindSuccessorRequestWIKI)
+      // @@protoc_insertion_point(builder_scope:FindSuccessorRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:FindSuccessorRequestWIKI)
-    private static final proto.Chord.FindSuccessorRequestWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:FindSuccessorRequest)
+    private static final proto.Chord.FindSuccessorRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorRequestWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorRequest();
     }
 
-    public static proto.Chord.FindSuccessorRequestWIKI getDefaultInstance() {
+    public static proto.Chord.FindSuccessorRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<FindSuccessorRequestWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorRequestWIKI>() {
+    private static final com.google.protobuf.Parser<FindSuccessorRequest>
+        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorRequest>() {
       @java.lang.Override
-      public FindSuccessorRequestWIKI parsePartialFrom(
+      public FindSuccessorRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -452,24 +452,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<FindSuccessorRequestWIKI> parser() {
+    public static com.google.protobuf.Parser<FindSuccessorRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<FindSuccessorRequestWIKI> getParserForType() {
+    public com.google.protobuf.Parser<FindSuccessorRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.FindSuccessorRequestWIKI getDefaultInstanceForType() {
+    public proto.Chord.FindSuccessorRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface FindSuccessorReplyWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:FindSuccessorReplyWIKI)
+  public interface FindSuccessorReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FindSuccessorReply)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -488,12 +488,12 @@ public final class Chord {
     proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder();
   }
   /**
-   * Protobuf type {@code FindSuccessorReplyWIKI}
+   * Protobuf type {@code FindSuccessorReply}
    */
-  public static final class FindSuccessorReplyWIKI extends
+  public static final class FindSuccessorReply extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:FindSuccessorReplyWIKI)
-      FindSuccessorReplyWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:FindSuccessorReply)
+      FindSuccessorReplyOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -502,26 +502,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        FindSuccessorReplyWIKI.class.getName());
+        FindSuccessorReply.class.getName());
     }
-    // Use FindSuccessorReplyWIKI.newBuilder() to construct.
-    private FindSuccessorReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use FindSuccessorReply.newBuilder() to construct.
+    private FindSuccessorReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private FindSuccessorReplyWIKI() {
+    private FindSuccessorReply() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_FindSuccessorReplyWIKI_descriptor;
+      return proto.Chord.internal_static_FindSuccessorReply_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_FindSuccessorReplyWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_FindSuccessorReply_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.FindSuccessorReplyWIKI.class, proto.Chord.FindSuccessorReplyWIKI.Builder.class);
+              proto.Chord.FindSuccessorReply.class, proto.Chord.FindSuccessorReply.Builder.class);
     }
 
     private int bitField0_;
@@ -591,10 +591,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.FindSuccessorReplyWIKI)) {
+      if (!(obj instanceof proto.Chord.FindSuccessorReply)) {
         return super.equals(obj);
       }
-      proto.Chord.FindSuccessorReplyWIKI other = (proto.Chord.FindSuccessorReplyWIKI) obj;
+      proto.Chord.FindSuccessorReply other = (proto.Chord.FindSuccessorReply) obj;
 
       if (hasChordNode() != other.hasChordNode()) return false;
       if (hasChordNode()) {
@@ -621,44 +621,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(byte[] data)
+    public static proto.Chord.FindSuccessorReply parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.FindSuccessorReply parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -666,26 +666,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.FindSuccessorReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.FindSuccessorReply parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.FindSuccessorReplyWIKI parseDelimitedFrom(
+    public static proto.Chord.FindSuccessorReply parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.FindSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.FindSuccessorReply parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -698,7 +698,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.FindSuccessorReplyWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.FindSuccessorReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -714,26 +714,26 @@ public final class Chord {
       return builder;
     }
     /**
-     * Protobuf type {@code FindSuccessorReplyWIKI}
+     * Protobuf type {@code FindSuccessorReply}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:FindSuccessorReplyWIKI)
-        proto.Chord.FindSuccessorReplyWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:FindSuccessorReply)
+        proto.Chord.FindSuccessorReplyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_FindSuccessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_FindSuccessorReply_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_FindSuccessorReplyWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_FindSuccessorReply_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.FindSuccessorReplyWIKI.class, proto.Chord.FindSuccessorReplyWIKI.Builder.class);
+                proto.Chord.FindSuccessorReply.class, proto.Chord.FindSuccessorReply.Builder.class);
       }
 
-      // Construct using proto.Chord.FindSuccessorReplyWIKI.newBuilder()
+      // Construct using proto.Chord.FindSuccessorReply.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -764,17 +764,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_FindSuccessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_FindSuccessorReply_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.FindSuccessorReplyWIKI getDefaultInstanceForType() {
-        return proto.Chord.FindSuccessorReplyWIKI.getDefaultInstance();
+      public proto.Chord.FindSuccessorReply getDefaultInstanceForType() {
+        return proto.Chord.FindSuccessorReply.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.FindSuccessorReplyWIKI build() {
-        proto.Chord.FindSuccessorReplyWIKI result = buildPartial();
+      public proto.Chord.FindSuccessorReply build() {
+        proto.Chord.FindSuccessorReply result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -782,14 +782,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.FindSuccessorReplyWIKI buildPartial() {
-        proto.Chord.FindSuccessorReplyWIKI result = new proto.Chord.FindSuccessorReplyWIKI(this);
+      public proto.Chord.FindSuccessorReply buildPartial() {
+        proto.Chord.FindSuccessorReply result = new proto.Chord.FindSuccessorReply(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.FindSuccessorReplyWIKI result) {
+      private void buildPartial0(proto.Chord.FindSuccessorReply result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -803,16 +803,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.FindSuccessorReplyWIKI) {
-          return mergeFrom((proto.Chord.FindSuccessorReplyWIKI)other);
+        if (other instanceof proto.Chord.FindSuccessorReply) {
+          return mergeFrom((proto.Chord.FindSuccessorReply)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.FindSuccessorReplyWIKI other) {
-        if (other == proto.Chord.FindSuccessorReplyWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.FindSuccessorReply other) {
+        if (other == proto.Chord.FindSuccessorReply.getDefaultInstance()) return this;
         if (other.hasChordNode()) {
           mergeChordNode(other.getChordNode());
         }
@@ -987,23 +987,23 @@ public final class Chord {
         return chordNodeBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:FindSuccessorReplyWIKI)
+      // @@protoc_insertion_point(builder_scope:FindSuccessorReply)
     }
 
-    // @@protoc_insertion_point(class_scope:FindSuccessorReplyWIKI)
-    private static final proto.Chord.FindSuccessorReplyWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:FindSuccessorReply)
+    private static final proto.Chord.FindSuccessorReply DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorReplyWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.FindSuccessorReply();
     }
 
-    public static proto.Chord.FindSuccessorReplyWIKI getDefaultInstance() {
+    public static proto.Chord.FindSuccessorReply getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<FindSuccessorReplyWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorReplyWIKI>() {
+    private static final com.google.protobuf.Parser<FindSuccessorReply>
+        PARSER = new com.google.protobuf.AbstractParser<FindSuccessorReply>() {
       @java.lang.Override
-      public FindSuccessorReplyWIKI parsePartialFrom(
+      public FindSuccessorReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1022,24 +1022,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<FindSuccessorReplyWIKI> parser() {
+    public static com.google.protobuf.Parser<FindSuccessorReply> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<FindSuccessorReplyWIKI> getParserForType() {
+    public com.google.protobuf.Parser<FindSuccessorReply> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.FindSuccessorReplyWIKI getDefaultInstanceForType() {
+    public proto.Chord.FindSuccessorReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface NotifyRequestWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:NotifyRequestWIKI)
+  public interface NotifyRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:NotifyRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1062,12 +1062,12 @@ public final class Chord {
    * ----------------------------------------------------
    * </pre>
    *
-   * Protobuf type {@code NotifyRequestWIKI}
+   * Protobuf type {@code NotifyRequest}
    */
-  public static final class NotifyRequestWIKI extends
+  public static final class NotifyRequest extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:NotifyRequestWIKI)
-      NotifyRequestWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:NotifyRequest)
+      NotifyRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -1076,26 +1076,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        NotifyRequestWIKI.class.getName());
+        NotifyRequest.class.getName());
     }
-    // Use NotifyRequestWIKI.newBuilder() to construct.
-    private NotifyRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use NotifyRequest.newBuilder() to construct.
+    private NotifyRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private NotifyRequestWIKI() {
+    private NotifyRequest() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_NotifyRequestWIKI_descriptor;
+      return proto.Chord.internal_static_NotifyRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_NotifyRequestWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_NotifyRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.NotifyRequestWIKI.class, proto.Chord.NotifyRequestWIKI.Builder.class);
+              proto.Chord.NotifyRequest.class, proto.Chord.NotifyRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -1165,10 +1165,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.NotifyRequestWIKI)) {
+      if (!(obj instanceof proto.Chord.NotifyRequest)) {
         return super.equals(obj);
       }
-      proto.Chord.NotifyRequestWIKI other = (proto.Chord.NotifyRequestWIKI) obj;
+      proto.Chord.NotifyRequest other = (proto.Chord.NotifyRequest) obj;
 
       if (hasChordNode() != other.hasChordNode()) return false;
       if (hasChordNode()) {
@@ -1195,44 +1195,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(byte[] data)
+    public static proto.Chord.NotifyRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.NotifyRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1240,26 +1240,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.NotifyRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.NotifyRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.NotifyRequestWIKI parseDelimitedFrom(
+    public static proto.Chord.NotifyRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.NotifyRequestWIKI parseFrom(
+    public static proto.Chord.NotifyRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1272,7 +1272,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.NotifyRequestWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.NotifyRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1292,26 +1292,26 @@ public final class Chord {
      * ----------------------------------------------------
      * </pre>
      *
-     * Protobuf type {@code NotifyRequestWIKI}
+     * Protobuf type {@code NotifyRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:NotifyRequestWIKI)
-        proto.Chord.NotifyRequestWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:NotifyRequest)
+        proto.Chord.NotifyRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_NotifyRequestWIKI_descriptor;
+        return proto.Chord.internal_static_NotifyRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_NotifyRequestWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_NotifyRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.NotifyRequestWIKI.class, proto.Chord.NotifyRequestWIKI.Builder.class);
+                proto.Chord.NotifyRequest.class, proto.Chord.NotifyRequest.Builder.class);
       }
 
-      // Construct using proto.Chord.NotifyRequestWIKI.newBuilder()
+      // Construct using proto.Chord.NotifyRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1342,17 +1342,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_NotifyRequestWIKI_descriptor;
+        return proto.Chord.internal_static_NotifyRequest_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.NotifyRequestWIKI getDefaultInstanceForType() {
-        return proto.Chord.NotifyRequestWIKI.getDefaultInstance();
+      public proto.Chord.NotifyRequest getDefaultInstanceForType() {
+        return proto.Chord.NotifyRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.NotifyRequestWIKI build() {
-        proto.Chord.NotifyRequestWIKI result = buildPartial();
+      public proto.Chord.NotifyRequest build() {
+        proto.Chord.NotifyRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1360,14 +1360,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.NotifyRequestWIKI buildPartial() {
-        proto.Chord.NotifyRequestWIKI result = new proto.Chord.NotifyRequestWIKI(this);
+      public proto.Chord.NotifyRequest buildPartial() {
+        proto.Chord.NotifyRequest result = new proto.Chord.NotifyRequest(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.NotifyRequestWIKI result) {
+      private void buildPartial0(proto.Chord.NotifyRequest result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -1381,16 +1381,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.NotifyRequestWIKI) {
-          return mergeFrom((proto.Chord.NotifyRequestWIKI)other);
+        if (other instanceof proto.Chord.NotifyRequest) {
+          return mergeFrom((proto.Chord.NotifyRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.NotifyRequestWIKI other) {
-        if (other == proto.Chord.NotifyRequestWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.NotifyRequest other) {
+        if (other == proto.Chord.NotifyRequest.getDefaultInstance()) return this;
         if (other.hasChordNode()) {
           mergeChordNode(other.getChordNode());
         }
@@ -1565,23 +1565,23 @@ public final class Chord {
         return chordNodeBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:NotifyRequestWIKI)
+      // @@protoc_insertion_point(builder_scope:NotifyRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:NotifyRequestWIKI)
-    private static final proto.Chord.NotifyRequestWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:NotifyRequest)
+    private static final proto.Chord.NotifyRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.NotifyRequestWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.NotifyRequest();
     }
 
-    public static proto.Chord.NotifyRequestWIKI getDefaultInstance() {
+    public static proto.Chord.NotifyRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<NotifyRequestWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<NotifyRequestWIKI>() {
+    private static final com.google.protobuf.Parser<NotifyRequest>
+        PARSER = new com.google.protobuf.AbstractParser<NotifyRequest>() {
       @java.lang.Override
-      public NotifyRequestWIKI parsePartialFrom(
+      public NotifyRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1600,33 +1600,33 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<NotifyRequestWIKI> parser() {
+    public static com.google.protobuf.Parser<NotifyRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<NotifyRequestWIKI> getParserForType() {
+    public com.google.protobuf.Parser<NotifyRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.NotifyRequestWIKI getDefaultInstanceForType() {
+    public proto.Chord.NotifyRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface NotifyReplyWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:NotifyReplyWIKI)
+  public interface NotifyReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:NotifyReply)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code NotifyReplyWIKI}
+   * Protobuf type {@code NotifyReply}
    */
-  public static final class NotifyReplyWIKI extends
+  public static final class NotifyReply extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:NotifyReplyWIKI)
-      NotifyReplyWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:NotifyReply)
+      NotifyReplyOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -1635,26 +1635,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        NotifyReplyWIKI.class.getName());
+        NotifyReply.class.getName());
     }
-    // Use NotifyReplyWIKI.newBuilder() to construct.
-    private NotifyReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use NotifyReply.newBuilder() to construct.
+    private NotifyReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private NotifyReplyWIKI() {
+    private NotifyReply() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_NotifyReplyWIKI_descriptor;
+      return proto.Chord.internal_static_NotifyReply_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_NotifyReplyWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_NotifyReply_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.NotifyReplyWIKI.class, proto.Chord.NotifyReplyWIKI.Builder.class);
+              proto.Chord.NotifyReply.class, proto.Chord.NotifyReply.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1690,10 +1690,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.NotifyReplyWIKI)) {
+      if (!(obj instanceof proto.Chord.NotifyReply)) {
         return super.equals(obj);
       }
-      proto.Chord.NotifyReplyWIKI other = (proto.Chord.NotifyReplyWIKI) obj;
+      proto.Chord.NotifyReply other = (proto.Chord.NotifyReply) obj;
 
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
@@ -1711,44 +1711,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(byte[] data)
+    public static proto.Chord.NotifyReply parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.NotifyReply parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1756,26 +1756,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.NotifyReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.NotifyReply parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.NotifyReplyWIKI parseDelimitedFrom(
+    public static proto.Chord.NotifyReply parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.NotifyReplyWIKI parseFrom(
+    public static proto.Chord.NotifyReply parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1788,7 +1788,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.NotifyReplyWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.NotifyReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1804,26 +1804,26 @@ public final class Chord {
       return builder;
     }
     /**
-     * Protobuf type {@code NotifyReplyWIKI}
+     * Protobuf type {@code NotifyReply}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:NotifyReplyWIKI)
-        proto.Chord.NotifyReplyWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:NotifyReply)
+        proto.Chord.NotifyReplyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_NotifyReplyWIKI_descriptor;
+        return proto.Chord.internal_static_NotifyReply_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_NotifyReplyWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_NotifyReply_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.NotifyReplyWIKI.class, proto.Chord.NotifyReplyWIKI.Builder.class);
+                proto.Chord.NotifyReply.class, proto.Chord.NotifyReply.Builder.class);
       }
 
-      // Construct using proto.Chord.NotifyReplyWIKI.newBuilder()
+      // Construct using proto.Chord.NotifyReply.newBuilder()
       private Builder() {
 
       }
@@ -1842,17 +1842,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_NotifyReplyWIKI_descriptor;
+        return proto.Chord.internal_static_NotifyReply_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.NotifyReplyWIKI getDefaultInstanceForType() {
-        return proto.Chord.NotifyReplyWIKI.getDefaultInstance();
+      public proto.Chord.NotifyReply getDefaultInstanceForType() {
+        return proto.Chord.NotifyReply.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.NotifyReplyWIKI build() {
-        proto.Chord.NotifyReplyWIKI result = buildPartial();
+      public proto.Chord.NotifyReply build() {
+        proto.Chord.NotifyReply result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1860,24 +1860,24 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.NotifyReplyWIKI buildPartial() {
-        proto.Chord.NotifyReplyWIKI result = new proto.Chord.NotifyReplyWIKI(this);
+      public proto.Chord.NotifyReply buildPartial() {
+        proto.Chord.NotifyReply result = new proto.Chord.NotifyReply(this);
         onBuilt();
         return result;
       }
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.NotifyReplyWIKI) {
-          return mergeFrom((proto.Chord.NotifyReplyWIKI)other);
+        if (other instanceof proto.Chord.NotifyReply) {
+          return mergeFrom((proto.Chord.NotifyReply)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.NotifyReplyWIKI other) {
-        if (other == proto.Chord.NotifyReplyWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.NotifyReply other) {
+        if (other == proto.Chord.NotifyReply.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -1920,23 +1920,23 @@ public final class Chord {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:NotifyReplyWIKI)
+      // @@protoc_insertion_point(builder_scope:NotifyReply)
     }
 
-    // @@protoc_insertion_point(class_scope:NotifyReplyWIKI)
-    private static final proto.Chord.NotifyReplyWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:NotifyReply)
+    private static final proto.Chord.NotifyReply DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.NotifyReplyWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.NotifyReply();
     }
 
-    public static proto.Chord.NotifyReplyWIKI getDefaultInstance() {
+    public static proto.Chord.NotifyReply getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<NotifyReplyWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<NotifyReplyWIKI>() {
+    private static final com.google.protobuf.Parser<NotifyReply>
+        PARSER = new com.google.protobuf.AbstractParser<NotifyReply>() {
       @java.lang.Override
-      public NotifyReplyWIKI parsePartialFrom(
+      public NotifyReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1955,24 +1955,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<NotifyReplyWIKI> parser() {
+    public static com.google.protobuf.Parser<NotifyReply> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<NotifyReplyWIKI> getParserForType() {
+    public com.google.protobuf.Parser<NotifyReply> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.NotifyReplyWIKI getDefaultInstanceForType() {
+    public proto.Chord.NotifyReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface PingNodeRequestWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:PingNodeRequestWIKI)
+  public interface PingNodeRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:PingNodeRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1986,12 +1986,12 @@ public final class Chord {
    * ----------------------------------------------------
    * </pre>
    *
-   * Protobuf type {@code PingNodeRequestWIKI}
+   * Protobuf type {@code PingNodeRequest}
    */
-  public static final class PingNodeRequestWIKI extends
+  public static final class PingNodeRequest extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:PingNodeRequestWIKI)
-      PingNodeRequestWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:PingNodeRequest)
+      PingNodeRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -2000,26 +2000,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        PingNodeRequestWIKI.class.getName());
+        PingNodeRequest.class.getName());
     }
-    // Use PingNodeRequestWIKI.newBuilder() to construct.
-    private PingNodeRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use PingNodeRequest.newBuilder() to construct.
+    private PingNodeRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private PingNodeRequestWIKI() {
+    private PingNodeRequest() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_PingNodeRequestWIKI_descriptor;
+      return proto.Chord.internal_static_PingNodeRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_PingNodeRequestWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_PingNodeRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.PingNodeRequestWIKI.class, proto.Chord.PingNodeRequestWIKI.Builder.class);
+              proto.Chord.PingNodeRequest.class, proto.Chord.PingNodeRequest.Builder.class);
     }
 
     public static final int ISALIVE_FIELD_NUMBER = 1;
@@ -2073,10 +2073,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.PingNodeRequestWIKI)) {
+      if (!(obj instanceof proto.Chord.PingNodeRequest)) {
         return super.equals(obj);
       }
-      proto.Chord.PingNodeRequestWIKI other = (proto.Chord.PingNodeRequestWIKI) obj;
+      proto.Chord.PingNodeRequest other = (proto.Chord.PingNodeRequest) obj;
 
       if (getIsAlive()
           != other.getIsAlive()) return false;
@@ -2099,44 +2099,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(byte[] data)
+    public static proto.Chord.PingNodeRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.PingNodeRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2144,26 +2144,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.PingNodeRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.PingNodeRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.PingNodeRequestWIKI parseDelimitedFrom(
+    public static proto.Chord.PingNodeRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.PingNodeRequestWIKI parseFrom(
+    public static proto.Chord.PingNodeRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2176,7 +2176,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.PingNodeRequestWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.PingNodeRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2196,26 +2196,26 @@ public final class Chord {
      * ----------------------------------------------------
      * </pre>
      *
-     * Protobuf type {@code PingNodeRequestWIKI}
+     * Protobuf type {@code PingNodeRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:PingNodeRequestWIKI)
-        proto.Chord.PingNodeRequestWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:PingNodeRequest)
+        proto.Chord.PingNodeRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_PingNodeRequestWIKI_descriptor;
+        return proto.Chord.internal_static_PingNodeRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_PingNodeRequestWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_PingNodeRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.PingNodeRequestWIKI.class, proto.Chord.PingNodeRequestWIKI.Builder.class);
+                proto.Chord.PingNodeRequest.class, proto.Chord.PingNodeRequest.Builder.class);
       }
 
-      // Construct using proto.Chord.PingNodeRequestWIKI.newBuilder()
+      // Construct using proto.Chord.PingNodeRequest.newBuilder()
       private Builder() {
 
       }
@@ -2236,17 +2236,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_PingNodeRequestWIKI_descriptor;
+        return proto.Chord.internal_static_PingNodeRequest_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.PingNodeRequestWIKI getDefaultInstanceForType() {
-        return proto.Chord.PingNodeRequestWIKI.getDefaultInstance();
+      public proto.Chord.PingNodeRequest getDefaultInstanceForType() {
+        return proto.Chord.PingNodeRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.PingNodeRequestWIKI build() {
-        proto.Chord.PingNodeRequestWIKI result = buildPartial();
+      public proto.Chord.PingNodeRequest build() {
+        proto.Chord.PingNodeRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2254,14 +2254,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.PingNodeRequestWIKI buildPartial() {
-        proto.Chord.PingNodeRequestWIKI result = new proto.Chord.PingNodeRequestWIKI(this);
+      public proto.Chord.PingNodeRequest buildPartial() {
+        proto.Chord.PingNodeRequest result = new proto.Chord.PingNodeRequest(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.PingNodeRequestWIKI result) {
+      private void buildPartial0(proto.Chord.PingNodeRequest result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.isAlive_ = isAlive_;
@@ -2270,16 +2270,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.PingNodeRequestWIKI) {
-          return mergeFrom((proto.Chord.PingNodeRequestWIKI)other);
+        if (other instanceof proto.Chord.PingNodeRequest) {
+          return mergeFrom((proto.Chord.PingNodeRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.PingNodeRequestWIKI other) {
-        if (other == proto.Chord.PingNodeRequestWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.PingNodeRequest other) {
+        if (other == proto.Chord.PingNodeRequest.getDefaultInstance()) return this;
         if (other.getIsAlive() != false) {
           setIsAlive(other.getIsAlive());
         }
@@ -2363,23 +2363,23 @@ public final class Chord {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:PingNodeRequestWIKI)
+      // @@protoc_insertion_point(builder_scope:PingNodeRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:PingNodeRequestWIKI)
-    private static final proto.Chord.PingNodeRequestWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:PingNodeRequest)
+    private static final proto.Chord.PingNodeRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.PingNodeRequestWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.PingNodeRequest();
     }
 
-    public static proto.Chord.PingNodeRequestWIKI getDefaultInstance() {
+    public static proto.Chord.PingNodeRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<PingNodeRequestWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<PingNodeRequestWIKI>() {
+    private static final com.google.protobuf.Parser<PingNodeRequest>
+        PARSER = new com.google.protobuf.AbstractParser<PingNodeRequest>() {
       @java.lang.Override
-      public PingNodeRequestWIKI parsePartialFrom(
+      public PingNodeRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2398,24 +2398,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<PingNodeRequestWIKI> parser() {
+    public static com.google.protobuf.Parser<PingNodeRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PingNodeRequestWIKI> getParserForType() {
+    public com.google.protobuf.Parser<PingNodeRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.PingNodeRequestWIKI getDefaultInstanceForType() {
+    public proto.Chord.PingNodeRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface PingNodeReplyWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:PingNodeReplyWIKI)
+  public interface PingNodeReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:PingNodeReply)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2425,12 +2425,12 @@ public final class Chord {
     boolean getIsAlive();
   }
   /**
-   * Protobuf type {@code PingNodeReplyWIKI}
+   * Protobuf type {@code PingNodeReply}
    */
-  public static final class PingNodeReplyWIKI extends
+  public static final class PingNodeReply extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:PingNodeReplyWIKI)
-      PingNodeReplyWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:PingNodeReply)
+      PingNodeReplyOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -2439,26 +2439,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        PingNodeReplyWIKI.class.getName());
+        PingNodeReply.class.getName());
     }
-    // Use PingNodeReplyWIKI.newBuilder() to construct.
-    private PingNodeReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use PingNodeReply.newBuilder() to construct.
+    private PingNodeReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private PingNodeReplyWIKI() {
+    private PingNodeReply() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_PingNodeReplyWIKI_descriptor;
+      return proto.Chord.internal_static_PingNodeReply_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_PingNodeReplyWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_PingNodeReply_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.PingNodeReplyWIKI.class, proto.Chord.PingNodeReplyWIKI.Builder.class);
+              proto.Chord.PingNodeReply.class, proto.Chord.PingNodeReply.Builder.class);
     }
 
     public static final int ISALIVE_FIELD_NUMBER = 1;
@@ -2512,10 +2512,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.PingNodeReplyWIKI)) {
+      if (!(obj instanceof proto.Chord.PingNodeReply)) {
         return super.equals(obj);
       }
-      proto.Chord.PingNodeReplyWIKI other = (proto.Chord.PingNodeReplyWIKI) obj;
+      proto.Chord.PingNodeReply other = (proto.Chord.PingNodeReply) obj;
 
       if (getIsAlive()
           != other.getIsAlive()) return false;
@@ -2538,44 +2538,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(byte[] data)
+    public static proto.Chord.PingNodeReply parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.PingNodeReply parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2583,26 +2583,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.PingNodeReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.PingNodeReply parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.PingNodeReplyWIKI parseDelimitedFrom(
+    public static proto.Chord.PingNodeReply parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.PingNodeReplyWIKI parseFrom(
+    public static proto.Chord.PingNodeReply parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2615,7 +2615,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.PingNodeReplyWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.PingNodeReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2631,26 +2631,26 @@ public final class Chord {
       return builder;
     }
     /**
-     * Protobuf type {@code PingNodeReplyWIKI}
+     * Protobuf type {@code PingNodeReply}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:PingNodeReplyWIKI)
-        proto.Chord.PingNodeReplyWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:PingNodeReply)
+        proto.Chord.PingNodeReplyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_PingNodeReplyWIKI_descriptor;
+        return proto.Chord.internal_static_PingNodeReply_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_PingNodeReplyWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_PingNodeReply_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.PingNodeReplyWIKI.class, proto.Chord.PingNodeReplyWIKI.Builder.class);
+                proto.Chord.PingNodeReply.class, proto.Chord.PingNodeReply.Builder.class);
       }
 
-      // Construct using proto.Chord.PingNodeReplyWIKI.newBuilder()
+      // Construct using proto.Chord.PingNodeReply.newBuilder()
       private Builder() {
 
       }
@@ -2671,17 +2671,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_PingNodeReplyWIKI_descriptor;
+        return proto.Chord.internal_static_PingNodeReply_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.PingNodeReplyWIKI getDefaultInstanceForType() {
-        return proto.Chord.PingNodeReplyWIKI.getDefaultInstance();
+      public proto.Chord.PingNodeReply getDefaultInstanceForType() {
+        return proto.Chord.PingNodeReply.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.PingNodeReplyWIKI build() {
-        proto.Chord.PingNodeReplyWIKI result = buildPartial();
+      public proto.Chord.PingNodeReply build() {
+        proto.Chord.PingNodeReply result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2689,14 +2689,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.PingNodeReplyWIKI buildPartial() {
-        proto.Chord.PingNodeReplyWIKI result = new proto.Chord.PingNodeReplyWIKI(this);
+      public proto.Chord.PingNodeReply buildPartial() {
+        proto.Chord.PingNodeReply result = new proto.Chord.PingNodeReply(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.PingNodeReplyWIKI result) {
+      private void buildPartial0(proto.Chord.PingNodeReply result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.isAlive_ = isAlive_;
@@ -2705,16 +2705,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.PingNodeReplyWIKI) {
-          return mergeFrom((proto.Chord.PingNodeReplyWIKI)other);
+        if (other instanceof proto.Chord.PingNodeReply) {
+          return mergeFrom((proto.Chord.PingNodeReply)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.PingNodeReplyWIKI other) {
-        if (other == proto.Chord.PingNodeReplyWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.PingNodeReply other) {
+        if (other == proto.Chord.PingNodeReply.getDefaultInstance()) return this;
         if (other.getIsAlive() != false) {
           setIsAlive(other.getIsAlive());
         }
@@ -2798,23 +2798,23 @@ public final class Chord {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:PingNodeReplyWIKI)
+      // @@protoc_insertion_point(builder_scope:PingNodeReply)
     }
 
-    // @@protoc_insertion_point(class_scope:PingNodeReplyWIKI)
-    private static final proto.Chord.PingNodeReplyWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:PingNodeReply)
+    private static final proto.Chord.PingNodeReply DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.PingNodeReplyWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.PingNodeReply();
     }
 
-    public static proto.Chord.PingNodeReplyWIKI getDefaultInstance() {
+    public static proto.Chord.PingNodeReply getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<PingNodeReplyWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<PingNodeReplyWIKI>() {
+    private static final com.google.protobuf.Parser<PingNodeReply>
+        PARSER = new com.google.protobuf.AbstractParser<PingNodeReply>() {
       @java.lang.Override
-      public PingNodeReplyWIKI parsePartialFrom(
+      public PingNodeReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2833,24 +2833,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<PingNodeReplyWIKI> parser() {
+    public static com.google.protobuf.Parser<PingNodeReply> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PingNodeReplyWIKI> getParserForType() {
+    public com.google.protobuf.Parser<PingNodeReply> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.PingNodeReplyWIKI getDefaultInstanceForType() {
+    public proto.Chord.PingNodeReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface GetPredecessorRequestWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetPredecessorRequestWIKI)
+  public interface GetPredecessorRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetPredecessorRequest)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
@@ -2858,12 +2858,12 @@ public final class Chord {
    * ----------------------------------------------------
    * </pre>
    *
-   * Protobuf type {@code GetPredecessorRequestWIKI}
+   * Protobuf type {@code GetPredecessorRequest}
    */
-  public static final class GetPredecessorRequestWIKI extends
+  public static final class GetPredecessorRequest extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:GetPredecessorRequestWIKI)
-      GetPredecessorRequestWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:GetPredecessorRequest)
+      GetPredecessorRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -2872,26 +2872,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        GetPredecessorRequestWIKI.class.getName());
+        GetPredecessorRequest.class.getName());
     }
-    // Use GetPredecessorRequestWIKI.newBuilder() to construct.
-    private GetPredecessorRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use GetPredecessorRequest.newBuilder() to construct.
+    private GetPredecessorRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private GetPredecessorRequestWIKI() {
+    private GetPredecessorRequest() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_GetPredecessorRequestWIKI_descriptor;
+      return proto.Chord.internal_static_GetPredecessorRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_GetPredecessorRequestWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_GetPredecessorRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.GetPredecessorRequestWIKI.class, proto.Chord.GetPredecessorRequestWIKI.Builder.class);
+              proto.Chord.GetPredecessorRequest.class, proto.Chord.GetPredecessorRequest.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2927,10 +2927,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.GetPredecessorRequestWIKI)) {
+      if (!(obj instanceof proto.Chord.GetPredecessorRequest)) {
         return super.equals(obj);
       }
-      proto.Chord.GetPredecessorRequestWIKI other = (proto.Chord.GetPredecessorRequestWIKI) obj;
+      proto.Chord.GetPredecessorRequest other = (proto.Chord.GetPredecessorRequest) obj;
 
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
@@ -2948,44 +2948,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(byte[] data)
+    public static proto.Chord.GetPredecessorRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.GetPredecessorRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2993,26 +2993,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.GetPredecessorRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.GetPredecessorRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.GetPredecessorRequestWIKI parseDelimitedFrom(
+    public static proto.Chord.GetPredecessorRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.GetPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.GetPredecessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3025,7 +3025,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.GetPredecessorRequestWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.GetPredecessorRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -3045,26 +3045,26 @@ public final class Chord {
      * ----------------------------------------------------
      * </pre>
      *
-     * Protobuf type {@code GetPredecessorRequestWIKI}
+     * Protobuf type {@code GetPredecessorRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetPredecessorRequestWIKI)
-        proto.Chord.GetPredecessorRequestWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:GetPredecessorRequest)
+        proto.Chord.GetPredecessorRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_GetPredecessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_GetPredecessorRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_GetPredecessorRequestWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_GetPredecessorRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.GetPredecessorRequestWIKI.class, proto.Chord.GetPredecessorRequestWIKI.Builder.class);
+                proto.Chord.GetPredecessorRequest.class, proto.Chord.GetPredecessorRequest.Builder.class);
       }
 
-      // Construct using proto.Chord.GetPredecessorRequestWIKI.newBuilder()
+      // Construct using proto.Chord.GetPredecessorRequest.newBuilder()
       private Builder() {
 
       }
@@ -3083,17 +3083,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_GetPredecessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_GetPredecessorRequest_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.GetPredecessorRequestWIKI getDefaultInstanceForType() {
-        return proto.Chord.GetPredecessorRequestWIKI.getDefaultInstance();
+      public proto.Chord.GetPredecessorRequest getDefaultInstanceForType() {
+        return proto.Chord.GetPredecessorRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.GetPredecessorRequestWIKI build() {
-        proto.Chord.GetPredecessorRequestWIKI result = buildPartial();
+      public proto.Chord.GetPredecessorRequest build() {
+        proto.Chord.GetPredecessorRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3101,24 +3101,24 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.GetPredecessorRequestWIKI buildPartial() {
-        proto.Chord.GetPredecessorRequestWIKI result = new proto.Chord.GetPredecessorRequestWIKI(this);
+      public proto.Chord.GetPredecessorRequest buildPartial() {
+        proto.Chord.GetPredecessorRequest result = new proto.Chord.GetPredecessorRequest(this);
         onBuilt();
         return result;
       }
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.GetPredecessorRequestWIKI) {
-          return mergeFrom((proto.Chord.GetPredecessorRequestWIKI)other);
+        if (other instanceof proto.Chord.GetPredecessorRequest) {
+          return mergeFrom((proto.Chord.GetPredecessorRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.GetPredecessorRequestWIKI other) {
-        if (other == proto.Chord.GetPredecessorRequestWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.GetPredecessorRequest other) {
+        if (other == proto.Chord.GetPredecessorRequest.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -3161,23 +3161,23 @@ public final class Chord {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:GetPredecessorRequestWIKI)
+      // @@protoc_insertion_point(builder_scope:GetPredecessorRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:GetPredecessorRequestWIKI)
-    private static final proto.Chord.GetPredecessorRequestWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:GetPredecessorRequest)
+    private static final proto.Chord.GetPredecessorRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.GetPredecessorRequestWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.GetPredecessorRequest();
     }
 
-    public static proto.Chord.GetPredecessorRequestWIKI getDefaultInstance() {
+    public static proto.Chord.GetPredecessorRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<GetPredecessorRequestWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<GetPredecessorRequestWIKI>() {
+    private static final com.google.protobuf.Parser<GetPredecessorRequest>
+        PARSER = new com.google.protobuf.AbstractParser<GetPredecessorRequest>() {
       @java.lang.Override
-      public GetPredecessorRequestWIKI parsePartialFrom(
+      public GetPredecessorRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3196,24 +3196,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<GetPredecessorRequestWIKI> parser() {
+    public static com.google.protobuf.Parser<GetPredecessorRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<GetPredecessorRequestWIKI> getParserForType() {
+    public com.google.protobuf.Parser<GetPredecessorRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.GetPredecessorRequestWIKI getDefaultInstanceForType() {
+    public proto.Chord.GetPredecessorRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface GetPredecessorReplyWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetPredecessorReplyWIKI)
+  public interface GetPredecessorReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetPredecessorReply)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -3232,12 +3232,12 @@ public final class Chord {
     proto.Chord.ChordNodeOrBuilder getChordNodeOrBuilder();
   }
   /**
-   * Protobuf type {@code GetPredecessorReplyWIKI}
+   * Protobuf type {@code GetPredecessorReply}
    */
-  public static final class GetPredecessorReplyWIKI extends
+  public static final class GetPredecessorReply extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:GetPredecessorReplyWIKI)
-      GetPredecessorReplyWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:GetPredecessorReply)
+      GetPredecessorReplyOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -3246,26 +3246,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        GetPredecessorReplyWIKI.class.getName());
+        GetPredecessorReply.class.getName());
     }
-    // Use GetPredecessorReplyWIKI.newBuilder() to construct.
-    private GetPredecessorReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use GetPredecessorReply.newBuilder() to construct.
+    private GetPredecessorReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private GetPredecessorReplyWIKI() {
+    private GetPredecessorReply() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_GetPredecessorReplyWIKI_descriptor;
+      return proto.Chord.internal_static_GetPredecessorReply_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_GetPredecessorReplyWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_GetPredecessorReply_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.GetPredecessorReplyWIKI.class, proto.Chord.GetPredecessorReplyWIKI.Builder.class);
+              proto.Chord.GetPredecessorReply.class, proto.Chord.GetPredecessorReply.Builder.class);
     }
 
     private int bitField0_;
@@ -3335,10 +3335,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.GetPredecessorReplyWIKI)) {
+      if (!(obj instanceof proto.Chord.GetPredecessorReply)) {
         return super.equals(obj);
       }
-      proto.Chord.GetPredecessorReplyWIKI other = (proto.Chord.GetPredecessorReplyWIKI) obj;
+      proto.Chord.GetPredecessorReply other = (proto.Chord.GetPredecessorReply) obj;
 
       if (hasChordNode() != other.hasChordNode()) return false;
       if (hasChordNode()) {
@@ -3365,44 +3365,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(byte[] data)
+    public static proto.Chord.GetPredecessorReply parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.GetPredecessorReply parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3410,26 +3410,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.GetPredecessorReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.GetPredecessorReply parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.GetPredecessorReplyWIKI parseDelimitedFrom(
+    public static proto.Chord.GetPredecessorReply parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.GetPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.GetPredecessorReply parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3442,7 +3442,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.GetPredecessorReplyWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.GetPredecessorReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -3458,26 +3458,26 @@ public final class Chord {
       return builder;
     }
     /**
-     * Protobuf type {@code GetPredecessorReplyWIKI}
+     * Protobuf type {@code GetPredecessorReply}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetPredecessorReplyWIKI)
-        proto.Chord.GetPredecessorReplyWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:GetPredecessorReply)
+        proto.Chord.GetPredecessorReplyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_GetPredecessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_GetPredecessorReply_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_GetPredecessorReplyWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_GetPredecessorReply_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.GetPredecessorReplyWIKI.class, proto.Chord.GetPredecessorReplyWIKI.Builder.class);
+                proto.Chord.GetPredecessorReply.class, proto.Chord.GetPredecessorReply.Builder.class);
       }
 
-      // Construct using proto.Chord.GetPredecessorReplyWIKI.newBuilder()
+      // Construct using proto.Chord.GetPredecessorReply.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -3508,17 +3508,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_GetPredecessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_GetPredecessorReply_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.GetPredecessorReplyWIKI getDefaultInstanceForType() {
-        return proto.Chord.GetPredecessorReplyWIKI.getDefaultInstance();
+      public proto.Chord.GetPredecessorReply getDefaultInstanceForType() {
+        return proto.Chord.GetPredecessorReply.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.GetPredecessorReplyWIKI build() {
-        proto.Chord.GetPredecessorReplyWIKI result = buildPartial();
+      public proto.Chord.GetPredecessorReply build() {
+        proto.Chord.GetPredecessorReply result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3526,14 +3526,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.GetPredecessorReplyWIKI buildPartial() {
-        proto.Chord.GetPredecessorReplyWIKI result = new proto.Chord.GetPredecessorReplyWIKI(this);
+      public proto.Chord.GetPredecessorReply buildPartial() {
+        proto.Chord.GetPredecessorReply result = new proto.Chord.GetPredecessorReply(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.GetPredecessorReplyWIKI result) {
+      private void buildPartial0(proto.Chord.GetPredecessorReply result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -3547,16 +3547,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.GetPredecessorReplyWIKI) {
-          return mergeFrom((proto.Chord.GetPredecessorReplyWIKI)other);
+        if (other instanceof proto.Chord.GetPredecessorReply) {
+          return mergeFrom((proto.Chord.GetPredecessorReply)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.GetPredecessorReplyWIKI other) {
-        if (other == proto.Chord.GetPredecessorReplyWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.GetPredecessorReply other) {
+        if (other == proto.Chord.GetPredecessorReply.getDefaultInstance()) return this;
         if (other.hasChordNode()) {
           mergeChordNode(other.getChordNode());
         }
@@ -3731,23 +3731,23 @@ public final class Chord {
         return chordNodeBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:GetPredecessorReplyWIKI)
+      // @@protoc_insertion_point(builder_scope:GetPredecessorReply)
     }
 
-    // @@protoc_insertion_point(class_scope:GetPredecessorReplyWIKI)
-    private static final proto.Chord.GetPredecessorReplyWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:GetPredecessorReply)
+    private static final proto.Chord.GetPredecessorReply DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.GetPredecessorReplyWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.GetPredecessorReply();
     }
 
-    public static proto.Chord.GetPredecessorReplyWIKI getDefaultInstance() {
+    public static proto.Chord.GetPredecessorReply getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<GetPredecessorReplyWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<GetPredecessorReplyWIKI>() {
+    private static final com.google.protobuf.Parser<GetPredecessorReply>
+        PARSER = new com.google.protobuf.AbstractParser<GetPredecessorReply>() {
       @java.lang.Override
-      public GetPredecessorReplyWIKI parsePartialFrom(
+      public GetPredecessorReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3766,24 +3766,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<GetPredecessorReplyWIKI> parser() {
+    public static com.google.protobuf.Parser<GetPredecessorReply> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<GetPredecessorReplyWIKI> getParserForType() {
+    public com.google.protobuf.Parser<GetPredecessorReply> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.GetPredecessorReplyWIKI getDefaultInstanceForType() {
+    public proto.Chord.GetPredecessorReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface SetPredecessorsSuccessorRequestWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SetPredecessorsSuccessorRequestWIKI)
+  public interface SetPredecessorsSuccessorRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetPredecessorsSuccessorRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -3806,12 +3806,12 @@ public final class Chord {
    * ----------------------------------------------------
    * </pre>
    *
-   * Protobuf type {@code SetPredecessorsSuccessorRequestWIKI}
+   * Protobuf type {@code SetPredecessorsSuccessorRequest}
    */
-  public static final class SetPredecessorsSuccessorRequestWIKI extends
+  public static final class SetPredecessorsSuccessorRequest extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:SetPredecessorsSuccessorRequestWIKI)
-      SetPredecessorsSuccessorRequestWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:SetPredecessorsSuccessorRequest)
+      SetPredecessorsSuccessorRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -3820,26 +3820,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        SetPredecessorsSuccessorRequestWIKI.class.getName());
+        SetPredecessorsSuccessorRequest.class.getName());
     }
-    // Use SetPredecessorsSuccessorRequestWIKI.newBuilder() to construct.
-    private SetPredecessorsSuccessorRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use SetPredecessorsSuccessorRequest.newBuilder() to construct.
+    private SetPredecessorsSuccessorRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private SetPredecessorsSuccessorRequestWIKI() {
+    private SetPredecessorsSuccessorRequest() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+      return proto.Chord.internal_static_SetPredecessorsSuccessorRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_SetPredecessorsSuccessorRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.SetPredecessorsSuccessorRequestWIKI.class, proto.Chord.SetPredecessorsSuccessorRequestWIKI.Builder.class);
+              proto.Chord.SetPredecessorsSuccessorRequest.class, proto.Chord.SetPredecessorsSuccessorRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -3909,10 +3909,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.SetPredecessorsSuccessorRequestWIKI)) {
+      if (!(obj instanceof proto.Chord.SetPredecessorsSuccessorRequest)) {
         return super.equals(obj);
       }
-      proto.Chord.SetPredecessorsSuccessorRequestWIKI other = (proto.Chord.SetPredecessorsSuccessorRequestWIKI) obj;
+      proto.Chord.SetPredecessorsSuccessorRequest other = (proto.Chord.SetPredecessorsSuccessorRequest) obj;
 
       if (hasChordNode() != other.hasChordNode()) return false;
       if (hasChordNode()) {
@@ -3939,44 +3939,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(byte[] data)
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3984,26 +3984,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseDelimitedFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4016,7 +4016,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.SetPredecessorsSuccessorRequestWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.SetPredecessorsSuccessorRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -4036,26 +4036,26 @@ public final class Chord {
      * ----------------------------------------------------
      * </pre>
      *
-     * Protobuf type {@code SetPredecessorsSuccessorRequestWIKI}
+     * Protobuf type {@code SetPredecessorsSuccessorRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SetPredecessorsSuccessorRequestWIKI)
-        proto.Chord.SetPredecessorsSuccessorRequestWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:SetPredecessorsSuccessorRequest)
+        proto.Chord.SetPredecessorsSuccessorRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_SetPredecessorsSuccessorRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_SetPredecessorsSuccessorRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.SetPredecessorsSuccessorRequestWIKI.class, proto.Chord.SetPredecessorsSuccessorRequestWIKI.Builder.class);
+                proto.Chord.SetPredecessorsSuccessorRequest.class, proto.Chord.SetPredecessorsSuccessorRequest.Builder.class);
       }
 
-      // Construct using proto.Chord.SetPredecessorsSuccessorRequestWIKI.newBuilder()
+      // Construct using proto.Chord.SetPredecessorsSuccessorRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -4086,17 +4086,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_SetPredecessorsSuccessorRequest_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.SetPredecessorsSuccessorRequestWIKI getDefaultInstanceForType() {
-        return proto.Chord.SetPredecessorsSuccessorRequestWIKI.getDefaultInstance();
+      public proto.Chord.SetPredecessorsSuccessorRequest getDefaultInstanceForType() {
+        return proto.Chord.SetPredecessorsSuccessorRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.SetPredecessorsSuccessorRequestWIKI build() {
-        proto.Chord.SetPredecessorsSuccessorRequestWIKI result = buildPartial();
+      public proto.Chord.SetPredecessorsSuccessorRequest build() {
+        proto.Chord.SetPredecessorsSuccessorRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4104,14 +4104,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.SetPredecessorsSuccessorRequestWIKI buildPartial() {
-        proto.Chord.SetPredecessorsSuccessorRequestWIKI result = new proto.Chord.SetPredecessorsSuccessorRequestWIKI(this);
+      public proto.Chord.SetPredecessorsSuccessorRequest buildPartial() {
+        proto.Chord.SetPredecessorsSuccessorRequest result = new proto.Chord.SetPredecessorsSuccessorRequest(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.SetPredecessorsSuccessorRequestWIKI result) {
+      private void buildPartial0(proto.Chord.SetPredecessorsSuccessorRequest result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -4125,16 +4125,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.SetPredecessorsSuccessorRequestWIKI) {
-          return mergeFrom((proto.Chord.SetPredecessorsSuccessorRequestWIKI)other);
+        if (other instanceof proto.Chord.SetPredecessorsSuccessorRequest) {
+          return mergeFrom((proto.Chord.SetPredecessorsSuccessorRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.SetPredecessorsSuccessorRequestWIKI other) {
-        if (other == proto.Chord.SetPredecessorsSuccessorRequestWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.SetPredecessorsSuccessorRequest other) {
+        if (other == proto.Chord.SetPredecessorsSuccessorRequest.getDefaultInstance()) return this;
         if (other.hasChordNode()) {
           mergeChordNode(other.getChordNode());
         }
@@ -4309,23 +4309,23 @@ public final class Chord {
         return chordNodeBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:SetPredecessorsSuccessorRequestWIKI)
+      // @@protoc_insertion_point(builder_scope:SetPredecessorsSuccessorRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:SetPredecessorsSuccessorRequestWIKI)
-    private static final proto.Chord.SetPredecessorsSuccessorRequestWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:SetPredecessorsSuccessorRequest)
+    private static final proto.Chord.SetPredecessorsSuccessorRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.SetPredecessorsSuccessorRequestWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.SetPredecessorsSuccessorRequest();
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorRequestWIKI getDefaultInstance() {
+    public static proto.Chord.SetPredecessorsSuccessorRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SetPredecessorsSuccessorRequestWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<SetPredecessorsSuccessorRequestWIKI>() {
+    private static final com.google.protobuf.Parser<SetPredecessorsSuccessorRequest>
+        PARSER = new com.google.protobuf.AbstractParser<SetPredecessorsSuccessorRequest>() {
       @java.lang.Override
-      public SetPredecessorsSuccessorRequestWIKI parsePartialFrom(
+      public SetPredecessorsSuccessorRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4344,33 +4344,33 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<SetPredecessorsSuccessorRequestWIKI> parser() {
+    public static com.google.protobuf.Parser<SetPredecessorsSuccessorRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<SetPredecessorsSuccessorRequestWIKI> getParserForType() {
+    public com.google.protobuf.Parser<SetPredecessorsSuccessorRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.SetPredecessorsSuccessorRequestWIKI getDefaultInstanceForType() {
+    public proto.Chord.SetPredecessorsSuccessorRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface SetPredecessorsSuccessorReplyWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SetPredecessorsSuccessorReplyWIKI)
+  public interface SetPredecessorsSuccessorReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetPredecessorsSuccessorReply)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code SetPredecessorsSuccessorReplyWIKI}
+   * Protobuf type {@code SetPredecessorsSuccessorReply}
    */
-  public static final class SetPredecessorsSuccessorReplyWIKI extends
+  public static final class SetPredecessorsSuccessorReply extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:SetPredecessorsSuccessorReplyWIKI)
-      SetPredecessorsSuccessorReplyWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:SetPredecessorsSuccessorReply)
+      SetPredecessorsSuccessorReplyOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -4379,26 +4379,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        SetPredecessorsSuccessorReplyWIKI.class.getName());
+        SetPredecessorsSuccessorReply.class.getName());
     }
-    // Use SetPredecessorsSuccessorReplyWIKI.newBuilder() to construct.
-    private SetPredecessorsSuccessorReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use SetPredecessorsSuccessorReply.newBuilder() to construct.
+    private SetPredecessorsSuccessorReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private SetPredecessorsSuccessorReplyWIKI() {
+    private SetPredecessorsSuccessorReply() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+      return proto.Chord.internal_static_SetPredecessorsSuccessorReply_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_SetPredecessorsSuccessorReply_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.SetPredecessorsSuccessorReplyWIKI.class, proto.Chord.SetPredecessorsSuccessorReplyWIKI.Builder.class);
+              proto.Chord.SetPredecessorsSuccessorReply.class, proto.Chord.SetPredecessorsSuccessorReply.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4434,10 +4434,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.SetPredecessorsSuccessorReplyWIKI)) {
+      if (!(obj instanceof proto.Chord.SetPredecessorsSuccessorReply)) {
         return super.equals(obj);
       }
-      proto.Chord.SetPredecessorsSuccessorReplyWIKI other = (proto.Chord.SetPredecessorsSuccessorReplyWIKI) obj;
+      proto.Chord.SetPredecessorsSuccessorReply other = (proto.Chord.SetPredecessorsSuccessorReply) obj;
 
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
@@ -4455,44 +4455,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(byte[] data)
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4500,26 +4500,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.SetPredecessorsSuccessorReply parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseDelimitedFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI parseFrom(
+    public static proto.Chord.SetPredecessorsSuccessorReply parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4532,7 +4532,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.SetPredecessorsSuccessorReplyWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.SetPredecessorsSuccessorReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -4548,26 +4548,26 @@ public final class Chord {
       return builder;
     }
     /**
-     * Protobuf type {@code SetPredecessorsSuccessorReplyWIKI}
+     * Protobuf type {@code SetPredecessorsSuccessorReply}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SetPredecessorsSuccessorReplyWIKI)
-        proto.Chord.SetPredecessorsSuccessorReplyWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:SetPredecessorsSuccessorReply)
+        proto.Chord.SetPredecessorsSuccessorReplyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_SetPredecessorsSuccessorReply_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_SetPredecessorsSuccessorReply_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.SetPredecessorsSuccessorReplyWIKI.class, proto.Chord.SetPredecessorsSuccessorReplyWIKI.Builder.class);
+                proto.Chord.SetPredecessorsSuccessorReply.class, proto.Chord.SetPredecessorsSuccessorReply.Builder.class);
       }
 
-      // Construct using proto.Chord.SetPredecessorsSuccessorReplyWIKI.newBuilder()
+      // Construct using proto.Chord.SetPredecessorsSuccessorReply.newBuilder()
       private Builder() {
 
       }
@@ -4586,17 +4586,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_SetPredecessorsSuccessorReply_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.SetPredecessorsSuccessorReplyWIKI getDefaultInstanceForType() {
-        return proto.Chord.SetPredecessorsSuccessorReplyWIKI.getDefaultInstance();
+      public proto.Chord.SetPredecessorsSuccessorReply getDefaultInstanceForType() {
+        return proto.Chord.SetPredecessorsSuccessorReply.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.SetPredecessorsSuccessorReplyWIKI build() {
-        proto.Chord.SetPredecessorsSuccessorReplyWIKI result = buildPartial();
+      public proto.Chord.SetPredecessorsSuccessorReply build() {
+        proto.Chord.SetPredecessorsSuccessorReply result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4604,24 +4604,24 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.SetPredecessorsSuccessorReplyWIKI buildPartial() {
-        proto.Chord.SetPredecessorsSuccessorReplyWIKI result = new proto.Chord.SetPredecessorsSuccessorReplyWIKI(this);
+      public proto.Chord.SetPredecessorsSuccessorReply buildPartial() {
+        proto.Chord.SetPredecessorsSuccessorReply result = new proto.Chord.SetPredecessorsSuccessorReply(this);
         onBuilt();
         return result;
       }
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.SetPredecessorsSuccessorReplyWIKI) {
-          return mergeFrom((proto.Chord.SetPredecessorsSuccessorReplyWIKI)other);
+        if (other instanceof proto.Chord.SetPredecessorsSuccessorReply) {
+          return mergeFrom((proto.Chord.SetPredecessorsSuccessorReply)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.SetPredecessorsSuccessorReplyWIKI other) {
-        if (other == proto.Chord.SetPredecessorsSuccessorReplyWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.SetPredecessorsSuccessorReply other) {
+        if (other == proto.Chord.SetPredecessorsSuccessorReply.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -4664,23 +4664,23 @@ public final class Chord {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:SetPredecessorsSuccessorReplyWIKI)
+      // @@protoc_insertion_point(builder_scope:SetPredecessorsSuccessorReply)
     }
 
-    // @@protoc_insertion_point(class_scope:SetPredecessorsSuccessorReplyWIKI)
-    private static final proto.Chord.SetPredecessorsSuccessorReplyWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:SetPredecessorsSuccessorReply)
+    private static final proto.Chord.SetPredecessorsSuccessorReply DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.SetPredecessorsSuccessorReplyWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.SetPredecessorsSuccessorReply();
     }
 
-    public static proto.Chord.SetPredecessorsSuccessorReplyWIKI getDefaultInstance() {
+    public static proto.Chord.SetPredecessorsSuccessorReply getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SetPredecessorsSuccessorReplyWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<SetPredecessorsSuccessorReplyWIKI>() {
+    private static final com.google.protobuf.Parser<SetPredecessorsSuccessorReply>
+        PARSER = new com.google.protobuf.AbstractParser<SetPredecessorsSuccessorReply>() {
       @java.lang.Override
-      public SetPredecessorsSuccessorReplyWIKI parsePartialFrom(
+      public SetPredecessorsSuccessorReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4699,24 +4699,24 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<SetPredecessorsSuccessorReplyWIKI> parser() {
+    public static com.google.protobuf.Parser<SetPredecessorsSuccessorReply> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<SetPredecessorsSuccessorReplyWIKI> getParserForType() {
+    public com.google.protobuf.Parser<SetPredecessorsSuccessorReply> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.SetPredecessorsSuccessorReplyWIKI getDefaultInstanceForType() {
+    public proto.Chord.SetPredecessorsSuccessorReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface SetSuccessorsPredecessorRequestWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SetSuccessorsPredecessorRequestWIKI)
+  public interface SetSuccessorsPredecessorRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetSuccessorsPredecessorRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -4739,12 +4739,12 @@ public final class Chord {
    * ----------------------------------------------------
    * </pre>
    *
-   * Protobuf type {@code SetSuccessorsPredecessorRequestWIKI}
+   * Protobuf type {@code SetSuccessorsPredecessorRequest}
    */
-  public static final class SetSuccessorsPredecessorRequestWIKI extends
+  public static final class SetSuccessorsPredecessorRequest extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:SetSuccessorsPredecessorRequestWIKI)
-      SetSuccessorsPredecessorRequestWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:SetSuccessorsPredecessorRequest)
+      SetSuccessorsPredecessorRequestOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -4753,26 +4753,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        SetSuccessorsPredecessorRequestWIKI.class.getName());
+        SetSuccessorsPredecessorRequest.class.getName());
     }
-    // Use SetSuccessorsPredecessorRequestWIKI.newBuilder() to construct.
-    private SetSuccessorsPredecessorRequestWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use SetSuccessorsPredecessorRequest.newBuilder() to construct.
+    private SetSuccessorsPredecessorRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private SetSuccessorsPredecessorRequestWIKI() {
+    private SetSuccessorsPredecessorRequest() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+      return proto.Chord.internal_static_SetSuccessorsPredecessorRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_SetSuccessorsPredecessorRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.SetSuccessorsPredecessorRequestWIKI.class, proto.Chord.SetSuccessorsPredecessorRequestWIKI.Builder.class);
+              proto.Chord.SetSuccessorsPredecessorRequest.class, proto.Chord.SetSuccessorsPredecessorRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -4842,10 +4842,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.SetSuccessorsPredecessorRequestWIKI)) {
+      if (!(obj instanceof proto.Chord.SetSuccessorsPredecessorRequest)) {
         return super.equals(obj);
       }
-      proto.Chord.SetSuccessorsPredecessorRequestWIKI other = (proto.Chord.SetSuccessorsPredecessorRequestWIKI) obj;
+      proto.Chord.SetSuccessorsPredecessorRequest other = (proto.Chord.SetSuccessorsPredecessorRequest) obj;
 
       if (hasChordNode() != other.hasChordNode()) return false;
       if (hasChordNode()) {
@@ -4872,44 +4872,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(byte[] data)
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4917,26 +4917,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseDelimitedFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4949,7 +4949,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.SetSuccessorsPredecessorRequestWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.SetSuccessorsPredecessorRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -4969,26 +4969,26 @@ public final class Chord {
      * ----------------------------------------------------
      * </pre>
      *
-     * Protobuf type {@code SetSuccessorsPredecessorRequestWIKI}
+     * Protobuf type {@code SetSuccessorsPredecessorRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SetSuccessorsPredecessorRequestWIKI)
-        proto.Chord.SetSuccessorsPredecessorRequestWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:SetSuccessorsPredecessorRequest)
+        proto.Chord.SetSuccessorsPredecessorRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_SetSuccessorsPredecessorRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_SetSuccessorsPredecessorRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.SetSuccessorsPredecessorRequestWIKI.class, proto.Chord.SetSuccessorsPredecessorRequestWIKI.Builder.class);
+                proto.Chord.SetSuccessorsPredecessorRequest.class, proto.Chord.SetSuccessorsPredecessorRequest.Builder.class);
       }
 
-      // Construct using proto.Chord.SetSuccessorsPredecessorRequestWIKI.newBuilder()
+      // Construct using proto.Chord.SetSuccessorsPredecessorRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -5019,17 +5019,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+        return proto.Chord.internal_static_SetSuccessorsPredecessorRequest_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.SetSuccessorsPredecessorRequestWIKI getDefaultInstanceForType() {
-        return proto.Chord.SetSuccessorsPredecessorRequestWIKI.getDefaultInstance();
+      public proto.Chord.SetSuccessorsPredecessorRequest getDefaultInstanceForType() {
+        return proto.Chord.SetSuccessorsPredecessorRequest.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.SetSuccessorsPredecessorRequestWIKI build() {
-        proto.Chord.SetSuccessorsPredecessorRequestWIKI result = buildPartial();
+      public proto.Chord.SetSuccessorsPredecessorRequest build() {
+        proto.Chord.SetSuccessorsPredecessorRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5037,14 +5037,14 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.SetSuccessorsPredecessorRequestWIKI buildPartial() {
-        proto.Chord.SetSuccessorsPredecessorRequestWIKI result = new proto.Chord.SetSuccessorsPredecessorRequestWIKI(this);
+      public proto.Chord.SetSuccessorsPredecessorRequest buildPartial() {
+        proto.Chord.SetSuccessorsPredecessorRequest result = new proto.Chord.SetSuccessorsPredecessorRequest(this);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      private void buildPartial0(proto.Chord.SetSuccessorsPredecessorRequestWIKI result) {
+      private void buildPartial0(proto.Chord.SetSuccessorsPredecessorRequest result) {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) != 0)) {
@@ -5058,16 +5058,16 @@ public final class Chord {
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.SetSuccessorsPredecessorRequestWIKI) {
-          return mergeFrom((proto.Chord.SetSuccessorsPredecessorRequestWIKI)other);
+        if (other instanceof proto.Chord.SetSuccessorsPredecessorRequest) {
+          return mergeFrom((proto.Chord.SetSuccessorsPredecessorRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.SetSuccessorsPredecessorRequestWIKI other) {
-        if (other == proto.Chord.SetSuccessorsPredecessorRequestWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.SetSuccessorsPredecessorRequest other) {
+        if (other == proto.Chord.SetSuccessorsPredecessorRequest.getDefaultInstance()) return this;
         if (other.hasChordNode()) {
           mergeChordNode(other.getChordNode());
         }
@@ -5242,23 +5242,23 @@ public final class Chord {
         return chordNodeBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:SetSuccessorsPredecessorRequestWIKI)
+      // @@protoc_insertion_point(builder_scope:SetSuccessorsPredecessorRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:SetSuccessorsPredecessorRequestWIKI)
-    private static final proto.Chord.SetSuccessorsPredecessorRequestWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:SetSuccessorsPredecessorRequest)
+    private static final proto.Chord.SetSuccessorsPredecessorRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.SetSuccessorsPredecessorRequestWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.SetSuccessorsPredecessorRequest();
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorRequestWIKI getDefaultInstance() {
+    public static proto.Chord.SetSuccessorsPredecessorRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SetSuccessorsPredecessorRequestWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<SetSuccessorsPredecessorRequestWIKI>() {
+    private static final com.google.protobuf.Parser<SetSuccessorsPredecessorRequest>
+        PARSER = new com.google.protobuf.AbstractParser<SetSuccessorsPredecessorRequest>() {
       @java.lang.Override
-      public SetSuccessorsPredecessorRequestWIKI parsePartialFrom(
+      public SetSuccessorsPredecessorRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5277,33 +5277,33 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<SetSuccessorsPredecessorRequestWIKI> parser() {
+    public static com.google.protobuf.Parser<SetSuccessorsPredecessorRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<SetSuccessorsPredecessorRequestWIKI> getParserForType() {
+    public com.google.protobuf.Parser<SetSuccessorsPredecessorRequest> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.SetSuccessorsPredecessorRequestWIKI getDefaultInstanceForType() {
+    public proto.Chord.SetSuccessorsPredecessorRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface SetSuccessorsPredecessorReplyWIKIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SetSuccessorsPredecessorReplyWIKI)
+  public interface SetSuccessorsPredecessorReplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SetSuccessorsPredecessorReply)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code SetSuccessorsPredecessorReplyWIKI}
+   * Protobuf type {@code SetSuccessorsPredecessorReply}
    */
-  public static final class SetSuccessorsPredecessorReplyWIKI extends
+  public static final class SetSuccessorsPredecessorReply extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:SetSuccessorsPredecessorReplyWIKI)
-      SetSuccessorsPredecessorReplyWIKIOrBuilder {
+      // @@protoc_insertion_point(message_implements:SetSuccessorsPredecessorReply)
+      SetSuccessorsPredecessorReplyOrBuilder {
   private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -5312,26 +5312,26 @@ public final class Chord {
         /* minor= */ 28,
         /* patch= */ 1,
         /* suffix= */ "",
-        SetSuccessorsPredecessorReplyWIKI.class.getName());
+        SetSuccessorsPredecessorReply.class.getName());
     }
-    // Use SetSuccessorsPredecessorReplyWIKI.newBuilder() to construct.
-    private SetSuccessorsPredecessorReplyWIKI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    // Use SetSuccessorsPredecessorReply.newBuilder() to construct.
+    private SetSuccessorsPredecessorReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private SetSuccessorsPredecessorReplyWIKI() {
+    private SetSuccessorsPredecessorReply() {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+      return proto.Chord.internal_static_SetSuccessorsPredecessorReply_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable
+      return proto.Chord.internal_static_SetSuccessorsPredecessorReply_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              proto.Chord.SetSuccessorsPredecessorReplyWIKI.class, proto.Chord.SetSuccessorsPredecessorReplyWIKI.Builder.class);
+              proto.Chord.SetSuccessorsPredecessorReply.class, proto.Chord.SetSuccessorsPredecessorReply.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -5367,10 +5367,10 @@ public final class Chord {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof proto.Chord.SetSuccessorsPredecessorReplyWIKI)) {
+      if (!(obj instanceof proto.Chord.SetSuccessorsPredecessorReply)) {
         return super.equals(obj);
       }
-      proto.Chord.SetSuccessorsPredecessorReplyWIKI other = (proto.Chord.SetSuccessorsPredecessorReplyWIKI) obj;
+      proto.Chord.SetSuccessorsPredecessorReply other = (proto.Chord.SetSuccessorsPredecessorReply) obj;
 
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
@@ -5388,44 +5388,44 @@ public final class Chord {
       return hash;
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(byte[] data)
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(java.io.InputStream input)
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5433,26 +5433,26 @@ public final class Chord {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseDelimitedFrom(java.io.InputStream input)
+    public static proto.Chord.SetSuccessorsPredecessorReply parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseDelimitedFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI parseFrom(
+    public static proto.Chord.SetSuccessorsPredecessorReply parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5465,7 +5465,7 @@ public final class Chord {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(proto.Chord.SetSuccessorsPredecessorReplyWIKI prototype) {
+    public static Builder newBuilder(proto.Chord.SetSuccessorsPredecessorReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -5481,26 +5481,26 @@ public final class Chord {
       return builder;
     }
     /**
-     * Protobuf type {@code SetSuccessorsPredecessorReplyWIKI}
+     * Protobuf type {@code SetSuccessorsPredecessorReply}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SetSuccessorsPredecessorReplyWIKI)
-        proto.Chord.SetSuccessorsPredecessorReplyWIKIOrBuilder {
+        // @@protoc_insertion_point(builder_implements:SetSuccessorsPredecessorReply)
+        proto.Chord.SetSuccessorsPredecessorReplyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_SetSuccessorsPredecessorReply_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable
+        return proto.Chord.internal_static_SetSuccessorsPredecessorReply_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                proto.Chord.SetSuccessorsPredecessorReplyWIKI.class, proto.Chord.SetSuccessorsPredecessorReplyWIKI.Builder.class);
+                proto.Chord.SetSuccessorsPredecessorReply.class, proto.Chord.SetSuccessorsPredecessorReply.Builder.class);
       }
 
-      // Construct using proto.Chord.SetSuccessorsPredecessorReplyWIKI.newBuilder()
+      // Construct using proto.Chord.SetSuccessorsPredecessorReply.newBuilder()
       private Builder() {
 
       }
@@ -5519,17 +5519,17 @@ public final class Chord {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return proto.Chord.internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+        return proto.Chord.internal_static_SetSuccessorsPredecessorReply_descriptor;
       }
 
       @java.lang.Override
-      public proto.Chord.SetSuccessorsPredecessorReplyWIKI getDefaultInstanceForType() {
-        return proto.Chord.SetSuccessorsPredecessorReplyWIKI.getDefaultInstance();
+      public proto.Chord.SetSuccessorsPredecessorReply getDefaultInstanceForType() {
+        return proto.Chord.SetSuccessorsPredecessorReply.getDefaultInstance();
       }
 
       @java.lang.Override
-      public proto.Chord.SetSuccessorsPredecessorReplyWIKI build() {
-        proto.Chord.SetSuccessorsPredecessorReplyWIKI result = buildPartial();
+      public proto.Chord.SetSuccessorsPredecessorReply build() {
+        proto.Chord.SetSuccessorsPredecessorReply result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5537,24 +5537,24 @@ public final class Chord {
       }
 
       @java.lang.Override
-      public proto.Chord.SetSuccessorsPredecessorReplyWIKI buildPartial() {
-        proto.Chord.SetSuccessorsPredecessorReplyWIKI result = new proto.Chord.SetSuccessorsPredecessorReplyWIKI(this);
+      public proto.Chord.SetSuccessorsPredecessorReply buildPartial() {
+        proto.Chord.SetSuccessorsPredecessorReply result = new proto.Chord.SetSuccessorsPredecessorReply(this);
         onBuilt();
         return result;
       }
 
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof proto.Chord.SetSuccessorsPredecessorReplyWIKI) {
-          return mergeFrom((proto.Chord.SetSuccessorsPredecessorReplyWIKI)other);
+        if (other instanceof proto.Chord.SetSuccessorsPredecessorReply) {
+          return mergeFrom((proto.Chord.SetSuccessorsPredecessorReply)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(proto.Chord.SetSuccessorsPredecessorReplyWIKI other) {
-        if (other == proto.Chord.SetSuccessorsPredecessorReplyWIKI.getDefaultInstance()) return this;
+      public Builder mergeFrom(proto.Chord.SetSuccessorsPredecessorReply other) {
+        if (other == proto.Chord.SetSuccessorsPredecessorReply.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -5597,23 +5597,23 @@ public final class Chord {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:SetSuccessorsPredecessorReplyWIKI)
+      // @@protoc_insertion_point(builder_scope:SetSuccessorsPredecessorReply)
     }
 
-    // @@protoc_insertion_point(class_scope:SetSuccessorsPredecessorReplyWIKI)
-    private static final proto.Chord.SetSuccessorsPredecessorReplyWIKI DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:SetSuccessorsPredecessorReply)
+    private static final proto.Chord.SetSuccessorsPredecessorReply DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new proto.Chord.SetSuccessorsPredecessorReplyWIKI();
+      DEFAULT_INSTANCE = new proto.Chord.SetSuccessorsPredecessorReply();
     }
 
-    public static proto.Chord.SetSuccessorsPredecessorReplyWIKI getDefaultInstance() {
+    public static proto.Chord.SetSuccessorsPredecessorReply getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<SetSuccessorsPredecessorReplyWIKI>
-        PARSER = new com.google.protobuf.AbstractParser<SetSuccessorsPredecessorReplyWIKI>() {
+    private static final com.google.protobuf.Parser<SetSuccessorsPredecessorReply>
+        PARSER = new com.google.protobuf.AbstractParser<SetSuccessorsPredecessorReply>() {
       @java.lang.Override
-      public SetSuccessorsPredecessorReplyWIKI parsePartialFrom(
+      public SetSuccessorsPredecessorReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5632,17 +5632,17 @@ public final class Chord {
       }
     };
 
-    public static com.google.protobuf.Parser<SetSuccessorsPredecessorReplyWIKI> parser() {
+    public static com.google.protobuf.Parser<SetSuccessorsPredecessorReply> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<SetSuccessorsPredecessorReplyWIKI> getParserForType() {
+    public com.google.protobuf.Parser<SetSuccessorsPredecessorReply> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public proto.Chord.SetSuccessorsPredecessorReplyWIKI getDefaultInstanceForType() {
+    public proto.Chord.SetSuccessorsPredecessorReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -14163,65 +14163,65 @@ public final class Chord {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_FindSuccessorRequestWIKI_descriptor;
+    internal_static_FindSuccessorRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_FindSuccessorRequestWIKI_fieldAccessorTable;
+      internal_static_FindSuccessorRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_FindSuccessorReplyWIKI_descriptor;
+    internal_static_FindSuccessorReply_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_FindSuccessorReplyWIKI_fieldAccessorTable;
+      internal_static_FindSuccessorReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_NotifyRequestWIKI_descriptor;
+    internal_static_NotifyRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_NotifyRequestWIKI_fieldAccessorTable;
+      internal_static_NotifyRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_NotifyReplyWIKI_descriptor;
+    internal_static_NotifyReply_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_NotifyReplyWIKI_fieldAccessorTable;
+      internal_static_NotifyReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_PingNodeRequestWIKI_descriptor;
+    internal_static_PingNodeRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_PingNodeRequestWIKI_fieldAccessorTable;
+      internal_static_PingNodeRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_PingNodeReplyWIKI_descriptor;
+    internal_static_PingNodeReply_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_PingNodeReplyWIKI_fieldAccessorTable;
+      internal_static_PingNodeReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetPredecessorRequestWIKI_descriptor;
+    internal_static_GetPredecessorRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_GetPredecessorRequestWIKI_fieldAccessorTable;
+      internal_static_GetPredecessorRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetPredecessorReplyWIKI_descriptor;
+    internal_static_GetPredecessorReply_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_GetPredecessorReplyWIKI_fieldAccessorTable;
+      internal_static_GetPredecessorReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor;
+    internal_static_SetPredecessorsSuccessorRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable;
+      internal_static_SetPredecessorsSuccessorRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor;
+    internal_static_SetPredecessorsSuccessorReply_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable;
+      internal_static_SetPredecessorsSuccessorReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor;
+    internal_static_SetSuccessorsPredecessorRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable;
+      internal_static_SetSuccessorsPredecessorRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor;
+    internal_static_SetSuccessorsPredecessorReply_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable;
+      internal_static_SetSuccessorsPredecessorReply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ChordNode_descriptor;
   private static final 
@@ -14296,52 +14296,49 @@ public final class Chord {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013chord.proto\"&\n\030FindSuccessorRequestWIK" +
-      "I\022\n\n\002id\030\001 \001(\004\"7\n\026FindSuccessorReplyWIKI\022" +
-      "\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"2\n\021Notify" +
-      "RequestWIKI\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNo" +
-      "de\"\021\n\017NotifyReplyWIKI\"&\n\023PingNodeRequest" +
-      "WIKI\022\017\n\007isAlive\030\001 \001(\010\"$\n\021PingNodeReplyWI" +
-      "KI\022\017\n\007isAlive\030\001 \001(\010\"\033\n\031GetPredecessorReq" +
-      "uestWIKI\"8\n\027GetPredecessorReplyWIKI\022\035\n\tc" +
-      "hordNode\030\001 \001(\0132\n.ChordNode\"D\n#SetPredece" +
-      "ssorsSuccessorRequestWIKI\022\035\n\tchordNode\030\001" +
-      " \001(\0132\n.ChordNode\"#\n!SetPredecessorsSucce" +
-      "ssorReplyWIKI\"D\n#SetSuccessorsPredecesso" +
-      "rRequestWIKI\022\035\n\tchordNode\030\001 \001(\0132\n.ChordN" +
-      "ode\"#\n!SetSuccessorsPredecessorReplyWIKI" +
-      "\"\204\001\n\tChordNode\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004" +
-      "\022\022\n\nidentifier\030\003 \001(\004\022\t\n\001m\030\004 \001(\004\022\035\n\tsucce" +
-      "ssor\030\005 \001(\0132\n.ChordNode\022\037\n\013predecessor\030\006 " +
-      "\001(\0132\n.ChordNode\";\n\tFileChunk\022\017\n\007content\030" +
-      "\001 \001(\014\022\035\n\tmediaInfo\030\002 \001(\0132\n.MediaInfo\"0\n\014" +
-      "UploadStatus\022\017\n\007message\030\001 \001(\t\022\017\n\007success" +
-      "\030\002 \001(\010\"+\n\017DownloadRequest\022\030\n\020identifierS" +
-      "tring\030\001 \001(\t\")\n\rDeleteRequest\022\030\n\020identifi" +
-      "erString\030\001 \001(\t\"0\n\014DeleteStatus\022\017\n\007messag" +
-      "e\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"\025\n\023ListAllSongs" +
-      "Request\"3\n\021ListAllSongsReply\022\036\n\nmediaInf" +
-      "os\030\001 \003(\0132\n.MediaInfo\"\026\n\024ListNodeSongsReq" +
-      "uest\"4\n\022ListNodeSongsReply\022\036\n\nmediaInfos" +
-      "\030\001 \003(\0132\n.MediaInfo\"F\n\026RequestTransferReq" +
-      "uest\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004\022\022\n\nidenti" +
-      "fier\030\003 \001(\004\"8\n\024RequestTransferReply\022\017\n\007me" +
-      "ssage\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"g\n\tMediaInf" +
-      "o\022\016\n\006artist\030\001 \001(\t\022\014\n\004song\030\002 \001(\t\022\r\n\005album" +
-      "\030\003 \001(\t\022\020\n\010duration\030\004 \001(\r\022\r\n\005genre\030\005 \001(\t\022" +
-      "\014\n\004size\030\006 \001(\0042\351\003\n\004Node\022I\n\021FindSuccessorW" +
-      "IKI\022\031.FindSuccessorRequestWIKI\032\027.FindSuc" +
-      "cessorReplyWIKI\"\000\0224\n\nNotifyWIKI\022\022.Notify" +
-      "RequestWIKI\032\020.NotifyReplyWIKI\"\000\022:\n\014PingN" +
-      "odeWIKI\022\024.PingNodeRequestWIKI\032\022.PingNode" +
-      "ReplyWIKI\"\000\022L\n\022GetPredecessorWIKI\022\032.GetP" +
-      "redecessorRequestWIKI\032\030.GetPredecessorRe" +
-      "plyWIKI\"\000\022j\n\034SetPredecessorsSuccessorWIK" +
-      "I\022$.SetPredecessorsSuccessorRequestWIKI\032" +
-      "\".SetPredecessorsSuccessorReplyWIKI\"\000\022j\n" +
-      "\034SetSuccessorsPredecessorWIKI\022$.SetSucce" +
-      "ssorsPredecessorRequestWIKI\032\".SetSuccess" +
-      "orsPredecessorReplyWIKI\"\0002\363\002\n\004File\022\'\n\006Up" +
+      "\n\013chord.proto\"\"\n\024FindSuccessorRequest\022\n\n" +
+      "\002id\030\001 \001(\004\"3\n\022FindSuccessorReply\022\035\n\tchord" +
+      "Node\030\001 \001(\0132\n.ChordNode\".\n\rNotifyRequest\022" +
+      "\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"\r\n\013Notify" +
+      "Reply\"\"\n\017PingNodeRequest\022\017\n\007isAlive\030\001 \001(" +
+      "\010\" \n\rPingNodeReply\022\017\n\007isAlive\030\001 \001(\010\"\027\n\025G" +
+      "etPredecessorRequest\"4\n\023GetPredecessorRe" +
+      "ply\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"@\n\037Se" +
+      "tPredecessorsSuccessorRequest\022\035\n\tchordNo" +
+      "de\030\001 \001(\0132\n.ChordNode\"\037\n\035SetPredecessorsS" +
+      "uccessorReply\"@\n\037SetSuccessorsPredecesso" +
+      "rRequest\022\035\n\tchordNode\030\001 \001(\0132\n.ChordNode\"" +
+      "\037\n\035SetSuccessorsPredecessorReply\"\204\001\n\tCho" +
+      "rdNode\022\n\n\002ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004\022\022\n\niden" +
+      "tifier\030\003 \001(\004\022\t\n\001m\030\004 \001(\004\022\035\n\tsuccessor\030\005 \001" +
+      "(\0132\n.ChordNode\022\037\n\013predecessor\030\006 \001(\0132\n.Ch" +
+      "ordNode\";\n\tFileChunk\022\017\n\007content\030\001 \001(\014\022\035\n" +
+      "\tmediaInfo\030\002 \001(\0132\n.MediaInfo\"0\n\014UploadSt" +
+      "atus\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"+" +
+      "\n\017DownloadRequest\022\030\n\020identifierString\030\001 " +
+      "\001(\t\")\n\rDeleteRequest\022\030\n\020identifierString" +
+      "\030\001 \001(\t\"0\n\014DeleteStatus\022\017\n\007message\030\001 \001(\t\022" +
+      "\017\n\007success\030\002 \001(\010\"\025\n\023ListAllSongsRequest\"" +
+      "3\n\021ListAllSongsReply\022\036\n\nmediaInfos\030\001 \003(\013" +
+      "2\n.MediaInfo\"\026\n\024ListNodeSongsRequest\"4\n\022" +
+      "ListNodeSongsReply\022\036\n\nmediaInfos\030\001 \003(\0132\n" +
+      ".MediaInfo\"F\n\026RequestTransferRequest\022\n\n\002" +
+      "ip\030\001 \001(\t\022\014\n\004port\030\002 \001(\004\022\022\n\nidentifier\030\003 \001" +
+      "(\004\"8\n\024RequestTransferReply\022\017\n\007message\030\001 " +
+      "\001(\t\022\017\n\007success\030\002 \001(\010\"g\n\tMediaInfo\022\016\n\006art" +
+      "ist\030\001 \001(\t\022\014\n\004song\030\002 \001(\t\022\r\n\005album\030\003 \001(\t\022\020" +
+      "\n\010duration\030\004 \001(\r\022\r\n\005genre\030\005 \001(\t\022\014\n\004size\030" +
+      "\006 \001(\0042\241\003\n\004Node\022=\n\rFindSuccessor\022\025.FindSu" +
+      "ccessorRequest\032\023.FindSuccessorReply\"\000\022(\n" +
+      "\006Notify\022\016.NotifyRequest\032\014.NotifyReply\"\000\022" +
+      ".\n\010PingNode\022\020.PingNodeRequest\032\016.PingNode" +
+      "Reply\"\000\022@\n\016GetPredecessor\022\026.GetPredecess" +
+      "orRequest\032\024.GetPredecessorReply\"\000\022^\n\030Set" +
+      "PredecessorsSuccessor\022 .SetPredecessorsS" +
+      "uccessorRequest\032\036.SetPredecessorsSuccess" +
+      "orReply\"\000\022^\n\030SetSuccessorsPredecessor\022 ." +
+      "SetSuccessorsPredecessorRequest\032\036.SetSuc" +
+      "cessorsPredecessorReply\"\0002\363\002\n\004File\022\'\n\006Up" +
       "load\022\n.FileChunk\032\r.UploadStatus\"\000(\001\022,\n\010D" +
       "ownload\022\020.DownloadRequest\032\n.FileChunk\"\0000" +
       "\001\022)\n\006Delete\022\016.DeleteRequest\032\r.DeleteStat" +
@@ -14357,77 +14354,77 @@ public final class Chord {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_FindSuccessorRequestWIKI_descriptor =
+    internal_static_FindSuccessorRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_FindSuccessorRequestWIKI_fieldAccessorTable = new
+    internal_static_FindSuccessorRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_FindSuccessorRequestWIKI_descriptor,
+        internal_static_FindSuccessorRequest_descriptor,
         new java.lang.String[] { "Id", });
-    internal_static_FindSuccessorReplyWIKI_descriptor =
+    internal_static_FindSuccessorReply_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_FindSuccessorReplyWIKI_fieldAccessorTable = new
+    internal_static_FindSuccessorReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_FindSuccessorReplyWIKI_descriptor,
+        internal_static_FindSuccessorReply_descriptor,
         new java.lang.String[] { "ChordNode", });
-    internal_static_NotifyRequestWIKI_descriptor =
+    internal_static_NotifyRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_NotifyRequestWIKI_fieldAccessorTable = new
+    internal_static_NotifyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_NotifyRequestWIKI_descriptor,
+        internal_static_NotifyRequest_descriptor,
         new java.lang.String[] { "ChordNode", });
-    internal_static_NotifyReplyWIKI_descriptor =
+    internal_static_NotifyReply_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_NotifyReplyWIKI_fieldAccessorTable = new
+    internal_static_NotifyReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_NotifyReplyWIKI_descriptor,
+        internal_static_NotifyReply_descriptor,
         new java.lang.String[] { });
-    internal_static_PingNodeRequestWIKI_descriptor =
+    internal_static_PingNodeRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_PingNodeRequestWIKI_fieldAccessorTable = new
+    internal_static_PingNodeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_PingNodeRequestWIKI_descriptor,
+        internal_static_PingNodeRequest_descriptor,
         new java.lang.String[] { "IsAlive", });
-    internal_static_PingNodeReplyWIKI_descriptor =
+    internal_static_PingNodeReply_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_PingNodeReplyWIKI_fieldAccessorTable = new
+    internal_static_PingNodeReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_PingNodeReplyWIKI_descriptor,
+        internal_static_PingNodeReply_descriptor,
         new java.lang.String[] { "IsAlive", });
-    internal_static_GetPredecessorRequestWIKI_descriptor =
+    internal_static_GetPredecessorRequest_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_GetPredecessorRequestWIKI_fieldAccessorTable = new
+    internal_static_GetPredecessorRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_GetPredecessorRequestWIKI_descriptor,
+        internal_static_GetPredecessorRequest_descriptor,
         new java.lang.String[] { });
-    internal_static_GetPredecessorReplyWIKI_descriptor =
+    internal_static_GetPredecessorReply_descriptor =
       getDescriptor().getMessageTypes().get(7);
-    internal_static_GetPredecessorReplyWIKI_fieldAccessorTable = new
+    internal_static_GetPredecessorReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_GetPredecessorReplyWIKI_descriptor,
+        internal_static_GetPredecessorReply_descriptor,
         new java.lang.String[] { "ChordNode", });
-    internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor =
+    internal_static_SetPredecessorsSuccessorRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
-    internal_static_SetPredecessorsSuccessorRequestWIKI_fieldAccessorTable = new
+    internal_static_SetPredecessorsSuccessorRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_SetPredecessorsSuccessorRequestWIKI_descriptor,
+        internal_static_SetPredecessorsSuccessorRequest_descriptor,
         new java.lang.String[] { "ChordNode", });
-    internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor =
+    internal_static_SetPredecessorsSuccessorReply_descriptor =
       getDescriptor().getMessageTypes().get(9);
-    internal_static_SetPredecessorsSuccessorReplyWIKI_fieldAccessorTable = new
+    internal_static_SetPredecessorsSuccessorReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_SetPredecessorsSuccessorReplyWIKI_descriptor,
+        internal_static_SetPredecessorsSuccessorReply_descriptor,
         new java.lang.String[] { });
-    internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor =
+    internal_static_SetSuccessorsPredecessorRequest_descriptor =
       getDescriptor().getMessageTypes().get(10);
-    internal_static_SetSuccessorsPredecessorRequestWIKI_fieldAccessorTable = new
+    internal_static_SetSuccessorsPredecessorRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_SetSuccessorsPredecessorRequestWIKI_descriptor,
+        internal_static_SetSuccessorsPredecessorRequest_descriptor,
         new java.lang.String[] { "ChordNode", });
-    internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor =
+    internal_static_SetSuccessorsPredecessorReply_descriptor =
       getDescriptor().getMessageTypes().get(11);
-    internal_static_SetSuccessorsPredecessorReplyWIKI_fieldAccessorTable = new
+    internal_static_SetSuccessorsPredecessorReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_SetSuccessorsPredecessorReplyWIKI_descriptor,
+        internal_static_SetSuccessorsPredecessorReply_descriptor,
         new java.lang.String[] { });
     internal_static_ChordNode_descriptor =
       getDescriptor().getMessageTypes().get(12);

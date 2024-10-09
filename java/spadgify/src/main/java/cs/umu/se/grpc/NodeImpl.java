@@ -9,22 +9,22 @@ import proto.Chord;
 import proto.NodeGrpc;
 
 public class NodeImpl extends NodeGrpc.NodeImplBase {
-    private int remotePort;
-    private String remoteIp;
-    private int port;
-    private long m;
-    private int mode;
-    private Node node;
-    private long maxNodes;
-    private int exitCode;
-    private ChordUtil chordUtil = new ChordUtil();
-    private ChordBackEnd chordBackEnd;
-    private String ip;
-    private Logger logger;
+    private final int remotePort;
+    private final String remoteIp;
+    private final int port;
+    private final long m;
+    private final int mode;
+    private final Node node;
+    private final long maxNodes;
+    private final int exitCode;
+    private final ChordUtil chordUtil = new ChordUtil();
+    private final ChordBackEnd chordBackEnd;
+    private final String ip;
+    private final Logger logger;
 
     public NodeImpl(Node node, String remoteIp, int remotePort, int mode, int exitCode, int delay, Logger logger, ChordBackEnd chordBackEnd) {
         this.logger = logger;
-        this.logger.info("Node service is up for node: " + node);
+        this.logger.info("Node service is up for node: {}", node);
 
         this.remoteIp = remoteIp;
         this.port = node.getMyPort();
@@ -39,80 +39,104 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         this.chordBackEnd = chordBackEnd;
         this.chordBackEnd.setDelay(delay); // Set the delay of stabilize (default to 1000 ms)
 
-//        System.out.println("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
-        this.logger.info("NodeImpl m: " + m + ", maxNodes: " + maxNodes);
+        this.logger.info("NodeImpl m: {}, maxNodes: {}", m, maxNodes);
     }
 
+    /**
+     * Processes a request to find the successor of a given node ID in the Chord network.
+     *
+     * @param req request containing the node ID for which the successor is to be found.
+     * @param resp used to send the response containing the successor node information.
+     */
     @Override
-    public void findSuccessorWIKI(Chord.FindSuccessorRequestWIKI req, StreamObserver<Chord.FindSuccessorReplyWIKI> resp) {
+    public void findSuccessor(Chord.FindSuccessorRequest req, StreamObserver<Chord.FindSuccessorReply> resp) {
 //        System.out.println("SERVER GOT findSuccessor REQUEST!");
         int id = (int) req.getId();
 
         Node nodePrime = chordBackEnd.findSuccessor(id);
-//        System.out.println("NODE PRIME: " + nodePrime);
 
-        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(nodePrime);
-        Chord.FindSuccessorReplyWIKI reply = Chord.FindSuccessorReplyWIKI.newBuilder().setChordNode(chordNode).build();
+        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(nodePrime);
+        Chord.FindSuccessorReply reply = Chord.FindSuccessorReply.newBuilder().setChordNode(chordNode).build();
 
-//        System.out.println("after receiving findSuccessor gRPC call");
         node.displayCurrentTable();
 
         resp.onNext(reply);
         resp.onCompleted();
     }
 
+    /**
+     * Handles a notify request in the Chord protocol, allowing a node to inform another node about its existence.
+     * This method is typically used to maintain and update the finger table and predecessor information of nodes.
+     *
+     * @param req The `NotifyRequest` request containing information about the notifying node.
+     * @param resp The `StreamObserver<NotifyReply>` used to send the response after processing the notification.
+     */
     @Override
-    public void notifyWIKI(Chord.NotifyRequestWIKI req, StreamObserver<Chord.NotifyReplyWIKI> resp) {
+    public void notify(Chord.NotifyRequest req, StreamObserver<Chord.NotifyReply> resp) {
 //        System.out.println("SERVER GOT notify REQUEST!");
 
         Chord.ChordNode chordNode = req.getChordNode();
-        Node nodePrime = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
-//        System.out.println("Request from: " + nodePrime);
+        Node nodePrime = chordUtil.createNodeFromGRPCChordNode(chordNode);
         chordBackEnd.notify(nodePrime);
-        Chord.NotifyReplyWIKI reply = Chord.NotifyReplyWIKI.newBuilder().build();
+        Chord.NotifyReply reply = Chord.NotifyReply.newBuilder().build();
 
-//        System.out.println("after receiving notify gRPC call");
         node.displayCurrentTable();
 
         resp.onNext(reply);
         resp.onCompleted();
     }
 
+    /**
+     * Handles an incoming ping request to check if the node is alive and responds with the same status.
+     *
+     * @param req the request containing the ping data, including the node's alive status.
+     * @param resp the response observer used to send back the reply containing the node's alive status.
+     */
     @Override
-    public void pingNodeWIKI(Chord.PingNodeRequestWIKI req, StreamObserver<Chord.PingNodeReplyWIKI> resp) {
-//        System.out.println("SERVER GOT pingNodeWIKI REQUEST!");
+    public void pingNode(Chord.PingNodeRequest req, StreamObserver<Chord.PingNodeReply> resp) {
+//        System.out.println("SERVER GOT pingNode REQUEST!");
 
         boolean isAlive = req.getIsAlive();
-        Chord.PingNodeReplyWIKI reply = Chord.PingNodeReplyWIKI.newBuilder().setIsAlive(isAlive).build();
+        Chord.PingNodeReply reply = Chord.PingNodeReply.newBuilder().setIsAlive(isAlive).build();
 
-//        System.out.println("after receiving pingNodeWIKI gRPC call");
         node.displayCurrentTable();
 
         resp.onNext(reply);
         resp.onCompleted();
     }
 
+    /**
+     * Retrieves the predecessor node in the Chord protocol and returns it in the response.
+     *
+     * @param req The request object of type `Chord.GetPredecessorRequest`.
+     * @param resp The response observer used to send back the reply containing the predecessor node information.
+     */
     @Override
-    public void getPredecessorWIKI(Chord.GetPredecessorRequestWIKI req, StreamObserver<Chord.GetPredecessorReplyWIKI> resp) {
-//        System.out.println("SERVER GOT getPredecessorWIKI REQUEST!");
-//        System.out.println("Thread in server: " + Thread.currentThread().getName());
+    public void getPredecessor(Chord.GetPredecessorRequest req, StreamObserver<Chord.GetPredecessorReply> resp) {
+//        System.out.println("SERVER GOT getPredecessor REQUEST!");
 
         Node predecessor = node;
-        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNodeWIKI(predecessor);
-        Chord.GetPredecessorReplyWIKI reply = Chord.GetPredecessorReplyWIKI.newBuilder().setChordNode(chordNode).build();
+        Chord.ChordNode chordNode = chordUtil.createGRPCChordNodeFromNode(predecessor);
+        Chord.GetPredecessorReply reply = Chord.GetPredecessorReply.newBuilder().setChordNode(chordNode).build();
 
         resp.onNext(reply);
         resp.onCompleted();
     }
 
+    /**
+     * Sets the successor node for the predecessor in the Chord protocol.
+     *
+     * @param req the request containing the Chord node information to set as the successor.
+     * @param resp the response observer used to send back an acknowledgement.
+     */
     @Override
-    public void setPredecessorsSuccessorWIKI(Chord.SetPredecessorsSuccessorRequestWIKI req, StreamObserver<Chord.SetPredecessorsSuccessorReplyWIKI> resp) {
-//        System.out.println("SERVER GOT setPredecessorsSuccessorWIKI REQUEST!");
+    public void setPredecessorsSuccessor(Chord.SetPredecessorsSuccessorRequest req, StreamObserver<Chord.SetPredecessorsSuccessorReply> resp) {
+//        System.out.println("SERVER GOT setPredecessorsSuccessor REQUEST!");
 
         Chord.ChordNode chordNode = req.getChordNode();
-        Node newSuccessor = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
+        Node newSuccessor = chordUtil.createNodeFromGRPCChordNode(chordNode);
         node.setSuccessor(newSuccessor);
-        Chord.SetPredecessorsSuccessorReplyWIKI reply = Chord.SetPredecessorsSuccessorReplyWIKI.newBuilder().build();
+        Chord.SetPredecessorsSuccessorReply reply = Chord.SetPredecessorsSuccessorReply.newBuilder().build();
 
 
         node.displayCurrentTable();
@@ -121,14 +145,20 @@ public class NodeImpl extends NodeGrpc.NodeImplBase {
         resp.onCompleted();
     }
 
+    /**
+     * Handles the request to set the predecessor of the successor node in the Chord protocol.
+     *
+     * @param req the request containing the Chord node information to set as the predecessor.
+     * @param resp the response observer used to send back an acknowledgement reply.
+     */
     @Override
-    public void setSuccessorsPredecessorWIKI(Chord.SetSuccessorsPredecessorRequestWIKI req, StreamObserver<Chord.SetSuccessorsPredecessorReplyWIKI> resp) {
-//        System.out.println("SERVER GOT setSuccessorsPredecessorWIKI REQUEST!");
+    public void setSuccessorsPredecessor(Chord.SetSuccessorsPredecessorRequest req, StreamObserver<Chord.SetSuccessorsPredecessorReply> resp) {
+//        System.out.println("SERVER GOT setSuccessorsPredecessor REQUEST!");
 
         Chord.ChordNode chordNode = req.getChordNode();
-        Node newPredecessor = chordUtil.createNodeFromGRPCChordNodeWIKI(chordNode);
+        Node newPredecessor = chordUtil.createNodeFromGRPCChordNode(chordNode);
         node.setPredecessor(newPredecessor);
-        Chord.SetSuccessorsPredecessorReplyWIKI reply = Chord.SetSuccessorsPredecessorReplyWIKI.newBuilder().build();
+        Chord.SetSuccessorsPredecessorReply reply = Chord.SetSuccessorsPredecessorReply.newBuilder().build();
 
         node.displayCurrentTable();
 

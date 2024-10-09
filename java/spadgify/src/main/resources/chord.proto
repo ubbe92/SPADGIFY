@@ -6,12 +6,12 @@ option java_package = "proto";
 // Service symbolizing the Messenger interface
 // ----------------------------------------------------
 service Node {
-  rpc FindSuccessorWIKI (FindSuccessorRequestWIKI) returns (FindSuccessorReplyWIKI) {}
-  rpc NotifyWIKI (NotifyRequestWIKI) returns (NotifyReplyWIKI) {}
-  rpc PingNodeWIKI (PingNodeRequestWIKI) returns (PingNodeReplyWIKI) {}
-  rpc GetPredecessorWIKI (GetPredecessorRequestWIKI) returns (GetPredecessorReplyWIKI) {}
-  rpc SetPredecessorsSuccessorWIKI (SetPredecessorsSuccessorRequestWIKI) returns (SetPredecessorsSuccessorReplyWIKI) {}
-  rpc SetSuccessorsPredecessorWIKI (SetSuccessorsPredecessorRequestWIKI) returns (SetSuccessorsPredecessorReplyWIKI) {}
+  rpc FindSuccessor (FindSuccessorRequest) returns (FindSuccessorReply) {}
+  rpc Notify (NotifyRequest) returns (NotifyReply) {}
+  rpc PingNode (PingNodeRequest) returns (PingNodeReply) {}
+  rpc GetPredecessor (GetPredecessorRequest) returns (GetPredecessorReply) {}
+  rpc SetPredecessorsSuccessor (SetPredecessorsSuccessorRequest) returns (SetPredecessorsSuccessorReply) {}
+  rpc SetSuccessorsPredecessor (SetSuccessorsPredecessorRequest) returns (SetSuccessorsPredecessorReply) {}
 }
 
 service File {
@@ -31,54 +31,54 @@ service File {
 // ----------------------------------------------------
 
 // ----------------------------------------------------
-message FindSuccessorRequestWIKI {
+message FindSuccessorRequest {
   uint64 id = 1;
 }
 
-message FindSuccessorReplyWIKI {
+message FindSuccessorReply {
   ChordNode chordNode = 1;
 }
 
 // ----------------------------------------------------
-message NotifyRequestWIKI {
+message NotifyRequest {
   ChordNode chordNode = 1;
 }
 
-message NotifyReplyWIKI {
+message NotifyReply {
 
 }
 
 // ----------------------------------------------------
-message PingNodeRequestWIKI {
+message PingNodeRequest {
   bool isAlive = 1;
 }
 
-message PingNodeReplyWIKI {
+message PingNodeReply {
   bool isAlive = 1;
 }
 
 // ----------------------------------------------------
-message GetPredecessorRequestWIKI {
+message GetPredecessorRequest {
 
 }
 
-message GetPredecessorReplyWIKI {
+message GetPredecessorReply {
   ChordNode chordNode = 1;
 }
 
 // ----------------------------------------------------
-message SetPredecessorsSuccessorRequestWIKI {
+message SetPredecessorsSuccessorRequest {
   ChordNode chordNode = 1;
 }
 
-message SetPredecessorsSuccessorReplyWIKI {
+message SetPredecessorsSuccessorReply {
 }
 // ----------------------------------------------------
-message SetSuccessorsPredecessorRequestWIKI {
+message SetSuccessorsPredecessorRequest {
   ChordNode chordNode = 1;
 }
 
-message SetSuccessorsPredecessorReplyWIKI {
+message SetSuccessorsPredecessorReply {
 }
 
 // ----------------------------------------------------
