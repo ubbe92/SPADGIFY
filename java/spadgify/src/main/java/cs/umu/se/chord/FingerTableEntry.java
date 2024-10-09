@@ -1,8 +1,11 @@
 package cs.umu.se.chord;
 
+/**
+ * Class to handle finger table entries
+ */
 public class FingerTableEntry {
-    private int start;
-    private int[] interval;
+    private final int start;
+    private final int[] interval;
     private Node node;
 
     public FingerTableEntry(int start, int[] interval, Node node) {

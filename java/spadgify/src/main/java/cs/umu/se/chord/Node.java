@@ -1,13 +1,14 @@
 package cs.umu.se.chord;
 
-import cs.umu.se.util.ChordUtil;
-
+/**
+ * Class to represent a Node object
+ */
 public class Node {
-    private FingerTable fingerTable;
-    private String myIp;
-    private int myPort;
-    private int m;
-    private int myIdentifier;
+    private final FingerTable fingerTable;
+    private final String myIp;
+    private final int myPort;
+    private final int m;
+    private final int myIdentifier;
     private Node predecessor;
 
     public Node(String ip, int port, int m) {
@@ -19,14 +20,12 @@ public class Node {
 
         // Init finger table for this node
         fingerTable = new FingerTable(this);
-
         predecessor = null;
-
-//        System.out.println("Created node with identifier string: " + identifierString + " and hash (identifier): " + myIdentifier);
-
-//        displayCurrentTable();
     }
 
+    /**
+     * Display the current finger table and print the nodes successor and predecessor
+     */
     public synchronized void displayCurrentTable() {
         fingerTable.displayCurrentTable();
         System.out.println("My successor: " + getSuccessor());
@@ -76,6 +75,11 @@ public class Node {
         return myIp + ":" + myPort + " identifier: " + myIdentifier;
     }
 
+    /**
+     * Check equality by comparing port and ip
+     * @param o the object to check
+     * @return true if object is equal to node else false
+     */
     @Override
     public boolean equals(Object o) {
 
