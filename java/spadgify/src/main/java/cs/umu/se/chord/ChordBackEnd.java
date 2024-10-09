@@ -138,9 +138,7 @@ public class ChordBackEnd {
         thread.start();
 
 
-
-
-        // Give the node some time to stabilize before requesting songs from predecessor
+        // Give the node some time to stabilize before requesting songs from successor
         try {
             int m = node.getM();
             int gracePeriod = delay * m;
@@ -149,34 +147,19 @@ public class ChordBackEnd {
             throw new RuntimeException(e);
         }
 
+        successor = node.getSuccessor();
         // list all node songs between my predecessor and me
-        Node predecessor = node.getPredecessor();
-        String predIp = predecessor.getMyIp();
-        int predPort = predecessor.getMyPort();
+        String succIp = successor.getMyIp();
+        int succPort = successor.getMyPort();
         int m = node.getM();
 
-        ClientBackend clientBackend = new ClientBackend(predIp, predPort, "", m);
-        int myIdentifier = node.getMyIdentifier();
-        MediaInfo[] mediaInfos = clientBackend.listSongsInIntervalFromNode(myIdentifier);
+        System.out.println("Node: " + node);
+        System.out.println("Successor: " + successor);
 
-        for (MediaInfo mediaInfo : mediaInfos)
-            System.out.println("Media info: " + mediaInfo);
+        ClientBackend clientBackend = new ClientBackend(succIp, succPort, "", m);
 
-        Song[] songs = new Song[mediaInfos.length];
+        clientBackend.requestTransfer(node);
 
-        // Retrieve all songs from predecessor
-        int i = 0;
-        for (MediaInfo mediaInfo : mediaInfos) { // retrieve and delete
-            String identifierString = mediaInfo.getIdentifierString();
-            songs[i] = clientBackend.retrieveFromNode(identifierString);
-//            clientBackend.deleteFromNode(identifierString);               // Implement this to remove the song in the old node
-            System.out.println("Got song: " + songs[i]);
-            i++;
-        }
-
-        clientBackend = new ClientBackend(node.getMyIp(), node.getMyPort(), "", m);
-        for (Song s : songs)
-            clientBackend.store(s);
     }
 
     public void leaveWIKI() {
@@ -202,11 +185,12 @@ public class ChordBackEnd {
 
         // Get all our songs
         ClientBackend clientBackend = new ClientBackend(node.getMyIp(), node.getMyPort(), "", m);
-        MediaInfo[] mediaInfos = clientBackend.listSongsFromNode();
+        MediaInfo[] mediaInfos = clientBackend.listNodeSongs();
         Song[] songs = new Song[mediaInfos.length];
 
+        // Cleanup locally saved files/data
         int i = 0;
-        for (MediaInfo mediaInfo : mediaInfos) { // retrieve and delete
+        for (MediaInfo mediaInfo : mediaInfos) {
             String identifierString = mediaInfo.getIdentifierString();
 
             if (!(successor.equals(node) && predecessor.equals(node)))
@@ -296,9 +280,9 @@ public class ChordBackEnd {
             x = gRPCGetPredecessorWIKI(successor);
 
         if (x != null) {
-           if (isNodeInIntervalExclusive(x, node, successor.getMyIdentifier())) {
-               node.setSuccessor(x);
-           }
+            if (isNodeInIntervalExclusive(x, node, successor.getMyIdentifier())) {
+                node.setSuccessor(x);
+            }
         }
 
         if (successor.equals(node)) {

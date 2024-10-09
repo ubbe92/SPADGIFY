@@ -2,6 +2,7 @@ package cs.umu.se.client;
 
 import com.google.protobuf.ByteString;
 import cs.umu.se.chord.Hash;
+import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
@@ -9,6 +10,8 @@ import cs.umu.se.util.MediaUtil;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import proto.Chord;
 import proto.FileGrpc;
 
@@ -29,6 +32,7 @@ public class ClientBackend implements Storage {
     private final int chunkSize = 2048;
     private int m;
 
+    private Logger logger = LogManager.getLogger();
 
     public ClientBackend(String ip, int port, String saveFolderPath, int m) {
         this.ip = ip;
@@ -128,11 +132,13 @@ public class ClientBackend implements Storage {
                     if (!value.hasMediaInfo()) {
                         chordMediaInfo = null;
                         System.out.println("onNext() value has no media info");
+                        logger.info("onNext() value has no media info");
                         return;
                     }
 
                     chordMediaInfo = value.getMediaInfo();
                     System.out.println("Artist: " + chordMediaInfo.getArtist());
+                    logger.info("Artist: {}", chordMediaInfo.getArtist());
                     i++;
                 }
 
@@ -170,6 +176,7 @@ public class ClientBackend implements Storage {
                     atomicSong.set(song);
 
                     System.out.println("File download complete!");
+                    logger.info("File download complete!");
                     future.complete("File downloaded successfully");  // Complete the future when the server is done
                 } catch (Exception e) {
                     future.complete("File could not be retrieved: " + e.getMessage());  // Complete the future when the server is done
@@ -258,7 +265,7 @@ public class ClientBackend implements Storage {
     }
 
     @Override
-    public MediaInfo[] listSongsFromNode() {
+    public MediaInfo[] listNodeSongs() {
         MediaInfo[] mediaInfos = null;
 
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
@@ -275,109 +282,84 @@ public class ClientBackend implements Storage {
         return mediaInfos;
     }
 
-    @Override
-    public MediaInfo[] listSongsInIntervalFromNode(int nodeIdentifier) {
-        MediaInfo[] mediaInfos = null;
 
+    @Override
+    public void requestTransfer(Node node) {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
         FileGrpc.FileBlockingStub stub = FileGrpc.newBlockingStub(channel);
 
-        Chord.ListSongsInIntervalRequest request = Chord.ListSongsInIntervalRequest.newBuilder().setIdentifier(nodeIdentifier).build();
-        Chord.ListNodeSongsReply reply = stub.listSongsInInterval(request);
+        String destIp = node.getMyIp();
+        int destPort = node.getMyPort();
+        int identifier = node.getMyIdentifier();
 
-        List<Chord.MediaInfo> mediaInfoList = reply.getMediaInfosList();
-        mediaInfos = mediaUtil.convertGRPCChordMediaInfosToMediaInfos(mediaInfoList);
+        Chord.RequestTransferRequest request = Chord.RequestTransferRequest.newBuilder()
+                .setIp(destIp)
+                .setPort(destPort)
+                .setIdentifier(identifier)
+                .build();
+        Chord.RequestTransferReply reply = stub.requestTransfer(request);
+
+        String message = reply.getMessage();
+        boolean success = reply.getSuccess();
+
+        message = "Transfer: " + success + ". Message: " + message;
+        logger.info(message);
 
         channel.shutdown();
-
-        return mediaInfos;
     }
 
     @Override
-    public Song retrieveFromNode(String identifierString) {
+    public void transfer(Song song) {
+        String filePath = song.getFilePath();
         CompletableFuture<String> future = new CompletableFuture<>(); // or this can be used to wait until complete
+
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ip, port).usePlaintext().build();
         FileGrpc.FileStub stub = FileGrpc.newStub(channel);
-        Chord.DownloadRequest request = Chord.DownloadRequest.newBuilder().setIdentifierString(identifierString).build();
-        AtomicReference<Song> atomicSong = new AtomicReference<>();
 
-        StreamObserver<Chord.FileChunk> streamObserver = new StreamObserver<Chord.FileChunk>() {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            Chord.MediaInfo chordMediaInfo;
-            int i = 0;
-            Song song = null;
-            String savePath = saveFolderPath + identifierString + ".mp3";
+        StreamObserver<Chord.FileChunk> requestObserver = stub.transfer(new StreamObserver<Chord.UploadStatus>() {
 
             @Override
-            public void onNext(Chord.FileChunk value) {
-                if (i == 0) {
-                    if (!value.hasMediaInfo()) {
-                        chordMediaInfo = null;
-                        System.out.println("onNext() value has no media info");
-                        return;
-                    }
-
-                    chordMediaInfo = value.getMediaInfo();
-                    System.out.println("Artist: " + chordMediaInfo.getArtist());
-                    i++;
-                }
-
-                try {
-                    byteArrayOutputStream.write(value.getContent().toByteArray());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void onNext(Chord.UploadStatus value) {
             }
 
             @Override
             public void onError(Throwable t) {
                 t.printStackTrace();
                 future.completeExceptionally(t);  // Complete future with exception in case of error
+
             }
 
             @Override
             public void onCompleted() {
-                if (chordMediaInfo == null) {
-                    atomicSong.set(null);
-                    future.complete("File could not be retrieved");
-                    return;
-                }
-
-                try {
-                    byteArrayOutputStream.close();
-
-                    MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
-                    byte[] data = byteArrayOutputStream.toByteArray();
-                    song = new Song(mediaInfo, "", data);
-
-                    song.setFilePath(savePath);
-                    atomicSong.set(song);
-
-                    System.out.println("File download complete!");
-                    future.complete("File downloaded successfully");  // Complete the future when the server is done
-                } catch (Exception e) {
-                    future.complete("File could not be retrieved: " + e.getMessage());  // Complete the future when the server is done
-                    throw new RuntimeException(e);
-                }
+                System.out.println("File upload completed.");
+                future.complete("File uploaded successfully");  // Complete the future when the server is done
             }
+        });
 
-        };
+        int offset = 0;
+        byte[] data = song.getData();
+        Chord.MediaInfo chordMediaInfo = mediaUtil.convertMediaInfoToGRPCChordMediaInfo(song.getMediaInfo());
+        while (offset < data.length) {
+            int remaining = data.length - offset;
+            int currentChunkSize = Math.min(chunkSize, remaining);
 
-        stub.downloadFromNode(request, streamObserver);
+            ByteString chunk = ByteString.copyFrom(data, offset, currentChunkSize);
+            Chord.FileChunk request = Chord.FileChunk.newBuilder()
+                    .setContent(chunk)
+                    .setMediaInfo(chordMediaInfo)
+                    .build();
+            requestObserver.onNext(request);
 
-        channel.shutdown();
+            offset += currentChunkSize;
+        }
+        requestObserver.onCompleted();
+
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
-            return null;
         }
 
-        return atomicSong.get();
-    }
-
-    @Override
-    public void deleteFromNode(String identifierString) {
-
+        channel.shutdown();
     }
 }

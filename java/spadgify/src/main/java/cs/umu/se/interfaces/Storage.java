@@ -1,5 +1,6 @@
 package cs.umu.se.interfaces;
 
+import cs.umu.se.chord.Node;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 
@@ -21,11 +22,9 @@ public interface Storage {
 
     MediaInfo[] listAllSongs(String identifierString);
 
-    MediaInfo[] listSongsFromNode();
+    MediaInfo[] listNodeSongs();
 
-    MediaInfo[] listSongsInIntervalFromNode(int nodeIdentifier);
+    void requestTransfer(Node node);
 
-    Song retrieveFromNode(String identifierString);
-
-    void deleteFromNode(String identifierString);
+    void transfer(Song song);
 }

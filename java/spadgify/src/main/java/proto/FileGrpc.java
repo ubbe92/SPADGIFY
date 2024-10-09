@@ -170,66 +170,66 @@ public final class FileGrpc {
     return getListNodeSongsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<proto.Chord.ListSongsInIntervalRequest,
-      proto.Chord.ListNodeSongsReply> getListSongsInIntervalMethod;
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.RequestTransferRequest,
+      proto.Chord.RequestTransferReply> getRequestTransferMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "ListSongsInInterval",
-      requestType = proto.Chord.ListSongsInIntervalRequest.class,
-      responseType = proto.Chord.ListNodeSongsReply.class,
+      fullMethodName = SERVICE_NAME + '/' + "RequestTransfer",
+      requestType = proto.Chord.RequestTransferRequest.class,
+      responseType = proto.Chord.RequestTransferReply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<proto.Chord.ListSongsInIntervalRequest,
-      proto.Chord.ListNodeSongsReply> getListSongsInIntervalMethod() {
-    io.grpc.MethodDescriptor<proto.Chord.ListSongsInIntervalRequest, proto.Chord.ListNodeSongsReply> getListSongsInIntervalMethod;
-    if ((getListSongsInIntervalMethod = FileGrpc.getListSongsInIntervalMethod) == null) {
+  public static io.grpc.MethodDescriptor<proto.Chord.RequestTransferRequest,
+      proto.Chord.RequestTransferReply> getRequestTransferMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.RequestTransferRequest, proto.Chord.RequestTransferReply> getRequestTransferMethod;
+    if ((getRequestTransferMethod = FileGrpc.getRequestTransferMethod) == null) {
       synchronized (FileGrpc.class) {
-        if ((getListSongsInIntervalMethod = FileGrpc.getListSongsInIntervalMethod) == null) {
-          FileGrpc.getListSongsInIntervalMethod = getListSongsInIntervalMethod =
-              io.grpc.MethodDescriptor.<proto.Chord.ListSongsInIntervalRequest, proto.Chord.ListNodeSongsReply>newBuilder()
+        if ((getRequestTransferMethod = FileGrpc.getRequestTransferMethod) == null) {
+          FileGrpc.getRequestTransferMethod = getRequestTransferMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.RequestTransferRequest, proto.Chord.RequestTransferReply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListSongsInInterval"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "RequestTransfer"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto.Chord.ListSongsInIntervalRequest.getDefaultInstance()))
+                  proto.Chord.RequestTransferRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto.Chord.ListNodeSongsReply.getDefaultInstance()))
-              .setSchemaDescriptor(new FileMethodDescriptorSupplier("ListSongsInInterval"))
+                  proto.Chord.RequestTransferReply.getDefaultInstance()))
+              .setSchemaDescriptor(new FileMethodDescriptorSupplier("RequestTransfer"))
               .build();
         }
       }
     }
-    return getListSongsInIntervalMethod;
+    return getRequestTransferMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<proto.Chord.DownloadRequest,
-      proto.Chord.FileChunk> getDownloadFromNodeMethod;
+  private static volatile io.grpc.MethodDescriptor<proto.Chord.FileChunk,
+      proto.Chord.UploadStatus> getTransferMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "DownloadFromNode",
-      requestType = proto.Chord.DownloadRequest.class,
-      responseType = proto.Chord.FileChunk.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<proto.Chord.DownloadRequest,
-      proto.Chord.FileChunk> getDownloadFromNodeMethod() {
-    io.grpc.MethodDescriptor<proto.Chord.DownloadRequest, proto.Chord.FileChunk> getDownloadFromNodeMethod;
-    if ((getDownloadFromNodeMethod = FileGrpc.getDownloadFromNodeMethod) == null) {
+      fullMethodName = SERVICE_NAME + '/' + "Transfer",
+      requestType = proto.Chord.FileChunk.class,
+      responseType = proto.Chord.UploadStatus.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<proto.Chord.FileChunk,
+      proto.Chord.UploadStatus> getTransferMethod() {
+    io.grpc.MethodDescriptor<proto.Chord.FileChunk, proto.Chord.UploadStatus> getTransferMethod;
+    if ((getTransferMethod = FileGrpc.getTransferMethod) == null) {
       synchronized (FileGrpc.class) {
-        if ((getDownloadFromNodeMethod = FileGrpc.getDownloadFromNodeMethod) == null) {
-          FileGrpc.getDownloadFromNodeMethod = getDownloadFromNodeMethod =
-              io.grpc.MethodDescriptor.<proto.Chord.DownloadRequest, proto.Chord.FileChunk>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DownloadFromNode"))
+        if ((getTransferMethod = FileGrpc.getTransferMethod) == null) {
+          FileGrpc.getTransferMethod = getTransferMethod =
+              io.grpc.MethodDescriptor.<proto.Chord.FileChunk, proto.Chord.UploadStatus>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Transfer"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto.Chord.DownloadRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   proto.Chord.FileChunk.getDefaultInstance()))
-              .setSchemaDescriptor(new FileMethodDescriptorSupplier("DownloadFromNode"))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.Chord.UploadStatus.getDefaultInstance()))
+              .setSchemaDescriptor(new FileMethodDescriptorSupplier("Transfer"))
               .build();
         }
       }
     }
-    return getDownloadFromNodeMethod;
+    return getTransferMethod;
   }
 
   /**
@@ -317,16 +317,16 @@ public final class FileGrpc {
 
     /**
      */
-    default void listSongsInInterval(proto.Chord.ListSongsInIntervalRequest request,
-        io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListSongsInIntervalMethod(), responseObserver);
+    default void requestTransfer(proto.Chord.RequestTransferRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.RequestTransferReply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRequestTransferMethod(), responseObserver);
     }
 
     /**
      */
-    default void downloadFromNode(proto.Chord.DownloadRequest request,
-        io.grpc.stub.StreamObserver<proto.Chord.FileChunk> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDownloadFromNodeMethod(), responseObserver);
+    default io.grpc.stub.StreamObserver<proto.Chord.FileChunk> transfer(
+        io.grpc.stub.StreamObserver<proto.Chord.UploadStatus> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getTransferMethod(), responseObserver);
     }
   }
 
@@ -399,18 +399,18 @@ public final class FileGrpc {
 
     /**
      */
-    public void listSongsInInterval(proto.Chord.ListSongsInIntervalRequest request,
-        io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply> responseObserver) {
+    public void requestTransfer(proto.Chord.RequestTransferRequest request,
+        io.grpc.stub.StreamObserver<proto.Chord.RequestTransferReply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getListSongsInIntervalMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getRequestTransferMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void downloadFromNode(proto.Chord.DownloadRequest request,
-        io.grpc.stub.StreamObserver<proto.Chord.FileChunk> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
-          getChannel().newCall(getDownloadFromNodeMethod(), getCallOptions()), request, responseObserver);
+    public io.grpc.stub.StreamObserver<proto.Chord.FileChunk> transfer(
+        io.grpc.stub.StreamObserver<proto.Chord.UploadStatus> responseObserver) {
+      return io.grpc.stub.ClientCalls.asyncClientStreamingCall(
+          getChannel().newCall(getTransferMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -461,17 +461,9 @@ public final class FileGrpc {
 
     /**
      */
-    public proto.Chord.ListNodeSongsReply listSongsInInterval(proto.Chord.ListSongsInIntervalRequest request) {
+    public proto.Chord.RequestTransferReply requestTransfer(proto.Chord.RequestTransferRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getListSongsInIntervalMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public java.util.Iterator<proto.Chord.FileChunk> downloadFromNode(
-        proto.Chord.DownloadRequest request) {
-      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
-          getChannel(), getDownloadFromNodeMethod(), getCallOptions(), request);
+          getChannel(), getRequestTransferMethod(), getCallOptions(), request);
     }
   }
 
@@ -517,10 +509,10 @@ public final class FileGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.ListNodeSongsReply> listSongsInInterval(
-        proto.Chord.ListSongsInIntervalRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto.Chord.RequestTransferReply> requestTransfer(
+        proto.Chord.RequestTransferRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getListSongsInIntervalMethod(), getCallOptions()), request);
+          getChannel().newCall(getRequestTransferMethod(), getCallOptions()), request);
     }
   }
 
@@ -528,9 +520,9 @@ public final class FileGrpc {
   private static final int METHODID_DELETE = 1;
   private static final int METHODID_LIST_ALL_SONGS = 2;
   private static final int METHODID_LIST_NODE_SONGS = 3;
-  private static final int METHODID_LIST_SONGS_IN_INTERVAL = 4;
-  private static final int METHODID_DOWNLOAD_FROM_NODE = 5;
-  private static final int METHODID_UPLOAD = 6;
+  private static final int METHODID_REQUEST_TRANSFER = 4;
+  private static final int METHODID_UPLOAD = 5;
+  private static final int METHODID_TRANSFER = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -565,13 +557,9 @@ public final class FileGrpc {
           serviceImpl.listNodeSongs((proto.Chord.ListNodeSongsRequest) request,
               (io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply>) responseObserver);
           break;
-        case METHODID_LIST_SONGS_IN_INTERVAL:
-          serviceImpl.listSongsInInterval((proto.Chord.ListSongsInIntervalRequest) request,
-              (io.grpc.stub.StreamObserver<proto.Chord.ListNodeSongsReply>) responseObserver);
-          break;
-        case METHODID_DOWNLOAD_FROM_NODE:
-          serviceImpl.downloadFromNode((proto.Chord.DownloadRequest) request,
-              (io.grpc.stub.StreamObserver<proto.Chord.FileChunk>) responseObserver);
+        case METHODID_REQUEST_TRANSFER:
+          serviceImpl.requestTransfer((proto.Chord.RequestTransferRequest) request,
+              (io.grpc.stub.StreamObserver<proto.Chord.RequestTransferReply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -585,6 +573,9 @@ public final class FileGrpc {
       switch (methodId) {
         case METHODID_UPLOAD:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.upload(
+              (io.grpc.stub.StreamObserver<proto.Chord.UploadStatus>) responseObserver);
+        case METHODID_TRANSFER:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.transfer(
               (io.grpc.stub.StreamObserver<proto.Chord.UploadStatus>) responseObserver);
         default:
           throw new AssertionError();
@@ -630,19 +621,19 @@ public final class FileGrpc {
               proto.Chord.ListNodeSongsReply>(
                 service, METHODID_LIST_NODE_SONGS)))
         .addMethod(
-          getListSongsInIntervalMethod(),
+          getRequestTransferMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              proto.Chord.ListSongsInIntervalRequest,
-              proto.Chord.ListNodeSongsReply>(
-                service, METHODID_LIST_SONGS_IN_INTERVAL)))
+              proto.Chord.RequestTransferRequest,
+              proto.Chord.RequestTransferReply>(
+                service, METHODID_REQUEST_TRANSFER)))
         .addMethod(
-          getDownloadFromNodeMethod(),
-          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+          getTransferMethod(),
+          io.grpc.stub.ServerCalls.asyncClientStreamingCall(
             new MethodHandlers<
-              proto.Chord.DownloadRequest,
-              proto.Chord.FileChunk>(
-                service, METHODID_DOWNLOAD_FROM_NODE)))
+              proto.Chord.FileChunk,
+              proto.Chord.UploadStatus>(
+                service, METHODID_TRANSFER)))
         .build();
   }
 
@@ -696,8 +687,8 @@ public final class FileGrpc {
               .addMethod(getDeleteMethod())
               .addMethod(getListAllSongsMethod())
               .addMethod(getListNodeSongsMethod())
-              .addMethod(getListSongsInIntervalMethod())
-              .addMethod(getDownloadFromNodeMethod())
+              .addMethod(getRequestTransferMethod())
+              .addMethod(getTransferMethod())
               .build();
         }
       }

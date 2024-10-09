@@ -19,10 +19,10 @@ service File {
   rpc Download (DownloadRequest) returns (stream FileChunk) {}
   rpc Delete (DeleteRequest) returns (DeleteStatus) {}
   rpc ListAllSongs (ListAllSongsRequest) returns (ListAllSongsReply) {}
-
   rpc ListNodeSongs (ListNodeSongsRequest) returns (ListNodeSongsReply) {}
-  rpc ListSongsInInterval (ListSongsInIntervalRequest) returns (ListNodeSongsReply) {}
-  rpc DownloadFromNode (DownloadRequest) returns (stream FileChunk) {}
+
+  rpc RequestTransfer (RequestTransferRequest) returns (RequestTransferReply) {}
+  rpc Transfer (stream FileChunk) returns (UploadStatus) {}
 
 }
 
@@ -139,9 +139,18 @@ message ListNodeSongsReply {
   repeated MediaInfo mediaInfos = 1;
 }
 
-message ListSongsInIntervalRequest {
-  uint64 identifier = 1;
+message RequestTransferRequest {
+  string ip = 1;
+  uint64 port = 2;
+  uint64 identifier = 3;
 }
+
+message RequestTransferReply {
+  string message = 1;
+  bool success = 2;
+}
+
+
 
 // ----------------------------------------------------
 // File service messages

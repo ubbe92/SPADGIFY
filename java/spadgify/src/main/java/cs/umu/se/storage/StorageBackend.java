@@ -76,7 +76,28 @@ public class StorageBackend implements Storage {
 
     @Override
     public Song[] retrieve(int nodeIdentifier) {
-        return new Song[0];
+        synchronized (this) {
+            ArrayList<Song> songArrayList = new ArrayList<>();
+
+            for (Song s: songHashMap.values()) {
+                int hash = s.getMediaInfo().getHash();
+                boolean isInInterval = mediaUtil.isNumberInIntervalExclusiveInclusive(hash, node.getMyIdentifier(), nodeIdentifier);
+
+                if (isInInterval) {
+                    String filePath = s.getFilePath();
+                    try {
+                        byte[] data = mediaUtil.readFromFile(filePath);
+                        s.setData(data);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    songArrayList.add(s);
+                }
+            }
+
+            Song[] songs = new Song[songArrayList.size()];
+            return songArrayList.toArray(songs);
+        }
     }
 
     @Override
@@ -113,7 +134,7 @@ public class StorageBackend implements Storage {
     }
 
     @Override
-    public MediaInfo[] listSongsFromNode() {
+    public MediaInfo[] listNodeSongs() {
         synchronized (this) {
             int size = songHashMap.size();
             MediaInfo[] mediaInfos = new MediaInfo[size];
@@ -129,31 +150,12 @@ public class StorageBackend implements Storage {
     }
 
     @Override
-    public MediaInfo[] listSongsInIntervalFromNode(int nodeIdentifier) {
-        synchronized (this) {
-            ArrayList<MediaInfo> mediaInfoArrayList = new ArrayList<>();
+    public void requestTransfer(Node node) {
 
-            for (Song s: songHashMap.values()) {
-                MediaInfo mediaInfo = s.getMediaInfo();
-                boolean isInInterval = mediaUtil.isNumberInIntervalExclusiveInclusive(mediaInfo.getHash(), node.getMyIdentifier(), nodeIdentifier);
-
-                if (isInInterval) {
-                    mediaInfoArrayList.add(mediaInfo);
-                }
-            }
-
-            MediaInfo[] mediaInfos = new MediaInfo[mediaInfoArrayList.size()];
-            return mediaInfoArrayList.toArray(mediaInfos);
-        }
     }
 
     @Override
-    public Song retrieveFromNode(String identifierString) {
-        return null;
-    }
-
-    @Override
-    public void deleteFromNode(String identifierString) {
+    public void transfer(Song song) {
 
     }
 

@@ -20,9 +20,6 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
-import javax.print.attribute.standard.Media;
-import javax.print.attribute.standard.MediaPrintableArea;
-
 public class FileImpl extends FileGrpc.FileImplBase {
 //    private ClientBackend clientBackend;
     private Node node;
@@ -274,7 +271,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
     @Override
     public void listNodeSongs(Chord.ListNodeSongsRequest req, StreamObserver<Chord.ListNodeSongsReply> resp) {
-        MediaInfo[] mediaInfos = storageBackend.listSongsFromNode();
+        MediaInfo[] mediaInfos = storageBackend.listNodeSongs();
 
         Chord.ListNodeSongsReply.Builder responseBuilder = Chord.ListNodeSongsReply.newBuilder();
         Chord.ListNodeSongsReply reply;
@@ -291,48 +288,87 @@ public class FileImpl extends FileGrpc.FileImplBase {
     }
 
     @Override
-    public void listSongsInInterval(Chord.ListSongsInIntervalRequest req, StreamObserver<Chord.ListNodeSongsReply> resp) {
-        int identifier = (int) req.getIdentifier();
-        MediaInfo[] mediaInfos = storageBackend.listSongsInIntervalFromNode(identifier);
+    public void requestTransfer(Chord.RequestTransferRequest request, StreamObserver<Chord.RequestTransferReply> responseObserver) {
+        String destIp = request.getIp();
+        int destPort = (int) request.getPort();
+        int identifier = (int) request.getIdentifier();
 
-        Chord.ListNodeSongsReply.Builder responseBuilder = Chord.ListNodeSongsReply.newBuilder();
-        Chord.ListNodeSongsReply reply;
+        Song[] songs = storageBackend.retrieve(identifier);
 
-        if (mediaInfos != null) {
-            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
-            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
-        } else {
-            reply = responseBuilder.build();
+        ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", m);
+        for (Song s : songs) {
+            logger.info("Sending song {}", s);
+            clientBackend.transfer(s);
+            storageBackend.delete(s.getIdentifierString());
         }
 
-        resp.onNext(reply);
-        resp.onCompleted();
-    }
+        Chord.RequestTransferReply.Builder responseBuilder = Chord.RequestTransferReply.newBuilder();
+        Chord.RequestTransferReply reply;
 
+        String message = "Transfer to node: " + destIp + ": " + destPort + " id: " + identifier + " complete!";
+        reply = responseBuilder.setMessage(message).setSuccess(true).build();
 
-    @Override
-    public void downloadFromNode(Chord.DownloadRequest req, StreamObserver<Chord.FileChunk> responseObserver) {
-        Song song = null;
-        String identifierString = req.getIdentifierString();
-
-        song = storageBackend.retrieve(identifierString);
-
-        if (song == null) {
-            Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
-            logger.info("Song not found in node " + node);
-            responseObserver.onNext(response);
-            responseObserver.onCompleted();
-            return;
-        }
-
-        // Send the song in chunks
-        sendChunks(song, responseObserver);
-
-        song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
-
+        responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
 
+    @Override
+    public StreamObserver<Chord.FileChunk> transfer(StreamObserver<Chord.UploadStatus> resp) {
+
+        return new StreamObserver<Chord.FileChunk>() {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            Chord.MediaInfo chordMediaInfo;
+            boolean success = true;
+            String message = "File transferred successfully";
+            int i = 0;
+
+            @Override
+            public void onNext(Chord.FileChunk value) {
+                if (i == 0) {
+                    chordMediaInfo = value.getMediaInfo();
+                    i++;
+                }
+
+                try {
+                    byteArrayOutputStream.write(value.getContent().toByteArray());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.error("transfer() onNext method caught exception!");
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                t.printStackTrace();
+                logger.error("transfer() onError method caught exception!");
+            }
+
+            @Override
+            public void onCompleted() {
+                // Create media info and hash song
+                MediaInfo mediaInfo = mediaUtil.convertGRPCChordMediaInfoToMediaInfo(chordMediaInfo);
+                int hash = mediaInfo.getHash();
+                byte[] data = byteArrayOutputStream.toByteArray();
+                String filePath = directory + mediaInfo.getIdentifierString() + ".mp3";
+
+                Song song = new Song(mediaInfo, filePath, data);
+                try {
+                    byteArrayOutputStream.close();
+                    storageBackend.store(song);
+                    message = message + " at node: " + node + " Song: \"" + song + "\" Hash: \"" + hash + "\"";
+                    logger.info(message);
+                } catch (Exception e) {
+                    message = e.getMessage();
+                    logger.error(message);
+                    success = false;
+                }
+                // Send the response to the client
+                resp.onNext(Chord.UploadStatus.newBuilder().setMessage(message).setSuccess(success).build());
+                resp.onCompleted();
+            }
+        };
+    }
 
     private void sendChunks(Song song, StreamObserver<Chord.FileChunk> responseObserver) {
         int offset = 0;
