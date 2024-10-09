@@ -16,24 +16,30 @@ import proto.FileGrpc;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Implementation of File service responsible for handling file operations such as upload,
+ * download, deletion, and song listing within a distributed network using the Chord protocol.
+ */
 public class FileImpl extends FileGrpc.FileImplBase {
-//    private ClientBackend clientBackend;
-    private Node node;
-    private int m;
-    private MediaUtil mediaUtil;
-    private StorageBackend storageBackend;
-    private String directory = "./media-spadgify/";
-    private int chunkSize = 2048;
-    private LRUCache lruCache;
-    private Logger logger;
+    private final Node node;
+    private final int m;
+    private final MediaUtil mediaUtil;
+    private final StorageBackend storageBackend;
+    private final String directory = "./media-spadgify/";
+    private final int chunkSize = 2048;
+    private final LRUCache lruCache;
+    private final Logger logger;
 
     public FileImpl(Node node, int cacheSize, Logger logger, StorageBackend storageBackend) {
         this.logger = logger;
-        this.logger.info("File service is up for node: " + node);
+        this.logger.info("File service is up for node: {}", node);
 
         this.node = node;
         m = node.getM();
@@ -42,10 +48,15 @@ public class FileImpl extends FileGrpc.FileImplBase {
         this.storageBackend = storageBackend;
     }
 
+    /**
+     * Handles upload of file chunks from client.
+     * Assembles chunks into a file and stores it, either locally or forwards it to the responsible node.
+     *
+     * @param resp StreamObserver to send upload status back to the client.
+     * @return StreamObserver for receiving file chunks from the client.
+     */
     @Override
     public StreamObserver<Chord.FileChunk> upload(StreamObserver<Chord.UploadStatus> resp) {
-//        System.out.println("SERVER GOT upload REQUEST!");
-
         return new StreamObserver<Chord.FileChunk>() {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             Chord.MediaInfo chordMediaInfo;
@@ -57,23 +68,20 @@ public class FileImpl extends FileGrpc.FileImplBase {
             public void onNext(Chord.FileChunk value) {
                 if (i == 0) {
                     chordMediaInfo = value.getMediaInfo();
-//                    System.out.println("Artist: " + chordMediaInfo.getArtist());
                     i++;
                 }
 
                 try {
                     byteArrayOutputStream.write(value.getContent().toByteArray());
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    logger.error("upload() onNext method caught exception!");
+                    logger.error("upload() onNext method caught exception! {}", Arrays.toString(e.getStackTrace()));
                 }
 
             }
 
             @Override
             public void onError(Throwable t) {
-                t.printStackTrace();
-                logger.error("upload() onError method caught exception!");
+                logger.error("upload() onError method caught exception! {}", Arrays.toString(t.getStackTrace()));
             }
 
             @Override
@@ -90,7 +98,9 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 // Check which node that is responsible for the interval containing the hash value for the song
                 Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
                 Song song = new Song(mediaInfo, filePath, data);
-                if (destinationNode.equals(node) || mediaUtil.isNumberInIntervalExclusiveInclusive(hash, predIdentifier, nodeIdentifier)) { // Store in this node
+
+                // Store in this node
+                if (destinationNode.equals(node) || mediaUtil.isNumberInIntervalExclusiveInclusive(hash, predIdentifier, nodeIdentifier)) {
                     try {
                         byteArrayOutputStream.close();
                         storageBackend.store(song);
@@ -102,9 +112,8 @@ public class FileImpl extends FileGrpc.FileImplBase {
                         success = false;
                     }
 
-                } else { // Forward data to destination node
-                    logger.info("Forwarding song \"" + song + "\" with hash: \"" +  hash + "\" to node: " + destinationNode);
-
+                } else {
+                    // Forward data to destination node
                     String destIp = destinationNode.getMyIp();
                     int destPort = destinationNode.getMyPort();
                     int destM = destinationNode.getM();
@@ -129,9 +138,17 @@ public class FileImpl extends FileGrpc.FileImplBase {
         };
     }
 
+    /**
+     * Handles the download of a song file requested by a client.
+     * Checks if the song is available in the cache or storage backend and sends it to the client in chunks.
+     * If the song is not found on the current node, the request is forwarded to the responsible node.
+     *
+     * @param req The request containing the identifier of the song to be downloaded.
+     * @param responseObserver The observer to send song file chunks back to the client.
+     */
     @Override
     public void download(Chord.DownloadRequest req, StreamObserver<Chord.FileChunk> responseObserver) {
-        Song song = null;
+        Song song;
         String identifierString = req.getIdentifierString();
 
         // Get hash for the song
@@ -141,7 +158,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
         song = (Song) lruCache.get(identifierString);
         if (song != null) {
             sendChunks(song, responseObserver);
-            logger.info("Found \"" + song + "\" in cache");
+            logger.info("Found \"{}\" in cache", song);
             responseObserver.onCompleted();
             return;
         }
@@ -150,17 +167,20 @@ public class FileImpl extends FileGrpc.FileImplBase {
         int nodeIdentifier = node.getMyIdentifier();
 
         Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
-        if (destinationNode.equals(node) || mediaUtil.isNumberInIntervalExclusiveInclusive(hash, predIdentifier, nodeIdentifier)) { // If song is stored in our backend
+
+        // If song is stored in our backend
+        if (destinationNode.equals(node) || mediaUtil.isNumberInIntervalExclusiveInclusive(hash, predIdentifier, nodeIdentifier)) {
             song = storageBackend.retrieve(identifierString);
 
             if (song == null) {
                 Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
-                logger.info("Song not found in node " + node);
+                logger.info("Song not found in node {}", node);
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
                 return;
             }
-        } else { // Forward request to destination node
+        } else {
+            // Forward request to destination node
             String destIp = destinationNode.getMyIp();
             int destPort = destinationNode.getMyPort();
             int destM = destinationNode.getM();
@@ -169,7 +189,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             if (song == null) {
                 Chord.FileChunk response = Chord.FileChunk.newBuilder().build();
-                logger.info("Song not found in destination node " + destinationNode);
+                logger.info("Song not found in destination node {}", destinationNode);
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
                 return;
@@ -189,6 +209,14 @@ public class FileImpl extends FileGrpc.FileImplBase {
     }
 
 
+    /**
+     * Handles the deletion of a song file as requested by a client.
+     * Determines if the current node is responsible for the song's hash and
+     * deletes it from the storage backend or forwards the request to the responsible node.
+     *
+     * @param req The request containing the identifier of the song to be deleted.
+     * @param resp StreamObserver to send the deletion status back to the client.
+     */
     @Override
     public void delete(Chord.DeleteRequest req, StreamObserver<Chord.DeleteStatus> resp) {
         String identifierString = req.getIdentifierString();
@@ -230,45 +258,99 @@ public class FileImpl extends FileGrpc.FileImplBase {
         resp.onCompleted();
     }
 
+    /**
+     * Handles the listing of all songs in the distributed storage.
+     * It gathers the song information from the current node and its successor,
+     * merges the results, and sends them back to the client.
+     *
+     * @param req The request containing the identifier of the requesting node and its IP and port.
+     * @param resp The observer to send the list of all songs back to the client.
+     */
+//    @Override
+//    public void listAllSongs(Chord.ListAllSongsRequest req, StreamObserver<Chord.ListAllSongsReply> resp) {
+//        int sourceIdentifier = (int) req.getIdentifier();
+//        int successorIdentifier = node.getSuccessor().getMyIdentifier();
+//        Node successor = node.getSuccessor();
+//        String firstNodeIdentifierString = req.getIp() + ":" + req.getPort();
+//
+//        MediaInfo[] mediaInfos = null;
+//        MediaInfo[] theirMediaInfos = null;
+//
+//        // Ask successor for its content
+//        if (successorIdentifier != sourceIdentifier) {
+//            System.out.println("Asking successor for its content!");
+//            String destIp = successor.getMyIp();
+//            int destPort = successor.getMyPort();
+//            int destM = successor.getM();
+//            ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
+//            theirMediaInfos = clientBackend.listAllSongs(firstNodeIdentifierString);
+//        }
+//
+//        // Add our content
+//        MediaInfo[] ourMediaInfos = storageBackend.listAllSongs(firstNodeIdentifierString);
+//        mediaInfos = mediaUtil.mergeMediaUtilsArrays(ourMediaInfos, theirMediaInfos);
+//
+//        // send reply
+//        Chord.ListAllSongsReply.Builder responseBuilder = Chord.ListAllSongsReply.newBuilder();
+//        Chord.ListAllSongsReply reply;
+//
+//        if (mediaInfos != null) {
+//            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
+//            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
+//        } else {
+//            reply = responseBuilder.build();
+//        }
+//
+//        resp.onNext(reply);
+//        resp.onCompleted();
+//    }
+
+
+    /**
+     * Lists all songs available in the network by traversing through each node
+     * and collecting the songs stored on them. It handles the request from a client
+     * and returns a consolidated list of songs.
+     *
+     * @param req The request object containing metadata for listing songs.
+     * @param resp The StreamObserver used to send the list of songs back to the client.
+     */
     @Override
     public void listAllSongs(Chord.ListAllSongsRequest req, StreamObserver<Chord.ListAllSongsReply> resp) {
-        int sourceIdentifier = (int) req.getIdentifier();
-        int successorIdentifier = node.getSuccessor().getMyIdentifier();
-        Node successor = node.getSuccessor();
-        String firstNodeIdentifierString = req.getIp() + ":" + req.getPort();
+        // Create a set to keep track of already visited nodes
+        Set<String> visitedNodes = new HashSet<>();
+        Chord.ListAllSongsReply.Builder replyBuilder = Chord.ListAllSongsReply.newBuilder();
+        // Start from the current node
+        Node currentNode = this.node;
 
-        MediaInfo[] mediaInfos = null;
-        MediaInfo[] theirMediaInfos = null;
+        while (!visitedNodes.contains(currentNode.getMyIp() + ":" + currentNode.getMyPort()))
+        {
+            String nodeIdentifierString = currentNode.getMyIp() + ":" + currentNode.getMyPort();
+            // Mark the current node as visited
+            visitedNodes.add(nodeIdentifierString);
 
-        // Ask successor for its content
-        if (successorIdentifier != sourceIdentifier) {
-            System.out.println("Asking successor for its content!");
-            String destIp = successor.getMyIp();
-            int destPort = successor.getMyPort();
-            int destM = successor.getM();
-            ClientBackend clientBackend = new ClientBackend(destIp, destPort, "", destM);
-            theirMediaInfos = clientBackend.listAllSongs(firstNodeIdentifierString);
+            ClientBackend clientBackend = new ClientBackend(currentNode.getMyIp(), currentNode.getMyPort(), "", m);
+            // Fetch the songs from the current node either locally or remotely
+            MediaInfo[] mediaInfos = this.node.equals(currentNode) ? storageBackend.listNodeSongs() : clientBackend.listNodeSongs();
+
+            for (MediaInfo mediaInfo : mediaInfos) {
+                // Add songs to the reply
+                replyBuilder.addMediaInfos(mediaUtil.convertMediaInfoToGRPCChordMediaInfo(mediaInfo));
+            }
+            // Move to the successor node
+            currentNode = currentNode.getSuccessor();
         }
 
-        // Add our content
-        MediaInfo[] ourMediaInfos = storageBackend.listAllSongs(firstNodeIdentifierString);
-        mediaInfos = mediaUtil.mergeMediaUtilsArrays(ourMediaInfos, theirMediaInfos);
-
-        // send reply
-        Chord.ListAllSongsReply.Builder responseBuilder = Chord.ListAllSongsReply.newBuilder();
-        Chord.ListAllSongsReply reply;
-
-        if (mediaInfos != null) {
-            List<Chord.MediaInfo> chordMediaInfos = mediaUtil.convertMediaInfosToGRPCChordMediaInfos(mediaInfos);
-            reply = responseBuilder.addAllMediaInfos(chordMediaInfos).build();
-        } else {
-            reply = responseBuilder.build();
-        }
-
-        resp.onNext(reply);
+        // Send the accumulated list of songs to the client
+        resp.onNext(replyBuilder.build());
         resp.onCompleted();
     }
 
+    /**
+     * Retrieves a list of songs stored on the current node and sends this list back to the client.
+     *
+     * @param req The request object containing nothing.
+     * @param resp The StreamObserver used to send the list of songs back to the client.
+     */
     @Override
     public void listNodeSongs(Chord.ListNodeSongsRequest req, StreamObserver<Chord.ListNodeSongsReply> resp) {
         MediaInfo[] mediaInfos = storageBackend.listNodeSongs();
@@ -287,6 +369,14 @@ public class FileImpl extends FileGrpc.FileImplBase {
         resp.onCompleted();
     }
 
+    /**
+     * Handles the transfer of songs to another node in the network. This method retrieves
+     * the specified songs from the storage backend and sends them to the destination node.
+     * Upon successful transfer, the songs are deleted from the current node's storage.
+     *
+     * @param request The request object containing the destination IP, port, and identifier of the songs to be transferred.
+     * @param responseObserver The observer used to send the status of the transfer back to the requesting client.
+     */
     @Override
     public void requestTransfer(Chord.RequestTransferRequest request, StreamObserver<Chord.RequestTransferReply> responseObserver) {
         String destIp = request.getIp();
@@ -312,6 +402,14 @@ public class FileImpl extends FileGrpc.FileImplBase {
         responseObserver.onCompleted();
     }
 
+    /**
+     * Handles the transfer of file chunks from client to the server.
+     * This method receives chunks of a file from the client, assembles them, and stores
+     * the complete file in the storage backend. It also sends the upload status back to the client.
+     *
+     * @param resp StreamObserver for sending upload status back to the client.
+     * @return StreamObserver for receiving file chunks from the client.
+     */
     @Override
     public StreamObserver<Chord.FileChunk> transfer(StreamObserver<Chord.UploadStatus> resp) {
 
@@ -332,16 +430,14 @@ public class FileImpl extends FileGrpc.FileImplBase {
                 try {
                     byteArrayOutputStream.write(value.getContent().toByteArray());
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    logger.error("transfer() onNext method caught exception!");
+                    logger.error("transfer() onNext method caught exception! {}", Arrays.toString(e.getStackTrace()));
                 }
 
             }
 
             @Override
             public void onError(Throwable t) {
-                t.printStackTrace();
-                logger.error("transfer() onError method caught exception!");
+                logger.error("transfer() onError method caught exception! {}", Arrays.toString(t.getStackTrace()));
             }
 
             @Override
@@ -370,6 +466,12 @@ public class FileImpl extends FileGrpc.FileImplBase {
         };
     }
 
+    /**
+     * Sends the song data in chunks through the responseObserver.
+     *
+     * @param song The Song object containing the data to be sent.
+     * @param responseObserver The StreamObserver used to send chunked data responses.
+     */
     private void sendChunks(Song song, StreamObserver<Chord.FileChunk> responseObserver) {
         int offset = 0;
 
@@ -388,8 +490,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
             offset += currentChunkSize;
         }
-
-        logger.info("Node: " + node + " sent chunks of file: \"" + song + ".mp3\"");
+        logger.info("Node: {} sent chunks of file: \"{}.mp3\"", node, song);
     }
 
 }

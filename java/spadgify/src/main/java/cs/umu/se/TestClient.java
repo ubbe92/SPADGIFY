@@ -28,8 +28,8 @@ public class TestClient {
     public static void main(String[] args) throws Exception {
         System.out.println("Test client running...");
 
-        String ip = "192.168.38.126";
-//        String ip = "192.168.1.50";
+//        String ip = "192.168.38.126";
+        String ip = "192.168.1.50";
         int port = 8185;
         String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
         String outputFolderPath = "./../../testMedia/output-music/";
@@ -51,7 +51,7 @@ public class TestClient {
             backend.store(song);
         }
 
-        Thread.sleep(2000);
+        Thread.sleep(500);
 
         String firstNodeIdentifierString = ip + ":" + port;
         MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);

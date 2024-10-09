@@ -80,16 +80,24 @@ public class Node {
      * @param o the object to check
      * @return true if object is equal to node else false
      */
+//    @Override
+//    public boolean equals(Object o) {
+//
+//        if (o == this)
+//            return true;
+//
+//        if (!(o instanceof Node))
+//            return false;
+//
+//        Node n = (Node) o;
+//        return (this.getMyPort() == n.getMyPort()) && (this.getMyIp().equals(n.getMyIp()));
+//    }
+
     @Override
     public boolean equals(Object o) {
-
-        if (o == this)
-            return true;
-
-        if (!(o instanceof Node))
-            return false;
-
-        Node n = (Node) o;
-        return (this.getMyPort() == n.getMyPort()) && (this.getMyIp().equals(n.getMyIp()));
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return myPort == node.myPort && myIp.equals(node.myIp);
     }
 }
