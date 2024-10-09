@@ -8,6 +8,12 @@ import org.apache.logging.log4j.Logger;
 import proto.Chord;
 import proto.NodeGrpc;
 
+/**
+ * NodeImpl is a concrete implementation of the NodeGrpc.NodeImplBase class, representing
+ * a node in a Chord distributed hash table. This class provides implementations for several
+ * RPC methods used in the Chord protocol, enabling node-to-node communication for operations
+ * such as finding a successor, notifying about existence, checking node liveness, and setting predecessors/successors.
+ */
 public class NodeImpl extends NodeGrpc.NodeImplBase {
     private final int remotePort;
     private final String remoteIp;

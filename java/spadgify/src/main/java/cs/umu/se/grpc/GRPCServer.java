@@ -49,7 +49,7 @@ public class GRPCServer implements Server {
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
 
-        storageBackend = new StorageBackend(node, m);
+        storageBackend = new StorageBackend(node, m, this.logger);
         chordBackEnd = new ChordBackEnd(node, this.logger);
 
         NodeImpl nodeImpl = new NodeImpl(node, remoteIp, remotePort, mode, exitCode, delay, logger, chordBackEnd);
