@@ -121,15 +121,15 @@ message DeleteStatus {
   bool success = 2;
 }
 
-//message ListAllSongsRequest {
-//  string ip = 1;
-//  uint64 port = 2;
-//  uint64 identifier = 3;
-//}
-
 message ListAllSongsRequest {
-
+  string ip = 1;
+  uint64 port = 2;
+  uint64 identifier = 3;
 }
+
+//message ListAllSongsRequest {
+//
+//}
 
 message ListAllSongsReply {
   repeated MediaInfo mediaInfos = 1;
