@@ -6,6 +6,18 @@ const MusicStreamingClient = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isNotStarted, setIsNotStarted] = useState(true);
 
+    const initPlayer = () => {
+        console.log("initPlayer");
+        setIsNotStarted(false);
+        stopAudio();
+        if (!audioContext) {
+            // Initialize AudioContext on user gesture
+            const context = new (window.AudioContext ||
+                window.webkitAudioContext)();
+            setAudioContext(context);
+        }
+    };
+
     const startAudio = () => {
         if (!audioContext) {
             // Initialize AudioContext on user gesture
@@ -20,6 +32,11 @@ const MusicStreamingClient = () => {
 
         socket.onopen = () => {
             console.log("WebSocket connection established");
+
+            // Request a song to listen to!
+            // const data = "perfect beauty-Mikael Jäcksson-In the bodega";
+            const data = "amalgam-DJ Sinthu-Performance is life";
+            socket.send(data);
         };
 
         socket.onmessage = (event) => {
@@ -66,18 +83,6 @@ const MusicStreamingClient = () => {
         setIsPlaying(true);
     };
 
-    const initPlayer = () => {
-        console.log("initPlayer");
-        setIsNotStarted(false);
-        stopAudio();
-        if (!audioContext) {
-            // Initialize AudioContext on user gesture
-            const context = new (window.AudioContext ||
-                window.webkitAudioContext)();
-            setAudioContext(context);
-        }
-    };
-
     const stopAudio = () => {
         console.log("Stop audio");
         if (source) {
@@ -86,6 +91,25 @@ const MusicStreamingClient = () => {
         }
         setIsPlaying(false);
     };
+
+    // const selectSong = () => {
+    //     console.log("Select song");
+    //     const socket = new WebSocket("ws://192.168.38.126:8080");
+    //     socket.binaryType = "arraybuffer";
+
+    //     socket.onopen = () => {
+    //         console.log("WebSocket connection established.");
+    //         // const data = "amalgam-DJ Sinthu-Performance is life";
+    //         const data = "perfect beauty-Mikael Jäcksson-In the bodega";
+    //         socket.send(data);
+    //     };
+
+    //     socket.onmessage = (event) => {
+    //         const data = "on message! Event: " + event.data;
+    //         // socket.send(data);
+    //         console.log("Event: " + data);
+    //     };
+    // };
 
     return (
         <div>
@@ -106,6 +130,7 @@ const MusicStreamingClient = () => {
             <button onClick={initPlayer} hidden={!isNotStarted}>
                 Init player
             </button>
+            {/* <button onClick={selectSong}>Send message to server</button> */}
         </div>
     );
 };

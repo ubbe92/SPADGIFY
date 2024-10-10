@@ -3,6 +3,7 @@ package cs.umu.se.grpc;
 import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Server;
+import cs.umu.se.music.MusicStreamingServer;
 import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.util.ChordUtil;
 import cs.umu.se.workers.StabilizerWorker;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,6 +29,7 @@ public class GRPCServer implements Server {
     private StorageBackend storageBackend;
     private final ChordUtil chordUtil = new ChordUtil();
     private final Logger logger  = LogManager.getLogger();
+    private MusicStreamingServer musicStreamingServer;
 
     public GRPCServer() {}
 
@@ -48,6 +51,15 @@ public class GRPCServer implements Server {
 
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
+
+        // Start music server
+        int musicServerPort = chordUtil.getAvailablePort(8080, 8100);
+        InetSocketAddress address = new InetSocketAddress(ip, musicServerPort);
+        musicStreamingServer = new MusicStreamingServer(address);
+        musicStreamingServer.setM(m);
+        musicStreamingServer.setChordServerPort(port);
+        musicStreamingServer.setLogger(logger);
+        musicStreamingServer.start();
 
         storageBackend = new StorageBackend(node, m, this.logger);
         chordBackEnd = new ChordBackEnd(node, this.logger);
@@ -131,5 +143,14 @@ public class GRPCServer implements Server {
 
     public StorageBackend getStorageBackend() {
         return this.storageBackend;
+    }
+
+    public void stopMusicServer() {
+//        musicWorker.stopMusicServer();
+        try {
+            musicStreamingServer.stop();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

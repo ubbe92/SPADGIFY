@@ -10,10 +10,12 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Arrays;
 
 public class MusicStreamingWebSocketServer extends WebSocketServer {
     public static byte[] mp3Data;
     public static Song song;
+    public static String clientMessage;
 
     public MusicStreamingWebSocketServer(InetSocketAddress address) {
         super(address);
@@ -33,6 +35,9 @@ public class MusicStreamingWebSocketServer extends WebSocketServer {
     @Override
     public void onMessage(WebSocket conn, String message) {
         System.out.println("Message from client: " + message);
+        clientMessage = message;
+        String[] info = clientMessage.split("-");
+        System.out.println("Info: " + Arrays.toString(info));
     }
 
     @Override
@@ -70,8 +75,6 @@ public class MusicStreamingWebSocketServer extends WebSocketServer {
                 throw new RuntimeException(e);
             }
         }));
-
-//        server.broadcast(mp3Data);
     }
 }
 
