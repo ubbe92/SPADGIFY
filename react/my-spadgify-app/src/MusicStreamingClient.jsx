@@ -5,6 +5,7 @@ const MusicStreamingClient = () => {
     const [source, setSource] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isNotStarted, setIsNotStarted] = useState(true);
+    const [value, setValue] = useState("");
 
     const initPlayer = () => {
         console.log("initPlayer");
@@ -35,7 +36,8 @@ const MusicStreamingClient = () => {
 
             // Request a song to listen to!
             // const data = "perfect beauty-Mikael Jäcksson-In the bodega";
-            const data = "amalgam-DJ Sinthu-Performance is life";
+            // const data = "amalgam-DJ Sinthu-Performance is life";
+            const data = value;
             socket.send(data);
         };
 
@@ -111,26 +113,35 @@ const MusicStreamingClient = () => {
     //     };
     // };
 
+    function handleChange(e) {
+        setValue(e.target.value);
+    }
+
     return (
         <div>
-            <button
-                onClick={startAudio}
-                disabled={isPlaying}
-                hidden={isNotStarted}
-            >
-                Play Music
-            </button>
-            <button
-                onClick={stopAudio}
-                disabled={!isPlaying}
-                hidden={isNotStarted}
-            >
-                Stop Music
-            </button>
-            <button onClick={initPlayer} hidden={!isNotStarted}>
-                Init player
-            </button>
-            {/* <button onClick={selectSong}>Send message to server</button> */}
+            <div className="MusicStreamingClient">
+                <input value={value} onChange={handleChange} />
+                <div>Requested song: {value}</div>
+
+                <button
+                    onClick={startAudio}
+                    disabled={isPlaying}
+                    hidden={isNotStarted}
+                >
+                    Play Music
+                </button>
+                <button
+                    onClick={stopAudio}
+                    disabled={!isPlaying}
+                    hidden={isNotStarted}
+                >
+                    Stop Music
+                </button>
+                <button onClick={initPlayer} hidden={!isNotStarted}>
+                    Init player
+                </button>
+                {/* <button onClick={selectSong}>Send message to server</button> */}
+            </div>
         </div>
     );
 };

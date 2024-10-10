@@ -13,6 +13,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.MusicStreamingClient {
+    text-align: center;
+    margin: auto;
+}
+
 a {
     font-weight: 500;
     color: #646cff;
