@@ -1,7 +1,8 @@
 function Footer() {
     return (
         <footer>
-            <p>&copy; {new Date().getFullYear()} Your website name</p>
+            <hr></hr>
+            <p>&copy; {new Date().getFullYear()} Spadgify</p>
         </footer>
     );
 }
