@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <footer>
-            <hr></hr>
+            {/* <hr></hr> */}
             <p>&copy; {new Date().getFullYear()} Spadgify</p>
         </footer>
     );

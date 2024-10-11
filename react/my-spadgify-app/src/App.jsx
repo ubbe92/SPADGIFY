@@ -23,8 +23,10 @@ function App() {
   return (
     <>
       <Header></Header>
-      <MusicStreamingClient></MusicStreamingClient>
-      <Table getMedia={getMedia} data={mediaData}></Table>
+      <div className="main-container">
+        <MusicStreamingClient></MusicStreamingClient>
+        <Table getMedia={getMedia} data={mediaData}></Table>
+      </div>
       <Footer></Footer>
     </>
   );

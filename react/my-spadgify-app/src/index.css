@@ -11,12 +11,14 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+
+    height: 100%;
 }
 
 .MusicStreamingClient {
     text-align: center;
     margin: auto;
+    flex-grow: 1;
 }
 
 a {
@@ -31,9 +33,22 @@ a:hover {
 body {
     margin: 0;
     display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+    flex-direction: column; /* Ensure content stacks from top to bottom */
+    justify-content: start; /* Align content at the top */
+    align-items: center; /* Center horizontally */
+    width: 100vw;
+    height: 100vh;
+    background-color: inherit;
+}
+
+/* Container for your components, centers and limits width */
+.main-container {
+    width: 100%; /* Allows the container to be responsive */
+    max-width: 800px; /* Limits the width to 800px */
+    margin: 0 auto; /* Centers the content horizontally */
+    padding: 20px; /* Adds padding for spacing */
+    background-color: inherit; /* Optional: Background for the content area */
+    /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); Optional: Adds shadow for some depth */
 }
 
 h1 {
@@ -58,6 +73,15 @@ button:hover {
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+
+footer {
+    margin-top: auto; /* This pushes the footer to the bottom */
+    width: 100%; /* Ensure the footer takes the full width */
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-top: 1px solid #cccccc;
+    text-align: center; /* Center the footer content */
 }
 
 @media (prefers-color-scheme: light) {
