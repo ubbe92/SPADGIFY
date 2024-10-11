@@ -1,0 +1,29 @@
+.MediaTable {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.SearchField {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+table {
+    border: 2px solid forestgreen;
+    width: 800px;
+    height: 200px;
+}
+
+th {
+    border-bottom: 1px solid black;
+}
+
+td {
+    text-align: center;
+}
