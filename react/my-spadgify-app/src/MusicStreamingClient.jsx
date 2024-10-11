@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SocketInput from "./SocketInput";
 
 const MusicStreamingClient = () => {
     const [audioContext, setAudioContext] = useState(null);
@@ -6,6 +7,7 @@ const MusicStreamingClient = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isNotStarted, setIsNotStarted] = useState(true);
     const [value, setValue] = useState("");
+    const [ipPort, setIpPort] = useState(null);
 
     const initPlayer = () => {
         console.log("initPlayer");
@@ -28,7 +30,8 @@ const MusicStreamingClient = () => {
         }
 
         // WebSocket setup and handling remains the same
-        const socket = new WebSocket("ws://192.168.38.126:8080");
+        // const socket = new WebSocket("ws://192.168.38.126:8080");
+        const socket = new WebSocket("ws://" + ipPort);
         socket.binaryType = "arraybuffer";
 
         socket.onopen = () => {
@@ -94,34 +97,28 @@ const MusicStreamingClient = () => {
         setIsPlaying(false);
     };
 
-    // const selectSong = () => {
-    //     console.log("Select song");
-    //     const socket = new WebSocket("ws://192.168.38.126:8080");
-    //     socket.binaryType = "arraybuffer";
-
-    //     socket.onopen = () => {
-    //         console.log("WebSocket connection established.");
-    //         // const data = "amalgam-DJ Sinthu-Performance is life";
-    //         const data = "perfect beauty-Mikael Jäcksson-In the bodega";
-    //         socket.send(data);
-    //     };
-
-    //     socket.onmessage = (event) => {
-    //         const data = "on message! Event: " + event.data;
-    //         // socket.send(data);
-    //         console.log("Event: " + data);
-    //     };
-    // };
-
     function handleChange(e) {
         setValue(e.target.value);
     }
 
+    const getIpPort = (serverIpPort) => {
+        setIpPort(serverIpPort);
+    };
+
     return (
         <div>
             <div className="MusicStreamingClient">
-                <input value={value} onChange={handleChange} />
-                <div>Requested song: {value}</div>
+                <div hidden={isNotStarted}>
+                    <input value={value} onChange={handleChange} />
+                    <div>Requested song: {value}</div>
+                </div>
+
+                <div>
+                    <SocketInput
+                        getIpPort={getIpPort}
+                        hidden={!isNotStarted}
+                    ></SocketInput>
+                </div>
 
                 <button
                     onClick={startAudio}
@@ -140,7 +137,6 @@ const MusicStreamingClient = () => {
                 <button onClick={initPlayer} hidden={!isNotStarted}>
                     Init player
                 </button>
-                {/* <button onClick={selectSong}>Send message to server</button> */}
             </div>
         </div>
     );

@@ -36,7 +36,7 @@ public class ChordUtil {
      * @param stopRange The ending port number of the range to scan.
      * @return The first available port in the specified range, or -1 if no ports are available.
      */
-    public int getAvailablePort(int startRange, int stopRange) {
+    public synchronized int getAvailablePortGRPC(int startRange, int stopRange) {
         for (int port = startRange; port < stopRange; port++) {
             try (ServerSocket serverSocket = new ServerSocket(port)) {
                 if (!(serverSocket.getLocalPort() == port)) continue;
@@ -46,9 +46,27 @@ public class ChordUtil {
                 System.out.println("port in use..." + e.getMessage());
             }
         }
+
         return -1;
     }
 
+    public synchronized int getAvailablePortSocket(int startRange, int stopRange) {
+        String ip = getLocalIp();
+        Socket portCheck;
+        for (int port = startRange; port < stopRange; port++) {
+            try {
+                System.out.println("Looking for " + port);
+                portCheck = new Socket(ip, port);
+                System.out.println("There is a server running on port " + port);
+            } catch (UnknownHostException e) {
+                System.out.println("Unknown host exception: " + e);
+                break;
+            } catch (IOException e) {
+                return port; // Could not establish connection == available port
+            }
+        }
+        return -1;
+    }
 
     /**
      * Creates a new Node instance from a given GRPC ChordNode.

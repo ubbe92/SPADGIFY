@@ -27,6 +27,7 @@ public class MusicStreamingServer extends WebSocketServer {
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         String msg = "New connection: " + conn.getRemoteSocketAddress();
         logger.info(msg);
+        System.out.println("Websocket thread name: " + Thread.currentThread().getName());
 //        conn.send(mp3Data);
 //        mp3Data = new byte[0];
     }

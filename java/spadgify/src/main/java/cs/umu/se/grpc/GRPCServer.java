@@ -52,14 +52,15 @@ public class GRPCServer implements Server {
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
 
-        // Start music server
-        int musicServerPort = chordUtil.getAvailablePort(8080, 8100);
-        InetSocketAddress address = new InetSocketAddress(ip, musicServerPort);
-        musicStreamingServer = new MusicStreamingServer(address);
-        musicStreamingServer.setM(m);
-        musicStreamingServer.setChordServerPort(port);
-        musicStreamingServer.setLogger(logger);
-        musicStreamingServer.start();
+//        // Start music server
+//        int musicServerPort = chordUtil.getAvailablePort(8185, 8100);
+//        System.out.println("Chosen music socket port: " + musicServerPort);
+//        InetSocketAddress address = new InetSocketAddress(ip, musicServerPort);
+//        musicStreamingServer = new MusicStreamingServer(address);
+//        musicStreamingServer.setM(m);
+//        musicStreamingServer.setChordServerPort(port);
+//        musicStreamingServer.setLogger(logger);
+//        musicStreamingServer.start();
 
         storageBackend = new StorageBackend(node, m, this.logger);
         chordBackEnd = new ChordBackEnd(node, this.logger);
@@ -95,6 +96,17 @@ public class GRPCServer implements Server {
             }
 
             worker = chordBackEnd.getWorkerThread();
+
+            // Start music server
+            int musicServerPort = chordUtil.getAvailablePortSocket(8080, 8160);
+            System.out.println("Chosen music socket port: " + musicServerPort);
+            InetSocketAddress address = new InetSocketAddress(ip, musicServerPort);
+            musicStreamingServer = new MusicStreamingServer(address);
+            musicStreamingServer.setM(m);
+            musicStreamingServer.setChordServerPort(port);
+            musicStreamingServer.setLogger(logger);
+            musicStreamingServer.start();
+
 
             server.awaitTermination();
         } catch (IOException | InterruptedException e) {

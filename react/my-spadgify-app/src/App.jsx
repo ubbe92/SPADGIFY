@@ -7,7 +7,6 @@ function App() {
     return (
         <>
             <Header></Header>
-            {/* <Food></Food> */}
             <MusicStreamingClient></MusicStreamingClient>
             <Footer></Footer>
         </>
