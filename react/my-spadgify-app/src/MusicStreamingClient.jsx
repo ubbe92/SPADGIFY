@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import SocketInput from "./SocketInput";
 
 const MusicStreamingClient = () => {
@@ -7,7 +7,7 @@ const MusicStreamingClient = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isNotStarted, setIsNotStarted] = useState(true);
     const [value, setValue] = useState("");
-    const [ipPort, setIpPort] = useState(null);
+    const [ipPortSocket, setIpPortSocket] = useState(null);
 
     const initPlayer = () => {
         console.log("initPlayer");
@@ -31,7 +31,7 @@ const MusicStreamingClient = () => {
 
         // WebSocket setup and handling remains the same
         // const socket = new WebSocket("ws://192.168.38.126:8080");
-        const socket = new WebSocket("ws://" + ipPort);
+        const socket = new WebSocket("ws://" + ipPortSocket);
         socket.binaryType = "arraybuffer";
 
         socket.onopen = () => {
@@ -114,8 +114,8 @@ const MusicStreamingClient = () => {
         setValue(e.target.value);
     }
 
-    const getIpPort = (serverIpPort) => {
-        setIpPort(serverIpPort);
+    const getIpPortSocket = (serverIpPortSocket) => {
+        setIpPortSocket(serverIpPortSocket);
     };
 
     return (
@@ -128,7 +128,7 @@ const MusicStreamingClient = () => {
 
                 <div>
                     <SocketInput
-                        getIpPort={getIpPort}
+                        getIpPort={getIpPortSocket}
                         hidden={!isNotStarted}
                     ></SocketInput>
                 </div>

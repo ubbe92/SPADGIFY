@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-function FetchDataComponent() {
+function FetchDataComponent({ ipPort }) {
     const [data, setData] = useState([]); // Holds the data from the server
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         // Fetch data from the Restlet server
-        // fetch("http://localhost:8080/API/mediaInfo", {
-        fetch("http://localhost:8000/API/mediaInfo", {
+        // fetch("http://localhost:8000/API/mediaInfo", {
+        fetch("http://" + ipPort + "/API/mediaInfo", {
             // Adjust the endpoint as per your Restlet server
             method: "GET",
             headers: {
@@ -24,6 +24,7 @@ function FetchDataComponent() {
             .then((data) => {
                 setData(data); // Store the data in state
                 setLoading(false); // Loading is done
+                console.log("Data: " + data);
             })
             .catch((error) => {
                 setError(error); // Handle any errors
