@@ -6,8 +6,13 @@ import org.apache.logging.log4j.Logger;
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Restlet;
+import org.restlet.data.Method;
 import org.restlet.data.Protocol;
+import org.restlet.engine.application.CorsFilter;
 import org.restlet.routing.Router;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class RESTServer extends Application {
 
@@ -58,7 +63,17 @@ public class RESTServer extends Application {
     public Restlet createInboundRoot() {
         Router router = new Router(getContext());
         router.attach("/mediaInfo", RESTMediaInfo.class);
-        return router;
+//        return router;
+
+        // Set up CORS
+        CorsFilter corsFilter = new CorsFilter(getContext(), router);
+        corsFilter.setAllowedOrigins(new HashSet<>(Arrays.asList("*"))); // Allows all origins
+        corsFilter.setAllowedCredentials(true);
+        corsFilter.setAllowedHeaders(new HashSet<>(Arrays.asList("Content-Type", "Authorization")));
+        corsFilter.setDefaultAllowedMethods(new HashSet<>(Arrays.asList(Method.GET, Method.POST, Method.OPTIONS, Method.PUT, Method.DELETE)));
+
+        return corsFilter;
     }
+
 
 }

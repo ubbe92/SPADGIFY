@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SocketInput from "./SocketInput";
+import FetchDataComponent from "./FetchDataComponent";
 
 function MusicStreamer() {
     const [audioContext, setAudioContext] = useState(null);
@@ -50,6 +51,7 @@ function MusicStreamer() {
 
     return (
         <div>
+            <FetchDataComponent ipPort="192.168.38.126:8000"></FetchDataComponent>
             <input value={value} onChange={handleChange} />
             <div>{value}</div>
             <button onClick={startAudio}>Click me!</button>
