@@ -115,7 +115,7 @@
     <maven.compiler.source>18</maven.compiler.source>
     <protocCommand>protoc</protocCommand>
     <maven.compiler.target>18</maven.compiler.target>
-    <protobuf.version>4.28.1</protobuf.version>
+    <protobuf.version>4.26.0</protobuf.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.1</junit.version>
     <grpc.version>1.62.2</grpc.version>

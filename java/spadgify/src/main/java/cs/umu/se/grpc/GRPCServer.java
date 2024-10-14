@@ -4,6 +4,7 @@ import cs.umu.se.chord.ChordBackEnd;
 import cs.umu.se.chord.Node;
 import cs.umu.se.interfaces.Server;
 import cs.umu.se.music.MusicStreamingServer;
+import cs.umu.se.rest.RESTServer;
 import cs.umu.se.storage.StorageBackend;
 import cs.umu.se.util.ChordUtil;
 import cs.umu.se.workers.StabilizerWorker;
@@ -30,6 +31,7 @@ public class GRPCServer implements Server {
     private final ChordUtil chordUtil = new ChordUtil();
     private final Logger logger  = LogManager.getLogger();
     private MusicStreamingServer musicStreamingServer;
+    private RESTServer restServer;
 
     public GRPCServer() {}
 
@@ -51,16 +53,6 @@ public class GRPCServer implements Server {
 
         String ip = chordUtil.getLocalIp();
         Node node = new Node(ip, port, m);
-
-//        // Start music server
-//        int musicServerPort = chordUtil.getAvailablePort(8185, 8100);
-//        System.out.println("Chosen music socket port: " + musicServerPort);
-//        InetSocketAddress address = new InetSocketAddress(ip, musicServerPort);
-//        musicStreamingServer = new MusicStreamingServer(address);
-//        musicStreamingServer.setM(m);
-//        musicStreamingServer.setChordServerPort(port);
-//        musicStreamingServer.setLogger(logger);
-//        musicStreamingServer.start();
 
         storageBackend = new StorageBackend(node, m, this.logger);
         chordBackEnd = new ChordBackEnd(node, this.logger);
@@ -99,14 +91,20 @@ public class GRPCServer implements Server {
 
             // Start music server
             int musicServerPort = chordUtil.getAvailablePortSocket(8080, 8160);
-            System.out.println("Chosen music socket port: " + musicServerPort);
+            String logMessage = "Chosen music socket port: " + musicServerPort;
+            logger.info(logMessage);
             InetSocketAddress address = new InetSocketAddress(ip, musicServerPort);
             musicStreamingServer = new MusicStreamingServer(address);
-            musicStreamingServer.setM(m);
-            musicStreamingServer.setChordServerPort(port);
+            musicStreamingServer.setNode(node);
             musicStreamingServer.setLogger(logger);
             musicStreamingServer.start();
 
+            // Start rest server
+            int restServerPort = chordUtil.getAvailablePortSocket(8000, 8079);
+            logMessage = "Chosen rest server port: " + restServerPort;
+            logger.info(logMessage);
+            restServer = new RESTServer();
+            restServer.startServer(node, restServerPort, logger);
 
             server.awaitTermination();
         } catch (IOException | InterruptedException e) {
@@ -158,11 +156,14 @@ public class GRPCServer implements Server {
     }
 
     public void stopMusicServer() {
-//        musicWorker.stopMusicServer();
         try {
             musicStreamingServer.stop();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void stopRESTServer() {
+        restServer.stopServer();
     }
 }

@@ -16,6 +16,9 @@ public class Chord {
         // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8193 3 (id 0) (sinthu: id 5)
         // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8188 3 (id 6)
         // Join existing DHT:   java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 2000 -p 8185 -i 192.168.38.126 0 8206 3 (id 4)
+
+        // music player ip: 192.168.38.126:8080
+        // ethereal vistas-Mikael Jäcksson-In the bodega
         GetOP getOp = new GetOP();
         CommandLine commandLine = new CommandLine(getOp);
         int exitCode = commandLine.execute(args);
@@ -48,6 +51,9 @@ public class Chord {
 
             // Stop the music streaming server
             server.stopMusicServer();
+
+            // Stop the rest server
+            server.stopRESTServer();
 
             server.stopWorkerThread();
             while (server.isStabilizerWorkerAlive()); // Wait a while for the worker thread to stop

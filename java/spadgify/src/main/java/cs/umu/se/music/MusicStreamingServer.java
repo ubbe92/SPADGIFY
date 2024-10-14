@@ -1,5 +1,6 @@
 package cs.umu.se.music;
 
+import cs.umu.se.chord.Node;
 import cs.umu.se.client.ClientBackend;
 import cs.umu.se.types.Song;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +18,7 @@ public class MusicStreamingServer extends WebSocketServer {
     public byte[] mp3Data = new byte[0];
     private ClientBackend clientBackend;
     private Logger logger;
+    private Node node;
 
 
     public MusicStreamingServer(InetSocketAddress address) {
@@ -28,7 +30,7 @@ public class MusicStreamingServer extends WebSocketServer {
         String msg = "New connection: " + conn.getRemoteSocketAddress();
         logger.info(msg);
         System.out.println("Websocket thread name: " + Thread.currentThread().getName());
-//        conn.send(mp3Data);
+//        conn.send(msg);
 //        mp3Data = new byte[0];
     }
 
@@ -62,19 +64,24 @@ public class MusicStreamingServer extends WebSocketServer {
         this.musicServerPort = this.getPort();
         String message = "Music server started at: " + ip + ":" + musicServerPort;
         logger.info(message);
-//        System.out.println(message);
         clientBackend = new ClientBackend(ip, chordServerPort, "", m);
-    }
-
-    public void setM(int m) {
-        this.m = m;
-    }
-
-    public void setChordServerPort(int chordServerPort) {
-        this.chordServerPort = chordServerPort;
     }
 
     public void setLogger(Logger logger) {
         this.logger = logger;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
+        setM(node.getM());
+        setChordServerPort(node.getMyPort());
+    }
+
+    private void setM(int m) {
+        this.m = m;
+    }
+
+    private void setChordServerPort(int chordServerPort) {
+        this.chordServerPort = chordServerPort;
     }
 }

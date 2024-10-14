@@ -40,12 +40,25 @@ const MusicStreamingClient = () => {
             // Request a song to listen to!
             // const data = "perfect beauty-Mikael Jäcksson-In the bodega";
             // const data = "amalgam-DJ Sinthu-Performance is life";
+
+            // const data = value;
+            // socket.send(data);
+
             const data = value;
             socket.send(data);
         };
 
         socket.onmessage = (event) => {
             console.log("onmessage");
+
+            if (typeof event.data === "string") {
+                console.log("Is string!: " + event.data);
+            } else if (event.data instanceof ArrayBuffer) {
+                console.log("is music data");
+            } else {
+                console.log("unknown data");
+            }
+
             const audioData = event.data;
             if (audioContext) {
                 audioContext.decodeAudioData(
