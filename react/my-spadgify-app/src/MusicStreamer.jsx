@@ -158,7 +158,7 @@ function MusicStreamer() {
         <div>
             <div className="MusicStreamingClient">
                 <div hidden={isNotStarted}>
-                    <input value={value} onChange={handleChange} />
+                    {/* <input value={value} onChange={handleChange} /> */}
                     <div>Requested song: {value}</div>
                 </div>
 

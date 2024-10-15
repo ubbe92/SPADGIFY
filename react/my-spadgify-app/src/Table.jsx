@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./css/Table.css";
+import Fuse from "fuse.js";
 
 function Table({ getMedia, data }) {
     // Handles clicking on a table row and returning the clicked row's details
@@ -14,7 +15,34 @@ function Table({ getMedia, data }) {
         const { value } = e.target;
         getMedia(value);
     };
+
     // Search - fuzzy search
+    const [query, setQuery] = useState('');  // User input for search query
+    const [results, setResults] = useState([]);  // Search results
+
+    // Fuse.js options
+    const options = {
+        includeScore: true,
+        keys: ['song', 'artist'],  // Fields to search in
+    };
+
+    const fuse = new Fuse(data, options);  // Initialize Fuse.js with data and options
+
+    // Handle search input change
+    const handleSearch = (event) => {
+        const value = event.target.value;
+        setQuery(value);
+
+        // Perform fuzzy search if query is not empty
+        if (value.trim()) {
+            const searchResults = fuse.search(value);
+            setResults(searchResults.map(result => result.item));  // Extract the items from the result
+            console.log(results)
+        } else {
+            setResults([]);  // Reset results if query is cleared
+        }
+    };
+
     // Display songs in table
     // On click return row from table
 
@@ -24,7 +52,8 @@ function Table({ getMedia, data }) {
                 <input
                     type="text"
                     placeholder="Add song-artist-album"
-                    onChange={handleChange}
+                    // onChange={handleChange}
+                    onChange={handleSearch}
                 />
             </div>
             <div className="">
@@ -38,7 +67,26 @@ function Table({ getMedia, data }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data && data.length > 0 ? (
+                        {
+                        results && results.length > 0 ? (
+                            results.map((item, index) => {
+                                const [song, artist, album] = item.split("-"); // Split "song-artist-album"
+                                return (
+                                    <tr
+                                        key={index}
+                                        onClick={() =>
+                                                handleRowClick(song, artist, album)
+                                            }
+                                        >
+                                            <td>{song}</td>
+                                            <td>{artist}</td>
+                                            <td>{album}</td>
+                                        </tr>
+                                    );
+                                })
+                            )
+                        : (
+
                             data.map((item, index) => {
                                 const [song, artist, album] = item.split("-"); // Split "song-artist-album"
                                 return (
@@ -54,11 +102,7 @@ function Table({ getMedia, data }) {
                                     </tr>
                                 );
                             })
-                        ) : (
-                            <tr>
-                                <td colSpan="3">No media items available</td>
-                            </tr>
-                        )}
+                            )}
                     </tbody>
                 </table>
             </div>

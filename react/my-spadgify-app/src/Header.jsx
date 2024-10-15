@@ -3,7 +3,7 @@ function Header() {
         <header>
             <h1>Spadgify</h1>
             <nav>
-                <u1>
+                {/* <u1>
                     <li>
                         <a href="#">Home</a>
                     </li>
@@ -16,7 +16,7 @@ function Header() {
                     <li>
                         <a href="#">Contact</a>
                     </li>
-                </u1>
+                </u1> */}
             </nav>
             <hr></hr>
         </header>
