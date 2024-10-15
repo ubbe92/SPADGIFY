@@ -1,4 +1,4 @@
-.MediaTable {
+.media-table {
     width: 100%;
     height: 100%;
     display: flex;
@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.SearchField {
+.search-field {
     margin: 20px;
     padding: 10px;
     border: 1px solid black;

@@ -47,8 +47,8 @@ function Table({ getMedia, data }) {
     // On click return row from table
 
     return (
-        <div className="MediaTable">
-            <div className="SearchField">
+        <div className="media-table">
+            <div className="search-field">
                 <input
                     type="text"
                     placeholder="Add song-artist-album"
