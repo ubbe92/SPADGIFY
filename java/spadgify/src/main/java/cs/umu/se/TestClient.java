@@ -18,13 +18,10 @@ import java.io.*;
  * retrieve songs.
  */
 public class TestClient {
-    private static final int m = 3;
-    //private static int chunkSize = 2048;
-    private static final MediaUtil mediaUtil = new MediaUtil(m);
 
+    // example on commandline arguments for this program: -l -p 192.168.38.126 8185 3
     public static void main(String[] args) throws Exception {
         System.out.println("Test client running...");
-
         ClientGetOP clientGetOP = new ClientGetOP();
         CommandLine commandLine = new CommandLine(clientGetOP);
         commandLine.execute(args);
@@ -40,24 +37,23 @@ public class TestClient {
         int m = clientGetOP.getM();
         boolean isLogic = clientGetOP.isLogic();
         boolean isPerformance = clientGetOP.isPerformance();
-
-
-        Storage storage = new ClientBackend(ip, port, saveFolderPath, m);
-
-        if (isLogic) {
-            ClientLogicTest test = new ClientLogicTest(storage);
-        }
-
-        if (isPerformance) {
-            ClientPerformanceTest test = new ClientPerformanceTest(storage);
-        }
+        MediaUtil mediaUtil = new MediaUtil(m);
 
         System.out.println("ip: '" + ip + "'");
         System.out.println("port: '" + port + "'");
 
-//        String ip = "192.168.38.126";
-////        String ip = "192.168.1.50";
-//        int port = 8185;
+        Storage storage = new ClientBackend(ip, port, saveFolderPath, m);
+
+        // logic tests
+        if (isLogic) {
+            ClientLogicTest test = new ClientLogicTest(storage);
+        }
+
+        // performance tests
+        if (isPerformance) {
+            ClientPerformanceTest test = new ClientPerformanceTest(storage);
+        }
+        
         String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
         String outputFolderPath = "./../../testMedia/output-music/";
         ClientBackend backend = new ClientBackend(ip, port, outputFolderPath, m);
