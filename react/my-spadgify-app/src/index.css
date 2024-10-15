@@ -1,5 +1,7 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, Nunito;
     line-height: 1.5;
     font-weight: 400;
 
@@ -15,7 +17,7 @@
     height: 100%;
 }
 
-.MusicStreamingClient {
+.music-streaming-client {
     text-align: center;
     margin: auto;
     flex-grow: 1;
@@ -51,9 +53,28 @@ body {
     /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); Optional: Adds shadow for some depth */
 }
 
+.media-button-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+
+.logo {
+    /* color: #730039; */
+    color: #ff0030;
+
+    font-size: 4.2rem;
+    transform: rotate(270deg);
+}
+
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
+    margin-bottom: 0;
+    font-family: Nunito;
 }
 
 button {
@@ -73,6 +94,12 @@ button:hover {
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+
+header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 footer {

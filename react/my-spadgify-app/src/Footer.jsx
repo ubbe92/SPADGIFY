@@ -2,7 +2,7 @@ function Footer() {
     return (
         <footer>
             {/* <hr></hr> */}
-            <p>&copy; {new Date().getFullYear()} Spadgify</p>
+            <p>&copy; {new Date().getFullYear()} Spadgify - music for some</p>
         </footer>
     );
 }

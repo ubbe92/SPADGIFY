@@ -47,16 +47,14 @@ function Table({ getMedia, data }) {
     // On click return row from table
 
     return (
-        <div className="media-table">
-            <div className="search-field">
-                <input
-                    type="text"
-                    placeholder="Add song-artist-album"
-                    // onChange={handleChange}
-                    onChange={handleSearch}
-                />
-            </div>
-            <div className="">
+        <div className="table-container">
+            <input
+                className="search-field"
+                type="text"
+                placeholder="Search..."
+                onChange={handleSearch}
+            />
+            <div className="media-table">
                 {/* Input to add media (not fully implemented) */}
                 <table>
                     <thead>
