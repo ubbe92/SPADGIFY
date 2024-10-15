@@ -22,7 +22,7 @@ import java.util.concurrent.Callable;
  */
 @CommandLine.Command(name = "chord", mixinStandardHelpOptions = true, version = "Ubbes Chord DHT 1.0",
         description = "Starts a node and lets it either join or create a DHT.")
-public class GetOP implements Callable<Integer> {
+public class ChordGetOP implements Callable<Integer> {
 
     @CommandLine.Parameters(index = "0", paramLabel = "mode", description = "0 = join existing DTH. 1 = create new DHT.")
     private int mode = -1;

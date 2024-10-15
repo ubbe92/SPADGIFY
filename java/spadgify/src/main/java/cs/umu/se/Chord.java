@@ -1,10 +1,8 @@
 package cs.umu.se;
 
 import cs.umu.se.grpc.GRPCServer;
-import cs.umu.se.util.GetOP;
+import cs.umu.se.util.ChordGetOP;
 import picocli.CommandLine;
-
-import java.util.Arrays;
 
 public class Chord {
 
@@ -19,28 +17,28 @@ public class Chord {
 
         // music player ip: 192.168.38.126:8080
         // ethereal vistas-Mikael Jäcksson-In the bodega
-        GetOP getOp = new GetOP();
-        CommandLine commandLine = new CommandLine(getOp);
+        ChordGetOP chordGetOp = new ChordGetOP();
+        CommandLine commandLine = new CommandLine(chordGetOp);
         int exitCode = commandLine.execute(args);
 
-        if (getOp.isHelp())
+        if (chordGetOp.isHelp())
             System.exit(0);
 
         if (exitCode != 0) {
-            System.out.println("Exit code: " + exitCode + " reason: " + getOp.translateExitCode(exitCode));
+            System.out.println("Exit code: " + exitCode + " reason: " + chordGetOp.translateExitCode(exitCode));
 //            commandLine.usage(System.out);
             System.exit(exitCode);
         }
 
         // System.out.println("args: " + Arrays.toString(args));
 
-        int port = getOp.getPort();
-        String remoteIp = getOp.getRemoteIp();
-        int remotePort = getOp.getRemotePort();
-        int m = getOp.getM();
-        int mode = getOp.getMode();
-        int delay = getOp.getDelay();
-        int cacheSize = getOp.getCache();
+        int port = chordGetOp.getPort();
+        String remoteIp = chordGetOp.getRemoteIp();
+        int remotePort = chordGetOp.getRemotePort();
+        int m = chordGetOp.getM();
+        int mode = chordGetOp.getMode();
+        int delay = chordGetOp.getDelay();
+        int cacheSize = chordGetOp.getCache();
 
         // System.out.println("Delay: " + delay);
 
