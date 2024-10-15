@@ -1,9 +1,6 @@
 package cs.umu.se;
 
-import cs.umu.se.client.ClientBackend;
-import cs.umu.se.client.ClientLogicTest;
-import cs.umu.se.client.ClientPerformanceTest;
-import cs.umu.se.client.MediaBackend;
+import cs.umu.se.client.*;
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
@@ -48,6 +45,7 @@ public class TestClient {
         System.out.println("node port: '" + nodePort + "'");
         System.out.println("socket ip: '" + socketIp + "'");
         System.out.println("socket port: '" + socketPort + "'");
+        System.out.println("rest port: '" + restPort + "'");
 
         // test gRPC backend
         Storage storage = new ClientBackend(nodeIp, nodePort, saveFolderPath, m);
@@ -55,25 +53,45 @@ public class TestClient {
         // logic tests
         if (isLogic) {
             ClientLogicTest test = new ClientLogicTest(storage);
+
+            // check logic
+            test.testStoreAndDelete();
         }
 
         // performance tests
         if (isPerformance) {
             ClientPerformanceTest test = new ClientPerformanceTest(storage);
+
+            // do tests
+
+            // plot results
         }
 
-        // test web socket backend here (need to be implement methods and create a thread pool):::
-        storage = new MediaBackend(socketIp, socketPort, restPort, m);
+        // test web socket backend here (need to be implement methods and create a thread pool)!!!!!!
+        MediaBackend mediaBackend = new MediaBackend(socketIp, socketPort, restPort, m);
 
         // logic tests
         if (isLogic) {
-            ClientLogicTest test = new ClientLogicTest(storage);
+            ClientMediaLogicTest test = new ClientMediaLogicTest(mediaBackend);
+            
+            // check logic
+
         }
 
         // performance tests
         if (isPerformance) {
-            ClientPerformanceTest test = new ClientPerformanceTest(storage);
+            ClientMediaPerformanceTest test = new ClientMediaPerformanceTest(mediaBackend);
+
+            // do tests
+
+            // plot results
         }
+
+
+
+
+
+
 
 
         String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";

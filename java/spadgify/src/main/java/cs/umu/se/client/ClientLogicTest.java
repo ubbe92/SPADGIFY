@@ -9,4 +9,8 @@ public class ClientLogicTest {
         this.storage = storage;
     }
 
+    public void testStoreAndDelete() {
+
+    }
+
 }
