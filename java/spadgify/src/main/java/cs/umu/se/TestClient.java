@@ -3,6 +3,7 @@ package cs.umu.se;
 import cs.umu.se.client.ClientBackend;
 import cs.umu.se.client.ClientLogicTest;
 import cs.umu.se.client.ClientPerformanceTest;
+import cs.umu.se.client.MediaBackend;
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
@@ -19,7 +20,7 @@ import java.io.*;
  */
 public class TestClient {
 
-    // example on commandline arguments for this program: -l -p 192.168.38.126 8185 3
+    // example on commandline arguments for this program: -l -p 192.168.38.126 8185 3 192.168.38.126 8080 8000
     public static void main(String[] args) throws Exception {
         System.out.println("Test client running...");
         ClientGetOP clientGetOP = new ClientGetOP();
@@ -31,18 +32,25 @@ public class TestClient {
         if (isVersion || isUsage)
             System.exit(0);
 
-        String ip = clientGetOP.getIp();
-        int port = clientGetOP.getPort();
+        String nodeIp = clientGetOP.getNodeIp();
+        int nodePort = clientGetOP.getNodePort();
         String saveFolderPath = "";
         int m = clientGetOP.getM();
         boolean isLogic = clientGetOP.isLogic();
         boolean isPerformance = clientGetOP.isPerformance();
+        String socketIp = clientGetOP.getSocketIp();
+        int socketPort = clientGetOP.getSocketPort();
+        int restPort = clientGetOP.getRestPort();
+
         MediaUtil mediaUtil = new MediaUtil(m);
 
-        System.out.println("ip: '" + ip + "'");
-        System.out.println("port: '" + port + "'");
+        System.out.println("node ip: '" + nodeIp + "'");
+        System.out.println("node port: '" + nodePort + "'");
+        System.out.println("socket ip: '" + socketIp + "'");
+        System.out.println("socket port: '" + socketPort + "'");
 
-        Storage storage = new ClientBackend(ip, port, saveFolderPath, m);
+        // test gRPC backend
+        Storage storage = new ClientBackend(nodeIp, nodePort, saveFolderPath, m);
 
         // logic tests
         if (isLogic) {
@@ -53,10 +61,24 @@ public class TestClient {
         if (isPerformance) {
             ClientPerformanceTest test = new ClientPerformanceTest(storage);
         }
-        
+
+        // test web socket backend here (need to be implement methods and create a thread pool):::
+        storage = new MediaBackend(socketIp, socketPort, restPort, m);
+
+        // logic tests
+        if (isLogic) {
+            ClientLogicTest test = new ClientLogicTest(storage);
+        }
+
+        // performance tests
+        if (isPerformance) {
+            ClientPerformanceTest test = new ClientPerformanceTest(storage);
+        }
+
+
         String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
         String outputFolderPath = "./../../testMedia/output-music/";
-        ClientBackend backend = new ClientBackend(ip, port, outputFolderPath, m);
+        ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
 
 
         // Open all files in the input directory, parse them and create song objects
@@ -76,7 +98,7 @@ public class TestClient {
 
         Thread.sleep(500);
 
-        String firstNodeIdentifierString = ip + ":" + port;
+        String firstNodeIdentifierString = nodeIp + ":" + nodePort;
         MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);
 
         for (MediaInfo mediaInfo : mediaInfos)

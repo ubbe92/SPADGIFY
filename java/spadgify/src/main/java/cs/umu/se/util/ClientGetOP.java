@@ -8,14 +8,24 @@ import java.util.concurrent.Callable;
         description = "Performs logic and performance test on the chord cluster.")
 public class ClientGetOP implements Callable<Integer> {
 
-    @CommandLine.Parameters(index = "0", paramLabel = "ip", description = "The ip to a node.")
-    private String ip = "";
+    @CommandLine.Parameters(index = "0", paramLabel = "node ip", description = "The ip to a node.")
+    private String nodeIp = "";
 
-    @CommandLine.Parameters(index = "1", paramLabel = "port", description = "The port to a node.")
-    private int port = -1;
+    @CommandLine.Parameters(index = "1", paramLabel = "node port", description = "The port to a node.")
+    private int nodePort = -1;
 
     @CommandLine.Parameters(index = "2", paramLabel = "m", description = "The identifier length m.")
     private int m = -1;
+
+    @CommandLine.Parameters(index = "3", paramLabel = "socket ip", description = "The ip to a web socket.")
+    private String socketIp = "";
+
+    @CommandLine.Parameters(index = "4", paramLabel = "socket port", description = "The port to a web socket.")
+    private int socketPort = -1;
+
+    @CommandLine.Parameters(index = "5", paramLabel = "rest port", description = "The port to a rest server.")
+    private int restPort = -1;
+
 
     @CommandLine.Option(names = {"-l", "--logic"}, description = "Perform logic tests.")
     private boolean logic = false;
@@ -29,12 +39,12 @@ public class ClientGetOP implements Callable<Integer> {
         return 0;
     }
 
-    public String getIp() {
-        return ip;
+    public String getNodeIp() {
+        return nodeIp;
     }
 
-    public int getPort() {
-        return port;
+    public int getNodePort() {
+        return nodePort;
     }
 
     public int getM() {
@@ -47,5 +57,17 @@ public class ClientGetOP implements Callable<Integer> {
 
     public boolean isPerformance() {
         return performance;
+    }
+
+    public String getSocketIp() {
+        return socketIp;
+    }
+
+    public int getSocketPort() {
+        return socketPort;
+    }
+
+    public int getRestPort() {
+        return restPort;
     }
 }
