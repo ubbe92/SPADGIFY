@@ -52,15 +52,16 @@ public class TestClient {
 
         // logic tests
         if (isLogic) {
-            ClientLogicTest test = new ClientLogicTest(storage);
+            ClientLogicTest test = new ClientLogicTest(storage, m, nodeIp, nodePort);
 
             // check logic
-            test.testStoreAndDelete();
+            test.testListNodeSong();
+            test.testListAllSongs();
         }
 
         // performance tests
         if (isPerformance) {
-            ClientPerformanceTest test = new ClientPerformanceTest(storage);
+            ClientPerformanceTest test = new ClientPerformanceTest(storage, m, nodeIp, nodePort);
 
             // do tests
 
@@ -73,7 +74,7 @@ public class TestClient {
         // logic tests
         if (isLogic) {
             ClientMediaLogicTest test = new ClientMediaLogicTest(mediaBackend);
-            
+
             // check logic
 
         }
@@ -94,33 +95,40 @@ public class TestClient {
 
 
 
-        String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
-        String outputFolderPath = "./../../testMedia/output-music/";
-        ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
+//        String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
+//        String outputFolderPath = "./../../testMedia/output-music/";
+//        ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
+//
+//
+//        // Open all files in the input directory, parse them and create song objects
+//        String inputDirectoryPath = "./../../testMedia/input-music";
+//        File[] files = mediaUtil.getAllFilesInDirectory(inputDirectoryPath);
+//        Song[] songs = mediaUtil.getSongsFromFiles(files);
+//
+//        for (Song song : songs)
+//            System.out.println("hash: " + song.getMediaInfo().getHash() +
+//                    "\tduration: " + song.getMediaInfo().getDuration() +
+//                    "\tsize: " + song.getMediaInfo().getSize() +
+//                    "\tSong: " + song);
+//
+//        for (Song song : songs) {
+//            backend.store(song);
+//        }
+//
+//        Thread.sleep(500);
+//
+//        String firstNodeIdentifierString = nodeIp + ":" + nodePort;
+//        MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);
+//
+//        for (MediaInfo mediaInfo : mediaInfos)
+//            System.out.println("Media info: " + mediaInfo);
 
 
-        // Open all files in the input directory, parse them and create song objects
-        String inputDirectoryPath = "./../../testMedia/input-music";
-        File[] files = mediaUtil.getAllFilesInDirectory(inputDirectoryPath);
-        Song[] songs = mediaUtil.getSongsFromFiles(files);
 
-        for (Song song : songs)
-            System.out.println("hash: " + song.getMediaInfo().getHash() +
-                    "\tduration: " + song.getMediaInfo().getDuration() +
-                    "\tsize: " + song.getMediaInfo().getSize() +
-                    "\tSong: " + song);
 
-        for (Song song : songs) {
-            backend.store(song);
-        }
 
-        Thread.sleep(500);
 
-        String firstNodeIdentifierString = nodeIp + ":" + nodePort;
-        MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);
 
-        for (MediaInfo mediaInfo : mediaInfos)
-            System.out.println("Media info: " + mediaInfo);
 
 //        byte[] bytes = mediaUtil.readFromFile(inputFilePath);
 ////        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",

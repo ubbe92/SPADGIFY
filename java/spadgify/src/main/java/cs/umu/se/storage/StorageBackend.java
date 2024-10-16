@@ -11,9 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-
-import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.Array;
 
 /**
  * The StorageBackend class provides an implementation of the Storage interface.
@@ -56,20 +53,6 @@ public class StorageBackend implements Storage {
     }
 
     /**
-     * Stores an array of songs to the local storage, ensuring each song's data is written to a file and the
-     * corresponding song entry is saved in the internal hash map for future retrieval.
-     *
-     * @param song an array of song objects containing the metadata and data to be stored. Each song's data
-     *             will be written to the file path specified in the song object.
-     */
-    @Override
-    public void store(Song[] song) {
-        for (Song s: song) {
-            store(s);
-        }
-    }
-
-    /**
      * Retrieves a Song object corresponding to the given identifier string.
      * If the song is found in the internal storage but its data is not loaded into memory,
      * the song's data will be read from the file system and set to the Song object.
@@ -98,23 +81,6 @@ public class StorageBackend implements Storage {
 
         logger.info("Retrieved song: \"{}\"", song);
         return song;
-    }
-
-    /**
-     * Retrieves an array of Song objects corresponding to the given identifiers.
-     *
-     * @param identifierString an array of strings, each representing the unique identifier for a song.
-     * @return an array of Song objects, each corresponding to one of the provided identifiers.
-     */
-    @Override
-    public Song[] retrieve(String[] identifierString) {
-        ArrayList<Song> songArrayList = new ArrayList<>();
-        for (String s: identifierString) {
-            Song song = retrieve(s);
-            if (song != null)
-                songArrayList.add(song);
-        }
-        return new Song[songArrayList.size()];
     }
 
     /**
@@ -158,7 +124,7 @@ public class StorageBackend implements Storage {
      * @throws IllegalArgumentException if the song cannot be deleted.
      */
     @Override
-    public  void delete(String identifierString) throws IllegalArgumentException {
+    public void delete(String identifierString) throws IllegalArgumentException {
         synchronized (this) {
             Song song = songHashMap.get(identifierString);
 
@@ -166,21 +132,8 @@ public class StorageBackend implements Storage {
             mediaUtil.deleteFile(song.getFilePath());
 
             songHashMap.remove(identifierString);
-        }
-    }
 
-    /**
-     * Deletes multiple songs from the local storage based on the given array of identifier strings.
-     * This method iterates through the provided array of identifiers, removing each song from the internal hash map
-     * and deleting the associated file from the disk.
-     *
-     * @param identifierString an array of unique identifier strings of the songs to be deleted.
-     * @throws IllegalArgumentException if any of the songs cannot be deleted.
-     */
-    @Override
-    public void delete(String[] identifierString) {
-        for (String s: identifierString) {
-            delete(s);
+            logger.info("Deleted song: \"{}\"", song);
         }
     }
 

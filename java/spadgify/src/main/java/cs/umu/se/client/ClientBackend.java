@@ -81,11 +81,6 @@ public class ClientBackend implements Storage {
         sendChunks(song, future, channel, requestObserver);
     }
 
-    @Override
-    public void store(Song[] song) {
-
-    }
-
     /**
      * Retrieves a song from the Chord network
      * @param identifierString the song identifier (song-artist-album)
@@ -180,11 +175,6 @@ public class ClientBackend implements Storage {
     }
 
     @Override
-    public Song[] retrieve(String[] identifierString) {
-        return new Song[0];
-    }
-
-    @Override
     public Song[] retrieve(int nodeIdentifier) {
         return new Song[0];
     }
@@ -205,11 +195,8 @@ public class ClientBackend implements Storage {
 
         if (!resp.getSuccess())
             throw new IllegalArgumentException(resp.getMessage());
-    }
 
-    @Override
-    public void delete(String[] identifierString) {
-
+        logger.info("File deleted successfully!");
     }
 
     /**

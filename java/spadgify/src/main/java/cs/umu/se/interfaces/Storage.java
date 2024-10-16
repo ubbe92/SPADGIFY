@@ -8,17 +8,11 @@ public interface Storage {
 
     void store(Song song);
 
-    void store(Song[] song);
-
     Song retrieve(String identifierString);
-
-    Song[] retrieve(String[] identifierString);
 
     Song[] retrieve(int nodeIdentifier);
 
     void delete(String identifierString);
-
-    void delete(String[] identifierString);
 
     MediaInfo[] listAllSongs(String identifierString);
 
