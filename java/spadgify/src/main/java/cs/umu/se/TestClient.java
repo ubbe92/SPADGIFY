@@ -57,6 +57,8 @@ public class TestClient {
             // check logic
             test.testListNodeSong();
             test.testListAllSongs();
+            test.testStoreAndDelete();
+
         }
 
         // performance tests

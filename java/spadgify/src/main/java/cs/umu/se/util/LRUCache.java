@@ -1,5 +1,7 @@
 package cs.umu.se.util;
 
+import cs.umu.se.types.Song;
+
 import java.util.HashMap;
 
 /**
@@ -54,6 +56,7 @@ public class LRUCache<K, V> {
     public void remove(K key) {
         Node<K, V> node = cacheMap.get(key);
         cacheList.remove(node);
+        cacheMap.remove(key);
     }
 
     private void moveToHead(Node<K, V> node) {

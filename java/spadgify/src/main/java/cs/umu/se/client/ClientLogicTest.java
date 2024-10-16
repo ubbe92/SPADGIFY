@@ -91,6 +91,24 @@ public class ClientLogicTest {
 
     }
     public void testStoreAndDelete() {
+        Song song = createDummySong();
+        Song returnSong = storage.retrieve(song.getIdentifierString());
+
+        if (returnSong != null)
+            throw new IllegalStateException("testStoreAndDelete(): returnSong != null before storing");
+
+        storage.store(song);
+        returnSong = storage.retrieve(song.getIdentifierString());
+
+        if (returnSong == null)
+            throw new IllegalStateException("testStoreAndDelete(): returnSong == null after storing");
+
+        storage.delete(song.getIdentifierString());
+        returnSong = storage.retrieve(song.getIdentifierString());
+        System.out.println("Ret song: " + returnSong);
+
+        if (returnSong != null)
+            throw new IllegalStateException("testStoreAndDelete(): returnSong != null after deleting");
 
         System.out.println("testStoreAndDelete() done!");
 

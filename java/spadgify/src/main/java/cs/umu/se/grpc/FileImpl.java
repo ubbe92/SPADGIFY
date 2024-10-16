@@ -229,8 +229,9 @@ public class FileImpl extends FileGrpc.FileImplBase {
         Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
         Song song = (Song) lruCache.get(identifierString);
 
-        if (song != null)
+        if (song != null) {
             lruCache.remove(identifierString);
+        }
 
         int predIdentifier = node.getPredecessor().getMyIdentifier();
         int nodeIdentifier = node.getMyIdentifier();
