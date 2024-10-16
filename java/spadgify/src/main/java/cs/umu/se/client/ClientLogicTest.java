@@ -4,10 +4,12 @@ import cs.umu.se.chord.Hash;
 import cs.umu.se.interfaces.Storage;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
+import cs.umu.se.util.MediaUtil;
 
 import java.util.Random;
 
 public class ClientLogicTest {
+    private MediaUtil mediaUtil;
     private String nodeIp;
     private int nodePort;
     private Storage storage;
@@ -18,35 +20,12 @@ public class ClientLogicTest {
         this.m = m;
         this.nodeIp = nodeIp;
         this.nodePort = nodePort;
-    }
-
-    private String createRandomString(int length) {
-        int leftLimit = 97; // letter 'a'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = length;
-        Random random = new Random();
-
-        String generatedString = random.ints(leftLimit, rightLimit + 1)
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-
-        return generatedString;
-    }
-
-    private Song createDummySong() {
-        long size = 10810096;
-        byte[] data = new byte[(int) size];
-        String artist = createRandomString(15);
-        String song = createRandomString(15);
-        String album = createRandomString(15);
-        MediaInfo mediaInfo = new MediaInfo(artist, song, album, 120, "", size, m);
-        System.out.println("hash: " + mediaInfo.getHash());
-        return new Song(mediaInfo, "", data);
+        this.mediaUtil = new MediaUtil(m);
     }
 
     public void testListNodeSong() {
-        Song song = createDummySong();
+        long size = 10810096;
+        Song song = mediaUtil.createDummySong(size);
 
         int lengthBeforeStore = storage.listNodeSongs().length;
         storage.store(song);
@@ -69,7 +48,8 @@ public class ClientLogicTest {
     }
 
     public void testListAllSongs() {
-        Song song = createDummySong();
+        long size = 10810096;
+        Song song = mediaUtil.createDummySong(size);
         String identifierString = nodeIp + ":" + nodePort;
 
         int lengthBeforeStore = storage.listAllSongs(identifierString).length;
@@ -91,7 +71,8 @@ public class ClientLogicTest {
 
     }
     public void testStoreAndDelete() {
-        Song song = createDummySong();
+        long size = 10810096;
+        Song song = mediaUtil.createDummySong(size);
         Song returnSong = storage.retrieve(song.getIdentifierString());
 
         if (returnSong != null)
@@ -105,7 +86,6 @@ public class ClientLogicTest {
 
         storage.delete(song.getIdentifierString());
         returnSong = storage.retrieve(song.getIdentifierString());
-        System.out.println("Ret song: " + returnSong);
 
         if (returnSong != null)
             throw new IllegalStateException("testStoreAndDelete(): returnSong != null after deleting");
@@ -115,8 +95,9 @@ public class ClientLogicTest {
     }
 
     public void testStoreDuplicate() {
-        Song song1 = createDummySong();
-        Song song2 = createDummySong();
+        long size = 10810096;
+        Song song1 = mediaUtil.createDummySong(size);
+        Song song2 = mediaUtil.createDummySong(size);
         String identifierString = nodeIp + ":" + nodePort;
 
         int lengthBeforeStore = storage.listAllSongs(identifierString).length;
@@ -144,5 +125,4 @@ public class ClientLogicTest {
 
         System.out.println("testStoreDuplicate() done!");
     }
-
 }

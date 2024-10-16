@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * MediaUtil is a utility class for various media-related operations including converting media information
@@ -274,5 +275,26 @@ public class MediaUtil {
             System.arraycopy(mediaInfos2, 0, mediaInfos, size1, size2);
 
         return mediaInfos;
+    }
+
+    public String createRandomString(int length) {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = length;
+        Random random = new Random();
+
+        return random.ints(leftLimit, rightLimit + 1)
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+    }
+
+    public Song createDummySong(long size) {
+        byte[] data = new byte[(int) size];
+        String artist = createRandomString(15);
+        String song = createRandomString(15);
+        String album = createRandomString(15);
+        MediaInfo mediaInfo = new MediaInfo(artist, song, album, 120, "", size, m);
+        return new Song(mediaInfo, "", data);
     }
 }

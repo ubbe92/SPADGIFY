@@ -10,6 +10,7 @@ import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.LRUCache;
 import cs.umu.se.util.MediaUtil;
+import cs.umu.se.util.ReadThroughCache;
 import io.grpc.stub.StreamObserver;
 import proto.Chord;
 import proto.FileGrpc;
@@ -34,7 +35,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
     private final StorageBackend storageBackend;
     private final String directory = "./media-spadgify/";
     private final int chunkSize = 2048;
-    private final LRUCache lruCache;
+    private final ReadThroughCache readThroughCache;
     private final Logger logger;
 
     public FileImpl(Node node, int cacheSize, Logger logger, StorageBackend storageBackend) {
@@ -43,7 +44,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
         this.node = node;
         m = node.getM();
-        lruCache = new LRUCache(cacheSize);
+        readThroughCache = new ReadThroughCache(cacheSize);
         mediaUtil = new MediaUtil(m);
         this.storageBackend = storageBackend;
     }
@@ -155,7 +156,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
         int hash =  Hash.getNodeIdentifierFromString(identifierString, m);
 
         // Do we have the song in our cache
-        song = (Song) lruCache.get(identifierString);
+        song = readThroughCache.get(identifierString);
         if (song != null) {
             sendChunks(song, responseObserver);
             logger.info("Found \"{}\" in cache", song);
@@ -201,7 +202,7 @@ public class FileImpl extends FileGrpc.FileImplBase {
 
         // Make deep copy to store in cache
         Song songCopy = new Song(song);
-        lruCache.put(songCopy.getIdentifierString(), songCopy);
+        readThroughCache.put(songCopy.getIdentifierString(), songCopy);
 
         song.setData(null); // we don't need to hold this in memory, retrieve method will add the data back
 
@@ -227,10 +228,10 @@ public class FileImpl extends FileGrpc.FileImplBase {
         String message = "File: " + identifierString + " deleted successfully!";
 
         Node destinationNode = mediaUtil.getResponsibleNodeForHash(node, hash);
-        Song song = (Song) lruCache.get(identifierString);
+        Song song = readThroughCache.get(identifierString);
 
         if (song != null) {
-            lruCache.remove(identifierString);
+            readThroughCache.remove(identifierString);
         }
 
         int predIdentifier = node.getPredecessor().getMyIdentifier();

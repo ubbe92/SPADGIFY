@@ -39,6 +39,7 @@ public class LRUCache<K, V> {
     public void put(K key, V value) {
         Node<K, V> existingNode = cacheMap.get(key);
         if (existingNode != null) {
+            System.out.println("LRU CACHE: replacing");
             existingNode.value = value;
             moveToHead(existingNode);
             return;
@@ -47,16 +48,20 @@ public class LRUCache<K, V> {
         Node<K, V> newNode = new Node<>(key, value);
         cacheList.addFirst(newNode);
         cacheMap.put(key, newNode);
+        System.out.println("LRU CACHE: inserting");
 
+        System.out.println("WTFFFFFFFFFFF");
         if (cacheList.size() > capacity) {
+            System.out.println("LRU CACHE: remove LRU entry");
             removeLeastRecentlyUsed();
         }
+        System.out.println("LRU CACHE: done put");
     }
 
     public void remove(K key) {
         Node<K, V> node = cacheMap.get(key);
         cacheList.remove(node);
-        cacheMap.remove(key);
+        cacheMap.remove(key); // we added, breaks implementation?
     }
 
     private void moveToHead(Node<K, V> node) {
@@ -65,8 +70,11 @@ public class LRUCache<K, V> {
     }
 
     private void removeLeastRecentlyUsed() {
+        System.out.println("removeLeastRecentlyUsed1");
         Node<K, V> tail = cacheList.removeLast();
+        System.out.println("removeLeastRecentlyUsed2");
         cacheMap.remove(tail.key);
+        System.out.println("removeLeastRecentlyUsed3");
     }
 
     private static class Node<K, V> {
@@ -128,7 +136,9 @@ public class LRUCache<K, V> {
         public int size() {
             int size = 0;
             Node<K, V> current = head;
+            System.out.println("head: " + head.value);
             while (current != null) {
+                System.out.println("current: " + current.value);
                 size++;
                 current = current.next;
             }

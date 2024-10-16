@@ -2,13 +2,12 @@ package cs.umu.se;
 
 import cs.umu.se.client.*;
 import cs.umu.se.interfaces.Storage;
-import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.ClientGetOP;
 import cs.umu.se.util.MediaUtil;
 import picocli.CommandLine;
 
-import java.io.*;
+import java.io.File;
 
 /**
  * The TestClient class is responsible for initializing and running a test client
@@ -58,6 +57,7 @@ public class TestClient {
             test.testListAllSongs();
             test.testStoreAndDelete();
             test.testStoreDuplicate();
+            System.out.println("Logic tests done!");
         }
 
         // performance tests
@@ -65,8 +65,20 @@ public class TestClient {
             ClientPerformanceTest test = new ClientPerformanceTest(storage, m, nodeIp, nodePort);
 
             // do tests
+            int iterations = 10;
+            int nrSongs = 80;
+            int nrBoxes = 2;
+            long songSize = 10810096;
 
+            // Test increasing amount of messages - seq
+            String title = "Non caching retrieve of songs with fixed payload size of 10 Mb repeated " + iterations + " times.";
+            test.makeBoxPlotSeqIncSongsNoCaching(title, nrBoxes, nrSongs, iterations, songSize);
+
+            title = "Caching retrieve of songs with fixed payload size of 10 Mb repeated " + iterations + " times.";
+            test.makeBoxPlotSeqIncSonsWithCache(title, nrBoxes, nrSongs, iterations, songSize);
             // plot results
+
+            System.out.println("Performance tests done!");
         }
 
         // test web socket backend here (need to be implement methods and create a thread pool)!!!!!!
@@ -96,25 +108,24 @@ public class TestClient {
 
 
 
-//        String inputFilePath = "./../../testMedia/input-music/freeDemoSong.mp3";
-//        String outputFolderPath = "./../../testMedia/output-music/";
-//        ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
-//
-//
-//        // Open all files in the input directory, parse them and create song objects
-//        String inputDirectoryPath = "./../../testMedia/input-music";
-//        File[] files = mediaUtil.getAllFilesInDirectory(inputDirectoryPath);
-//        Song[] songs = mediaUtil.getSongsFromFiles(files);
-//
-//        for (Song song : songs)
-//            System.out.println("hash: " + song.getMediaInfo().getHash() +
-//                    "\tduration: " + song.getMediaInfo().getDuration() +
-//                    "\tsize: " + song.getMediaInfo().getSize() +
-//                    "\tSong: " + song);
-//
-//        for (Song song : songs) {
-//            backend.store(song);
-//        }
+        String outputFolderPath = "./../../testMedia/output-music/";
+        ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
+
+
+        // Open all files in the input directory, parse them and create song objects
+        String inputDirectoryPath = "./../../testMedia/input-music";
+        File[] files = mediaUtil.getAllFilesInDirectory(inputDirectoryPath);
+        Song[] songs = mediaUtil.getSongsFromFiles(files);
+
+        for (Song song : songs)
+            System.out.println("hash: " + song.getMediaInfo().getHash() +
+                    "\tduration: " + song.getMediaInfo().getDuration() +
+                    "\tsize: " + song.getMediaInfo().getSize() +
+                    "\tSong: " + song);
+
+        for (Song song : songs) {
+            backend.store(song);
+        }
 //
 //        Thread.sleep(500);
 //

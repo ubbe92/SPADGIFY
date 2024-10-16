@@ -114,7 +114,6 @@ public class ClientBackend implements Storage {
                     }
 
                     chordMediaInfo = value.getMediaInfo();
-                    logger.info("Artist: {}", chordMediaInfo.getArtist());
                     i++;
                 }
 
@@ -193,8 +192,11 @@ public class ClientBackend implements Storage {
 
         channel.shutdown();
 
-        if (!resp.getSuccess())
-            throw new IllegalArgumentException(resp.getMessage());
+        if (!resp.getSuccess()) {
+//            throw new IllegalArgumentException(resp.getMessage());
+            logger.info("Could not delete song: {} - {}", identifierString, resp.getMessage());
+            return;
+        }
 
         logger.info("File deleted successfully!");
     }
