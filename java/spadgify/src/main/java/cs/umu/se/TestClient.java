@@ -53,12 +53,11 @@ public class TestClient {
         // logic tests
         if (isLogic) {
             ClientLogicTest test = new ClientLogicTest(storage, m, nodeIp, nodePort);
-
             // check logic
             test.testListNodeSong();
             test.testListAllSongs();
             test.testStoreAndDelete();
-
+            test.testStoreDuplicate();
         }
 
         // performance tests

@@ -114,4 +114,35 @@ public class ClientLogicTest {
 
     }
 
+    public void testStoreDuplicate() {
+        Song song1 = createDummySong();
+        Song song2 = createDummySong();
+        String identifierString = nodeIp + ":" + nodePort;
+
+        int lengthBeforeStore = storage.listAllSongs(identifierString).length;
+        if (lengthBeforeStore != 0)
+            throw new IllegalStateException("testStoreDuplicate():  lengthBeforeStore != 0");
+
+        storage.store(song1);
+        storage.store(song1);
+
+        int lengthAfterStore = storage.listAllSongs(identifierString).length;
+        if (lengthAfterStore != 1)
+            throw new IllegalStateException("testStoreDuplicate():  lengthAfterStore != 1");
+
+        storage.store(song2);
+        lengthAfterStore = storage.listAllSongs(identifierString).length;
+        if (lengthAfterStore != 2)
+            throw new IllegalStateException("testStoreDuplicate():  lengthAfterStore != 2");
+
+        storage.delete(song1.getIdentifierString());
+        storage.delete(song2.getIdentifierString());
+
+        int lengthAfterDelete = storage.listAllSongs(identifierString).length;
+        if (lengthAfterDelete != 0)
+            throw new IllegalStateException("testStoreDuplicate():  lengthAfterDelete != 0");
+
+        System.out.println("testStoreDuplicate() done!");
+    }
+
 }
