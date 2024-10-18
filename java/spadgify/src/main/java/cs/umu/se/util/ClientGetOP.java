@@ -33,6 +33,10 @@ public class ClientGetOP implements Callable<Integer> {
     @CommandLine.Option(names = {"-p", "--performance"}, description = "Perform performance tests.")
     private boolean performance = false;
 
+    @CommandLine.Option(names = {"-u", "--upload"}, description = "Upload music data from the given path.")
+    private String pathToMusic = "";
+
+
 
     @Override
     public Integer call() throws Exception {
@@ -69,5 +73,13 @@ public class ClientGetOP implements Callable<Integer> {
 
     public int getRestPort() {
         return restPort;
+    }
+
+    public String getPathToMusic() {
+        return pathToMusic;
+    }
+
+    public boolean isUpload() {
+        return !pathToMusic.equals("");
     }
 }

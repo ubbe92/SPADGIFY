@@ -21,7 +21,12 @@ public class TestClient {
         System.out.println("Test client running...");
         ClientGetOP clientGetOP = new ClientGetOP();
         CommandLine commandLine = new CommandLine(clientGetOP);
-        commandLine.execute(args);
+        int exitCode = commandLine.execute(args);
+
+        if (exitCode != 0) {
+            System.out.println("GetOP exit code: " + exitCode);
+            System.exit(exitCode);
+        }
 
         boolean isVersion = commandLine.isVersionHelpRequested();
         boolean isUsage = commandLine.isUsageHelpRequested();
@@ -34,6 +39,8 @@ public class TestClient {
         int m = clientGetOP.getM();
         boolean isLogic = clientGetOP.isLogic();
         boolean isPerformance = clientGetOP.isPerformance();
+        boolean isUpload = clientGetOP.isUpload();
+        String pathToMusic = clientGetOP.getPathToMusic();
         String socketIp = clientGetOP.getSocketIp();
         int socketPort = clientGetOP.getSocketPort();
         int restPort = clientGetOP.getRestPort();
@@ -66,7 +73,7 @@ public class TestClient {
 
             // do tests
             int iterations = 10;
-            int nrSongs = 80;
+            int nrSongs = 5;
             int nrBoxes = 2;
             long songSize = 10810096;
 
@@ -102,30 +109,33 @@ public class TestClient {
         }
 
 
+        if (isUpload) {
+            System.out.println("Is upload: " + isUpload + ", path: " + pathToMusic);
+            String outputFolderPath = "./../../testMedia/output-music/";
+            ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
 
+            // Open all files in the input directory, parse them and create song objects
+            // pathToMusic = "./../../testMedia/input-music"
+            File[] files = mediaUtil.getAllFilesInDirectory(pathToMusic);
+            Song[] songs = mediaUtil.getSongsFromFiles(files);
 
+            for (Song song : songs)
+                System.out.println("hash: " + song.getMediaInfo().getHash() +
+                        "\tduration: " + song.getMediaInfo().getDuration() +
+                        "\tsize: " + song.getMediaInfo().getSize() +
+                        "\tSong: " + song);
 
-
-
-
-        String outputFolderPath = "./../../testMedia/output-music/";
-        ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
-
-
-        // Open all files in the input directory, parse them and create song objects
-        String inputDirectoryPath = "./../../testMedia/input-music";
-        File[] files = mediaUtil.getAllFilesInDirectory(inputDirectoryPath);
-        Song[] songs = mediaUtil.getSongsFromFiles(files);
-
-        for (Song song : songs)
-            System.out.println("hash: " + song.getMediaInfo().getHash() +
-                    "\tduration: " + song.getMediaInfo().getDuration() +
-                    "\tsize: " + song.getMediaInfo().getSize() +
-                    "\tSong: " + song);
-
-        for (Song song : songs) {
-            backend.store(song);
+            for (Song song : songs) {
+                backend.store(song);
+            }
         }
+
+
+
+
+
+
+
 //
 //        Thread.sleep(500);
 //
