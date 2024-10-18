@@ -53,12 +53,47 @@ public class TestClient {
         System.out.println("socket port: '" + socketPort + "'");
         System.out.println("rest port: '" + restPort + "'");
 
+
+        // Upload music to the node
+        // ------------------------------------------------
+        if (isUpload) {
+            System.out.println("Is upload: " + isUpload + ", path: " + pathToMusic);
+            String outputFolderPath = "./../../testMedia/output-music/"; // if we want to save retrieved songs to disc later
+            ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
+
+            // Open all files in the input directory, parse them and create song objects
+            // e.g. pathToMusic = "./../../testMedia/input-music"
+            File[] files = mediaUtil.getAllFilesInDirectory(pathToMusic);
+            Song[] songs = mediaUtil.getSongsFromFiles(files);
+
+            for (Song song : songs)
+                System.out.println("hash: " + song.getMediaInfo().getHash() +
+                        "\tduration: " + song.getMediaInfo().getDuration() +
+                        "\tsize: " + song.getMediaInfo().getSize() +
+                        "\tSong: " + song);
+
+            for (Song song : songs) {
+                backend.store(song);
+            }
+
+
+            // Only for testing
+            MusicStreamingClientLogicTest test = new MusicStreamingClientLogicTest(socketIp, socketPort, restPort, m);
+
+            // check logic
+            test.testRESTListAllSongs();
+            test.testStreamingData();
+        }
+
+
         // test gRPC backend
+        // ------------------------------------------------
         Storage storage = new ClientBackend(nodeIp, nodePort, saveFolderPath, m);
 
         // logic tests
         if (isLogic) {
             ClientLogicTest test = new ClientLogicTest(storage, m, nodeIp, nodePort);
+
             // check logic
             test.testListNodeSong();
             test.testListAllSongs();
@@ -77,58 +112,42 @@ public class TestClient {
             int nrBoxes = 2;
             long songSize = 10810096;
 
-            // Test increasing amount of messages - seq
+            // Test increasing amount of messages - seq without cache
             String title = "Non caching retrieve of songs with fixed payload size of 10 Mb repeated " + iterations + " times.";
             test.makeBoxPlotSeqIncSongsNoCaching(title, nrBoxes, nrSongs, iterations, songSize);
 
+            // Test increasing amount of messages - seq with cache
             title = "Caching retrieve of songs with fixed payload size of 10 Mb repeated " + iterations + " times.";
             test.makeBoxPlotSeqIncSonsWithCache(title, nrBoxes, nrSongs, iterations, songSize);
-            // plot results
 
             System.out.println("Performance tests done!");
         }
 
         // test web socket backend here (need to be implement methods and create a thread pool)!!!!!!
-        MediaBackend mediaBackend = new MediaBackend(socketIp, socketPort, restPort, m);
+        // ------------------------------------------------
 
         // logic tests
         if (isLogic) {
-            ClientMediaLogicTest test = new ClientMediaLogicTest(mediaBackend);
+            MusicStreamingClientLogicTest test = new MusicStreamingClientLogicTest(socketIp, socketPort, restPort, m);
 
             // check logic
+            test.testRESTListAllSongs();
+            test.testStreamingData();
 
+            System.out.println("Web socket logic tests done!");
         }
 
         // performance tests
         if (isPerformance) {
-            ClientMediaPerformanceTest test = new ClientMediaPerformanceTest(mediaBackend);
+//            ClientMediaPerformanceTest test = new ClientMediaPerformanceTest(musicStreamingClient);
 
             // do tests
 
             // plot results
+
+            System.out.println("Web socket performance tests done!");
         }
 
-
-        if (isUpload) {
-            System.out.println("Is upload: " + isUpload + ", path: " + pathToMusic);
-            String outputFolderPath = "./../../testMedia/output-music/";
-            ClientBackend backend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
-
-            // Open all files in the input directory, parse them and create song objects
-            // pathToMusic = "./../../testMedia/input-music"
-            File[] files = mediaUtil.getAllFilesInDirectory(pathToMusic);
-            Song[] songs = mediaUtil.getSongsFromFiles(files);
-
-            for (Song song : songs)
-                System.out.println("hash: " + song.getMediaInfo().getHash() +
-                        "\tduration: " + song.getMediaInfo().getDuration() +
-                        "\tsize: " + song.getMediaInfo().getSize() +
-                        "\tSong: " + song);
-
-            for (Song song : songs) {
-                backend.store(song);
-            }
-        }
 
 
 
@@ -178,6 +197,6 @@ public class TestClient {
 //        if (songRet != null)
 //            backend.delete(songRet.getIdentifierString());
 
-        System.out.println("Done");
+        System.out.println("Test client done!");
     }
 }

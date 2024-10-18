@@ -30,7 +30,7 @@ public class RESTMediaInfo extends ServerResource {
         try {
             String identifierString = node.getMyIp() + ":" + node.getMyPort();
             mediaInfos = clientBackend.listAllSongs(identifierString);
-            System.out.println("MEDIA INFOS RETRIEVED IN REST SERVER: " + Arrays.toString(mediaInfos));
+            logger.info("REST list all songs called.");
 
         } catch (Exception e) {
             logger.error("Could not retrieve all media infos from REST server: {}", e.getMessage());

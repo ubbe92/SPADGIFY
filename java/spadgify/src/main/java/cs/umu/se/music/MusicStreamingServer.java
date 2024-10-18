@@ -50,7 +50,9 @@ public class MusicStreamingServer extends WebSocketServer {
         if (song != null) {
             mp3Data = song.getData();
             conn.send(mp3Data);
-        }
+        } else
+//            conn.send(""); // to indicate that a song does not exist
+            conn.send(new byte[0]); // to indicate that a song does not exist
     }
 
     @Override

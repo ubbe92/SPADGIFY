@@ -33,7 +33,7 @@ public class ClientGetOP implements Callable<Integer> {
     @CommandLine.Option(names = {"-p", "--performance"}, description = "Perform performance tests.")
     private boolean performance = false;
 
-    @CommandLine.Option(names = {"-u", "--upload"}, description = "Upload music data from the given path.")
+    @CommandLine.Option(names = {"-u", "--upload"}, description = "Upload real music files from the given path to the node.")
     private String pathToMusic = "";
 
 
