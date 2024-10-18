@@ -104,9 +104,12 @@ public class TestClient {
             for (MusicStreamingClient musicStreamingClient : musicStreamingClients)
                 musicStreamingClient.send(getThisSong);
 
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             for (MusicStreamingClient musicStreamingClient : musicStreamingClients)
                 musicStreamingClient.closeBlocking();
+
+            int nrThreads = 5;
+            MusicStreamingClientPerformanceTest t = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m, nrThreads);
         }
 
 
@@ -149,7 +152,6 @@ public class TestClient {
 
         // test web socket backend here (need to be implement methods and create a thread pool)!!!!!!
         // ------------------------------------------------
-
         // logic tests
         if (isLogic) {
             MusicStreamingClientLogicTest test = new MusicStreamingClientLogicTest(socketIp, socketPort, restPort, m);
@@ -163,7 +165,8 @@ public class TestClient {
 
         // performance tests
         if (isPerformance) {
-            MusicStreamingClientPerformanceTest test = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m);
+            int nrThreads = 5;
+            MusicStreamingClientPerformanceTest test = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m, nrThreads);
 
             // do tests
 

@@ -43,11 +43,11 @@ public class MusicStreamingClientLogicTest {
     }
 
     public void testRESTListAllSongs() {
-        Response response = makeRequestWithoutBody(restEndpoint, Method.GET);
+        MediaUtil mediaUtil = new MediaUtil(m);
+        Response response = mediaUtil.makeRestletRequestWithoutBody(restEndpoint, Method.GET, restClient);
         Representation representation = response.getEntity();
 
         try {
-            MediaUtil mediaUtil = new MediaUtil(m);
             JSONArray jsonArray = mediaUtil.convertRepresentationToJsonArray(representation);
 
             if (jsonArray.isEmpty())
@@ -103,10 +103,5 @@ public class MusicStreamingClientLogicTest {
         }
 
         System.out.println("testStreamingData() done!");
-    }
-
-    private Response makeRequestWithoutBody(String url, Method method) {
-        Request request = new Request(method, url, null);
-        return restClient.handle(request);
     }
 }

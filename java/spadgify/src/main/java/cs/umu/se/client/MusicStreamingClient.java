@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 
 public class MusicStreamingClient extends WebSocketClient {
-    private final CountDownLatch latch = new CountDownLatch(1);
+    private CountDownLatch latch = new CountDownLatch(1);
     private byte[] data;
 
     public MusicStreamingClient(URI serverUri) {
@@ -31,15 +31,19 @@ public class MusicStreamingClient extends WebSocketClient {
     // Handle binary messages
     @Override
     public void onMessage(ByteBuffer message) {
-        System.out.println("Client received binary message on thread: " + Thread.currentThread().getName());
         byte[] bytes = new byte[message.remaining()];
         message.get(bytes);  // Read the bytes from ByteBuffer
 
         // Handle or process the binary data (e.g., save or play audio)
-        if (bytes.length > 0)
-            this.data = bytes;
-        else
-            this.data = null;
+        synchronized (this) {
+            if (bytes.length > 0)
+                this.data = bytes;
+            else
+                this.data = null;
+        }
+
+        System.out.println("Client received binary message on thread: " + Thread.currentThread().getName() +
+                ", nr bytes: " + bytes.length);
 
         latch.countDown();
     }
@@ -58,9 +62,12 @@ public class MusicStreamingClient extends WebSocketClient {
     public void awaitResponse() throws InterruptedException {
         System.out.println("Client awaiting response...");
         latch.await();
+        latch = new CountDownLatch(1);
     }
 
     public byte[] getData() {
-        return data;
+        synchronized (this) {
+            return data;
+        }
     }
 }

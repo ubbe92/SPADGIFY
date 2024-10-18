@@ -8,6 +8,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.restlet.Client;
+import org.restlet.Request;
+import org.restlet.Response;
+import org.restlet.data.Method;
 import org.restlet.representation.Representation;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 import proto.Chord;
@@ -331,5 +335,57 @@ public class MediaUtil {
         String genre = (String) json.get("genre");
 
         return new MediaInfo(artist, song, album, (int) duration, genre, size, m);
+    }
+
+    public Response makeRestletRequestWithoutBody(String url, Method method, Client restClient) {
+        Request request = new Request(method, url, null);
+        return restClient.handle(request);
+    }
+
+    /**
+     * This method creates an array of dummy songs. In order to make the cache testable, every other song is replaced
+     * with one of the Math.floor(Math.sqrt(nrSongs)) popular songs. Hence, some songs will be more popular and thereby
+     * be in the cache
+     * @param nrSongs the number songs requested
+     * @param songSize size of each song
+     * @return an array of songs containing duplicates in order to test the cache
+     */
+    public Song[] createCacheableDummySongs(int nrSongs, long songSize) {
+        Song[] songs = new Song[nrSongs];
+        for (int k = 0; k < nrSongs; k++) {
+            songs[k] = createDummySong(songSize);
+        }
+
+        int nrPopularSongs = (int) Math.floor(Math.sqrt(songs.length));
+        Song[] popularSongs = new Song[nrPopularSongs];
+        for (int k = 0; k < nrPopularSongs; k++)
+            popularSongs[k] = createDummySong(songSize);
+
+        for (int k = 0; k < songs.length; k++) {
+            if (k % 2 == 0) {
+                Random rand = new Random();
+                int index = rand.nextInt(nrPopularSongs);
+                songs[k] = popularSongs[index];
+            }
+        }
+
+        return songs;
+    }
+
+    /**
+     * This method creates an array of dummy songs of length nrSongs. Each song will be unique, hence the cache inside
+     * the nodes will not be used since each song in this array is unique.
+     * @param nrSongs the number songs requested
+     * @param songSize size of each song
+     * @return an array of unique songs
+     */
+    public Song[] createDummySongs(int nrSongs, long songSize) {
+        // create dummy data
+        Song[] songs = new Song[nrSongs];
+        for (int k = 0; k < nrSongs; k++) {
+            songs[k] = createDummySong(songSize);
+        }
+
+        return songs;
     }
 }
