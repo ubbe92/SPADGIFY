@@ -31,16 +31,16 @@ public class MusicStreamingClient extends WebSocketClient {
     // Handle binary messages
     @Override
     public void onMessage(ByteBuffer message) {
-        System.out.println("Client received binary message");
+        System.out.println("Client received binary message on thread: " + Thread.currentThread().getName());
         byte[] bytes = new byte[message.remaining()];
         message.get(bytes);  // Read the bytes from ByteBuffer
 
+        // Handle or process the binary data (e.g., save or play audio)
         if (bytes.length > 0)
             this.data = bytes;
         else
             this.data = null;
 
-        // Handle or process the binary data (e.g., save or play audio)
         latch.countDown();
     }
 

@@ -8,6 +8,7 @@ import cs.umu.se.util.MediaUtil;
 import picocli.CommandLine;
 
 import java.io.File;
+import java.net.URI;
 
 /**
  * The TestClient class is responsible for initializing and running a test client
@@ -77,12 +78,35 @@ public class TestClient {
             }
 
 
-            // Only for testing
+            // Only for testing, remove later
             MusicStreamingClientLogicTest test = new MusicStreamingClientLogicTest(socketIp, socketPort, restPort, m);
 
             // check logic
             test.testRESTListAllSongs();
             test.testStreamingData();
+
+
+            // Testing how to perform performance test below, remove later
+            String socketEndpoint = "ws://" + socketIp + ":" + socketPort;
+            URI uri = new URI(socketEndpoint);
+            int nrClients = 4;
+            MusicStreamingClient[] musicStreamingClients = new MusicStreamingClient[nrClients];
+
+            for (int i = 0; i < nrClients; i++) {
+                musicStreamingClients[i] = new MusicStreamingClient(uri);
+            }
+
+            for (MusicStreamingClient musicStreamingClient : musicStreamingClients)
+                musicStreamingClient.connectBlocking();
+
+
+            String getThisSong = "ethereal vistas-Mikael Jäcksson-In the bodega";
+            for (MusicStreamingClient musicStreamingClient : musicStreamingClients)
+                musicStreamingClient.send(getThisSong);
+
+            Thread.sleep(5000);
+            for (MusicStreamingClient musicStreamingClient : musicStreamingClients)
+                musicStreamingClient.closeBlocking();
         }
 
 
@@ -139,7 +163,7 @@ public class TestClient {
 
         // performance tests
         if (isPerformance) {
-//            ClientMediaPerformanceTest test = new ClientMediaPerformanceTest(musicStreamingClient);
+            MusicStreamingClientPerformanceTest test = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m);
 
             // do tests
 

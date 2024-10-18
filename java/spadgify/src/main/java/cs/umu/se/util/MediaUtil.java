@@ -4,6 +4,11 @@ import cs.umu.se.chord.FingerTableEntry;
 import cs.umu.se.chord.Node;
 import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.restlet.representation.Representation;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 import proto.Chord;
 
@@ -296,5 +301,35 @@ public class MediaUtil {
         String album = createRandomString(15);
         MediaInfo mediaInfo = new MediaInfo(artist, song, album, 120, "", size, m);
         return new Song(mediaInfo, "", data);
+    }
+
+    public JSONArray convertRepresentationToJsonArray(Representation entity) throws IOException, ParseException {
+        String s = entity.getText();
+        JSONParser parser = new JSONParser();
+        return (JSONArray) parser.parse(s);
+    }
+
+    public MediaInfo[] convertJSONArrayToMediaInfos(JSONArray jsonArray) {
+        MediaInfo[] mediaInfos = new MediaInfo[jsonArray.size()];
+
+        int i = 0;
+        for (Object object : jsonArray) {
+            JSONObject jsonObject = (JSONObject) object;
+            mediaInfos[i] = convertJSONObjectToMediaInfo(jsonObject);
+            i++;
+        }
+
+        return mediaInfos;
+    }
+
+    public MediaInfo convertJSONObjectToMediaInfo(JSONObject json) {
+        String song = (String) json.get("song");
+        long duration = (long) json.get("duration");
+        long size = (long) json.get("size");
+        String artist = (String) json.get("artist");
+        String album = (String) json.get("album");
+        String genre = (String) json.get("genre");
+
+        return new MediaInfo(artist, song, album, (int) duration, genre, size, m);
     }
 }

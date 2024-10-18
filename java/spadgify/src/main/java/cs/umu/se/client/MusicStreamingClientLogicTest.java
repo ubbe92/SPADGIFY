@@ -1,5 +1,7 @@
 package cs.umu.se.client;
 
+import cs.umu.se.types.MediaInfo;
+import cs.umu.se.util.MediaUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,6 +16,7 @@ import org.restlet.representation.Representation;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 public class MusicStreamingClientLogicTest {
     private Client restClient = new Client(Protocol.HTTP);
@@ -44,7 +47,8 @@ public class MusicStreamingClientLogicTest {
         Representation representation = response.getEntity();
 
         try {
-            JSONArray jsonArray = convertRepresentationToJsonArray(representation);
+            MediaUtil mediaUtil = new MediaUtil(m);
+            JSONArray jsonArray = mediaUtil.convertRepresentationToJsonArray(representation);
 
             if (jsonArray.isEmpty())
                 throw new IllegalStateException("testRESTListAllSongs(): response from server was empty. Are there songs in the cluster?");
@@ -83,7 +87,6 @@ public class MusicStreamingClientLogicTest {
     }
 
     public void testStreamingData() {
-
         String getThisSong = "ethereal vistas-Mikael Jäcksson-In the bodega";
         try {
             musicStreamingClient.connectBlocking();
@@ -94,9 +97,7 @@ public class MusicStreamingClientLogicTest {
             if (musicStreamingClient.getData() == null)
                 throw new IllegalStateException("testStreamingData(): could not fetch song data.");
 
-
             musicStreamingClient.closeBlocking();
-            System.out.println("is open: " + musicStreamingClient.isOpen());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -107,11 +108,5 @@ public class MusicStreamingClientLogicTest {
     private Response makeRequestWithoutBody(String url, Method method) {
         Request request = new Request(method, url, null);
         return restClient.handle(request);
-    }
-
-    private JSONArray convertRepresentationToJsonArray(Representation entity) throws IOException, ParseException {
-        String s = entity.getText();
-        JSONParser parser = new JSONParser();
-        return (JSONArray) parser.parse(s);
     }
 }
