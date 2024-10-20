@@ -9,6 +9,8 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 import java.net.InetSocketAddress;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MusicStreamingServer extends WebSocketServer {
     private int m;
@@ -20,6 +22,8 @@ public class MusicStreamingServer extends WebSocketServer {
     private Logger logger;
     private Node node;
     private final int maxPendingConnections = 320;
+    private final int threadPoolSize = 8;
+    private ExecutorService threadPool;
 
 
     public MusicStreamingServer(InetSocketAddress address, Node node, Logger logger) {
@@ -31,6 +35,8 @@ public class MusicStreamingServer extends WebSocketServer {
         this.chordServerPort = node.getMyPort();
         this.logger = logger;
         logger.info("Music streaming sever has maximum {} connections", maxPendingConnections);
+
+        this.threadPool = Executors.newFixedThreadPool(threadPoolSize);
     }
 
     @Override
@@ -57,6 +63,9 @@ public class MusicStreamingServer extends WebSocketServer {
             conn.send(mp3Data);
         } else
             conn.send(new byte[0]); // to indicate that a song does not exist
+
+//        threadPool.submit(() -> handleMessage(conn, message));
+
     }
 
     @Override
@@ -71,5 +80,24 @@ public class MusicStreamingServer extends WebSocketServer {
         String message = "Music server started at: " + ip + ":" + musicServerPort;
         logger.info(message);
         clientBackend = new ClientBackend(ip, chordServerPort, "", m);
+    }
+
+    private void handleMessage(WebSocket conn, String message) {
+        String msg = "Message from client: " + message;
+        logger.info(msg);
+        Song song = clientBackend.retrieve(message);
+        logger.info("Song retrieved: {}", song);
+
+        if (song != null) {
+            mp3Data = song.getData();
+            conn.send(mp3Data);
+        } else
+            conn.send(new byte[0]); // to indicate that a song does not exist
+    }
+
+    public void shutdown() {
+        if (threadPool != null) {
+            threadPool.shutdown();
+        }
     }
 }

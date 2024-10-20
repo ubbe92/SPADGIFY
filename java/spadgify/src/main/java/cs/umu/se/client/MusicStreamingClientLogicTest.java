@@ -91,8 +91,10 @@ public class MusicStreamingClientLogicTest {
         try {
             musicStreamingClient.connectBlocking();
 
-            musicStreamingClient.send(getThisSong);
-            musicStreamingClient.awaitResponse();
+            if (musicStreamingClient.isOpen()) {
+                musicStreamingClient.send(getThisSong);
+                musicStreamingClient.awaitResponse();
+            }
 
             if (musicStreamingClient.getData() == null)
                 throw new IllegalStateException("testStreamingData(): could not fetch song data.");

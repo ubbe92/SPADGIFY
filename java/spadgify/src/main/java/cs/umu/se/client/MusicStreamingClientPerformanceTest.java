@@ -117,6 +117,7 @@ public class MusicStreamingClientPerformanceTest {
                 testWorkers[k] = new WebSocketTestWorker(songs[k], uri);
 
             results.add(testSongWebSocketStreamingTotalTime(songs, testWorkers));
+            System.out.println("testSongWebSocketStreamingNTimesTotalTime() iteration: " + i + " done nrClients: " + nrClients);
         }
         return results;
     }
@@ -145,20 +146,13 @@ public class MusicStreamingClientPerformanceTest {
             // Create a new thread pool
             this.executor = Executors.newFixedThreadPool(nrThreads);
 
-//            // store songs in the cluster
-//            for (Song s : songs)
-//                gRPCBackend.store(s);
-
             executeWorkers(testWorkers);
-
-//            // remove songs from the cluster
-//            for (Song s : songs)
-//                gRPCBackend.delete(s.getIdentifierString());
 
             // save all client times for his iteration
             for (WebSocketTestWorker testWorker : testWorkers)
                 results.add(testWorker.getTime());
 
+            System.out.println("testSongWebSocketStreamingNTimesPerClientTime() iteration: " + i + " done nrClients: " + nrClients);
         }
 
         return results;

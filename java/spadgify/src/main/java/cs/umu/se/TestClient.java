@@ -130,14 +130,14 @@ public class TestClient {
 
         // performance tests
         if (isPerformance) {
-            int nrThreads = 80;
+            int nrThreads = 8;
             String outputFolderPath = "./../../testMedia/output-music/";
             ClientBackend gRPCBackend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
             MusicStreamingClientPerformanceTest test = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m, nrThreads, gRPCBackend);
 
             // do tests
             int iterations = 10;
-            int nrClients = 10;
+            int nrClients = 80;
             int nrBoxes = 1;
             long songSize = 10810096;
 

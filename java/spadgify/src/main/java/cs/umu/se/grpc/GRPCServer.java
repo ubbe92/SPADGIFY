@@ -155,6 +155,7 @@ public class GRPCServer implements Server {
 
     public void stopMusicServer() {
         try {
+            musicStreamingServer.shutdown();
             musicStreamingServer.stop();
         } catch (InterruptedException e) {
             e.printStackTrace();

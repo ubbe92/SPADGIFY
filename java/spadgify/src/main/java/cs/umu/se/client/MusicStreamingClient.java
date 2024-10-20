@@ -54,7 +54,6 @@ public class MusicStreamingClient extends WebSocketClient {
     }
 
     public void awaitResponse() throws InterruptedException {
-//        System.out.println("Client awaiting response...");
         latch.await();
         latch = new CountDownLatch(1);
     }
