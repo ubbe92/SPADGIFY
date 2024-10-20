@@ -18,7 +18,6 @@ public class MusicStreamingClient extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshakedata) {
-        System.out.println("Client onOpen");
     }
 
     @Override
@@ -42,16 +41,11 @@ public class MusicStreamingClient extends WebSocketClient {
                 this.data = null;
         }
 
-        System.out.println("Client received binary message on thread: " + Thread.currentThread().getName() +
-                ", nr bytes: " + bytes.length);
-
         latch.countDown();
     }
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        System.out.println("Client onClose");
-
     }
 
     @Override
@@ -60,7 +54,7 @@ public class MusicStreamingClient extends WebSocketClient {
     }
 
     public void awaitResponse() throws InterruptedException {
-        System.out.println("Client awaiting response...");
+//        System.out.println("Client awaiting response...");
         latch.await();
         latch = new CountDownLatch(1);
     }
