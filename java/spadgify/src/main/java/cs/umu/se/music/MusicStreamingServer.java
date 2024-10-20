@@ -19,19 +19,24 @@ public class MusicStreamingServer extends WebSocketServer {
     private ClientBackend clientBackend;
     private Logger logger;
     private Node node;
+    private final int maxPendingConnections = 320;
 
 
-    public MusicStreamingServer(InetSocketAddress address) {
+    public MusicStreamingServer(InetSocketAddress address, Node node, Logger logger) {
         super(address);
+        setMaxPendingConnections(maxPendingConnections);
+
+        this.node = node;
+        this.m = node.getM();
+        this.chordServerPort = node.getMyPort();
+        this.logger = logger;
+        logger.info("Music streaming sever has maximum {} connections", maxPendingConnections);
     }
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         String msg = "New connection: " + conn.getRemoteSocketAddress();
         logger.info(msg);
-        System.out.println("Websocket thread name: " + Thread.currentThread().getName());
-//        conn.send(msg);
-//        mp3Data = new byte[0];
     }
 
     @Override
@@ -51,7 +56,6 @@ public class MusicStreamingServer extends WebSocketServer {
             mp3Data = song.getData();
             conn.send(mp3Data);
         } else
-//            conn.send(""); // to indicate that a song does not exist
             conn.send(new byte[0]); // to indicate that a song does not exist
     }
 
@@ -67,23 +71,5 @@ public class MusicStreamingServer extends WebSocketServer {
         String message = "Music server started at: " + ip + ":" + musicServerPort;
         logger.info(message);
         clientBackend = new ClientBackend(ip, chordServerPort, "", m);
-    }
-
-    public void setLogger(Logger logger) {
-        this.logger = logger;
-    }
-
-    public void setNode(Node node) {
-        this.node = node;
-        setM(node.getM());
-        setChordServerPort(node.getMyPort());
-    }
-
-    private void setM(int m) {
-        this.m = m;
-    }
-
-    private void setChordServerPort(int chordServerPort) {
-        this.chordServerPort = chordServerPort;
     }
 }

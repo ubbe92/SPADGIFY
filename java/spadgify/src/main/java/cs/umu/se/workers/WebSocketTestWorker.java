@@ -21,7 +21,7 @@ public class WebSocketTestWorker implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Thread " + Thread.currentThread().getName() + " connecting to web socket");
+//        System.out.println("Thread " + Thread.currentThread().getName() + " connecting to web socket");
         try {
             musicStreamingClient.connectBlocking();
             musicStreamingClient.send(getThisSong);
@@ -30,7 +30,7 @@ public class WebSocketTestWorker implements Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Thread " + Thread.currentThread().getName() + " closed connection to web socket and got: " +
-                musicStreamingClient.getData().length + " bytes");
+//        System.out.println("Thread " + Thread.currentThread().getName() + " closed connection to web socket and got: " +
+//                musicStreamingClient.getData().length + " bytes");
     }
 }

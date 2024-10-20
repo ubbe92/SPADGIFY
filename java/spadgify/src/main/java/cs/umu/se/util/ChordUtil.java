@@ -55,7 +55,6 @@ public class ChordUtil {
         Socket portCheck;
         for (int port = startRange; port < stopRange; port++) {
             try {
-                System.out.println("Looking for " + port);
                 portCheck = new Socket(ip, port);
                 System.out.println("There is a server running on port " + port);
             } catch (UnknownHostException e) {

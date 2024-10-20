@@ -73,7 +73,7 @@ public class StorageBackend implements Storage {
                 byte[] data = mediaUtil.readFromFile(filePath);
                 song.setData(data); // loaded data from disc back into memory
 
-                displayFilePaths();
+//                displayFilePaths();
             }
         } catch (Exception e) {
             logger.error("retrieve() Could not retrieve song: {} from disc. {}", identifierString, Arrays.toString(e.getStackTrace()));

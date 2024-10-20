@@ -50,7 +50,7 @@ public class MusicStreamingClient extends WebSocketClient {
 
     @Override
     public void onError(Exception ex) {
-        System.out.println("Client onError");
+        System.out.println("Client onError: " + ex.getMessage());
     }
 
     public void awaitResponse() throws InterruptedException {

@@ -131,7 +131,7 @@ public class TestClient {
 
         // performance tests
         if (isPerformance) {
-            int nrThreads = 5;
+            int nrThreads = 80;
             String outputFolderPath = "./../../testMedia/output-music/";
             ClientBackend gRPCBackend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
             MusicStreamingClientPerformanceTest test = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m, nrThreads, gRPCBackend);
@@ -139,11 +139,11 @@ public class TestClient {
             // do tests
             int iterations = 10;
             int nrClients = 10;
-            int nrBoxes = 1;
+            int nrBoxes = 4;
             long songSize = 10810096;
 
             // Test increasing amount of messages - seq without cache
-            String title = "Web socket non caching streaming with increasing number of clients with payload size of 10 Mb repeated " + iterations + " times.";
+            String title = "Web socket (no cache) with increasing number of clients with payload size of 10 Mb repeated " + iterations + " times.";
             test.makeBoxPlotIncClientsNoCaching(title, nrBoxes, nrClients, iterations, songSize);
 
             System.out.println("Web socket performance tests done!");

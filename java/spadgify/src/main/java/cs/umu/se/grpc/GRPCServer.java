@@ -94,9 +94,7 @@ public class GRPCServer implements Server {
             String logMessage = "Chosen music socket port: " + musicServerPort;
             logger.info(logMessage);
             InetSocketAddress address = new InetSocketAddress(ip, musicServerPort);
-            musicStreamingServer = new MusicStreamingServer(address);
-            musicStreamingServer.setNode(node);
-            musicStreamingServer.setLogger(logger);
+            musicStreamingServer = new MusicStreamingServer(address, node, logger);
             musicStreamingServer.start();
 
             // Start rest server
