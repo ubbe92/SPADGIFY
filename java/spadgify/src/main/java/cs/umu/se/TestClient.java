@@ -10,7 +10,6 @@ import picocli.CommandLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 
 /**
  * The TestClient class is responsible for initializing and running a test client
@@ -108,7 +107,7 @@ public class TestClient {
 
         }
 
-        // test web socket backend here (need to be implement methods and create a thread pool)!!!!!!
+        // test web socket backend
         // ------------------------------------------------
 
         // logic tests
@@ -139,12 +138,15 @@ public class TestClient {
             // do tests
             int iterations = 10;
             int nrClients = 10;
-            int nrBoxes = 4;
+            int nrBoxes = 1;
             long songSize = 10810096;
 
-            // Test increasing amount of messages - seq without cache
-            String title = "Web socket (no cache) with increasing number of clients with payload size of 10 Mb repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsNoCaching(title, nrBoxes, nrClients, iterations, songSize);
+            // Test increasing amount of clients - without cache
+            String title = "Web socket (no cache) total time, increasing #clients, payload size 10 Mb, repeated " + iterations + " times.";
+            test.makeBoxPlotIncClientsNoCachingTotalTime(title, nrBoxes, nrClients, iterations, songSize);
+
+            title = "Web socket (no cache) per client time, increasing #clients, payload size 10 Mb, repeated " + iterations + " times.";
+            test.makeBoxPlotIncClientsNoCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize);
 
             System.out.println("Web socket performance tests done!");
         }

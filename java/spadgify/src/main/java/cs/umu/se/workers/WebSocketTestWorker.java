@@ -6,14 +6,11 @@ import cs.umu.se.types.Song;
 import java.net.URI;
 
 public class WebSocketTestWorker implements Runnable {
-    private Song song;
-    private URI uri;
     private MusicStreamingClient musicStreamingClient;
     private String getThisSong;
+    private long time = 0;
 
     public WebSocketTestWorker(Song song, URI uri) {
-        this.song = song;
-        this.uri = uri;
         this.musicStreamingClient = new MusicStreamingClient(uri);
         this.getThisSong = song.getIdentifierString();
     }
@@ -21,16 +18,24 @@ public class WebSocketTestWorker implements Runnable {
 
     @Override
     public void run() {
-//        System.out.println("Thread " + Thread.currentThread().getName() + " connecting to web socket");
         try {
+            long t1 = System.currentTimeMillis();
             musicStreamingClient.connectBlocking();
             musicStreamingClient.send(getThisSong);
             musicStreamingClient.awaitResponse();
             musicStreamingClient.closeBlocking();
+            long t2 = System.currentTimeMillis();
+            time = t2 - t1;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-//        System.out.println("Thread " + Thread.currentThread().getName() + " closed connection to web socket and got: " +
-//                musicStreamingClient.getData().length + " bytes");
+    }
+
+    /**
+     * This method gets the time it took the thread to execute its run method.
+     * @return the time.
+     */
+    public long getTime() {
+        return time;
     }
 }
