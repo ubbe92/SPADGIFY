@@ -6,19 +6,22 @@ import cs.umu.se.types.Song;
 import java.net.URI;
 
 public class WebSocketTestWorker implements Runnable {
+    private final boolean getAll;
     private MusicStreamingClient musicStreamingClient;
     private String getThisSong;
     private long time = 0;
 
-    public WebSocketTestWorker(Song song, URI uri) {
+    public WebSocketTestWorker(Song song, URI uri, boolean getAll) {
         this.musicStreamingClient = new MusicStreamingClient(uri);
         this.getThisSong = song.getIdentifierString();
+        this.getAll = getAll;
     }
 
 
     @Override
     public void run() {
         try {
+            musicStreamingClient.addHeader("getAll", String.valueOf(getAll));
             long t1 = System.currentTimeMillis();
             musicStreamingClient.connectBlocking();
             musicStreamingClient.send(getThisSong);

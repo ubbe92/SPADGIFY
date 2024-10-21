@@ -89,6 +89,7 @@ public class MusicStreamingClientLogicTest {
     public void testStreamingData() {
         String getThisSong = "ethereal vistas-Mikael Jäcksson-In the bodega";
         try {
+            musicStreamingClient.addHeader("getAll", "true");
             musicStreamingClient.connectBlocking();
 
             if (musicStreamingClient.isOpen()) {

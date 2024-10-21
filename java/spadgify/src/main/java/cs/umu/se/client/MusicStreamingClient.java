@@ -32,7 +32,6 @@ public class MusicStreamingClient extends WebSocketClient {
     public void onMessage(ByteBuffer message) {
         byte[] bytes = new byte[message.remaining()];
         message.get(bytes);  // Read the bytes from ByteBuffer
-
         // Handle or process the binary data (e.g., save or play audio)
         synchronized (this) {
             if (bytes.length > 0)

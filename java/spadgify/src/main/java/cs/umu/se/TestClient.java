@@ -137,16 +137,34 @@ public class TestClient {
 
             // do tests
             int iterations = 10;
-            int nrClients = 80;
-            int nrBoxes = 1;
-            long songSize = 10810096;
+            int nrClients = 10;
+            int nrBoxes = 4;
+//            long songSize = 10810096;
+            long songSize = (long) 10810096 / 1000;
+            boolean getAll = true;
 
             // Test increasing amount of clients - without cache
-            String title = "Web socket (no cache) total time, increasing #clients, payload size 10 Mb, repeated " + iterations + " times.";
+            String title = "Web socket (no cache) total time, payload size: " + songSize + " b, repeated " + iterations + " times.";
             test.makeBoxPlotIncClientsNoCachingTotalTime(title, nrBoxes, nrClients, iterations, songSize);
 
-            title = "Web socket (no cache) per client time, increasing #clients, payload size 10 Mb, repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsNoCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize);
+            title = "Web socket (no cache, get all true) per client time, payload size: " + songSize + " b, repeated " + iterations + " times.";
+            test.makeBoxPlotIncClientsNoCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
+
+            getAll = false;
+            title = "Web socket (no cache, get all false) per client time, payload size: " + songSize * 0.05 + " b, repeated " + iterations + " times.";
+            test.makeBoxPlotIncClientsNoCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
+
+            // Test increasing amount of clients - with cache
+            title = "Web socket (with cache) total time, payload size: " + songSize + " b, repeated " + iterations + " times.";
+            test.makeBoxPlotIncClientsWithCachingTotalTime(title, nrBoxes, nrClients, iterations, songSize);
+
+            getAll = true;
+            title = "Web socket (with cache, get all true) per client time, payload size: " + songSize + " b, repeated " + iterations + " times.";
+            test.makeBoxPlotIncClientsWithCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
+
+            getAll = false;
+            title = "Web socket (with cache, get all false) per client time, payload size: " + songSize * 0.05 + " b, repeated " + iterations + " times.";
+            test.makeBoxPlotIncClientsWithCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
 
             System.out.println("Web socket performance tests done!");
         }

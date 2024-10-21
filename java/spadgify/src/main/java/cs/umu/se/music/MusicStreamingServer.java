@@ -22,6 +22,8 @@ public class MusicStreamingServer extends WebSocketServer {
     private Logger logger;
     private Node node;
     private final int maxPendingConnections = 320;
+    private boolean getAll = true;
+    private final double fivePercent = 0.05;
 
     public MusicStreamingServer(InetSocketAddress address, Node node, Logger logger) {
         super(address);
@@ -38,6 +40,11 @@ public class MusicStreamingServer extends WebSocketServer {
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         String msg = "New connection: " + conn.getRemoteSocketAddress();
         logger.info(msg);
+
+        synchronized (this) {
+            if (handshake.hasFieldValue("getAll"))
+                getAll = Boolean.parseBoolean(handshake.getFieldValue("getAll"));
+        }
     }
 
     @Override
@@ -55,7 +62,14 @@ public class MusicStreamingServer extends WebSocketServer {
 
         if (song != null) {
             mp3Data = song.getData();
-            conn.send(mp3Data);
+            if (getAll)
+                conn.send(mp3Data);
+            else {
+                int fivePercentLength = (int) (mp3Data.length * fivePercent);
+                byte[] mp3DataFivePercent = new byte[fivePercentLength];
+                System.arraycopy(mp3Data, 0, mp3DataFivePercent, 0, fivePercentLength);
+                conn.send(mp3DataFivePercent);
+            }
         } else
             conn.send(new byte[0]); // to indicate that a song does not exist
 
