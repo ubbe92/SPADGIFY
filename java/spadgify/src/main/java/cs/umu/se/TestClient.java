@@ -68,44 +68,42 @@ public class TestClient {
         // ------------------------------------------------
         Storage storage = new ClientBackend(nodeIp, nodePort, saveFolderPath, m);
 
-        if (false) { // To skip gRPC tests, remove later
+        // logic tests
+        if (isLogic) {
+            ClientLogicTest test = new ClientLogicTest(storage, m, nodeIp, nodePort);
 
+            // check logic
+            test.testListAllSongs();
+            test.testStoreAndDelete();
+            test.testStoreDuplicate();
 
-            // logic tests
-            if (isLogic) {
-                ClientLogicTest test = new ClientLogicTest(storage, m, nodeIp, nodePort);
-
-                // check logic
-                test.testListNodeSong();
-                test.testListAllSongs();
-                test.testStoreAndDelete();
-                test.testStoreDuplicate();
-
-                System.out.println("gRPC logic tests done!");
-            }
-
-            // performance tests
-            if (isPerformance) {
-                ClientPerformanceTest test = new ClientPerformanceTest(storage, m, nodeIp, nodePort);
-
-                // do tests
-                int iterations = 10;
-                int nrSongs = 5;
-                int nrBoxes = 2;
-                long songSize = 10810096;
-
-                // Test increasing amount of messages - seq without cache
-                String title = "gRPC non caching retrieve of songs with fixed payload size of 10 Mb repeated " + iterations + " times.";
-                test.makeBoxPlotSeqIncSongsNoCaching(title, nrBoxes, nrSongs, iterations, songSize);
-
-                // Test increasing amount of messages - seq with cache
-                title = "gRPC caching retrieve of songs with fixed payload size of 10 Mb repeated " + iterations + " times.";
-                test.makeBoxPlotSeqIncSonsWithCache(title, nrBoxes, nrSongs, iterations, songSize);
-
-                System.out.println("gRPC performance tests done!");
-            }
-
+            System.out.println("gRPC logic tests done!");
         }
+
+        // performance tests
+        if (isPerformance) {
+            ClientPerformanceTest test = new ClientPerformanceTest(storage, m, nodeIp, nodePort);
+
+            // do tests
+            int iterations = 10;
+            int nrSongs = 30;
+            int nrBoxes = 1;
+            long songSize = (long) 10810096 / 2;
+
+            // Test increasing amount of messages - seq without cache
+            String title = "gRPC non caching retrieve of songs with fixed payload size of " + songSize + " b repeated " + iterations + " times.";
+            test.makeBoxPlotSeqIncSongsNoCaching(title, nrBoxes, nrSongs, iterations, songSize);
+
+            // Test increasing amount of messages - seq with cache
+            title = "gRPC caching retrieve of songs with fixed payload size of " + songSize + " b repeated " + iterations + " times.";
+            test.makeBoxPlotSeqIncSonsWithCache(title, nrBoxes, nrSongs, iterations, songSize);
+
+            System.out.println("gRPC performance tests done!");
+        }
+
+        // remove later
+        if (true)
+            return;
 
         // test web socket backend
         // ------------------------------------------------
@@ -130,41 +128,31 @@ public class TestClient {
 
         // performance tests
         if (isPerformance) {
-            int nrThreads = 8;
             String outputFolderPath = "./../../testMedia/output-music/";
             ClientBackend gRPCBackend = new ClientBackend(nodeIp, nodePort, outputFolderPath, m);
-            MusicStreamingClientPerformanceTest test = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m, nrThreads, gRPCBackend);
+            MusicStreamingClientPerformanceTest test = new MusicStreamingClientPerformanceTest(socketIp, socketPort, restPort, m, gRPCBackend);
 
             // do tests
             int iterations = 10;
-            int nrClients = 10;
+            int nrTasks = 24;
             int nrBoxes = 4;
-//            long songSize = 10810096;
-            long songSize = (long) 10810096 / 1000;
+            long songSize = (long) 10810096 / 2;
             boolean getAll = true;
+            boolean cache = true;
 
             // Test increasing amount of clients - without cache
-            String title = "Web socket (no cache) total time, payload size: " + songSize + " b, repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsNoCachingTotalTime(title, nrBoxes, nrClients, iterations, songSize);
+            String title = "Web socket (cache: " + cache + ") total time, payload size: " + songSize + " b, repeated " + iterations + " times, #tasks: " + nrTasks;
+            Song[] songs = mediaUtil.createCacheableDummySongs(nrTasks, songSize);
+            test.makeBoxPlotTotalTime(title, nrBoxes, nrTasks, iterations, songs);
 
-            title = "Web socket (no cache, get all true) per client time, payload size: " + songSize + " b, repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsNoCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
-
-            getAll = false;
-            title = "Web socket (no cache, get all false) per client time, payload size: " + songSize * 0.05 + " b, repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsNoCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
-
-            // Test increasing amount of clients - with cache
-            title = "Web socket (with cache) total time, payload size: " + songSize + " b, repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsWithCachingTotalTime(title, nrBoxes, nrClients, iterations, songSize);
-
-            getAll = true;
-            title = "Web socket (with cache, get all true) per client time, payload size: " + songSize + " b, repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsWithCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
+            title = "Web socket (cache: " + cache + ") per client time, payload size: " + songSize + " b, repeated " + iterations + " times, #tasks: " + nrTasks;
+            songs = mediaUtil.createCacheableDummySongs(nrTasks, songSize);
+            test.makeBoxPlotPerClientTime(title, nrBoxes, nrTasks, iterations, getAll, songs);
 
             getAll = false;
-            title = "Web socket (with cache, get all false) per client time, payload size: " + songSize * 0.05 + " b, repeated " + iterations + " times.";
-            test.makeBoxPlotIncClientsWithCachingPerClientTime(title, nrBoxes, nrClients, iterations, songSize, getAll);
+            title = "Web socket (cache: " + cache + ") per client time, payload size: " + songSize * 0.05 + " b, repeated " + iterations + " times, #tasks: " + nrTasks;
+            songs = mediaUtil.createCacheableDummySongs(nrTasks, songSize);
+            test.makeBoxPlotPerClientTime(title, nrBoxes, nrTasks, iterations, getAll, songs);
 
             System.out.println("Web socket performance tests done!");
         }

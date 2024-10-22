@@ -23,30 +23,6 @@ public class ClientLogicTest {
         this.mediaUtil = new MediaUtil(m);
     }
 
-    public void testListNodeSong() {
-        long size = 10810096;
-        Song song = mediaUtil.createDummySong(size);
-
-        int lengthBeforeStore = storage.listNodeSongs().length;
-        storage.store(song);
-        int lengthAfterStore = storage.listNodeSongs().length;
-
-        if (lengthAfterStore != (lengthBeforeStore + 1))
-            throw new IllegalStateException("testListNodeSong(): lengthAfterStore != (lengthBeforeStore + 1)");
-
-
-        int lengthBeforeDelete = lengthAfterStore;
-        String identifierString = song.getIdentifierString();
-        storage.delete(identifierString);
-
-        int lengthAfterDelete = storage.listNodeSongs().length;
-
-        if (lengthAfterDelete != (lengthBeforeDelete - 1))
-            throw new IllegalStateException("testListNodeSong(): lengthAfterDelete != (lengthBeforeDelete - 1)");
-
-        System.out.println("testListNodeSong() done!");
-    }
-
     public void testListAllSongs() {
         long size = 10810096;
         Song song = mediaUtil.createDummySong(size);

@@ -4,7 +4,7 @@ import cs.umu.se.types.MediaInfo;
 import cs.umu.se.types.Song;
 import cs.umu.se.util.BoxPlotXChart;
 import cs.umu.se.util.MediaUtil;
-import cs.umu.se.workers.WebSocketTestWorker;
+import cs.umu.se.workers.WebSocketTaskWorker;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.restlet.Client;
@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MusicStreamingClientPerformanceTest {
     private ExecutorService executor;
-    private int nrThreads;
     private MediaUtil mediaUtil;
     private Client restClient = new Client(Protocol.HTTP);
     private String socketEndpoint;
@@ -33,12 +32,11 @@ public class MusicStreamingClientPerformanceTest {
     private MediaInfo[] mediaInfos;
     private ClientBackend gRPCBackend;
 
-    public MusicStreamingClientPerformanceTest(String socketIp, int socketPort, int restPort, int m, int nrThreads, ClientBackend gRPCBackend) throws URISyntaxException, IOException, ParseException {
+    public MusicStreamingClientPerformanceTest(String socketIp, int socketPort, int restPort, int m,  ClientBackend gRPCBackend) throws URISyntaxException, IOException, ParseException {
         this.mediaUtil = new MediaUtil(m);
         this.socketEndpoint = "ws://" + socketIp + ":" + socketPort;
         this.uri = new URI(socketEndpoint);
         this.restEndpoint = String.format("http://%s:%s/API/mediaInfo", socketIp, restPort);
-        this.nrThreads = nrThreads;
         this.gRPCBackend = gRPCBackend;
 
         Response response = mediaUtil.makeRestletRequestWithoutBody(restEndpoint, Method.GET, restClient);
@@ -47,25 +45,17 @@ public class MusicStreamingClientPerformanceTest {
         this.mediaInfos = mediaUtil.convertJSONArrayToMediaInfos(jsonArray);
     }
 
-    public void makeBoxPlotIncClientsNoCachingTotalTime(String title, int nrBoxes, int nrClients, int iterations, long songSize) {
+    public void makeBoxPlotTotalTime(String title, int nrBoxes, int nrTasks, int iterations, Song[] songs) {
         BoxPlotXChart boxPlot = new BoxPlotXChart();
         boxPlot.createPlot(title, MusicStreamingClient.class.getName(), "Time (ms)");
-
-        int factor = 1;
-        for (int i = 0; i < nrBoxes - 1; i++)
-            factor = factor * 2;
-
-        // create one unique song for each client
-        Song[] songs = mediaUtil.createDummySongs(nrClients * factor, songSize);
 
         // store songs in the cluster
         for (Song s : songs)
             gRPCBackend.store(s);
 
-        int j = 1;
         for (int i = 0; i < nrBoxes; i++) {
-            boxPlot.addToPlot(nrClients * j     + " requests", testSongWebSocketStreamingNTimesTotalTime(songs, iterations, nrClients * j));
-            j = j * 2;
+            int nrThreads = (int) Math.pow(2, i);
+            boxPlot.addToPlot(nrThreads + " client(s)", testSongWebSocketStreamingNTimesTotalTime(songs, iterations, nrTasks, nrThreads));
         }
 
         // remove songs from the cluster
@@ -75,25 +65,17 @@ public class MusicStreamingClientPerformanceTest {
         boxPlot.showPlot();
     }
 
-    public void makeBoxPlotIncClientsNoCachingPerClientTime(String title, int nrBoxes, int nrClients, int iterations, long songSize, boolean getAll) {
+    public void makeBoxPlotPerClientTime(String title, int nrBoxes, int nrTasks, int iterations, boolean getAll, Song[] songs) {
         BoxPlotXChart boxPlot = new BoxPlotXChart();
         boxPlot.createPlot(title, MusicStreamingClient.class.getName(), "Time (ms)");
-
-        int factor = 1;
-        for (int i = 0; i < nrBoxes - 1; i++)
-            factor = factor * 2;
-
-        // create one unique song for each client
-        Song[] songs = mediaUtil.createDummySongs(nrClients * factor, songSize);
 
         // store songs in the cluster
         for (Song s : songs)
             gRPCBackend.store(s);
 
-        int j = 1;
         for (int i = 0; i < nrBoxes; i++) {
-            boxPlot.addToPlot(nrClients * j + " requests", testSongWebSocketStreamingNTimesPerClientTime(songs, iterations, nrClients * j, getAll));
-            j = j * 2;
+            int nrThreads = (int) Math.pow(2, i);
+            boxPlot.addToPlot(nrThreads + " client(s)", testSongStreamingITimesPerClientTime(songs, iterations, nrTasks, getAll, nrThreads));
         }
 
         // remove songs from the cluster
@@ -103,71 +85,43 @@ public class MusicStreamingClientPerformanceTest {
         boxPlot.showPlot();
     }
 
-    public void makeBoxPlotIncClientsWithCachingTotalTime(String title, int nrBoxes, int nrClients, int iterations, long songSize) {
-        BoxPlotXChart boxPlot = new BoxPlotXChart();
-        boxPlot.createPlot(title, MusicStreamingClient.class.getName(), "Time (ms)");
-
-        int factor = 1;
-        for (int i = 0; i < nrBoxes - 1; i++)
-            factor = factor * 2;
-
-        // create one unique song for each client
-        Song[] songs = mediaUtil.createCacheableDummySongs(nrClients * factor, songSize);
-
-        // store songs in the cluster
-        for (Song s : songs)
-            gRPCBackend.store(s);
-
-        int j = 1;
-        for (int i = 0; i < nrBoxes; i++) {
-            boxPlot.addToPlot(nrClients * j + " requests", testSongWebSocketStreamingNTimesTotalTime(songs, iterations, nrClients * j));
-            j = j * 2;
-        }
-
-        // remove songs from the cluster
-        for (Song s : songs)
-            gRPCBackend.delete(s.getIdentifierString());
-
-        boxPlot.showPlot();
-    }
-
-    private List<Long> testSongWebSocketStreamingNTimesTotalTime(Song[] songs, int iterations, int nrClients) {
+    private List<Long> testSongWebSocketStreamingNTimesTotalTime(Song[] songs, int iterations, int nrTasks, int nrThreads) {
         boolean getAll = true;
 
         List<Long> results = new ArrayList<>();
         for (int i = 0; i < iterations; i++) {
 
             // Create worker threads
-            WebSocketTestWorker[] testWorkers = new WebSocketTestWorker[nrClients];
-            for (int k = 0; k < nrClients; k++)
-                testWorkers[k] = new WebSocketTestWorker(songs[k], uri, getAll);
+            WebSocketTaskWorker[] taskWorkers = new WebSocketTaskWorker[nrTasks];
+            for (int k = 0; k < nrTasks; k++)
+                taskWorkers[k] = new WebSocketTaskWorker(songs[k], uri, getAll);
 
-            results.add(testSongWebSocketStreamingTotalTime(songs, testWorkers));
-            System.out.println("testSongWebSocketStreamingNTimesTotalTime() iteration: " + i + " done nrClients: " + nrClients);
+            results.add(testSongWebSocketStreamingTotalTime(taskWorkers, nrThreads));
+            System.out.println("testSongWebSocketStreamingNTimesTotalTime() iteration: " + i + " done, nrTasks: " + nrTasks + ", nrThreads: " + nrThreads);
         }
         return results;
     }
 
-    private long testSongWebSocketStreamingTotalTime(Song[] songs, WebSocketTestWorker[] testWorkers) {
+    private long testSongWebSocketStreamingTotalTime(WebSocketTaskWorker[] taskWorkers, int nrThreads) {
         // Create a new thread pool
         this.executor = Executors.newFixedThreadPool(nrThreads);
 
         // perform test
         long t1 = System.currentTimeMillis();
-        executeWorkers(testWorkers);
+        executeWorkers(taskWorkers);
         long t2 = System.currentTimeMillis();
 
         return t2 - t1;
     }
 
-    private List<Long> testSongWebSocketStreamingNTimesPerClientTime(Song[] songs, int iterations, int nrClients, boolean getAll) {
+    private List<Long> testSongStreamingITimesPerClientTime(Song[] songs, int iterations, int nrTasks, boolean getAll, int nrThreads) {
         List<Long> results = new ArrayList<>();
         for (int i = 0; i < iterations; i++) {
 
             // Create worker threads
-            WebSocketTestWorker[] testWorkers = new WebSocketTestWorker[nrClients];
-            for (int k = 0; k < nrClients; k++)
-                testWorkers[k] = new WebSocketTestWorker(songs[k], uri, getAll);
+            WebSocketTaskWorker[] testWorkers = new WebSocketTaskWorker[nrTasks];
+            for (int k = 0; k < nrTasks; k++)
+                testWorkers[k] = new WebSocketTaskWorker(songs[k], uri, getAll);
 
             // Create a new thread pool
             this.executor = Executors.newFixedThreadPool(nrThreads);
@@ -175,19 +129,19 @@ public class MusicStreamingClientPerformanceTest {
             executeWorkers(testWorkers);
 
             // save all client times for his iteration
-            for (WebSocketTestWorker testWorker : testWorkers)
+            for (WebSocketTaskWorker testWorker : testWorkers)
                 results.add(testWorker.getTime());
 
-            System.out.println("testSongWebSocketStreamingNTimesPerClientTime() iteration: " + i + " done nrClients: " + nrClients);
+            System.out.println("testSongStreamingITimesPerClientTime() iteration: " + i + " done, nrTasks: " + nrTasks + ", nrThreads: " + nrThreads);
         }
 
         return results;
     }
 
-    private void executeWorkers(WebSocketTestWorker[] testWorkers) {
+    private void executeWorkers(WebSocketTaskWorker[] taskWorkers) {
         // Send the workers to the thread pool
-        for (WebSocketTestWorker testWorker : testWorkers)
-            executor.execute(testWorker);
+        for (WebSocketTaskWorker taskWorker : taskWorkers)
+            executor.execute(taskWorker);
 
         // Shutdown the thread pool
         executor.shutdown();
@@ -199,33 +153,5 @@ public class MusicStreamingClientPerformanceTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void makeBoxPlotIncClientsWithCachingPerClientTime(String title, int nrBoxes, int nrClients, int iterations, long songSize, boolean getAll) {
-        BoxPlotXChart boxPlot = new BoxPlotXChart();
-        boxPlot.createPlot(title, MusicStreamingClient.class.getName(), "Time (ms)");
-
-        int factor = 1;
-        for (int i = 0; i < nrBoxes - 1; i++)
-            factor = factor * 2;
-
-        // create one unique song for each client
-        Song[] songs = mediaUtil.createCacheableDummySongs(nrClients * factor, songSize);
-
-        // store songs in the cluster
-        for (Song s : songs)
-            gRPCBackend.store(s);
-
-        int j = 1;
-        for (int i = 0; i < nrBoxes; i++) {
-            boxPlot.addToPlot(nrClients * j + " clients", testSongWebSocketStreamingNTimesPerClientTime(songs, iterations, nrClients * j, getAll));
-            j = j * 2;
-        }
-
-        // remove songs from the cluster
-        for (Song s : songs)
-            gRPCBackend.delete(s.getIdentifierString());
-
-        boxPlot.showPlot();
     }
 }
