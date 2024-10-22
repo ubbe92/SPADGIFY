@@ -96,7 +96,10 @@ public class MusicStreamingClientPerformanceTest {
             for (int k = 0; k < nrTasks; k++)
                 taskWorkers[k] = new WebSocketTaskWorker(songs[k], uri, getAll);
 
-            results.add(testSongWebSocketStreamingTotalTime(taskWorkers, nrThreads));
+            long res = testSongWebSocketStreamingTotalTime(taskWorkers, nrThreads);
+            if (res != -1)
+                results.add(res);
+
             System.out.println("testSongWebSocketStreamingNTimesTotalTime() iteration: " + i + " done, nrTasks: " + nrTasks + ", nrThreads: " + nrThreads);
         }
         return results;
@@ -108,10 +111,13 @@ public class MusicStreamingClientPerformanceTest {
 
         // perform test
         long t1 = System.currentTimeMillis();
-        executeWorkers(taskWorkers);
+        boolean res = executeWorkers(taskWorkers);
         long t2 = System.currentTimeMillis();
 
-        return t2 - t1;
+        if (res)
+            return t2 - t1;
+        else
+            return -1;
     }
 
     private List<Long> testSongStreamingITimesPerClientTime(Song[] songs, int iterations, int nrTasks, boolean getAll, int nrThreads) {
@@ -126,7 +132,7 @@ public class MusicStreamingClientPerformanceTest {
             // Create a new thread pool
             this.executor = Executors.newFixedThreadPool(nrThreads);
 
-            executeWorkers(testWorkers);
+            boolean res = executeWorkers(testWorkers);
 
             // save all client times for his iteration
             for (WebSocketTaskWorker testWorker : testWorkers)
@@ -138,7 +144,7 @@ public class MusicStreamingClientPerformanceTest {
         return results;
     }
 
-    private void executeWorkers(WebSocketTaskWorker[] taskWorkers) {
+    private boolean executeWorkers(WebSocketTaskWorker[] taskWorkers) {
         // Send the workers to the thread pool
         for (WebSocketTaskWorker taskWorker : taskWorkers)
             executor.execute(taskWorker);
@@ -149,7 +155,7 @@ public class MusicStreamingClientPerformanceTest {
         // Wait for the thread pool to shut down
         try {
             long timeout = 120000;
-            executor.awaitTermination(timeout, TimeUnit.MILLISECONDS);
+            return executor.awaitTermination(timeout, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

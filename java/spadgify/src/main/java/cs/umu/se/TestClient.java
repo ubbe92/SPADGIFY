@@ -64,6 +64,9 @@ public class TestClient {
         }
 
 
+        if (false) { // remove later
+
+
         // test gRPC backend
         // ------------------------------------------------
         Storage storage = new ClientBackend(nodeIp, nodePort, saveFolderPath, m);
@@ -101,9 +104,7 @@ public class TestClient {
             System.out.println("gRPC performance tests done!");
         }
 
-        // remove later
-        if (true)
-            return;
+        }
 
         // test web socket backend
         // ------------------------------------------------
@@ -134,16 +135,16 @@ public class TestClient {
 
             // do tests
             int iterations = 10;
-            int nrTasks = 24;
+            int nrTasks = 16;
             int nrBoxes = 4;
             long songSize = (long) 10810096 / 2;
             boolean getAll = true;
-            boolean cache = true;
+            boolean cache = false;
 
             // Test increasing amount of clients - without cache
             String title = "Web socket (cache: " + cache + ") total time, payload size: " + songSize + " b, repeated " + iterations + " times, #tasks: " + nrTasks;
             Song[] songs = mediaUtil.createCacheableDummySongs(nrTasks, songSize);
-            test.makeBoxPlotTotalTime(title, nrBoxes, nrTasks, iterations, songs);
+//            test.makeBoxPlotTotalTime(title, nrBoxes, nrTasks, iterations, songs);
 
             title = "Web socket (cache: " + cache + ") per client time, payload size: " + songSize + " b, repeated " + iterations + " times, #tasks: " + nrTasks;
             songs = mediaUtil.createCacheableDummySongs(nrTasks, songSize);
