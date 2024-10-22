@@ -5,9 +5,7 @@ import React, { useState } from "react";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 // import Food from "./Food.jsx";
-import Table from "./Table.jsx";
 
-import MusicStreamingClient from "./MusicStreamingClient.jsx";
 import MusicStreamer from "./MusicStreamer.jsx";
 
 function App() {

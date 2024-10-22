@@ -10,12 +10,6 @@ function Table({ getMedia, data }) {
         getMedia(metadata);
     };
 
-    // Handles input change (add or remove songs)
-    const handleChange = (e) => {
-        const { value } = e.target;
-        getMedia(value);
-    };
-
     // Search - fuzzy search
     const [query, setQuery] = useState('');  // User input for search query
     const [results, setResults] = useState([]);  // Search results
@@ -55,7 +49,6 @@ function Table({ getMedia, data }) {
                 onChange={handleSearch}
             />
             <div className="media-table">
-                {/* Input to add media (not fully implemented) */}
                 <table>
                     <thead>
                         <tr>
@@ -64,6 +57,10 @@ function Table({ getMedia, data }) {
                             <th>Album</th>
                         </tr>
                     </thead>
+                </table>
+                {/* Scrollable container for the table body */}
+                <div className="scrollable-tbody">
+                    <table>
                     <tbody>
                         {
                         results && results.length > 0 ? (
@@ -103,6 +100,7 @@ function Table({ getMedia, data }) {
                             )}
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     );
