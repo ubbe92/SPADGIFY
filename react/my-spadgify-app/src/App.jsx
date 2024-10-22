@@ -24,7 +24,7 @@ function App() {
     return (
         <>
             <Header></Header>
-            <div class="main-container">
+            <div className="main-container">
                 {/* <MusicStreamingClient></MusicStreamingClient>
                 <Table getMedia={getMedia} data={mediaData}></Table> */}
                 <MusicStreamer></MusicStreamer>
