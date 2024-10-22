@@ -5,9 +5,7 @@ import React, { useState } from "react";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 // import Food from "./Food.jsx";
-import Table from "./Table.jsx";
 
-import MusicStreamingClient from "./MusicStreamingClient.jsx";
 import MusicStreamer from "./MusicStreamer.jsx";
 
 function App() {
@@ -26,7 +24,7 @@ function App() {
     return (
         <>
             <Header></Header>
-            <div className="main-container">
+            <div class="main-container">
                 {/* <MusicStreamingClient></MusicStreamingClient>
                 <Table getMedia={getMedia} data={mediaData}></Table> */}
                 <MusicStreamer></MusicStreamer>
