@@ -65,9 +65,7 @@ a:hover {
 }
 
 .logo {
-    /* color: #730039; */
     color: #ff0030;
-
     font-size: 4.2rem;
     transform: rotate(270deg);
 }
@@ -86,12 +84,10 @@ button {
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
     transition: border-color 0.25s;
 }
 button:hover {
-    border-color: #646cff;
+    border-color: #ff0030;
 }
 button:focus,
 button:focus-visible {
@@ -130,11 +126,6 @@ footer {
         color: #747bff;
     }
 
-    button {
-        background-color: #f9f9f9;
-        color: #213547; /* Text color in light mode */
-    }
-
     footer {
         background-color: #f9f9f9;
         color: #213547;
@@ -168,11 +159,6 @@ footer {
 
     .initButton {
         color: var(--background-light);
-    }
-
-    button {
-        background-color: #1a1a1a;
-        color: rgba(255, 255, 255, 0.87); /*Light text in dark mode */
     }
 
     footer {
