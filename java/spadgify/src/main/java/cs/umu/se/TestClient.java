@@ -63,10 +63,6 @@ public class TestClient {
             uploadMusicToCluster(nodeIp, nodePort, m, pathToMusic, mediaUtil);
         }
 
-
-        if (false) { // remove later
-
-
         // test gRPC backend
         // ------------------------------------------------
         Storage storage = new ClientBackend(nodeIp, nodePort, saveFolderPath, m);
@@ -102,8 +98,6 @@ public class TestClient {
             test.makeBoxPlotSeqIncSonsWithCache(title, nrBoxes, nrSongs, iterations, songSize);
 
             System.out.println("gRPC performance tests done!");
-        }
-
         }
 
         // test web socket backend
@@ -144,7 +138,7 @@ public class TestClient {
             // Test increasing amount of clients - without cache
             String title = "Web socket (cache: " + cache + ") total time, payload size: " + songSize + " b, repeated " + iterations + " times, #tasks: " + nrTasks;
             Song[] songs = mediaUtil.createCacheableDummySongs(nrTasks, songSize);
-//            test.makeBoxPlotTotalTime(title, nrBoxes, nrTasks, iterations, songs);
+            test.makeBoxPlotTotalTime(title, nrBoxes, nrTasks, iterations, songs);
 
             title = "Web socket (cache: " + cache + ") per client time, payload size: " + songSize + " b, repeated " + iterations + " times, #tasks: " + nrTasks;
             songs = mediaUtil.createCacheableDummySongs(nrTasks, songSize);
@@ -157,55 +151,6 @@ public class TestClient {
 
             System.out.println("Web socket performance tests done!");
         }
-
-
-
-
-
-
-
-
-//
-//        Thread.sleep(500);
-//
-//        String firstNodeIdentifierString = nodeIp + ":" + nodePort;
-//        MediaInfo[] mediaInfos = backend.listAllSongs(firstNodeIdentifierString);
-//
-//        for (MediaInfo mediaInfo : mediaInfos)
-//            System.out.println("Media info: " + mediaInfo);
-
-
-
-
-
-
-
-
-//        byte[] bytes = mediaUtil.readFromFile(inputFilePath);
-////        MediaInfo mediaInfo = new MediaInfo("Anton Dacklin Gaied", "Mot graven vi går!",
-////                "Datas album", 110, "Chill music", 3535934, m); // id 3
-//
-//        MediaInfo mediaInfo = new MediaInfo("DJ Dick", "Mot graven vi går!",
-//                "Datas album", 110, "Chill music", 3535934, m); // id 4
-//
-//        Song song = new Song(mediaInfo, "", bytes);
-//
-//        System.out.println("Hash of mediaInfo: " + mediaInfo.getHash());
-//
-//
-//        backend.store(song);
-//        System.out.println("Sent song: " + song);
-//        Thread.sleep(2000);
-//
-//        Song songRet = backend.retrieve(song.getIdentifierString());
-//        if (songRet != null)
-//            mediaUtil.writeToFile(songRet.getData(), songRet.getFilePath());
-//
-//        System.out.println("Got song: " + songRet);
-//        Thread.sleep(2000);
-//
-//        if (songRet != null)
-//            backend.delete(songRet.getIdentifierString());
 
         System.out.println("Test client done!");
     }
