@@ -72,9 +72,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* Anton Dacklin Gaied
-* Sinthujan Ponnampalam - [Sinthu](https://github.com/Sinthu01)
+* **Anton Dacklin Gaied**
+* **Sinthujan Ponnampalam** - [Sinthu](https://github.com/Sinthu01)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
