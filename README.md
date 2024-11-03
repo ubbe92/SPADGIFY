@@ -9,11 +9,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+<!-- What things you need to install the software and how to install them -->
 
-```
-Give examples
-```
+The project was written using Java 18.0.1.1, Maven 3.9.9 and libprotoc 28.0. Hence, these dependencies are needed in order to install and use the software.
+
+In order to use the provided React client, the node JS runtime environment is needed. During the development of this client the version used was: v22.9.0.
+
 
 ### Installing
 
