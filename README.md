@@ -1,15 +1,12 @@
 # SPADGIFY
-A truly HIGH performance version of Spotify, beware!
 
-We are the next big thing!
+This is our simplified take on how to implement a distributed audio streaming service. To really understand this implementation we recommend that you read the provided report that can be found in this repository (5dv205_project_report.pdf).
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
-
-<!-- What things you need to install the software and how to install them -->
 
 The project was written using Java 18.0.1.1, Maven 3.9.9 and libprotoc 28.0. Hence, these dependencies are needed in order to install and use the software.
 
@@ -18,73 +15,67 @@ In order to use the provided React client, the node JS runtime environment is ne
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+For installing the software we refer to section 2 (Usage) in the report (5dv205_project_report.pdf) that can be found in the repository. Just to clarify, the m-bit identifier argument for a node also defines the size of the chord cluster. If m is set to 3, then the max number of nodes will be $2^m = 2^3 = 8$ nodes. The value given to m must be the same for all nodes in the cluster.
 
 ```
-Give the example
+Usage: chord [-h] [-c=<cache>] [-d=<delay>] [-i=<remoteIp>][-p=<remotePort>] mode port m
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+for more information, read section 2 in the report.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+The repository has a test client that can upload music files to the cluster as well as performing logic and performance tests. For information on how to use this test client we refer to section 2.2 in the report.
 
-### Break down into end to end tests
+### Test details
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+For a more detailed explanation of the tests, please read section 9 in the report. 
 
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
 
-## Built With
+To deploy a new cluster a user can do the following:
 
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [npm](https://www.npmjs.com/) - Used to build and run UI
 
-## Contributing
+1. open a terminal and run the jar file with the following command: 
+```
+java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 1000 1 8185 3
+```
+Say that the machine running this node has the ip: 192.168.38.126
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+2. To add nodes to the cluster, open a new terminal and run the jar file with the following command:
+```
+java -jar spadgify-1.0-SNAPSHOT.jar -c 10 -d 1000 -p 8185 -i 192.168.38.126 0 8187 3
+```
+Worth noting is that the ID of a node is a hash of the nodes ip and port. When m is a small number, the likelyhood of collsions is higher. Therefore each node needs to have a unique ID in order to join the cluster. If a connecting node fails, try changing the port to get a different hash or increase the size of m.
 
-## Versioning
+A user can add music to the cluster by running the test client as described in section 2.2 in the report with the following run configuration:
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+```
+-u ./../../testMedia/input-music 192.168.38.126 8185 3 192.168.38.126 8080 8000
+```
+in this case we are sending the data to a node in the cluster with the IP and port of 192.168.38.126:8185 but it could be any node in the cluster.
+
+To test the audio streaming a user can start the provided REACT client by opening a terminal, moving into the SPADGIFY/react/my-spadgify-app folder. Then performing the following two commands:
+
+1. npm install
+2. npm run dev
+
+this will start the react client on localhost:SOME_PORT. The user can then enter the IP of some node in the cluster to connect to. 
 
 ## Authors
 
-* **Anton Dacklin Gaied**
+* **Anton Dacklin Gaied** - [Anton](https://github.com/ubbe92)
 * **Sinthujan Ponnampalam** - [Sinthu](https://github.com/Sinthu01)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+* Inspiration from the original article of [Chord](https://pdos.csail.mit.edu/papers/chord:sigcomm01/chord_sigcomm.pdf)
+* The associate professor and scientist Per-Olov Östberg [P-O](https://www.umu.se/personal/per-olov-ostberg/)
+* The TA and postdoctoral Chanh Le Tan Nguyen  [Chanh](https://www.umu.se/personal/chanh-nguyen/)
+* Spotify [Spotify](https://open.spotify.com/)
